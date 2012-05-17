@@ -14,7 +14,7 @@
     This XSLT stylesheet applies to LyX native XHTML output and converts
     it into xml2rfc's input schema.
 -->
-<xsl:import href="trim-simple.xsl"/>
+<!--<xsl:import href="trim-simple.xsl"/>-->
 
 <xsl:variable name="months">
     <m>January</m><m>February</m><m>March</m><m>April</m>
