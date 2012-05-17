@@ -126,9 +126,10 @@
 <!-- Plain paragraphs -->
 <xsl:template match="div[@class='standard']">
     <xsl:element name="t">
-        <xsl:call-template name="trim">
-            <xsl:with-param name="x" select="text()[2]"/>
-        </xsl:call-template>
+        <xsl:value-of select="string-join(text()/normalize-space(), ' ')"/>
+        <!--<xsl:call-template name="trim">
+            <xsl:with-param name="x" select="string-join(text())"/>
+        </xsl:call-template>-->
         <xsl:apply-templates select="child::*[name() != 'table']"/><!-- Limit to 'a' elements! -->
     </xsl:element>
     <xsl:apply-templates select="child::table"/>
