@@ -1,7 +1,7 @@
 
-This is a project to make it possible to use LyX, a WYSIWYM[0] editor
-based on LaTeX, to edit Internet-Drafts (and, if the RFC-Editor ever
-wanted to, RFCs).
+This is a project to make it possible to use LyX [0], a WYSIWYM [1]
+editor based on LaTeX, to edit Internet-Drafts (and, if the RFC-Editor
+ever wanted to, RFCs).
 
 Currently the project is incomplete but very close to functional (i.e.,
 it works with some manual intervention).  It consists of an XSLT 2.0
@@ -33,3 +33,5 @@ TODO:
 
  - Add more texttable support (e.g., column widths).
 
+[0] http://www.lyx.org/
+[1] What You See Is What You Mean.
