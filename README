@@ -1,0 +1,30 @@
+
+This is a project to make it possible to use LyX, a WYSIWYM[0] editor
+based on LaTeX, to edit Internet-Drafts (and, if the RFC-Editor ever
+wanted to, RFCs).
+
+Currently the project is incomplete but very close to functional (i.e.,
+it works with some manual intervention).  It consists of an XSLT 2.0
+template to convert LyX XHTML output to the xml2rfc schema, at which
+point one can run the xml2rfc tool to typeset in any of the normal
+I-D/RFC formats (text, HTML, and PDF).
+
+In order to use this one must add all the custom inset definitions from
+the test-i-d.lyx file.  These custom insets are used to handle metadata
+needed by xml2rfc but not provided by LyX (e.g., draftname, intended
+status, and so on, as well as author metadata).
+
+TODO:
+
+ - Write a wrapper script to invoke lyx -e to export a LyX file to XHTML,
+   pre-process the LyX XHTML output (e.g., to add entity definitions for
+   &ldquo;, &rdquo; &ndash;, &nbsp;, and so on) invoke Saxon to apply
+   the XSLT template, invoke xml2rfc.
+
+ - Address XML namespace issues.
+
+ - Complete cross-reference, external reference, and iref support.
+
+ - Workaround LyX bug (fixed upstream) where the <a> anchors for
+   bibliography entries are not output.  This will require a temporary
+   convention in LyX I-D documents.
