@@ -1,0 +1,590 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xhtml [ <!ENTITY nbsp "&#160;"> ]>
+<html >
+  <head>
+    <meta content="LyX 2.0.0" name="GENERATOR"/>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-type"/>
+    <title>A Skeleton Internet-Draft Written in LyX</title>
+    <!-- Text Class Preamble -->
+    <style type="text/css">
+div.toc {
+margin: 2em 0em;
+border-style: solid;
+border-width: 2px 0px;
+padding: 1em 0em;
+}
+div.tochead { font-size: x-large; font-weight: bold; }
+div.lyxtoc-0 {
+margin: 2em 0em 0em 0em;
+font-size: xx-large;
+font-weight: bold;
+}
+div.lyxtoc-1 {
+margin: 1em 0em 0em 0em;
+font-size: x-large;
+font-weight: bold;
+}
+div.lyxtoc-2 {
+margin: 0em 0em 0em 1em;
+font-size: large;
+font-weight: normal;
+}
+div.lyxtoc-3 { margin: 0em 0em 0em 0.5em; font-size: medium; }
+div.lyxtoc-4 { margin: 0em 0em 0em 0.5em; }
+div.lyxtoc-5 { margin: 0em 0em 0em 0.5em; }
+div.lyxtoc-6 { margin: 0em 0em 0em 0.5em; }
+a.tocentry {
+text-decoration: none;
+color: black;
+}
+a.tocentry:visited { color: black; }
+a.tocarrow {
+font-weight: bold;
+text-decoration: none;
+color: #909090;
+}
+a.tocarrow:visited { color: #C0C0C0; }
+</style>
+    <!-- Preamble Snippets -->
+    <style type="text/css">
+table { border: 1px solid black; display: inline-block; }
+td { border: 1px solid black; padding: 0.5ex; }
+</style>
+    <!-- Layout-provided Styles -->
+    <style type="text/css">
+h1.title {
+font-size: x-large;
+margin-bottom: 1ex;
+text-align: center;
+
+}
+div.standard {
+text-align: left;
+
+}
+div.plain_layout {
+text-align: left;
+
+}
+div.author {
+font-size: large;
+margin-top: 1.3ex;
+margin-bottom: 0.7ex;
+text-align: center;
+
+}
+div.abstract {
+font-size: small;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+margin-right: 3ex;
+text-align: left;
+
+}
+div.abstract_label {
+font-weight: bold;
+font-size: large;
+text-align: center;
+
+}
+
+div.abstract {
+margin: 4ex;
+}
+div.abstract_item {
+font-size: small;
+padding-top: 1ex;
+}
+div.abstract_label {
+font-weight: bold;
+}
+h2.section {
+font-weight: bold;
+font-size: x-large;
+margin-top: 1.3ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+ol.enumerate {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
+ul.itemize {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
+dl.description dt { font-weight: bold; }
+h3.subsection {
+font-weight: bold;
+font-size: large;
+margin-top: 0.9ex;
+margin-bottom: 0.5ex;
+text-align: left;
+
+}
+h4.subsubsection {
+font-weight: bold;
+font-size: medium;
+margin-top: 0.7ex;
+margin-bottom: 0.4ex;
+text-align: left;
+
+}
+div.bibliography {
+text-align: left;
+
+}
+div.lyx__separator__ {
+text-align: left;
+
+}
+div.flex_docname {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_ipr {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_intendedstatus {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_titleabbrev {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_ietfarea {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_xml_rfckeyword {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authororg {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authororgabbrev {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authorinitials {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authorsurname {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoraddrstreet {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoraddrcity {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoraddrregion {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoraddrcountry {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoraddrcode {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoremailaddr {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authorrole {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.float {
+border: 2px solid black;
+text-align: center;
+}
+div.listings {
+font-family: monospace;
+}
+div.float-caption {
+text-align: center;
+border: 2px solid black;
+padding: 1ex;
+margin: 1ex;
+}
+div.flex_referenceentity {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+</style>
+  </head>
+  <body>
+    <h1 class="title">
+      <a id="magicparlabel-93345"/>
+A Skeleton Internet-Draft Written in LyX</h1>
+    <div class="standard">
+      <a id="magicparlabel-93346"/>
+      <div class="flex_docname">
+        <div class="plain_layout">
+          <a id="magicparlabel-93350"/>
+draft-doe-something-or-other</div>
+      </div>
+      <div class="flex_ipr">
+        <div class="plain_layout">
+          <a id="magicparlabel-93354"/>
+trust200902</div>
+      </div>
+      <div class="flex_intendedstatus">
+        <div class="plain_layout">
+          <a id="magicparlabel-93358"/>
+Informational</div>
+      </div>
+      <div class="flex_titleabbrev">
+        <div class="plain_layout">
+          <a id="magicparlabel-93362"/>
+Skeleton I-D</div>
+      </div>
+      <div class="flex_ietfarea">
+        <div class="plain_layout">
+          <a id="magicparlabel-93366"/>
+Security Area</div>
+      </div>
+      <div class="flex_xml_rfckeyword">
+        <div class="plain_layout">
+          <a id="magicparlabel-93370"/>
+Internet-Draft</div>
+      </div>
+    </div>
+    <div class="author">
+      <div class="author_item">
+        <a id="magicparlabel-93706"/>
+Jane Doe<div class="flex_authororg"><div class="plain_layout"><a id="magicparlabel-93696"/>
+Doe Corp.</div></div><div class="flex_authororgabbrev"><div class="plain_layout"><a id="magicparlabel-93697"/>
+Doe</div></div><div class="flex_authorinitials"><div class="plain_layout"><a id="magicparlabel-93698"/>
+J.</div></div><div class="flex_authorsurname"><div class="plain_layout"><a id="magicparlabel-93699"/>
+Doe</div></div><div class="flex_authoraddrstreet"><div class="plain_layout"><a id="magicparlabel-93700"/>
+12345 Some St</div></div><div class="flex_authoraddrcity"><div class="plain_layout"><a id="magicparlabel-93701"/>
+Somewhere</div></div><div class="flex_authoraddrregion"><div class="plain_layout"><a id="magicparlabel-93710"/>
+NY</div></div><div class="flex_authoraddrcountry"><div class="plain_layout"><a id="magicparlabel-93703"/>
+USA</div></div><div class="flex_authoraddrcode"><div class="plain_layout"><a id="magicparlabel-93704"/>
+10001</div></div><div class="flex_authoremailaddr"><div class="plain_layout"><a id="magicparlabel-93705"/>
+jane@doecorp.example</div></div></div>
+      <div class="author_item">
+        <a id="magicparlabel-93412"/>
+Joe Sixpack<div class="flex_authorrole"><div class="plain_layout"><a id="magicparlabel-93978"/>
+editor</div></div></div>
+    </div>
+    <div class="abstract">
+      <div class="abstract_label">Abstract</div>
+      <div class="abstract_item">
+        <a id="magicparlabel-93413"/>
+This document proposes a classification scheme for HTTPbis authentication proposals, to help with analysis and selection.</div>
+      <div class="abstract_item">
+        <a id="magicparlabel-93414"/>
+Two paragrap abstract, eh?</div>
+    </div>
+    <div class="standard">
+      <a id="magicparlabel-93415"/>
+    </div>
+    <div class="toc">
+      <div class="tochead part_">Table of Contents</div>
+      <div class="lyxtoc-1">
+        <a class="tocentry" href="#magicparlabel-93416">1 Introduction</a> <a class="tocarrow" href="#magicparlabel-93416">&gt;</a><div class="lyxtoc-2"><a class="tocentry" href="#magicparlabel-93451">1.1 Conventions used in this document</a> <a class="tocarrow" href="#magicparlabel-93451">&gt;</a></div></div>
+      <div class="lyxtoc-1">
+        <a class="tocentry" href="#magicparlabel-93453">2 Details</a> <a class="tocarrow" href="#magicparlabel-93453">&gt;</a><div class="lyxtoc-2"><a class="tocentry" href="#magicparlabel-93455">2.1 A sub-section</a> <a class="tocarrow" href="#magicparlabel-93455">&gt;</a><div class="lyxtoc-3"><a class="tocentry" href="#magicparlabel-93457">2.1.1 A sub-sub-section</a> <a class="tocarrow" href="#magicparlabel-93457">&gt;</a></div></div></div>
+      <div class="lyxtoc-1">
+        <a class="tocentry" href="#magicparlabel-93517">3 References</a> <a class="tocarrow" href="#magicparlabel-93517">&gt;</a></div>
+      <div class="lyxtoc-1">
+        <a class="tocentry" href="#magicparlabel-93526">A First Appendix</a> <a class="tocarrow" href="#magicparlabel-93526">&gt;</a><div class="lyxtoc-2"><a class="tocentry" href="#magicparlabel-93528">A.1 Sub-Appendix</a> <a class="tocarrow" href="#magicparlabel-93528">&gt;</a></div></div>
+      <div class="lyxtoc-1">
+        <a class="tocentry" href="#magicparlabel-93530">B Last Appendix</a> <a class="tocarrow" href="#magicparlabel-93530">&gt;</a></div>
+    </div>
+    <h2 class="section">
+      <span class="section_label">1</span> <a id="magicparlabel-93416"/>
+Introduction</h2>
+    <div class="standard">
+      <a id="magicparlabel-93417"/>
+A paragraph. Text after a vspace.</div>
+    <div style="height:2ex"></div>
+    <div class="standard">
+      <a id="magicparlabel-93418"/>
+Another paragraph.</div>
+    <div class="standard">
+      <a id="magicparlabel-93419"/>
+    </div>
+    <div class="float float-figure">
+      <div class="plain_layout">
+        <a id="magicparlabel-93423"/>
+      </div>
+      <div class="float float-listings">
+        <pre>+=======================+
+|     A box             |
+|                       |
++=======================+</pre>
+      </div>
+      <div class="plain_layout">
+        <a id="magicparlabel-93431"/>
+        <div class="float-caption float-caption-figure">Figure 1:<div class="plain_layout"><a id="magicparlabel-93435"/>
+A figure of some sort</div></div>
+      </div>
+    </div>
+    <div class="standard">
+      <a id="magicparlabel-93436"/>
+A numbered list:</div>
+    <ol class="enumerate">
+      <li class="enumerate_item">
+        <a id="magicparlabel-93437"/>
+Item 1...has two paragraphs, in a manner similar to xml2rfc (i.e., with vspace).</li>
+      <li class="enumerate_item">
+        <a id="magicparlabel-93438"/>
+Item 2 doesn't.</li>
+    </ol>
+    <div class="standard">
+      <a id="magicparlabel-93439"/>
+Now an unnumbered list:</div>
+    <ul class="itemize">
+      <li class="itemize_item">
+        <a id="magicparlabel-93440"/>
+a bullet
+
+<ul class="itemize"><li class="itemize_item"><a id="magicparlabel-93441"/>
+with a nested list!</li></ul></li>
+      <li class="itemize_item">
+        <a id="magicparlabel-93442"/>
+another
+<div class="standard"><a id="magicparlabel-93443"/>
+this one has a nested list with no bulleting. will it do?</div><div class="standard"><a id="magicparlabel-93444"/>
+how about another?</div></li>
+    </ul>
+    <div class="standard">
+      <a id="magicparlabel-93445"/>
+And:</div>
+    <ul class="itemize">
+      <li class="itemize_item">
+        <a id="magicparlabel-93446"/>
+something</li>
+      <li class="itemize_item">
+        <a id="magicparlabel-93447"/>
+or other</li>
+    </ul>
+    <div class="standard">
+      <a id="magicparlabel-93448"/>
+Now a desc list:</div>
+    <dl class="description">
+      <dt class="description_label">item1</dt>
+      <dd class="description_item">
+        <a id="magicparlabel-93449"/>
+ description of item 1</dd>
+      <dt class="description_label">item2</dt>
+      <dd class="description_item">
+        <a id="magicparlabel-93450"/>
+ description of item 2</dd>
+    </dl>
+    <h3 class="subsection">
+      <span class="subsection_label">1.1</span> <a id="magicparlabel-93451"/>
+Conventions used in this document</h3>
+    <div class="standard">
+      <a id="magicparlabel-93452"/>
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [<a href="#key-2">key-2</a>].</div>
+    <h2 class="section">
+      <span class="section_label">2</span> <a id="magicparlabel-93453"/>
+Details</h2>
+    <div class="standard">
+      <a id="magicparlabel-93454"/>
+Some text. Here's a protected&nbsp;space, and here's a bunch of them: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, see?</div>
+    <h3 class="subsection">
+      <span class="subsection_label">2.1</span> <a id="magicparlabel-93455"/><a id="sub_A_sub_section"/>
+A sub-section</h3>
+    <div class="standard">
+      <a id="magicparlabel-93456"/>
+and</div>
+    <h4 class="subsubsection">
+      <span class="subsubsection_label">2.1.1</span> <a id="magicparlabel-93457"/>
+A sub-sub-section</h4>
+    <div class="standard">
+      <a id="magicparlabel-93458"/>
+cool.</div>
+    <div class="standard">
+      <a id="magicparlabel-93460"/>
+Now back to standard paragraphs... And now a table</div>
+    <div class="standard">
+      <a id="magicparlabel-93461"/>
+      <table>
+        <tbody>
+          <tr>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93491"/>
+a</div>
+            </td>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93494"/>
+b</div>
+            </td>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93497"/>
+c</div>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93500"/>
+0</div>
+            </td>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93503"/>
+stuff</div>
+            </td>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93506"/>
+what</div>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93509"/>
+1</div>
+            </td>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93512"/>
+foo</div>
+            </td>
+            <td align="center" valign="top">
+              <div class="plain_layout">
+                <a id="magicparlabel-93515"/>
+bar</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="standard">
+      <a id="magicparlabel-93516"/>
+And some text after it. See also section <a href="#sub_A_sub_section">2.1</a>.</div>
+    <h2 class="section">
+      <span class="section_label">3</span> <a id="magicparlabel-93517"/>
+References</h2>
+    <div class="bibliography">
+      <a id="magicparlabel-93518"/>
+      <a id=""/>
+      <span class="bibitemlabel">1</span>
+      <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119</a>
+    </div>
+    <div class="bibliography">
+      <a id="magicparlabel-93519"/>
+      <a id=""/>
+      <span class="bibitemlabel">2</span>
+      <div class="flex_referenceentity">
+        <div class="plain_layout">
+          <a id="magicparlabel-93523"/>
+rfc1113</div>
+      </div>
+      <a href="http://www.ietf.org/rfc/rfc1113.txt">RFC1113</a>
+      <a href="http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml">(bibxml)</a>
+    </div>
+    <div class="standard">
+      <a id="magicparlabel-93524"/>
+Some text.</div>
+    <div class="bibliography">
+      <a id="magicparlabel-93525"/>
+      <a id=""/>
+      <span class="bibitemlabel">3</span>RFC5246</div>
+    <h2 class="section">
+      <span class="section_label">A</span> <a id="magicparlabel-93526"/>
+First Appendix</h2>
+    <div class="standard">
+      <a id="magicparlabel-93527"/>
+Appendici.</div>
+    <h3 class="subsection">
+      <span class="subsection_label">A.1</span> <a id="magicparlabel-93528"/>
+Sub-Appendix</h3>
+    <div class="standard">
+      <a id="magicparlabel-93529"/>
+Whatever.</div>
+    <h2 class="section">
+      <span class="section_label">B</span> <a id="magicparlabel-93530"/>
+Last Appendix</h2>
+    <div class="standard">
+      <a id="magicparlabel-93531"/>
+Last word.</div>
+    <div class="lyx__separator__">
+      <a id="magicparlabel-93532"/>
+    </div>
+  </body>
+</html>
