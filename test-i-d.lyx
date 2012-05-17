@@ -8,6 +8,56 @@
 \begin_local_layout
 Format 31
 
+InsetLayout Flex:PI_Strict
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_SymRefs
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_SortRefs
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_TOC
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_TOCIndent
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_TOCDepth
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_TOCNarrow
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_TOCCompact
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:PI_TOCAppendix
+    LyXType Custom
+    HTMLTag div
+End
+
 InsetLayout Flex:DocName
     LyXType Custom
     HTMLTag div
@@ -218,6 +268,39 @@ status collapsed
 
 \begin_layout Plain Layout
 Internet-Draft
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex PI TOC
+status collapsed
+
+\begin_layout Plain Layout
+yes
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI SymRefs
+status collapsed
+
+\begin_layout Plain Layout
+yes
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI TOCIndent
+status collapsed
+
+\begin_layout Plain Layout
+no
 \end_layout
 
 \end_inset

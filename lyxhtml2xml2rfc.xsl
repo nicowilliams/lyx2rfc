@@ -27,6 +27,10 @@
 <xsl:output method="xml" omit-xml-declaration="no"/>
 
 <xsl:template match="/">
+    <!-- Emit processing instructions -->
+    <xsl:apply-templates select="//div[starts-with(@class, 'flex_pi_')]"/>
+    <xsl:apply-templates select="//div[starts-with(@class, 'flex_pi')]"/>
+    <!-- Emit the rfc element and its contents -->
     <xsl:apply-templates select="html"/>
 </xsl:template>
 
@@ -97,7 +101,8 @@
         <xsl:apply-templates
             select="h2[not(starts-with(normalize-space(text()[3]), 'References')) and
                         not(starts-with(normalize-space(text()[3]), 'Normative References')) and
-                        not(starts-with(normalize-space(text()[3]), 'Informative References'))]"/>
+                        not(starts-with(normalize-space(text()[3]), 'Informative References'))
+                        and not(matches(span, '^[A-Z].*'))]"/>
     </xsl:element>
     <!-- Now back matter -->
     <xsl:element name="back">
@@ -105,6 +110,11 @@
             select="h2[starts-with(normalize-space(text()[3]), 'References') or
             starts-with(normalize-space(text()[3]), 'Normative References') or
             starts-with(normalize-space(text()[3]), 'Informative References')]"/>
+        <xsl:apply-templates
+            select="h2[matches(span, '^[A-Z].*') and
+            not(starts-with(normalize-space(text()[3]), 'References')) and
+            not(starts-with(normalize-space(text()[3]), 'Normative References')) and
+            not(starts-with(normalize-space(text()[3]), 'Informative References'))]"/>
     </xsl:element>
 </xsl:template>
 
@@ -247,7 +257,7 @@
 
 <!-- Sections -->
 
-<xsl:template match="h2[starts-with(@class, 'section') and not(matches(span, '^[A-Z].*')) and
+<xsl:template match="h2[starts-with(@class, 'section') and
     not(starts-with(normalize-space(text()[3]), 'References')) and
     not(starts-with(normalize-space(text()[3]), 'Normative References')) and
     not(starts-with(normalize-space(text()[3]), 'InformativeReferences'))]">
@@ -292,7 +302,7 @@ h2: handling section content node tag: </xsl:text>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="h3[starts-with(@class, 'subsection') and not(matches(span, '^[A-Z].*'))]">
+<xsl:template match="h3[starts-with(@class, 'subsection')]">
     <xsl:element name="section">
         <xsl:attribute name="title">
             <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
@@ -330,125 +340,8 @@ h3: handling section content node tag: </xsl:text>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="h4[starts-with(@class, 'subsubsection') and not(matches(span, '^[A-Z].*'))]">
+<xsl:template match="h4[starts-with(@class, 'subsubsection')]">
     <xsl:element name="section">
-        <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
-        </xsl:attribute>
-        <xsl:attribute name="anchor">
-            <xsl:choose>
-                <xsl:when test="string-length(a[not(starts-with(@id, 'magicparlabel-'))]/@id) > 0">
-                    <xsl:value-of select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="generate-id()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-
-        <!-- Handle the contents of this section -->
-        <xsl:for-each select="following-sibling::*[. &lt;&lt; $next-hN]">
-            <!-- Debug xsl:text's and xsl:value-of's
-            <xsl:text>
-h4: handling section content node tag: </xsl:text>
-            <xsl:value-of select="name()"/> -->
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-    </xsl:element>
-</xsl:template>
-
-<!-- Appendices -->
-
-<xsl:template match="h2[starts-with(@class, 'section') and matches(span, '^[A-Z].*')]">
-    <xsl:element name="appendix">
-        <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
-        </xsl:attribute>
-        <xsl:attribute name="anchor">
-            <xsl:choose>
-                <xsl:when test="string-length(a[not(starts-with(@id, 'magicparlabel-'))]/@id) > 0">
-                    <xsl:value-of select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="generate-id()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-
-        <!-- Some variables needed to help select sub-sets of following
-             siblings (an "in sequence" operator would make this
-             simpler, and would allow us to move this into a common,
-             callable template) -->
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::h2[contains(@class, 'section')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-
-        <!-- Handle the contents of this section -->
-        <xsl:for-each select="following-sibling::*[. &lt;&lt; $next-hN]">
-            <!-- Debug xsl:text's and xsl:value-of's
-            <xsl:text>
-h2: handling section content node tag: </xsl:text>
-            <xsl:value-of select="name()"/> -->
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-
-        <!-- Handle sub-sections of this section -->
-        <xsl:apply-templates select="following-sibling::h3[. &lt;&lt; $end-hN]"/>
-    </xsl:element>
-</xsl:template>
-
-<xsl:template match="h3[starts-with(@class, 'subsection') and matches(span, '^[A-Z].*')]">
-    <xsl:element name="appendix">
-        <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
-        </xsl:attribute>
-        <xsl:attribute name="anchor">
-            <xsl:choose>
-                <xsl:when test="string-length(a[not(starts-with(@id, 'magicparlabel-'))]/@id) > 0">
-                    <xsl:value-of select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="generate-id()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
-
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-
-        <!-- Handle the contents of this section -->
-        <xsl:for-each select="following-sibling::*[. &lt;&lt; $next-hN]">
-            <!-- Debug xsl:text's and xsl:value-of's
-            <xsl:text>
-h3: handling section content node tag: </xsl:text>
-            <xsl:value-of select="name()"/> -->
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-
-        <!-- Handle sub-sections of this section -->
-        <xsl:apply-templates select="following-sibling::h4[. &lt;&lt; $end-hN]"/>
-    </xsl:element>
-</xsl:template>
-
-<xsl:template match="h4[starts-with(@class, 'subsubsection') and matches(span, '^[A-Z].*')]">
-    <xsl:element name="appendix">
         <xsl:attribute name="title">
             <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
         </xsl:attribute>
@@ -521,6 +414,21 @@ h4: handling section content node tag: </xsl:text>
              been I-Ds and RFCs with such sub-sections.  Make this a
              TODO. -->
     </xsl:element>
+</xsl:template>
+
+<!-- Emit processing instructions -->
+<xsl:template match="div[starts-with(@class, 'flex_pi_')]">
+    <xsl:processing-instruction name="rfc">
+        <xsl:value-of select="replace(@class, '^flex_pi_', '')"/>
+        <xsl:text>="</xsl:text>
+        <xsl:value-of select="normalize-space(.)"/>
+        <xsl:text>"</xsl:text>
+    </xsl:processing-instruction>
+</xsl:template>
+<xsl:template match="div[@class = 'flex_pi']">
+    <xsl:processing-instruction name="rfc">
+        <xsl:value-of select="normalize-space(.)"/>
+    </xsl:processing-instruction>
 </xsl:template>
 
 <!-- Emit references -->
