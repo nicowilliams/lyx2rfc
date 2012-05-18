@@ -12,7 +12,100 @@ I-D/RFC formats (text, HTML, and PDF).
 In order to use this one must add all the custom inset definitions from
 the test-i-d.lyx file.  These custom insets are used to handle metadata
 needed by xml2rfc but not provided by LyX (e.g., draftname, intended
-status, and so on, as well as author metadata).
+status, and so on, as well as author metadata, and xml2rfc processing
+instructions).
+
+In order to create an Internet-Draft with LyX and lyx2rfc you must add
+to your LyX document several custom insets.  Somewhere in your LyX
+document you must be in standard mode (i.e., paragraph) and use
+Insert->Custom Insets-> and pick each of the following insets:
+
+ - PI
+
+   Set the contents of this inset to be a processing instruction, such
+   as tocindent="no" to disable indentation in the Table of Contents.
+
+   See the xml2rfc docs for more on this.
+
+ - DocName
+
+   The draft-... handle.
+
+ - IPR, IETFArea, TitleAbbrev
+
+   These should have text corresponding to the values of the <rfc> ipr
+   attribute, the <area> element, the <title> abbrev attribute.
+
+Also, in each Author inset (click on Standard, select Author) you'll
+need the following custom insets (all optional!):
+
+ - AuthorRole
+
+   The author's role in the I-D (e.g., "editor").
+
+ - AuthorInitials
+
+   The author's initials.
+
+ - AuthorSurname
+
+   The author's surname.
+
+ - AuthorOrg
+
+   The name of the author's employer/organization.
+
+ - AuthorOrgAbbrev
+
+   An abbreviation of the author's employer/organization.
+
+ - AuthorEmailAddr
+
+   The author's e-mail address.
+
+ - AuthorURI
+
+   The author's homepage/whatever.
+
+ - AuthorPhone
+
+   The author's phone number.
+
+ - AuthorAddrStreet
+
+   The author's street address.
+
+ - AuthorAddrCity
+
+   The city of the author's address.
+
+ - AuthorAddrRegion
+
+   The state/province/region of the author's address.
+
+ - AuthorAddrCode
+
+   The postal code of the author's address.
+
+ - AuthorAddrCountry
+
+   The country of the author's address.  This inset must be present if
+   any of the other author address insets are.
+
+In order to add bibxml references you must add a bibliography entry for
+each reference with the following content:
+
+ - A ReferenceEntity attribute with a string that will be used to form
+   an XML ENTITY name for including the bibxml entry.
+
+ - A hyperlink to the bibxml entry, with the following link text: "(bibxml)".
+
+ - A hyperlink to the RFC/I-D/whatever, with the anchor declared in the
+   bibxml entry as the link text.
+
+In order to cite a reference you must Insert->Citation and select the
+bibliography entry key of the reference in question.
+
 
 TODO:
 
