@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- 
+    Version: 0.1
+-->
+
 <!--
     Copyright (c) 2012, Cryptonector, LLC.
     All rights reserved.
@@ -30,15 +34,12 @@
     OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
 
-<!DOCTYPE xsl:stylesheet [
-        <!ENTITY nbsp "&#160;">
-    ]>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-<!-- 
-    Version: 0.1
-    (c) Cryptonector, LLC
--->
+<!DOCTYPE xsl:stylesheet [ ]>
+<xsl:stylesheet version="2.0"
+    xpath-default-namespace="http://www.w3.org/1999/xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    >
 
 <!-- 
     This XSLT stylesheet applies to LyX native XHTML output and converts
