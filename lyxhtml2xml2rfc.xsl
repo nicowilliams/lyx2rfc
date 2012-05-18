@@ -64,6 +64,23 @@
     <!-- Emit processing instructions -->
     <xsl:apply-templates select="//div[starts-with(@class, 'flex_pi_')]"/>
     <xsl:apply-templates select="//div[starts-with(@class, 'flex_pi')]"/>
+
+    <!-- Emit toc="yes" PI by default -->
+    <xsl:if test="not(//div[starts-with(@class, 'flex_pi_toc')]) and
+                  not(//div[@class = 'flex_pi' and starts-with(normalize-space(.), 'toc=')])">
+        <xsl:processing-instruction name="rfc">
+            <xsl:text>toc="yes"</xsl:text>
+        </xsl:processing-instruction>
+    </xsl:if>
+
+    <!-- Emit symrefs="yes" PI by default -->
+    <xsl:if test="not(//div[starts-with(@class, 'flex_pi_symrefs')]) and
+                  not(//div[@class = 'flex_pi' and starts-with(normalize-space(.), 'symrefs=')])">
+        <xsl:processing-instruction name="rfc">
+            <xsl:text>symrefs="yes"</xsl:text>
+        </xsl:processing-instruction>
+    </xsl:if>
+
     <!-- Emit the rfc element and its contents -->
     <xsl:apply-templates select="html"/>
 </xsl:template>
@@ -98,6 +115,12 @@
         <front>
             <!-- Grab the title -->
             <xsl:element name="title">
+                <xsl:if test="//div[@class = 'flex_titleabbrev']">
+                    <xsl:attribute name="abbrev">
+                        <xsl:value-of
+                            select="normalize-space(//div[@class = 'flex_titleabbrev'])"/>
+                    </xsl:attribute>
+                </xsl:if>
                 <xsl:value-of select="./head/title"/>
             </xsl:element>
             <!-- Grab the authors -->
