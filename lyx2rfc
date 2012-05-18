@@ -14,18 +14,44 @@ function usage {
     exit 1
 }
 
+# Very, very lame command-line parsing (should use getopts).
+#
+# The first argument must be a LyX document filename.  If it doesn't end
+# in .lyx we'll tack on the .lyx extension.
+#
+# The second argument must be an output filename.  The extension must be
+# one of txt, pdf, html, or xml.  If no extension is provided we'll tack
+# on '.txt'.
 (($# > 0)) || usage
-
+(($# < 3)) || usage
 lyxf=$1
 [[ "$lyxf" = *.lyx && "$lyxf" != *.* ]] && lyxf=${lyxf}.lyx
+[[ "$lyxf" != *.lyx ]] && usage
 xhtml=${1:%.lyx}.xhtml
 out=${2:-${lyxf%.lyx}.txt}
-xmlout=${out%.@(txt|pdf|html)}.xml
+[[ "$out" != *.* ]] && out=${out}.txt
+[[ "$out" != *.@(txt|pdf|html|xml) ]] && usage
+xmlout=${out%.@(txt|pdf|html|xml)}.xml
 
-set -x
+# Get and cache a local copy of the XHTML DTD:
+if [[ ! -f "xhtml-math11-f.dtd" ]]; then
+    wget http://www.w3.org/TR/2001/REC-MathML2-20010221/dtd/xhtml-math11-f.dtd
+fi
 
+# Export LyX document as XHTML:
 lyx -e xhtml "$lyxf"
+
+# Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
 sed --in-place=bkp -e "s,${LYX_XHTML_DTD},${LOCAL_XHTML_DTD}," "$xhtml"
+
+# Apply the lyx2rfc XSTL stylesheet:
 java net/sf/saxon/Transform "$xhtml" $XSL > "$xmlout"
-DISPLAY= xml2rfc "$xmlout" "$out"
+
+# The old xml2rfc tool doesn't grok xmlns attributes; remove them:
+sed --in-place=bkp \
+    -e 's,xmlns="xml2rfc",,' \
+    -e 's,xmlns:xhtml="http://www.w3.org/1999/xhtml",,' "$xmlout"
+
+# Run xml2rfc to do the final conversion if desired:
+[[ "$out" != *.xml ]] && DISPLAY= xml2rfc "$xmlout" "$out"
 
