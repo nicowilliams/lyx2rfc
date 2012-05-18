@@ -1,0 +1,31 @@
+#!/bin/ksh
+
+set -e
+set -o noglob
+
+PROG=${0##*/}
+XSL=lyxhtml2xml2rfc.xsl
+
+LYX_XHTML_DTD=http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd
+LOCAL_XHTML_DTD=file:xhtml-math11-f.dtd
+
+function usage {
+    printf "Usage: $PROG lyx_file [out_file]\n"
+    exit 1
+}
+
+(($# > 0)) || usage
+
+lyxf=$1
+[[ "$lyxf" = *.lyx && "$lyxf" != *.* ]] && lyxf=${lyxf}.lyx
+xhtml=${1:%.lyx}.xhtml
+out=${2:-${lyxf%.lyx}.txt}
+xmlout=${out%.@(txt|pdf|html)}.xml
+
+set -x
+
+lyx -e xhtml "$lyxf"
+sed --in-place=bkp -e "s,${LYX_XHTML_DTD},${LOCAL_XHTML_DTD}," "$xhtml"
+java net/sf/saxon/Transform "$xhtml" $XSL > "$xmlout"
+DISPLAY= xml2rfc "$xmlout" "$out"
+

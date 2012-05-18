@@ -453,7 +453,8 @@ A paragraph.
 \begin_inset VSpace defskip
 \end_inset
 
- Text after a vspace.
+ Text after a vspace (currently doesn't work due to a bug in LyX's XHTML
+ exporter).
 \end_layout
 
 \begin_layout Standard
@@ -592,7 +593,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
  to be interpreted as described in 
 \begin_inset CommandInset citation
 LatexCommand cite
-key "key-2"
+key "key-1"
 
 \end_inset
 
@@ -781,7 +782,17 @@ References
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-2"
+key "key-1"
+
+\end_inset
+
+
+\begin_inset Flex ReferenceEntity
+status collapsed
+
+\begin_layout Plain Layout
+rfc2119
+\end_layout
 
 \end_inset
 
@@ -794,12 +805,20 @@ target "http://www.ietf.org/rfc/rfc2119.txt"
 \end_inset
 
 
+\begin_inset CommandInset href
+LatexCommand href
+name "(bibxml)"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Bibliography
 \begin_inset CommandInset bibitem
 LatexCommand bibitem
-key "key-3"
+key "key-2"
 
 \end_inset
 

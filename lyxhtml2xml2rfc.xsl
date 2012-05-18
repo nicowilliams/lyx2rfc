@@ -37,8 +37,11 @@
 <!DOCTYPE xsl:stylesheet [ ]>
 <xsl:stylesheet version="2.0"
     xpath-default-namespace="http://www.w3.org/1999/xhtml"
-    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns="xml2rfc"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:rfc="xml2rfc"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    exclude-result-prefixes="rfc"
     >
 
 <!-- 
@@ -103,7 +106,7 @@
             <xsl:element name="date">
                 <xsl:attribute name="month">
                     <xsl:value-of
-                        select="$months/m[number(month-from-dateTime(current-dateTime()))]"/>
+                        select="$months/rfc:m[number(month-from-dateTime(current-dateTime()))]"/>
                 </xsl:attribute>
                 <xsl:attribute name="year">
                     <xsl:value-of
@@ -130,22 +133,22 @@
     <!-- Handle only top-level sections -->
     <xsl:element name="middle">
         <xsl:apply-templates
-            select="h2[not(starts-with(normalize-space(text()[3]), 'References')) and
-                        not(starts-with(normalize-space(text()[3]), 'Normative References')) and
-                        not(starts-with(normalize-space(text()[3]), 'Informative References'))
+            select="h2[not(starts-with(normalize-space(string-join(text(), '')), 'References')) and
+                        not(starts-with(normalize-space(string-join(text(), '')), 'Normative References')) and
+                        not(starts-with(normalize-space(string-join(text(), '')), 'Informative References'))
                         and not(matches(span, '^[A-Z].*'))]"/>
     </xsl:element>
     <!-- Now back matter -->
     <xsl:element name="back">
         <xsl:apply-templates
-            select="h2[starts-with(normalize-space(text()[3]), 'References') or
-            starts-with(normalize-space(text()[3]), 'Normative References') or
-            starts-with(normalize-space(text()[3]), 'Informative References')]"/>
+            select="h2[starts-with(normalize-space(string-join(text(), '')), 'References') or
+            starts-with(normalize-space(string-join(text(), '')), 'Normative References') or
+            starts-with(normalize-space(string-join(text(), '')), 'Informative References')]"/>
         <xsl:apply-templates
             select="h2[matches(span, '^[A-Z].*') and
-            not(starts-with(normalize-space(text()[3]), 'References')) and
-            not(starts-with(normalize-space(text()[3]), 'Normative References')) and
-            not(starts-with(normalize-space(text()[3]), 'Informative References'))]"/>
+            not(starts-with(normalize-space(string-join(text(), '')), 'References')) and
+            not(starts-with(normalize-space(string-join(text(), '')), 'Normative References')) and
+            not(starts-with(normalize-space(string-join(text(), '')), 'Informative References'))]"/>
     </xsl:element>
 </xsl:template>
 
@@ -168,7 +171,11 @@
 <xsl:template match="div[@class='standard']">
     <xsl:element name="t">
         <xsl:value-of select="string-join(text()/normalize-space(), ' ')"/>
-        <!--<xsl:call-template name="trim">
+        <!--
+            The normalize-space() function is too aggressive; we only
+            want to trim out leadign and trailing whitespace.  That's
+            what the trim template does, but for now we don't use it.
+            <xsl:call-template name="trim">
             <xsl:with-param name="x" select="string-join(text())"/>
         </xsl:call-template>-->
         <xsl:apply-templates select="child::*[name() != 'table']"/><!-- Limit to 'a' elements! -->
@@ -255,13 +262,23 @@
         </xsl:attribute>
     </xsl:element>
 </xsl:template>
+<xsl:template match="a[@href and starts-with(@href, '#key-')]"><!-- workaround for LyX bug -->
+    <xsl:variable name="key" select="substring(@href, 6)"/>
+    <xsl:element name="xref">
+        <xsl:attribute name="target">
+            <xsl:value-of select="normalize-space(//div[@class='bibliography' and normalize-space(./span) = $key]/a[@href and normalize-space(text()) != '(bibxml)'])"/>
+        </xsl:attribute>
+    </xsl:element>
+</xsl:template>
 
 <!-- erefs -->
 <xsl:template match="a[@href and not(starts-with(@href, '#'))]">
-    <xsl:element name="eref">
-        <xsl:attribute name="target">
-            <xsl:value-of select="./@href"/>
-        </xsl:attribute>
+    <xsl:element name="t">
+        <xsl:element name="eref">
+            <xsl:attribute name="target">
+                <xsl:value-of select="./@href"/>
+            </xsl:attribute>
+        </xsl:element>
     </xsl:element>
 </xsl:template>
 
@@ -289,12 +306,12 @@
 <!-- Sections -->
 
 <xsl:template match="h2[starts-with(@class, 'section') and
-    not(starts-with(normalize-space(text()[3]), 'References')) and
-    not(starts-with(normalize-space(text()[3]), 'Normative References')) and
-    not(starts-with(normalize-space(text()[3]), 'InformativeReferences'))]">
+    not(starts-with(normalize-space(string-join(text(), '')), 'References')) and
+    not(starts-with(normalize-space(string-join(text(), '')), 'Normative References')) and
+    not(starts-with(normalize-space(string-join(text(), '')), 'InformativeReferences'))]">
     <xsl:element name="section">
         <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
+            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
         </xsl:attribute>
         <xsl:attribute name="anchor">
             <xsl:choose>
@@ -336,7 +353,7 @@ h2: handling section content node tag: </xsl:text>
 <xsl:template match="h3[starts-with(@class, 'subsection')]">
     <xsl:element name="section">
         <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
+            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
         </xsl:attribute>
         <xsl:attribute name="anchor">
             <xsl:choose>
@@ -374,7 +391,7 @@ h3: handling section content node tag: </xsl:text>
 <xsl:template match="h4[starts-with(@class, 'subsubsection')]">
     <xsl:element name="section">
         <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
+            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
         </xsl:attribute>
         <xsl:attribute name="anchor">
             <xsl:choose>
@@ -408,12 +425,12 @@ h4: handling section content node tag: </xsl:text>
 
 <!-- References -->
 
-<xsl:template match="h2[starts-with(normalize-space(text()[3]), 'References') or
-            starts-with(normalize-space(text()[3]), 'Normative References') or
-            starts-with(normalize-space(text()[3]), 'Informative References')]">
+<xsl:template match="h2[starts-with(normalize-space(string-join(text(), '')), 'References') or
+            starts-with(normalize-space(string-join(text(), '')), 'Normative References') or
+            starts-with(normalize-space(string-join(text(), '')), 'Informative References')]">
     <xsl:element name="references">
         <xsl:attribute name="title">
-            <xsl:value-of select="concat(normalize-space(text()[2]), normalize-space(text()[3]))"/>
+            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
         </xsl:attribute>
         <!--
         <xsl:attribute name="anchor">
@@ -539,21 +556,44 @@ h4: handling section content node tag: </xsl:text>
 <xsl:template match="div[@class='author_item']">
     <!-- Author element -->
     <xsl:element name='author'>
-        <!-- Initials and surname attributes and various sub-elements
-             -->
+        <!-- Initials and surname attributes and various sub-elements...
+
+             Try to be user-friendly by deriving the initials and
+             surname from the fullname.  XSLT conditionals are extremely
+             verbose :( -->
         <xsl:attribute name="initials">
-            <xsl:value-of select="normalize-space(./div[@class='flex_authorinitials']/div)"/>
+            <xsl:choose>
+                <xsl:when test="./div[@class='flex_authorinitials']/div">
+                    <xsl:value-of select="normalize-space(./div[@class='flex_authorinitials']/div)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of
+                        select="concat(substring(normalize-space(string-join(text(), '')), 1, 1), '.')"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:attribute>
         <xsl:attribute name="surname">
-            <xsl:value-of select="normalize-space(./div[@class='flex_authorsurname']/div)"/>
+            <xsl:choose>
+                <xsl:when test="./div[@class='flex_authorsurname']/div">
+                    <xsl:value-of select="normalize-space(./div[@class='flex_authorsurname']/div)"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <xsl:value-of
+                        select="replace(normalize-space(normalize-space(string-join(text(), ''))), '^.* ', '')"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:attribute>
         <xsl:attribute name="fullname">
-            <xsl:value-of select="normalize-space(text()[2])"/>
+            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
         </xsl:attribute>
+
         <!-- Organization element -->
         <xsl:apply-templates select=".//div[@class='flex_authororg']"/>
 
-        <!-- Address element -->
+        <!-- Address element.  We try hard to avoid an empty address
+             element.  It'd be so nice to have an attribute of
+             xsl:element by which to say "don't output this element if
+             it is empty"... :( -->
         <xsl:choose>
             <!-- Add an address element IFF there are either author
                  postal address elements, author phone number, author
