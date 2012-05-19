@@ -1,0 +1,504 @@
+
+
+
+NETWORK WORKING GROUP                                             J. Doe
+Internet-Draft                                                       Doe
+Expires: November 19, 2012                                    J. Sixpack
+                                                            May 18, 2012
+
+
+                A Skeleton Internet-Draft Written in LyX
+                      draft-doe-something-or-other
+
+Abstract
+
+   This document proposes a classification scheme for HTTPbis
+   authentication proposals, to help with analysis and selection.
+
+   Two paragrap abstract, eh?
+
+Status of this Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on November 19, 2012.
+
+Copyright Notice
+
+   Copyright (c) 2012 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 1]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+Table of Contents
+
+   1.          Introduction  . . . . . . . . . . . . . . . . . . . . . 3
+   1.1.        Conventions used in this document . . . . . . . . . . . 4
+   2.          Details . . . . . . . . . . . . . . . . . . . . . . . . 5
+   2.1.        A sub-section . . . . . . . . . . . . . . . . . . . . . 5
+   2.1.1.      A sub-sub-section . . . . . . . . . . . . . . . . . . . 5
+   3.          References  . . . . . . . . . . . . . . . . . . . . . . 6
+   Appendix A. First Appendix  . . . . . . . . . . . . . . . . . . . . 7
+   A.1.        Sub-Appendix  . . . . . . . . . . . . . . . . . . . . . 7
+   Appendix B. Last Appendix . . . . . . . . . . . . . . . . . . . . . 8
+               Authors' Addresses  . . . . . . . . . . . . . . . . . . 9
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 2]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+1.  Introduction
+
+   A paragraph.  Text after a vspace (currently doesn't work due to a
+   bug in LyX's XHTML exporter).
+
+   Another paragraph.
+
+
+   +=======================+
+   |     A box             |
+   |                       |
+   +=======================+
+
+   Figure 1: A figure of some sort
+
+                                 Figure 1
+
+   A numbered list:
+
+   1.  Item 1...has two paragraphs, in a manner similar to xml2rfc
+       (i.e., with vspace).
+
+   2.  Item 2 doesn't.
+
+   Now an unnumbered list:
+
+   o  a bullet with a nested list!
+
+   o  another this one has a nested list with no bulleting. will it do?
+      how about another?
+
+      this one has a nested list with no bulleting. will it do?
+
+      how about another?
+
+   And:
+
+   o  something
+
+   o  or other
+
+   Now a desc list:
+
+   item1  description of item 1
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 3]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+   item2  description of item 2
+
+1.1.  Conventions used in this document
+
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
+   document are to be interpreted as described in [ ].[RFC2119]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 4]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+2.  Details
+
+   Some text.  Here's a protected space, and here's a bunch of them:
+        , see?
+
+2.1.  A sub-section
+
+   and
+
+2.1.1.  A sub-sub-section
+
+   cool.
+
+   Now back to standard paragraphs...  And now a table
+
+                           +---+-------+------+
+                           | a | b     | c    |
+                           +---+-------+------+
+                           | 0 | stuff | what |
+                           |   |       |      |
+                           | 1 | foo   | bar  |
+                           +---+-------+------+
+
+   And some text after it.  See also section .Section 2.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 5]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+3.  References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC1113]  Linn, J., "Privacy enhancement for Internet electronic
+              mail: Part I - message encipherment and authentication
+              procedures", RFC 1113, August 1989.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 6]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+Appendix A.  First Appendix
+
+   Appendici.
+
+A.1.  Sub-Appendix
+
+   Whatever.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 7]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+Appendix B.  Last Appendix
+
+   Last word.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 8]
+
+Internet-Draft                Skeleton I-D                      May 2012
+
+
+Authors' Addresses
+
+   Jane Doe
+   Doe Corp.
+   12345 Some St
+   Somewhere, NY  10001
+   USA
+
+   Email: jane@doecorp.example
+
+
+   Joe Sixpack
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doe & Sixpack           Expires November 19, 2012               [Page 9]
+
