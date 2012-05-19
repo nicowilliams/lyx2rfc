@@ -115,8 +115,6 @@ bibliography entry key of the reference in question.
 
 TODO:
 
- - Address remaining XML namespace issues.
-
  - Add iref support.
 
  - Add more texttable support (e.g., column widths).

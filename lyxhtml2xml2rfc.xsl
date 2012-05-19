@@ -112,7 +112,7 @@
                 select="normalize-space(body//div[@class='flex_intendedstatus']/div)"/>
         </xsl:attribute>-->
 
-        <front>
+        <xsl:element name="front">
             <!-- Grab the title -->
             <xsl:element name="title">
                 <xsl:if test="//div[@class = 'flex_titleabbrev']">
@@ -136,9 +136,13 @@
                         select="year-from-dateTime(current-dateTime())"/>
                 </xsl:attribute>
             </xsl:element>
-            <area><xsl:value-of select="normalize-space(.//div[@class='flex_ietfarea'])"/></area>
-            <workgroup>NETWORK WORKING GROUP</workgroup>
-            <keyword><xsl:value-of select="normalize-space(.//div[@class='flex_xml_rfckeyword'])"/></keyword>
+            <xsl:element name="area">
+                <xsl:value-of select="normalize-space(.//div[@class='flex_ietfarea'])"/>
+            </xsl:element>
+            <xsl:element name="workgroup">NETWORK WORKING GROUP</xsl:element>
+            <xsl:element name="keyword">
+                <xsl:value-of select="normalize-space(.//div[@class='flex_xml_rfckeyword'])"/>
+            </xsl:element>
             <!-- Grab the abstract -->
             <xsl:element name="abstract">
                 <xsl:for-each select="//div[@class='abstract_item']">
@@ -147,7 +151,7 @@
                     </xsl:element>
                 </xsl:for-each>
             </xsl:element>
-        </front>
+        </xsl:element>
         <xsl:apply-templates select="body"/>
     </xsl:element>
 </xsl:template>
@@ -177,7 +181,7 @@
 
 <!-- We don't have any use for the style elements in xml2rfc -->
 <xsl:template match="style"/>
-<!-- XXX Remap this into a toc directive -->
+<!-- xml2rfc has its own way of handling toc, see PIs -->
 <xsl:template match="div[@class='toc']"/>
 <!-- Strip out things for the front matter that we handle above -->
 <xsl:template match="h1[@class='title']"/>
@@ -209,17 +213,19 @@
 <!-- Lists! -->
 <xsl:template match="ul">
     <xsl:element name="t">
-        <list style="symbols">
+        <xsl:element name="list">
+            <xsl:attribute name="style">symbols</xsl:attribute>
             <xsl:apply-templates select="li"/>
-        </list>
+        </xsl:element>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="ol">
     <xsl:element name="t">
-        <list style="numbers">
+        <xsl:element name="list">
+            <xsl:attribute name="style">numbers</xsl:attribute>
             <xsl:apply-templates select="li"/>
-        </list>
+        </xsl:element>
     </xsl:element>
 </xsl:template>
 
@@ -228,7 +234,9 @@
         <xsl:value-of select="."/>
         <!-- Multi-paragraph list items -->
         <xsl:for-each select="div[@class = 'standard']">
-            <vspace blankLines='1'/>
+            <xsl:element name="vspace">
+                <xsl:attribute name="blankLines">1</xsl:attribute>
+            </xsl:element>
             <xsl:value-of select="."/>
         </xsl:for-each>
     </xsl:element>
@@ -237,9 +245,10 @@
 <!-- Description lists -->
 <xsl:template match="dl">
     <xsl:element name="t">
-        <list style="hanging">
+        <xsl:element name="list">
+            <xsl:attribute name="style">hanging</xsl:attribute>
             <xsl:apply-templates select="dt"/>
-        </list>
+        </xsl:element>
     </xsl:element>
 </xsl:template>
 
@@ -248,11 +257,8 @@
         <xsl:attribute name="hangText">
             <xsl:value-of select="."/>
         </xsl:attribute>
-        <!-- Grab the immediately following element, which should be a
-             dd element, but we don't check that it is!  We should, but
-             don't for not knowing how to ask for the first following
-             sibling that is a dd element.  XXX add this check! -->
-        <xsl:value-of select="(following-sibling::*)[1]"/>
+        <!-- Grab the immediately following dd element -->
+        <xsl:value-of select="(following-sibling::dd)[1]"/>
     </xsl:element>
 </xsl:template>
 
@@ -265,10 +271,10 @@
             </xsl:attribute>
             <xsl:element name="artwork">
                 <xsl:text disable-output-escaping='yes'>&lt;![CDATA[
-    </xsl:text>
+</xsl:text>
                 <xsl:value-of select="div/pre"/>
                 <xsl:text disable-output-escaping='yes'>
-    ]]&gt;</xsl:text>
+]]&gt;</xsl:text>
             </xsl:element>
             <xsl:element name="postamble">
                 <xsl:value-of select="div/div[@class='float-caption float-caption-figure']"/>

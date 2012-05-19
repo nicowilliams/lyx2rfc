@@ -48,9 +48,7 @@ sed --in-place=bkp -e "s,${LYX_XHTML_DTD},${LOCAL_XHTML_DTD}," "$xhtml"
 java net/sf/saxon/Transform "$xhtml" $XSL > "$xmlout"
 
 # The old xml2rfc tool doesn't grok xmlns attributes; remove them:
-sed --in-place=bkp \
-    -e 's,xmlns="xml2rfc",,' \
-    -e 's,xmlns:xhtml="http://www.w3.org/1999/xhtml",,' "$xmlout"
+sed --in-place=bkp -e 's,xmlns="xml2rfc",,' "$xmlout"
 
 # Run xml2rfc to do the final conversion if desired:
 [[ "$out" != *.xml ]] && DISPLAY= xml2rfc "$xmlout" "$out"
