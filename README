@@ -16,9 +16,15 @@ status, and so on, as well as author metadata, and xml2rfc processing
 instructions).
 
 In order to create an Internet-Draft with LyX and lyx2rfc you must add
-to your LyX document several custom insets.  Somewhere in your LyX
-document you must be in standard mode (i.e., paragraph) and use
-Insert->Custom Insets-> and pick each of the following insets:
+to your LyX document several custom insets, which you can find in the
+custom_insets file in this project: go to Document->Settings, Local
+Layout, and add all the custom insets.  Alternatively copy the
+test-i-d.lyx file.
+
+To add the metadata needed for formatting an Internet-Draft (or RFC),
+somewhere in your LyX document you must be in standard mode (i.e.,
+paragraph) and use Insert->Custom Insets and pick each of the
+following insets:
 
  - PI
 
@@ -109,20 +115,9 @@ bibliography entry key of the reference in question.
 
 TODO:
 
- - Write a wrapper script to invoke lyx -e to export a LyX file to XHTML,
-   pre-process the LyX XHTML output (e.g., to add entity definitions for
-   &ldquo;, &rdquo; &ndash;, &nbsp;, and so on) invoke Saxon to apply
-   the XSLT template, invoke xml2rfc.
+ - Address remaining XML namespace issues.
 
- - Address XML namespace issues.
-
- - Complete cross-reference, external reference, and iref support.
-
- - Workaround LyX bug (fixed upstream) where the <a> anchors for
-   bibliography entries are not output.  This will require a temporary
-   convention in LyX I-D documents.
-
- - Add more custom insets to deal with PIs like toccompat and friends.
+ - Add iref support.
 
  - Add more texttable support (e.g., column widths).
 
