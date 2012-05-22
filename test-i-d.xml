@@ -6,7 +6,7 @@
             <!ENTITY rfc1113 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml'>
 
 ]>
-<rfc xmlns="xml2rfc" docName="draft-doe-something-or-other" ipr="trust200902"><front><title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title><author initials="J." surname="Doe" fullname="Jane Doe"><organization abbrev="Doe">Doe Corp.</organization><address><postal><street>12345 Some St</street><city>Somewhere</city><region>NY</region><code>10001</code><country>USA</country></postal><email>
+<rfc  docName="draft-doe-something-or-other" ipr="trust200902"><front><title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title><author initials="J." surname="Doe" fullname="Jane Doe"><organization abbrev="Doe">Doe Corp.</organization><address><postal><street>12345 Some St</street><city>Somewhere</city><region>NY</region><code>10001</code><country>USA</country></postal><email>
 jane@doecorp.example</email></address></author><author initials="J." surname="Sixpack" fullname="Joe Sixpack"/><date month="May" year="2012"/><area>Security Area</area><workgroup>NETWORK WORKING GROUP</workgroup><keyword>Internet-Draft</keyword><abstract><t>
 This document proposes a classification scheme for HTTPbis authentication proposals, to help with analysis and selection.</t><t>
 Two paragrap abstract, eh?</t></abstract></front><middle><section title="Introduction" anchor="d1e222"><t>A paragraph. Text after a vspace (currently doesn't work due to a bug in LyX's XHTML exporter).</t><t>Another paragraph.</t><t/><t><figure anchor="magicparlabel-96 magicparlabel-104"><artwork><![CDATA[
@@ -36,7 +36,7 @@ how about another?</t></list></t><t>And:</t><t><list style="symbols"><t>
 something</t><t>
 or other</t></list></t><t>Now a desc list:</t><t><list style="hanging"><t hangText="item1">
  description of item 1</t><t hangText="item2">
- description of item 2</t></list></t><section title="Conventions used in this document" anchor="d1e315"><t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [ ].<xref target="RFC2119"/></t></section></section><section title="Details" anchor="d1e328"><t>Some text. Here's a protected space, and here's a bunch of them:      , see?</t><section title="A sub-section" anchor="sub_A_sub_section"><t>and</t><section title="A sub-sub-section" anchor="d1e348"><t>cool.</t><t>Now back to standard paragraphs... And now a table</t><t> </t><texttable><ttcol>
+ description of item 2</t></list></t><section title="Conventions used in this document" anchor="d1e315"><t>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [<xref target="RFC2119"/>].</t></section></section><section title="Details" anchor="d1e328"><t>Some text. Here's a protected space, and here's a bunch of them:      , see?</t><section title="A sub-section" anchor="sub_A_sub_section"><t>and</t><section title="A sub-sub-section" anchor="d1e348"><t>cool.</t><t>Now back to standard paragraphs... And now a table</t><texttable><ttcol>
 a</ttcol><ttcol>
 b</ttcol><ttcol>
 c</ttcol><c>
@@ -45,6 +45,6 @@ stuff</c><c>
 what</c><c>
 1</c><c>
 foo</c><c>
-bar</c></texttable><t>And some text after it. See also section .<xref target="sub_A_sub_section"/></t></section></section></section></middle><back><references title="References">&rfc2119;
+bar</c></texttable><t>And some text after it. See also section <xref target="sub_A_sub_section"/>.</t></section></section></section></middle><back><references title="References">&rfc2119;
 &rfc1113;
 </references><section title="First Appendix" anchor="d1e470"><t>Appendici.</t><section title="Sub-Appendix" anchor="d1e479"><t>Whatever.</t></section></section><section title="Last Appendix" anchor="d1e488"><t>Last word.</t></section></back></rfc>

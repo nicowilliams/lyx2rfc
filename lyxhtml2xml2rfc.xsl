@@ -196,18 +196,40 @@
 
 <!-- Plain paragraphs -->
 <xsl:template match="div[@class='standard']">
-    <xsl:element name="t">
-        <xsl:value-of select="string-join(text()/normalize-space(), ' ')"/>
-        <!--
-            The normalize-space() function is too aggressive; we only
-            want to trim out leadign and trailing whitespace.  That's
-            what the trim template does, but for now we don't use it.
-            <xsl:call-template name="trim">
-            <xsl:with-param name="x" select="string-join(text())"/>
-        </xsl:call-template>-->
-        <xsl:apply-templates select="child::*[name() != 'table']"/><!-- Limit to 'a' elements! -->
-    </xsl:element>
-    <xsl:apply-templates select="child::table"/>
+    <xsl:choose>
+        <xsl:when test="./table/tbody">
+            <!-- Tables are generated inside an otherwise empty div with
+                 class='standard'.  We don't want to generate an
+                 unnecessary <t></t> around the <texttable>.  -->
+            <xsl:apply-templates select="child::table"/>
+        </xsl:when>
+        <xsl:otherwise>
+            <xsl:element name="t">
+                <!--
+                     Applies templates to the text() nodes and child elements in
+                     order.  This is important.  Selecting the string-join() of
+                     text() then applying templates to children would cause
+                     xrefs to be added at the end of the paragraphs, which would
+                     be incorrect.
+                     -->
+                <xsl:apply-templates/>
+            </xsl:element>
+        </xsl:otherwise>
+    </xsl:choose>
+</xsl:template>
+
+<!-- Plain paragrah text -->
+<xsl:template match="div[@class='standard']/text()">
+    <!-- We trim all leading/trainling whitespace (unfortunately
+         normalize-space() also normalizes internal space, something we
+         need to fix eventually, probably by using replace() instead of
+         normalize-space()).  We could append a space so that text nodes
+         separated by <a> and other elements (probably only <a>) don't
+         get run-on.  Currently this can only happen for non-citation
+         xrefs, so we just prepend a space to those (see <xref>
+         generation code below).  But we leave the concat() with empty
+         string as a breadcrumb.  -->
+    <xsl:value-of select="concat(normalize-space(.), '')"/>
 </xsl:template>
 
 <!-- Lists! -->
@@ -285,6 +307,9 @@
 
 <!-- xrefs -->
 <xsl:template match="a[@href and starts-with(@href, '#') and not(starts-with(@href, '#key-'))]"><!-- workaround for LyX bug -->
+    <!-- We add a space here to avoid running this xref onto the end of
+         the preceding text() node. -->
+    <xsl:text> </xsl:text>
     <xsl:element name="xref">
         <xsl:attribute name="target">
             <xsl:value-of select="substring(./@href, 2)"/>
