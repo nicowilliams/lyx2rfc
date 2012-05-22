@@ -275,12 +275,14 @@
 
 <xsl:template match="li">
     <xsl:element name="t">
+        <!-- XXX This should probably be an apply-templates -->
         <xsl:value-of select="."/>
         <!-- Multi-paragraph list items -->
         <xsl:for-each select="div[@class = 'standard']">
             <xsl:element name="vspace">
                 <xsl:attribute name="blankLines">1</xsl:attribute>
             </xsl:element>
+            <!-- XXX This should probably be an apply-templates -->
             <xsl:value-of select="."/>
         </xsl:for-each>
     </xsl:element>
@@ -299,6 +301,7 @@
 <xsl:template match="dt">
     <xsl:element name="t">
         <xsl:attribute name="hangText">
+            <!-- XXX This should probably be an apply-templates -->
             <xsl:value-of select="."/>
         </xsl:attribute>
         <!-- Grab the immediately following dd element -->
@@ -369,14 +372,25 @@
 
 <xsl:template match="tbody">
     <xsl:element name="texttable">
+        <!-- This would probably be best done with apply-templates so
+             that we can apply further templates as necessary. -->
+        <!-- Anyways, so xml2rfc has no row element to contain column
+             values, which is very strange and prevents one column value
+             from spanning several columns, for example.  So first we
+             generate column declarations (<ttcol> elements) for the
+             columns (taken from the first row from the XHTML), then we
+             generate column values (<c> elements) for all the <td>s
+             from subsequent rows.  -->
         <xsl:for-each select='tr[position() = 1]/td/div'>
             <xsl:element name="ttcol">
                 <!-- XXX add alignment and other options! -->
+                <!-- XXX Could this be an apply-templates -->
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
         <xsl:for-each select="tr[position() > 1]/td/div">
             <xsl:element name="c">
+                <!-- XXX Could this be an apply-templates -->
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
