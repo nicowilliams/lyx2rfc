@@ -193,6 +193,9 @@
 <xsl:template match="a[starts-with(@id, 'magicparlabel-')]"/>
 
 <!-- Plain paragraphs -->
+<!-- XXX May want to match
+     starts-with(string-join(normalize-space(text()), ' '), '[')
+     and output a <cref> (a comment).  -->
 <xsl:template match="div[@class='standard']">
     <xsl:choose>
         <xsl:when test="./table/tbody">
@@ -207,8 +210,8 @@
                      Applies templates to the text() nodes and child elements in
                      order.  This is important.  Selecting the string-join() of
                      text() then applying templates to children would cause
-                     xrefs to be added at the end of the paragraphs, which would
-                     be incorrect.
+                     <xref>s, <em>s, <a>s, and such to be added at the
+                     end of the paragraphs, which would be incorrect.
                      -->
                 <xsl:apply-templates/>
             </xsl:element>
@@ -221,13 +224,21 @@
     <!-- We trim all leading/trainling whitespace (unfortunately
          normalize-space() also normalizes internal space, something we
          need to fix eventually, probably by using replace() instead of
-         normalize-space()).  We could append a space so that text nodes
-         separated by <a> and other elements (probably only <a>) don't
-         get run-on.  Currently this can only happen for non-citation
-         xrefs, so we just prepend a space to those (see <xref>
-         generation code below).  But we leave the concat() with empty
-         string as a breadcrumb.  -->
-    <xsl:value-of select="concat(normalize-space(.), '')"/>
+         normalize-space()).  We append a space so that text nodes
+         separated by <a>, <em> and other elements don't get run-on.
+         But this leads to citations having an unnecessary, ugly space
+         prepended :( -->
+    <xsl:value-of select="concat(normalize-space(.), ' ')"/>
+</xsl:template>
+
+<xsl:template match="em">
+    <xsl:element name="spanx">
+        <xsl:attribute name="style">
+            <xsl:text>emph</xsl:text>
+        </xsl:attribute>
+        <xsl:apply-templates select="text()"/>
+    </xsl:element>
+    <xsl:text> </xsl:text>
 </xsl:template>
 
 <!-- Lists! -->
