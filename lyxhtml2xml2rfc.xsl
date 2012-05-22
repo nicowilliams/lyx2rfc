@@ -372,8 +372,6 @@
 
 <xsl:template match="tbody">
     <xsl:element name="texttable">
-        <!-- This would probably be best done with apply-templates so
-             that we can apply further templates as necessary. -->
         <!-- Anyways, so xml2rfc has no row element to contain column
              values, which is very strange and prevents one column value
              from spanning several columns, for example.  So first we
@@ -381,9 +379,11 @@
              columns (taken from the first row from the XHTML), then we
              generate column values (<c> elements) for all the <td>s
              from subsequent rows.  -->
+        <!-- XXX This would probably be best done with apply-templates
+             so that we can apply further templates as necessary. -->
         <xsl:for-each select='tr[position() = 1]/td/div'>
             <xsl:element name="ttcol">
-                <!-- XXX add alignment and other options! -->
+                <xsl:apply-templates select="../@align"/>
                 <!-- XXX Could this be an apply-templates -->
                 <xsl:value-of select="."/>
             </xsl:element>
@@ -395,6 +395,12 @@
             </xsl:element>
         </xsl:for-each>
     </xsl:element>
+</xsl:template>
+
+<xsl:template match="@align">
+    <xsl:attribute name="align">
+        <xsl:value-of select="."/>
+    </xsl:attribute>
 </xsl:template>
 
 <!-- Sections -->

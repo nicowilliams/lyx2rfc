@@ -117,7 +117,14 @@ TODO:
 
  - Add iref support.
 
- - Add more texttable support (e.g., column widths).
+ - Add cref support.
+
+BUGS:
+
+ - LyX does not pass through any table column widths.  Besides, LyX lets
+   the user set column widths only in centimeters, while xml2rfc allows
+   only percentages.  Since the XSLT won't see any column width, there's
+   nothing we can do.
 
 [0] http://www.lyx.org/
 [1] What You See Is What You Mean.
