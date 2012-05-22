@@ -25,7 +25,7 @@ function usage {
 (($# > 0)) || usage
 (($# < 3)) || usage
 lyxf=$1
-[[ "$lyxf" = *.lyx && "$lyxf" != *.* ]] && lyxf=${lyxf}.lyx
+[[ "$lyxf" != *.lyx && "$lyxf" != *.* ]] && lyxf=${lyxf}.lyx
 [[ "$lyxf" != *.lyx ]] && usage
 xhtml=${1:%.lyx}.xhtml
 out=${2:-${lyxf%.lyx}.txt}
