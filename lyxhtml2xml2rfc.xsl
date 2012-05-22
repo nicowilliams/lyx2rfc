@@ -56,8 +56,6 @@
     <m>September</m><m>October</m><m>November</m><m>December</m>
 </xsl:variable>
 
-<!-- XXX Add cdata-section-elements="artwork" so the CDATA for that is
-     automatically generated! -->
 <xsl:output method="xml" omit-xml-declaration="no"/>
 
 <xsl:template match="/">
@@ -233,7 +231,7 @@
 </xsl:template>
 
 <!-- Lists! -->
-<xsl:template match="ul">
+<xsl:template match="ul[../name() != 'dd']">
     <xsl:element name="t">
         <xsl:element name="list">
             <xsl:attribute name="style">symbols</xsl:attribute>
@@ -241,13 +239,26 @@
         </xsl:element>
     </xsl:element>
 </xsl:template>
+<xsl:template match="ul[../name() = 'dd']">
+    <!-- In a nested list we don't want to nest <t> in <t> -->
+    <xsl:element name="list">
+        <xsl:attribute name="style">symbols</xsl:attribute>
+        <xsl:apply-templates select="li"/>
+    </xsl:element>
+</xsl:template>
 
-<xsl:template match="ol">
+<xsl:template match="ol[../name() != 'dd']">
     <xsl:element name="t">
         <xsl:element name="list">
             <xsl:attribute name="style">numbers</xsl:attribute>
             <xsl:apply-templates select="li"/>
         </xsl:element>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="ol[../name() = 'dd']">
+    <xsl:element name="list">
+        <xsl:attribute name="style">numbers</xsl:attribute>
+        <xsl:apply-templates select="li"/>
     </xsl:element>
 </xsl:template>
 
@@ -280,8 +291,12 @@
             <xsl:value-of select="."/>
         </xsl:attribute>
         <!-- Grab the immediately following dd element -->
-        <xsl:value-of select="(following-sibling::dd)[1]"/>
+        <xsl:apply-templates select="(following-sibling::dd)[1]"/>
     </xsl:element>
+</xsl:template>
+
+<xsl:template match="dd">
+    <xsl:apply-templates/>
 </xsl:template>
 
 <!-- Figures -->
@@ -292,11 +307,11 @@
                 <xsl:value-of select="div/a/@id"/>
             </xsl:attribute>
             <xsl:element name="artwork">
-                <xsl:text disable-output-escaping='yes'>&lt;![CDATA[
-</xsl:text>
+                <!--<xsl:text disable-output-escaping='yes'>&lt;![CDATA[
+</xsl:text>-->
                 <xsl:value-of select="div/pre"/>
-                <xsl:text disable-output-escaping='yes'>
-]]&gt;</xsl:text>
+                <!--<xsl:text disable-output-escaping='yes'>
+]]&gt;</xsl:text>-->
             </xsl:element>
             <xsl:element name="postamble">
                 <xsl:value-of select="div/div[@class='float-caption float-caption-figure']"/>
