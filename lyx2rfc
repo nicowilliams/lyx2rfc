@@ -43,14 +43,14 @@ printf "Exporting LyX document as XHTML...\n"
 lyx -e xhtml "$lyxf"
 
 # Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
-sed --in-place=bkp -e "s,${LYX_XHTML_DTD},${LOCAL_XHTML_DTD}," "$xhtml"
+sed --in-place -e "s,${LYX_XHTML_DTD},${LOCAL_XHTML_DTD}," "$xhtml"
 
 # Apply the lyx2rfc XSTL stylesheet:
 printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
 java net/sf/saxon/Transform "$xhtml" $XSL > "$xmlout"
 
 # The old xml2rfc tool doesn't grok xmlns attributes; remove them:
-sed --in-place=bkp -e 's,xmlns="xml2rfc",,' "$xmlout"
+sed --in-place -e 's,xmlns="xml2rfc",,' "$xmlout"
 
 # Run xml2rfc to do the final conversion if desired:
 printf "Applying xml2rfc for final formatting...\n"
