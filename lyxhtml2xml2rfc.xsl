@@ -193,7 +193,7 @@
 <xsl:template match="a[starts-with(@id, 'magicparlabel-')]"/>
 
 <!-- Plain paragraphs -->
-<!-- XXX May want to match
+<!-- TODO Maybe match
      starts-with(string-join(normalize-space(text()), ' '), '[')
      and output a <cref> (a comment).  -->
 <xsl:template match="div[@class='standard']">
@@ -217,18 +217,6 @@
             </xsl:element>
         </xsl:otherwise>
     </xsl:choose>
-</xsl:template>
-
-<!-- Plain paragrah text -->
-<xsl:template match="div[@class='standard']/text()">
-    <!-- We trim all leading/trainling whitespace (unfortunately
-         normalize-space() also normalizes internal space, something we
-         need to fix eventually, probably by using replace() instead of
-         normalize-space()).  We append a space so that text nodes
-         separated by <a>, <em> and other elements don't get run-on.
-         But this leads to citations having an unnecessary, ugly space
-         prepended :( -->
-    <xsl:value-of select="concat(normalize-space(.), ' ')"/>
 </xsl:template>
 
 <xsl:template match="em">
@@ -384,13 +372,13 @@
         <xsl:for-each select='tr[position() = 1]/td/div'>
             <xsl:element name="ttcol">
                 <xsl:apply-templates select="../@align"/>
-                <!-- XXX Could this be an apply-templates -->
+                <!-- XXX Could this be an apply-templates? -->
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
         <xsl:for-each select="tr[position() > 1]/td/div">
             <xsl:element name="c">
-                <!-- XXX Could this be an apply-templates -->
+                <!-- XXX Could this be an apply-templates? -->
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
