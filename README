@@ -115,9 +115,7 @@ bibliography entry key of the reference in question.
 
 TODO:
 
- - Add iref support.
-
- - Add cref support.
+ - Add iref support?
 
 BUGS:
 
@@ -125,6 +123,9 @@ BUGS:
    the user set column widths only in centimeters, while xml2rfc allows
    only percentages.  Since the XSLT won't see any column width, there's
    nothing we can do.
+
+   Still, we could add a custom inset by which to specify column widths
+   in percentage and render that into xml2rfc's schema.
 
 [0] http://www.lyx.org/
 [1] What You See Is What You Mean.

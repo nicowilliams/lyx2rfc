@@ -3,8 +3,8 @@
 
 NETWORK WORKING GROUP                                             J. Doe
 Internet-Draft                                                       Doe
-Expires: November 24, 2012                                    J. Sixpack
-                                                            May 23, 2012
+Expires: December 2, 2012                                     J. Sixpack
+                                                            May 31, 2012
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -32,7 +32,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 24, 2012.
+   This Internet-Draft will expire on December 2, 2012.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 1]
+Doe & Sixpack           Expires December 2, 2012                [Page 1]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 2]
+Doe & Sixpack           Expires December 2, 2012                [Page 2]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -119,6 +119,10 @@ Internet-Draft                Skeleton I-D                      May 2012
    bug in LyX's XHTML exporter).
 
    Another paragraph.
+
+   [[anchor1: An editorial comment.]]
+
+   [[anchor2: Another comment.]]
 
    +=======================+
    |     A box             |
@@ -154,20 +158,20 @@ Internet-Draft                Skeleton I-D                      May 2012
 
    Now a desc list:
 
-   item1  description of item 1
-
-   item2  description of item 2
 
 
 
 
 
 
-
-Doe & Sixpack           Expires November 24, 2012               [Page 3]
+Doe & Sixpack           Expires December 2, 2012                [Page 3]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
+
+   item1  description of item 1
+
+   item2  description of item 2
 
 1.1.  Conventions used in this document
 
@@ -216,11 +220,7 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-
-
-
-
-Doe & Sixpack           Expires November 24, 2012               [Page 4]
+Doe & Sixpack           Expires December 2, 2012                [Page 4]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -276,7 +276,7 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 5]
+Doe & Sixpack           Expires December 2, 2012                [Page 5]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -332,7 +332,7 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 6]
+Doe & Sixpack           Expires December 2, 2012                [Page 6]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -388,7 +388,7 @@ A.1.  Sub-Appendix
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 7]
+Doe & Sixpack           Expires December 2, 2012                [Page 7]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -444,7 +444,7 @@ Appendix B.  Last Appendix
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 8]
+Doe & Sixpack           Expires December 2, 2012                [Page 8]
 
 Internet-Draft                Skeleton I-D                      May 2012
 
@@ -500,5 +500,5 @@ Authors' Addresses
 
 
 
-Doe & Sixpack           Expires November 24, 2012               [Page 9]
+Doe & Sixpack           Expires December 2, 2012                [Page 9]
 

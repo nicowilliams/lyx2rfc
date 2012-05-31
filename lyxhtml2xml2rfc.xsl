@@ -193,9 +193,6 @@
 <xsl:template match="a[starts-with(@id, 'magicparlabel-')]"/>
 
 <!-- Plain paragraphs -->
-<!-- TODO Maybe match
-     starts-with(string-join(normalize-space(text()), ' '), '[')
-     and output a <cref> (a comment).  -->
 <xsl:template match="div[@class='standard']">
     <xsl:choose>
         <xsl:when test="./table/tbody">
@@ -219,6 +216,16 @@
     </xsl:choose>
 </xsl:template>
 
+<!-- crefs (editorial comments) -->
+<xsl:template match="div[@class='revisionremark']">
+    <xsl:element name="t">
+        <xsl:element name="cref">
+            <xsl:apply-templates/>
+        </xsl:element>
+    </xsl:element>
+</xsl:template>
+
+<!-- Emphasis (<spanx>) -->
 <xsl:template match="em">
     <xsl:element name="spanx">
         <xsl:attribute name="style">
@@ -231,6 +238,7 @@
 
 <!-- Lists! -->
 <xsl:template match="ul[../name() != 'dd']">
+    <!-- Unnumbered list NOT nested in a description list -->
     <xsl:element name="t">
         <xsl:element name="list">
             <xsl:attribute name="style">symbols</xsl:attribute>
@@ -239,13 +247,15 @@
     </xsl:element>
 </xsl:template>
 <xsl:template match="ul[../name() = 'dd']">
-    <!-- In a nested list we don't want to nest <t> in <t> -->
+    <!-- Unnumbered list nested in a description list.
+         In a nested list we don't want to nest <t> in <t> -->
     <xsl:element name="list">
         <xsl:attribute name="style">symbols</xsl:attribute>
         <xsl:apply-templates select="li"/>
     </xsl:element>
 </xsl:template>
 
+<!-- Ditto numbered lists -->
 <xsl:template match="ol[../name() != 'dd']">
     <xsl:element name="t">
         <xsl:element name="list">
@@ -261,6 +271,7 @@
     </xsl:element>
 </xsl:template>
 
+<!-- List elements -->
 <xsl:template match="li">
     <xsl:element name="t">
         <!-- XXX This should probably be an apply-templates -->
@@ -286,6 +297,7 @@
     </xsl:element>
 </xsl:template>
 
+<!-- Description list elements -->
 <xsl:template match="dt">
     <xsl:element name="t">
         <xsl:attribute name="hangText">
@@ -296,7 +308,6 @@
         <xsl:apply-templates select="(following-sibling::dd)[1]"/>
     </xsl:element>
 </xsl:template>
-
 <xsl:template match="dd">
     <xsl:apply-templates/>
 </xsl:template>
@@ -357,7 +368,6 @@
 <xsl:template match="table">
     <xsl:apply-templates select="tbody"/>
 </xsl:template>
-
 <xsl:template match="tbody">
     <xsl:element name="texttable">
         <!-- Anyways, so xml2rfc has no row element to contain column
@@ -384,7 +394,6 @@
         </xsl:for-each>
     </xsl:element>
 </xsl:template>
-
 <xsl:template match="@align">
     <xsl:attribute name="align">
         <xsl:value-of select="."/>
@@ -574,6 +583,7 @@ h4: handling section content node tag: </xsl:text>
     <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
 </xsl:template>
 
+<!-- Author information -->
 <xsl:template match="div[@class='flex_authororg']">
     <xsl:element name='organization'>
         <xsl:choose>
@@ -612,6 +622,9 @@ h4: handling section content node tag: </xsl:text>
 </xsl:template>
 
 <xsl:template match="div[@class='flex_authoraddrcountry']">
+    <!-- We don't want to have to nest insets for these things in LyX
+         documents, but xml2rfc requires nesting, thus the use of ..
+         here. -->
     <xsl:element name='postal'>
         <xsl:apply-templates select="../div[@class = 'flex_authoraddrstreet']"/>
         <xsl:apply-templates select="../div[@class = 'flex_authoraddrcity']"/>
@@ -641,14 +654,16 @@ h4: handling section content node tag: </xsl:text>
     </xsl:element>
 </xsl:template>
 
+<!-- Process author data -->
 <xsl:template match="div[@class='author_item']">
     <!-- Author element -->
     <xsl:element name='author'>
         <!-- Initials and surname attributes and various sub-elements...
 
              Try to be user-friendly by deriving the initials and
-             surname from the fullname.  XSLT conditionals are extremely
-             verbose :( -->
+             surname from the fullname.
+
+             XSLT conditionals are exceedingly verbose! :( -->
         <xsl:attribute name="initials">
             <xsl:choose>
                 <xsl:when test="./div[@class='flex_authorinitials']/div">

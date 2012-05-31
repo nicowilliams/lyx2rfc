@@ -306,6 +306,26 @@ no
 \end_inset
 
 
+\begin_inset Flex PI
+status collapsed
+
+\begin_layout Plain Layout
+comments="yes"
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex PI
+status collapsed
+
+\begin_layout Plain Layout
+inline="yes"
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Author
@@ -459,6 +479,14 @@ A paragraph.
 
 \begin_layout Standard
 Another paragraph.
+\end_layout
+
+\begin_layout RevisionRemark
+An editorial comment.
+\end_layout
+
+\begin_layout RevisionRemark
+Another comment.
 \end_layout
 
 \begin_layout Standard
