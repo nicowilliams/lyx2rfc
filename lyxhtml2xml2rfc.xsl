@@ -201,6 +201,14 @@
                  unnecessary <t></t> around the <texttable>.  -->
             <xsl:apply-templates select="child::table"/>
         </xsl:when>
+        <xsl:when test="..[name() = 'li']">
+            <!-- Paragraphs in list items should generate vspace
+                 elements but no t elements.  -->
+                 <xsl:element name="vspace">
+                     <xsl:attribute name="blankLines">1</xsl:attribute>
+                 </xsl:element>
+                 <xsl:apply-templates/>
+        </xsl:when>
         <xsl:otherwise>
             <xsl:element name="t">
                 <!--
@@ -237,8 +245,8 @@
 </xsl:template>
 
 <!-- Lists! -->
-<xsl:template match="ul[../name() != 'dd']">
-    <!-- Unnumbered list NOT nested in a description list -->
+<xsl:template match="ul[../name() != 'dd' and ../name() != 'li']">
+    <!-- Unnumbered list NOT nested in a another list -->
     <xsl:element name="t">
         <xsl:element name="list">
             <xsl:attribute name="style">symbols</xsl:attribute>
@@ -246,9 +254,9 @@
         </xsl:element>
     </xsl:element>
 </xsl:template>
-<xsl:template match="ul[../name() = 'dd']">
-    <!-- Unnumbered list nested in a description list.
-         In a nested list we don't want to nest <t> in <t> -->
+<xsl:template match="ul[../name() = 'dd' or ../name() = 'li']">
+    <!-- Unnumbered list nested in a list.  In a nested list we don't
+         want to nest <t> in <t>. -->
     <xsl:element name="list">
         <xsl:attribute name="style">symbols</xsl:attribute>
         <xsl:apply-templates select="li"/>
@@ -256,7 +264,7 @@
 </xsl:template>
 
 <!-- Ditto numbered lists -->
-<xsl:template match="ol[../name() != 'dd']">
+<xsl:template match="ol[../name() != 'dd' and ../name() != 'li']">
     <xsl:element name="t">
         <xsl:element name="list">
             <xsl:attribute name="style">numbers</xsl:attribute>
@@ -264,7 +272,7 @@
         </xsl:element>
     </xsl:element>
 </xsl:template>
-<xsl:template match="ol[../name() = 'dd']">
+<xsl:template match="ol[../name() = 'dd' or ../name() = 'li']">
     <xsl:element name="list">
         <xsl:attribute name="style">numbers</xsl:attribute>
         <xsl:apply-templates select="li"/>
@@ -274,16 +282,7 @@
 <!-- List elements -->
 <xsl:template match="li">
     <xsl:element name="t">
-        <!-- XXX This should probably be an apply-templates -->
-        <xsl:value-of select="."/>
-        <!-- Multi-paragraph list items -->
-        <xsl:for-each select="div[@class = 'standard']">
-            <xsl:element name="vspace">
-                <xsl:attribute name="blankLines">1</xsl:attribute>
-            </xsl:element>
-            <!-- XXX This should probably be an apply-templates -->
-            <xsl:value-of select="."/>
-        </xsl:for-each>
+        <xsl:apply-templates/>
     </xsl:element>
 </xsl:template>
 

@@ -3,8 +3,8 @@
 
 NETWORK WORKING GROUP                                             J. Doe
 Internet-Draft                                                       Doe
-Expires: December 2, 2012                                     J. Sixpack
-                                                            May 31, 2012
+Expires: December 3, 2012                                     J. Sixpack
+                                                            June 1, 2012
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -32,7 +32,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 2, 2012.
+   This Internet-Draft will expire on December 3, 2012.
 
 Copyright Notice
 
@@ -52,9 +52,9 @@ Copyright Notice
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 1]
+Doe & Sixpack           Expires December 3, 2012                [Page 1]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 Table of Contents
@@ -108,9 +108,9 @@ Table of Contents
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 2]
+Doe & Sixpack           Expires December 3, 2012                [Page 2]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 1.  Introduction
@@ -141,10 +141,11 @@ Internet-Draft                Skeleton I-D                      May 2012
 
    Now an unnumbered list:
 
-   o  a bullet with a nested list!
+   o  a bullet
 
-   o  another this one has a nested list with no bulleting. will it do?
-      how about another?
+      *  with a nested list!
+
+   o  another
 
       this one has a nested list with no bulleting. will it do?
 
@@ -163,10 +164,9 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-
-Doe & Sixpack           Expires December 2, 2012                [Page 3]
+Doe & Sixpack           Expires December 3, 2012                [Page 3]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
    item1  description of item 1
@@ -220,9 +220,9 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 4]
+Doe & Sixpack           Expires December 3, 2012                [Page 4]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 2.  Details
@@ -276,9 +276,9 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 5]
+Doe & Sixpack           Expires December 3, 2012                [Page 5]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 3.  References
@@ -332,9 +332,9 @@ Internet-Draft                Skeleton I-D                      May 2012
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 6]
+Doe & Sixpack           Expires December 3, 2012                [Page 6]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 Appendix A.  First Appendix
@@ -388,9 +388,9 @@ A.1.  Sub-Appendix
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 7]
+Doe & Sixpack           Expires December 3, 2012                [Page 7]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 Appendix B.  Last Appendix
@@ -444,9 +444,9 @@ Appendix B.  Last Appendix
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 8]
+Doe & Sixpack           Expires December 3, 2012                [Page 8]
 
-Internet-Draft                Skeleton I-D                      May 2012
+Internet-Draft                Skeleton I-D                     June 2012
 
 
 Authors' Addresses
@@ -500,5 +500,5 @@ Authors' Addresses
 
 
 
-Doe & Sixpack           Expires December 2, 2012                [Page 9]
+Doe & Sixpack           Expires December 3, 2012                [Page 9]
 
