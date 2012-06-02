@@ -6,7 +6,7 @@
             <!ENTITY rfc1113 PUBLIC '' 'http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml'>
 
 ]>
-<rfc  docName="draft-doe-something-or-other" ipr="trust200902"><front><title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title><author initials="J." surname="Doe" fullname="Jane Doe"><organization abbrev="Doe">Doe Corp.</organization><address><postal><street>12345 Some St</street><city>Somewhere</city><region>NY</region><code>10001</code><country>USA</country></postal><email>
+<rfc  docName="draft-doe-something-or-other" ipr="trust200902" category="info"><front><title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title><author initials="J." surname="Doe" fullname="Jane Doe"><organization abbrev="Doe">Doe Corp.</organization><address><postal><street>12345 Some St</street><city>Somewhere</city><region>NY</region><code>10001</code><country>USA</country></postal><email>
 jane@doecorp.example</email></address></author><author initials="J." surname="Sixpack" fullname="Joe Sixpack"/><date month="June" year="2012"/><area>Security Area</area><workgroup>NETWORK WORKING GROUP</workgroup><keyword>Internet-Draft</keyword><abstract><t>
 This document proposes a classification scheme for HTTPbis authentication proposals, to help with analysis and selection.</t><t>
 Two paragrap abstract, eh?</t></abstract></front><middle><section title="Introduction" anchor="d1e232"><t>

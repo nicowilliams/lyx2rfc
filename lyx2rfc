@@ -4,10 +4,19 @@ set -e
 set -o noglob
 
 PROG=${0##*/}
-XSL=lyxhtml2xml2rfc.xsl
+if [[ "$0" = */* ]]; then
+    ORIGIN=${0%/*}
+    if [[ "$ORIGIN" != /* ]]; then
+        ORIGIN=${PWD}/$ORIGIN
+    fi
+else
+    ORIGIN=${PWD}
+fi
+XSL=$ORIGIN/lyxhtml2xml2rfc.xsl
 
 LYX_XHTML_DTD=http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd
-LOCAL_XHTML_DTD=file:xhtml-math11-f.dtd
+XHTML_DTD=http://www.w3.org/TR/2001/REC-MathML2-20010221/dtd/xhtml-math11-f.dtd
+LOCAL_XHTML_DTD=$ORIGIN/xhtml-math11-f.dtd
 
 function usage {
     printf "Usage: $PROG lyx_file [out_file]\n"
@@ -34,8 +43,8 @@ out=${2:-${lyxf%.lyx}.txt}
 xmlout=${out%.@(txt|pdf|html|xml)}.xml
 
 # Get and cache a local copy of the XHTML DTD:
-if [[ ! -f "xhtml-math11-f.dtd" ]]; then
-    wget http://www.w3.org/TR/2001/REC-MathML2-20010221/dtd/xhtml-math11-f.dtd
+if [[ ! -f "$LOCAL_XHTML_DTD" ]]; then
+    wget $XHTML_DTD
 fi
 
 # Export LyX document as XHTML:
@@ -43,11 +52,14 @@ printf "Exporting LyX document as XHTML...\n"
 lyx -e xhtml "$lyxf"
 
 # Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
-sed --in-place -e "s,${LYX_XHTML_DTD},${LOCAL_XHTML_DTD}," "$xhtml"
+sed --in-place -e "s,${LYX_XHTML_DTD},file://${LOCAL_XHTML_DTD}," "$xhtml"
 
 # Apply the lyx2rfc XSTL stylesheet:
 printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
 java net/sf/saxon/Transform "$xhtml" $XSL > "$xmlout"
+
+# Set the correct DTD URL, just so we don't have a local path left here
+sed --in-place -e "s,file://${LOCAL_XHTML_DTD},${XHTML_DTD}," "$xhtml"
 
 # The old xml2rfc tool doesn't grok xmlns attributes; remove them:
 sed --in-place -e 's,xmlns="xml2rfc",,' "$xmlout"

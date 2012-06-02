@@ -106,9 +106,9 @@
         <xsl:attribute name="ipr"><xsl:value-of
                 select="normalize-space(body//div[@class='flex_ipr']/div)"/>
         </xsl:attribute>
-        <!--<xsl:attribute name="category"><xsl:value-of
+        <xsl:attribute name="category"><xsl:value-of
                 select="normalize-space(body//div[@class='flex_intendedstatus']/div)"/>
-        </xsl:attribute>-->
+        </xsl:attribute>
 
         <xsl:element name="front">
             <!-- Grab the title -->
