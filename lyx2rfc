@@ -54,15 +54,16 @@ lyx -e xhtml "$lyxf"
 # Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
 sed --in-place -e "s,${LYX_XHTML_DTD},file://${LOCAL_XHTML_DTD}," "$xhtml"
 
-# Apply the lyx2rfc XSTL stylesheet:
+# Apply the lyx2rfc XSTL stylesheet and pretty-print result:
+# (the old xml2rfc tool doesn't grok xmlns attributes; remove them)
 printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
-java net/sf/saxon/Transform "$xhtml" $XSL > "$xmlout"
+java net/sf/saxon/Transform "$xhtml" $XSL | 
+    sed -e 's,xmlns="xml2rfc",,' -e 's/></>\n</g' |
+    xmllint --format - > "$xmlout"
 
 # Set the correct DTD URL, just so we don't have a local path left here
 sed --in-place -e "s,file://${LOCAL_XHTML_DTD},${XHTML_DTD}," "$xhtml"
 
-# The old xml2rfc tool doesn't grok xmlns attributes; remove them:
-sed --in-place -e 's,xmlns="xml2rfc",,' "$xmlout"
 
 # Run xml2rfc to do the final conversion if desired:
 printf "Applying xml2rfc for final formatting...\n"
