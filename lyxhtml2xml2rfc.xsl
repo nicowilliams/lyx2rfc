@@ -134,10 +134,7 @@
                         select="year-from-dateTime(current-dateTime())"/>
                 </xsl:attribute>
             </xsl:element>
-            <xsl:element name="area">
-                <xsl:value-of select="normalize-space(.//div[@class='flex_ietfarea'])"/>
-            </xsl:element>
-            <xsl:element name="workgroup">NETWORK WORKING GROUP</xsl:element>
+            <xsl:apply-templates select=".//div[starts-with(@class, 'flex_ietf')]"/>
             <xsl:element name="keyword">
                 <xsl:value-of select="normalize-space(.//div[@class='flex_xml_rfckeyword'])"/>
             </xsl:element>
@@ -151,6 +148,17 @@
             </xsl:element>
         </xsl:element>
         <xsl:apply-templates select="body"/>
+    </xsl:element>
+</xsl:template>
+
+<xsl:template match="div[@class='flex_ietfarea']">
+    <xsl:element name="area">
+        <xsl:value-of select="."/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="div[@class='flex_ietfworkinggroup']">
+    <xsl:element name="workgroup">
+        <xsl:value-of select="."/>
     </xsl:element>
 </xsl:template>
 
@@ -316,7 +324,7 @@
     <xsl:element name="t">
         <xsl:element name="figure">
             <xsl:attribute name="anchor">
-                <xsl:value-of select="div/a/@id"/>
+                <xsl:value-of select="(div/a/@id)[1]"/>
             </xsl:attribute>
             <xsl:element name="artwork">
                 <!--<xsl:text disable-output-escaping='yes'>&lt;![CDATA[
