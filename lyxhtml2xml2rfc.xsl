@@ -232,6 +232,10 @@
     </xsl:choose>
 </xsl:template>
 
+<xsl:template match="text()[starts-with(., ']') or ends-with(., '[')]">
+    <xsl:value-of select="replace(replace(., '\[$', ''), '^\]', '')"/>
+</xsl:template>
+
 <!-- crefs (editorial comments) -->
 <xsl:template match="div[@class='revisionremark']">
     <xsl:element name="t">
