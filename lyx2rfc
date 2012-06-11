@@ -38,9 +38,11 @@ lyxf=$1
 [[ "$lyxf" != *.lyx ]] && usage
 xhtml=${1:%.lyx}.xhtml
 out=${2:-${lyxf%.lyx}.txt}
+unpg=${2:-${lyxf%.lyx}.unpg}
 [[ "$out" != *.* ]] && out=${out}.txt
 [[ "$out" != *.@(txt|pdf|html|xml) ]] && usage
 xmlout=${out%.@(txt|pdf|html|xml)}.xml
+htmlout=${out%.@(txt|pdf|html|xml)}.html
 
 # Get and cache a local copy of the XHTML DTD:
 if [[ ! -f "$LOCAL_XHTML_DTD" ]]; then
@@ -64,8 +66,12 @@ java net/sf/saxon/Transform "$xhtml" $XSL |
 # Set the correct DTD URL, just so we don't have a local path left here
 sed --in-place -e "s,file://${LOCAL_XHTML_DTD},${XHTML_DTD}," "$xhtml"
 
-
 # Run xml2rfc to do the final conversion if desired:
-printf "Applying xml2rfc for final formatting...\n"
+printf "Applying xml2rfc for final paginated formatting...\n"
 [[ "$out" != *.xml ]] && DISPLAY= xml2rfc "$xmlout" "$out"
 
+printf "Applying xml2rfc for final unpaginated formatting...\n"
+[[ "$out" != *.xml ]] && DISPLAY= xml2rfc "$xmlout" "$unpg"
+
+printf "Applying XSLT to produce HTML...\n"
+xsltproc rfc2629.xslt "$xmlout" > "$htmlout"

@@ -50,67 +50,18 @@ Copyright Notice
    described in the Simplified BSD License.
 
 
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 1]
-
-Internet-Draft                Skeleton I-D                     June 2012
-
-
 Table of Contents
 
-   1.          Introduction  . . . . . . . . . . . . . . . . . . . . . 3
-   1.1.        Conventions used in this document . . . . . . . . . . . 4
-   2.          Details . . . . . . . . . . . . . . . . . . . . . . . . 5
-   2.1.        A sub-section . . . . . . . . . . . . . . . . . . . . . 5
-   2.1.1.      A sub-sub-section . . . . . . . . . . . . . . . . . . . 5
-   3.          References  . . . . . . . . . . . . . . . . . . . . . . 6
-   Appendix A. First Appendix  . . . . . . . . . . . . . . . . . . . . 7
-   A.1.        Sub-Appendix  . . . . . . . . . . . . . . . . . . . . . 7
-   Appendix B. Last Appendix . . . . . . . . . . . . . . . . . . . . . 8
-               Authors' Addresses  . . . . . . . . . . . . . . . . . . 9
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 2]
-
-Internet-Draft                Skeleton I-D                     June 2012
+   1.          Introduction
+   1.1.        Conventions used in this document
+   2.          Details
+   2.1.        A sub-section
+   2.1.1.      A sub-sub-section
+   3.          References
+   Appendix A. First Appendix
+   A.1.        Sub-Appendix
+   Appendix B. Last Appendix
+               Authors' Addresses
 
 
 1.  Introduction
@@ -159,16 +110,6 @@ Internet-Draft                Skeleton I-D                     June 2012
 
    Now a desc list:
 
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 3]
-
-Internet-Draft                Skeleton I-D                     June 2012
-
-
    item1  description of item 1
 
    item2  description of item 2
@@ -178,51 +119,6 @@ Internet-Draft                Skeleton I-D                     June 2012
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 4]
-
-Internet-Draft                Skeleton I-D                     June 2012
 
 
 2.  Details
@@ -251,36 +147,6 @@ Internet-Draft                Skeleton I-D                     June 2012
    And some text after it.  See also section Section 2.1.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 5]
-
-Internet-Draft                Skeleton I-D                     June 2012
-
-
 3.  References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
@@ -289,52 +155,6 @@ Internet-Draft                Skeleton I-D                     June 2012
    [RFC1113]  Linn, J., "Privacy enhancement for Internet electronic
               mail: Part I - message encipherment and authentication
               procedures", RFC 1113, August 1989.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 6]
-
-Internet-Draft                Skeleton I-D                     June 2012
 
 
 Appendix A.  First Appendix
@@ -346,107 +166,9 @@ A.1.  Sub-Appendix
    Whatever.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 7]
-
-Internet-Draft                Skeleton I-D                     June 2012
-
-
 Appendix B.  Last Appendix
 
    Last word.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 8]
-
-Internet-Draft                Skeleton I-D                     June 2012
 
 
 Authors' Addresses
@@ -462,43 +184,3 @@ Authors' Addresses
 
    Joe Sixpack
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Doe & Sixpack           Expires December 13, 2012               [Page 9]
-
