@@ -11,7 +11,7 @@
 <!ENTITY rfc2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc1113 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml">
 ]>
-<rfc docName="draft-doe-something-or-other" ipr="trust200902" category="info">
+<rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info">
   <front>
     <title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title>
     <author initials="J." surname="Doe" fullname="Jane Doe">
@@ -24,8 +24,7 @@
           <code>10001</code>
           <country>USA</country>
         </postal>
-        <email>
-jane@doecorp.example</email>
+        <email>jane@doecorp.example</email>
       </address>
     </author>
     <author initials="J." surname="Sixpack" fullname="Joe Sixpack"/>
