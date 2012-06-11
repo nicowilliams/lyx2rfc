@@ -649,19 +649,19 @@ h4: handling section content node tag: </xsl:text>
 
 <xsl:template match="div[@class='flex_authorphone']">
     <xsl:element name='phone'>
-        <xsl:value-of select="./div"/>
+        <xsl:value-of select="normalize-space(./div)"/>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="div[@class='flex_authoruri']">
     <xsl:element name='uri'>
-        <xsl:value-of select="./div"/>
+        <xsl:value-of select="normalize-space(./div)"/>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="div[@class='flex_authoremailaddr']">
     <xsl:element name='email'>
-        <xsl:value-of select="./div"/>
+        <xsl:value-of select="normalize-space(./div)"/>
     </xsl:element>
 </xsl:template>
 
