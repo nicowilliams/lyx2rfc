@@ -1,16 +1,20 @@
 
 This is a project to make it possible to use LyX [0], a WYSIWYM [1]
 editor based on LaTeX, to edit Internet-Drafts (and, if the RFC-Editor
-ever wanted to, RFCs).
+ever wanted to, RFCs).  It works by converting LyX documents to
+xml2rfc's XML schema, then applying xml2rfc and/or the Greenbytes
+XSL template.
 
-Currently the project is incomplete but very close to functional (i.e.,
-it works with some manual intervention).  It consists of an XSLT 2.0
+Currently the project is quite functional functional, though not every
+xml2rfc feature is supported (iref is missing, for example, and
+references cannot be defined inline).  It consists of an XSLT 2.0
 template to convert LyX XHTML output to the xml2rfc schema, at which
 point one can run the xml2rfc tool to typeset in any of the normal
-I-D/RFC formats (text, HTML, and PDF).
+I-D/RFC formats (text, HTML, and PDF).  The lyx2rfc script automates all
+of this work.
 
-In order to use this one must add all the custom inset definitions from
-the test-i-d.lyx file.  These custom insets are used to handle metadata
+In order to use this one must add the custom inset definitions from the
+custom_insets file.  These custom insets are used to handle metadata
 needed by xml2rfc but not provided by LyX (e.g., draftname, intended
 status, and so on, as well as author metadata, and xml2rfc processing
 instructions).
@@ -19,7 +23,7 @@ In order to create an Internet-Draft with LyX and lyx2rfc you must add
 to your LyX document several custom insets, which you can find in the
 custom_insets file in this project: go to Document->Settings, Local
 Layout, and add all the custom insets.  Alternatively copy the
-test-i-d.lyx file.
+test-i-d.lyx file and edit that.
 
 To add the metadata needed for formatting an Internet-Draft (or RFC),
 somewhere in your LyX document you must be in standard mode (i.e.,
