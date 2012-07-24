@@ -893,6 +893,21 @@ key "key-5"
 RFC5246
 \end_layout
 
+\begin_layout Standard
+Note: to work around a bug in LyX 2.0.1 (fixed in 2.0.4, but lyx2xml2rfc does
+ not yet require 2.0.4) references must all consist of LyX citations named
+ 
+\begin_inset Quotes eld
+\end_inset
+
+key-N
+\begin_inset Quotes erd
+\end_inset
+
+, and the numbering must be monotonically increasing from 1 to N without
+ skipping any numbers.
+\end_layout
+
 \begin_layout Section
 \start_of_appendix
 First Appendix
