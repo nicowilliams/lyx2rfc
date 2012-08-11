@@ -366,7 +366,9 @@
     <xsl:element name="t">
         <xsl:element name="figure">
             <xsl:attribute name="anchor">
-                <xsl:value-of select="(div/a/@id)[1]"/>
+                <!-- Any anchor will do, but hopefully we have one added
+                     by the author -->
+                <xsl:value-of select="(.//div/a/@id)[last()]"/>
             </xsl:attribute>
             <xsl:element name="artwork">
                 <!--<xsl:text disable-output-escaping='yes'>&lt;![CDATA[
