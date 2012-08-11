@@ -105,21 +105,31 @@ need the following custom insets (all optional!):
 In order to add bibxml references you must add a bibliography entry for
 each reference with the following content:
 
- - A ReferenceEntity attribute with a string that will be used to form
-   an XML ENTITY name for including the bibxml entry.
+ - For RFC references:
+    + Insert->List/TOC->BibTex Bibliography then
+    + Insert->Custom Insets->AutoRFCReferenceEntity,
+      then add 'rfcXXXX' as the inset's contents.
 
- - A hyperlink to the bibxml entry, with the following link text: "(bibxml)".
+ - For I-D references:
+    + Insert->List/TOC->BibTex Bibliography then
+    + Insert->Custom Insets->AutoIDReferenceEntity,
+      then add 'I-D.<handle>' as the inset's contents.
 
- - A hyperlink to the RFC/I-D/whatever, with the anchor declared in the
-   bibxml entry as the link text.
+ - [OPTIONAL] Insert->Hyperlink to add a hyperlink to each bibliography
+              item pointing to the RFC/I-D if you want a link to be
+              rendered in XHTML.
 
-In order to cite a reference you must Insert->Citation and select the
-bibliography entry key of the reference in question.
+In order to cite a reference you must Insert->Custom Insets->EntityXRef
+and set the target name (from the bibxml reference declaration) as the
+inset's contents.
 
 
 TODO:
 
  - Add iref support?
+ - Add support for bibxml references other than to RFC and I-Ds.
+ - Add support for a variable/parameter for specifying alternate base
+   URLs for bibxml references.
 
 BUGS:
 

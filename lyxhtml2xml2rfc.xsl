@@ -89,6 +89,35 @@
     <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE rfc SYSTEM "rfc2629.dtd" [</xsl:text>
     <xsl:text>&#xA;</xsl:text>
     <!-- Emit XML ENTITY declarations for bibxml references -->
+    <!-- Generate ENTITYs for RFCs -->
+    <xsl:for-each
+        select="//div[@class = 'bibliography']/div[@class = 'flex_autorfcreferenceentity'] intersect
+                //div[@class = 'bibliography']/div[@class = 'flex_autorfcreferenceentity']">
+        <xsl:text disable-output-escaping="yes">
+            &lt;!ENTITY </xsl:text>
+        <xsl:value-of select="normalize-space(.)"/>
+        <xsl:text disable-output-escaping="yes"> PUBLIC "" "</xsl:text>
+        <xsl:text>http://xml.resource.org/public/rfc/bibxml/reference.RFC.</xsl:text>
+        <xsl:value-of select="substring-after(normalize-space(.), 'rfc')"/>
+        <xsl:text>.xml</xsl:text>
+        <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
+    </xsl:for-each>
+    <!-- Generate ENTITYs for I-Ds -->
+    <xsl:for-each
+        select="//div[@class = 'bibliography']/div[@class = 'flex_autoidreferenceentity'] intersect
+                //div[@class = 'bibliography']/div[@class = 'flex_autoidreferenceentity']">
+        <xsl:text disable-output-escaping="yes">
+            &lt;!ENTITY </xsl:text>
+        <xsl:value-of select="normalize-space(.)"/>
+        <xsl:text disable-output-escaping="yes"> PUBLIC "" "</xsl:text>
+        <xsl:text>http://xml.resource.org/public/rfc/bibxml3/reference.</xsl:text>
+        <xsl:value-of select="normalize-space(.)"/>
+        <xsl:text>.xml</xsl:text>
+        <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
+    </xsl:for-each>
+    <!-- TODO: Add ENTITY generation for other types of bibxml references -->
+    <!-- TODO: Remove flex_referenceentity when done with the preceding TODO -->
+    <!-- Emit ENTITY declarations for bibxml references -->
     <xsl:for-each select="//div[@class = 'bibliography']/div[@class = 'flex_referenceentity']">
         <xsl:text disable-output-escaping="yes">
             &lt;!ENTITY </xsl:text>
@@ -245,13 +274,22 @@
     </xsl:element>
 </xsl:template>
 
+<!-- Auto-reference -->
+<xsl:template match="div[@class = 'flex_entityxref']">
+    <xsl:element name="xref">
+        <xsl:attribute name="target">
+            <xsl:value-of select="normalize-space(.)"/>
+        </xsl:attribute>
+    </xsl:element>
+</xsl:template>
+
 <!-- Emphasis (<spanx>) -->
 <xsl:template match="em">
     <xsl:element name="spanx">
         <xsl:attribute name="style">
             <xsl:text>emph</xsl:text>
         </xsl:attribute>
-        <xsl:apply-templates select="text()"/>
+        <xsl:apply-templates/>
     </xsl:element>
     <xsl:text> </xsl:text>
 </xsl:template>
@@ -562,6 +600,15 @@ h4: handling section content node tag: </xsl:text>
             following-sibling::*[$num-siblings])[1]"/>
 
         <!-- Handle the contents of this section -->
+        <xsl:for-each select="following-sibling::div[@class = 'bibliography' and . &lt;&lt; $next-hN]/div[@class = 'flex_autorfcreferenceentity']">
+            <xsl:apply-templates select="."/>
+        </xsl:for-each>
+        <xsl:for-each select="following-sibling::div[@class = 'bibliography' and . &lt;&lt; $next-hN]/div[@class = 'flex_autoidreferenceentity']">
+            <xsl:apply-templates select="."/>
+        </xsl:for-each>
+        <!-- TODO: Add more bibxml reference entities here -->
+
+        <!-- TODO: Remove this and all traces of flex_referenceentity -->
         <xsl:for-each select="following-sibling::div[@class = 'bibliography' and . &lt;&lt; $next-hN]/div[@class = 'flex_referenceentity']">
             <xsl:apply-templates select="."/>
         </xsl:for-each>
@@ -588,6 +635,16 @@ h4: handling section content node tag: </xsl:text>
 </xsl:template>
 
 <!-- Emit references -->
+<xsl:template match="div[@class = 'flex_autorfcreferenceentity']">
+    <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
+    <xsl:value-of select="normalize-space(.)"/>
+    <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
+</xsl:template>
+<xsl:template match="div[@class = 'flex_autoidreferenceentity']">
+    <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
+    <xsl:value-of select="normalize-space(.)"/>
+    <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
+</xsl:template>
 <xsl:template match="div[@class = 'flex_referenceentity']">
     <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
     <xsl:value-of select="normalize-space(.)"/>
