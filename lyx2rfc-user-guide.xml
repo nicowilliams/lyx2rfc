@@ -29,7 +29,7 @@ This is the user guide for lyx2rfc, a program for converting LyX documents into 
       <t>
 Internet Requests For Comment (RFCs) are published by the RFC-Editor, typically on behalf of the Internet Engineering Task Force (IETF). The process involves a phase during which the RFC-to-be document is called an “Internet-Draft”.</t>
       <t>
-Historically Internet-Drafts and RFCs have been kept as nroff documents and typeset with the nroff tool. In recent years nroff has been mostly replaced by a tool named xml2rfc <t><eref target="http://xml.resource.org/"/></t> that uses XML to represent the source to an Internet-Draft or RFC. See the guide to xml2rfc<t><eref target="http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html"/></t>; see also <xref target="RFC2629"/>.</t>
+Historically Internet-Drafts and RFCs have been kept as nroff documents and typeset with the nroff tool. In recent years nroff has been mostly replaced by a tool named xml2rfc <eref target="http://xml.resource.org/"/> that uses XML to represent the source to an Internet-Draft or RFC. See the guide to xml2rfc<eref target="http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html"/>; see also <xref target="RFC2629"/>.</t>
       <t>
 XML is a great step forward in user-friendliness – from nroff anyways. But XML is not really user-friendly unless used with XML editors. The lyx2rfc tool is intended to allow the use of LyX, a WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.</t>
       <t>

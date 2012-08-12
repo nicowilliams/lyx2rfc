@@ -67,12 +67,10 @@ Williams                                                        [Page 1]
    Historically Internet-Drafts and RFCs have been kept as nroff
    documents and typeset with the nroff tool.  In recent years nroff has
    been mostly replaced by a tool named xml2rfc
-
-   <http://xml.resource.org/>that uses XML to represent the source to an
-   Internet-Draft or RFC.  See the guide to xml2rfc
-
-   <http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html>;
-   see also [RFC2629].
+   <http://xml.resource.org/> that uses XML to represent the source to
+   an Internet-Draft or RFC.  See the guide to xml2rfc<http://
+   xml.resource.org/authoring/draft-mrose-writing-rfcs.html>; see also
+   [RFC2629].
 
    XML is a great step forward in user-friendliness - from nroff
    anyways.  But XML is not really user-friendly unless used with XML
@@ -82,6 +80,8 @@ Williams                                                        [Page 1]
    This document itself, although it is not an Internet-Draft, much less
    an RFC, is written in LyX and rendered as text and HTML using
    lyx2rfc.
+
+
 
 
 

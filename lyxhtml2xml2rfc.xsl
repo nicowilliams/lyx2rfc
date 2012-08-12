@@ -406,12 +406,10 @@
 
 <!-- erefs -->
 <xsl:template match="a[@href and not(starts-with(@href, '#'))]">
-    <xsl:element name="t">
-        <xsl:element name="eref">
-            <xsl:attribute name="target">
-                <xsl:value-of select="./@href"/>
-            </xsl:attribute>
-        </xsl:element>
+    <xsl:element name="eref">
+        <xsl:attribute name="target">
+            <xsl:value-of select="./@href"/>
+        </xsl:attribute>
     </xsl:element>
 </xsl:template>
 
