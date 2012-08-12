@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "file:///home/nico/I-Ds/test/./xhtml-math11-f.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="GENERATOR" content="LyX 2.0.0" />
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<title>A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX</title>
+
+<!-- Text Class Preamble -->
+<style type="text/css">
+div.toc {
+margin: 2em 0em;
+border-style: solid;
+border-width: 2px 0px;
+padding: 1em 0em;
+}
+div.tochead { font-size: x-large; font-weight: bold; }
+div.lyxtoc-0 {
+margin: 2em 0em 0em 0em;
+font-size: xx-large;
+font-weight: bold;
+}
+div.lyxtoc-1 {
+margin: 1em 0em 0em 0em;
+font-size: x-large;
+font-weight: bold;
+}
+div.lyxtoc-2 {
+margin: 0em 0em 0em 1em;
+font-size: large;
+font-weight: normal;
+}
+div.lyxtoc-3 { margin: 0em 0em 0em 0.5em; font-size: medium; }
+div.lyxtoc-4 { margin: 0em 0em 0em 0.5em; }
+div.lyxtoc-5 { margin: 0em 0em 0em 0.5em; }
+div.lyxtoc-6 { margin: 0em 0em 0em 0.5em; }
+a.tocentry {
+text-decoration: none;
+color: black;
+}
+a.tocentry:visited { color: black; }
+a.tocarrow {
+font-weight: bold;
+text-decoration: none;
+color: #909090;
+}
+a.tocarrow:visited { color: #C0C0C0; }
+</style>
+
+<!-- Preamble Snippets -->
+<style type="text/css">
+table { border: 1px solid black; display: inline-block; }
+td { border: 1px solid black; padding: 0.5ex; }
+</style>
+
+<!-- Layout-provided Styles -->
+<style type='text/css'>
+h1.title {
+font-size: x-large;
+margin-bottom: 1ex;
+text-align: center;
+
+}
+div.standard {
+text-align: left;
+
+}
+div.plain_layout {
+text-align: left;
+
+}
+div.author {
+font-size: large;
+margin-top: 1.3ex;
+margin-bottom: 0.7ex;
+text-align: center;
+
+}
+div.abstract {
+font-size: small;
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+margin-right: 3ex;
+text-align: left;
+
+}
+div.abstract_label {
+font-weight: bold;
+font-size: large;
+text-align: center;
+
+}
+
+div.abstract {
+margin: 4ex;
+}
+div.abstract_item {
+font-size: small;
+padding-top: 1ex;
+}
+div.abstract_label {
+font-weight: bold;
+}
+h2.section {
+font-weight: bold;
+font-size: x-large;
+margin-top: 1.3ex;
+margin-bottom: 0.7ex;
+text-align: left;
+
+}
+h3.subsection {
+font-weight: bold;
+font-size: large;
+margin-top: 0.9ex;
+margin-bottom: 0.5ex;
+text-align: left;
+
+}
+dl.description dt { font-weight: bold; }
+ul.itemize {
+margin-top: 0.7ex;
+margin-bottom: 0.7ex;
+margin-left: 3ex;
+text-align: left;
+
+}
+div.bibliography {
+text-align: left;
+
+}
+div.flex_docname {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_intendedstatus {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_titleabbrev {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_xml_rfckeyword {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_ipr {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_pi {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authororg {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authororgabbrev {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authorinitials {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authorsurname {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_authoremailaddr {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.flex_entityxref {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+div.float {
+border: 2px solid black;
+text-align: center;
+}
+div.listings {
+font-family: monospace;
+}
+div.float-caption {
+text-align: center;
+border: 2px solid black;
+padding: 1ex;
+margin: 1ex;
+}
+div.flex_autorfcreferenceentity {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
+</style>
+</head>
+<body>
+<h1 class="title"><a id='magicparlabel-1' />
+A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX</h1>
+<div class="standard"><a id='magicparlabel-2' />
+<div class="flex_docname"><div class="plain_layout"><a id='magicparlabel-6' />
+lyx2rfc-user-guide</div>
+</div><div class="flex_intendedstatus"><div class="plain_layout"><a id='magicparlabel-10' />
+info</div>
+</div><div class="flex_titleabbrev"><div class="plain_layout"><a id='magicparlabel-14' />
+LyX2RFC User Guide</div>
+</div><div class="flex_xml_rfckeyword"><div class="plain_layout"><a id='magicparlabel-18' />
+Internet-Draft</div>
+</div><div class="flex_ipr"><div class="plain_layout"><a id='magicparlabel-22' />
+noDerivatives3978</div>
+</div></div>
+
+<div class="standard"><a id='magicparlabel-23' />
+<div class="flex_pi"><div class="plain_layout"><a id='magicparlabel-27' />
+private="yes"</div>
+</div><div class="flex_pi"><div class="plain_layout"><a id='magicparlabel-31' />
+toc="yes"</div>
+</div><div class="flex_pi"><div class="plain_layout"><a id='magicparlabel-35' />
+symrefs="yes"</div>
+</div><div class="flex_pi"><div class="plain_layout"><a id='magicparlabel-39' />
+tocindent="no"</div>
+</div><div class="flex_pi"><div class="plain_layout"><a id='magicparlabel-43' />
+comments="yes"</div>
+</div><div class="flex_pi"><div class="plain_layout"><a id='magicparlabel-47' />
+inline="yes"</div>
+</div></div>
+
+<div class="author"><div class="author_item"><a id='magicparlabel-48' />
+Nicolas Williams <div class="flex_authororg"><div class="plain_layout"><a id='magicparlabel-52' />
+Cryptonector LLC</div>
+</div><div class="flex_authororgabbrev"><div class="plain_layout"><a id='magicparlabel-56' />
+Williams</div>
+</div><div class="flex_authorinitials"><div class="plain_layout"><a id='magicparlabel-60' />
+N.</div>
+</div><div class="flex_authorsurname"><div class="plain_layout"><a id='magicparlabel-64' />
+Williams</div>
+</div><div class="flex_authoremailaddr"><div class="plain_layout"><a id='magicparlabel-68' />
+nico@cryptonector.com</div>
+</div></div>
+</div>
+
+<div class="abstract"><div class="abstract_label">Abstract</div>
+<div class="abstract_item"><a id='magicparlabel-69' />
+This is the user guide for lyx2rfc, a program for converting LyX documents into XML in the xml2rfc schema, then formatting to text and HTML via the xml2rfc and related tools. LyX is a graphical What You See Is What You Mean (WYSIWYM) editor.</div>
+</div>
+<div class="standard"><a id='magicparlabel-70' />
+</div>
+<div class='toc'><div class='tochead part_'>Table of Contents</div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-71' class='tocentry'>1 Internet-Drafts and RFCs</a> <a href='#magicparlabel-71' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-80' class='tocentry'>2 Using LyX to Edit Internet-Drafts</a> <a href='#magicparlabel-80' class='tocarrow'>&gt;</a>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-82' class='tocentry'>2.1 LyX Basics</a> <a href='#magicparlabel-82' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-85' class='tocentry'>2.2 Lyx2rfc Basics</a> <a href='#magicparlabel-85' class='tocarrow'>&gt;</a></div>
+</div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-87' class='tocentry'>3 Front Matter</a> <a href='#magicparlabel-87' class='tocarrow'>&gt;</a>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-97' class='tocentry'>3.1 Typical PIs</a> <a href='#magicparlabel-97' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-99' class='tocentry'>3.2 Author Metadata</a> <a href='#magicparlabel-99' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-111' class='tocentry'>3.3 Abstract</a> <a href='#magicparlabel-111' class='tocarrow'>&gt;</a></div>
+</div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-113' class='tocentry'>4 Middle Matter</a> <a href='#magicparlabel-113' class='tocarrow'>&gt;</a>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-115' class='tocentry'>4.1 Paragraphs</a> <a href='#magicparlabel-115' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-117' class='tocentry'>4.2 Lists</a> <a href='#magicparlabel-117' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-121' class='tocentry'>4.3 Figures</a> <a href='#magicparlabel-121' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-139' class='tocentry'>4.4 Tables</a> <a href='#magicparlabel-139' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-182' class='tocentry'>4.5 Intra-Document Cross-References</a> <a href='#magicparlabel-182' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-188' class='tocentry'>4.6 Citations</a> <a href='#magicparlabel-188' class='tocarrow'>&gt;</a></div>
+</div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-190' class='tocentry'>5 Back Matter</a> <a href='#magicparlabel-190' class='tocarrow'>&gt;</a>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-196' class='tocentry'>5.1 References Sections</a> <a href='#magicparlabel-196' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-197' class='tocentry'>5.2 Appendices</a> <a href='#magicparlabel-197' class='tocarrow'>&gt;</a></div>
+</div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-198' class='tocentry'>6 Running the lyx2rfc Tool</a> <a href='#magicparlabel-198' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-200' class='tocentry'>7 Lyx2RFC Internals</a> <a href='#magicparlabel-200' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-201' class='tocentry'>8 References</a> <a href='#magicparlabel-201' class='tocarrow'>&gt;</a></div>
+</div>
+
+<h2 class="section"><span class="section_label">1</span> <a id='magicparlabel-71' />
+<a id="sec_Internet_Drafts_and_RFCs" />
+Internet-Drafts and RFCs</h2>
+<div class="standard"><a id='magicparlabel-72' />
+Internet Requests For Comment (RFCs) are published by the RFC-Editor, typically on behalf of the Internet Engineering Task Force (IETF). The process involves a phase during which the RFC-to-be document is called an &ldquo;Internet-Draft&rdquo;.</div>
+
+<div class="standard"><a id='magicparlabel-73' />
+Historically Internet-Drafts and RFCs have been kept as nroff documents and typeset with the nroff tool. In recent years nroff has been mostly replaced by a tool named xml2rfc <a href="http://xml.resource.org/">(link)</a> that uses XML to represent the source to an Internet-Draft or RFC. See the guide to xml2rfc<a href="http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html">(draft-mrose-writing-rfcs)</a>; see also <div class="flex_entityxref"><div class="plain_layout"><a id='magicparlabel-77' />
+RFC2629</div>
+</div>.</div>
+
+<div class="standard"><a id='magicparlabel-78' />
+XML is a great step forward in user-friendliness &ndash; from nroff anyways. But XML is not really user-friendly unless used with XML editors. The lyx2rfc tool is intended to allow the use of LyX, a WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.</div>
+
+<div class="standard"><a id='magicparlabel-79' />
+This document itself, although it is not an Internet-Draft, much less an RFC, is written in LyX and rendered as text and HTML using lyx2rfc.</div>
+<h2 class="section"><span class="section_label">2</span> <a id='magicparlabel-80' />
+<a id="sec_Using_LyX_to" />
+Using LyX to Edit Internet-Drafts</h2>
+<div class="standard"><a id='magicparlabel-81' />
+The first step to using LyX to edit an Internet-Draft is to start LyX and then use Document-&gt;Settings-&gt;Local Layout to add the &ldquo;custom insets&rdquo; that lyx2rfc requires: just paste them in, click on Validate, then OK. Alternatively start by copying the 'test-i-d.lyx' sample Internet-Draft.</div>
+<h3 class="subsection"><span class="subsection_label">2.1</span> <a id='magicparlabel-82' />
+<a id="sub_LyX_Basics" />
+LyX Basics</h3>
+<div class="standard"><a id='magicparlabel-83' />
+In the upper left hand corner of the LyX window there is a drop-down box for 'style' of text. 'Standard' here means 'paragraph'. Other styles include 'Title', 'Abstract', 'Section', etcetera. These correspond roughly to xml2rfc XML elements like 't', 'title', 'abstract', and 'section', but without any notion of elements containing elements.</div>
+
+<div class="standard"><a id='magicparlabel-84' />
+For the rest, LyX is very similar to many WYSIWYG graphical editors.</div>
+<h3 class="subsection"><span class="subsection_label">2.2</span> <a id='magicparlabel-85' />
+<a id="sub_Lyx2rfc_Basics" />
+Lyx2rfc Basics</h3>
+<div class="standard"><a id='magicparlabel-86' />
+While most xml2rfc input document elements can be mapped from existing LyX elements trivially, some xml2rfc elements have no LyX equivalents. To support these elements there are &ldquo;custom insets&rdquo; that are added via Document-&gt;Settings-&gt;Local Layout. To set XML Processing Instructions (&ldquo;PIs&rdquo;) simply write &lt;pi&gt;=&lt;value&gt;, use the mouse to select that text, then Insert-&gt;Custom Insets-&gt;PI. Several custom insets are provided as LyX equivalents of various xml2rfc elements not found natively in LyX.</div>
+<h2 class="section"><span class="section_label">3</span> <a id='magicparlabel-87' />
+<a id="sec_Front_Matter" />
+Front Matter</h2>
+<div class="standard"><a id='magicparlabel-88' />
+All the front matter should be in the first page, although lyx2rfc does not actually require this.</div>
+
+<div class="standard"><a id='magicparlabel-89' />
+The first line of the document should be set to the style of 'Title', then add a line below as 'Standard' where a number of custom insets will be added. A number of custom insets are REQUIRED:</div>
+
+<dl class='description'><dt class="description_label">DocName</dt>
+<dd class="description_item"><a id='magicparlabel-90' />
+ This corresponds to the Internet-Draft &ldquo;handle&rdquo; (e.g., draft-ietf-somewg-foobar-00).</dd>
+<dt class="description_label">TitleAbbrev</dt>
+<dd class="description_item"><a id='magicparlabel-91' />
+ This is the abbreviation of the document title that is to appear at the bottom of every page (when formatted as text).</dd>
+</dl>
+<div class="standard"><a id='magicparlabel-92' />
+Other custom insets related to the document itself:</div>
+
+<dl class='description'><dt class="description_label">IPR</dt>
+<dd class="description_item"><a id='magicparlabel-93' />
+ This is the value of the 'ipr' attribute of the 'rfc' element (e.g., full3978).</dd>
+<dt class="description_label">IETFArea</dt>
+<dd class="description_item"><a id='magicparlabel-94' />
+ The IETF area that this document is specific to (e.g., &ldquo;Applications&rdquo;).</dd>
+<dt class="description_label">IETFWorkingGroup</dt>
+<dd class="description_item"><a id='magicparlabel-95' />
+ The IETF Working Group (WG) that this document is specific to (e.g., &ldquo;TLS&rdquo;).</dd>
+<dt class="description_label">IntendedStatus</dt>
+<dd class="description_item"><a id='magicparlabel-96' />
+ The intended status for the RFC that would be published from the Internet-Draft, if it progresses that far (e.g., &ldquo;Informational&rdquo;).</dd>
+</dl>
+<h3 class="subsection"><span class="subsection_label">3.1</span> <a id='magicparlabel-97' />
+<a id="sub_Typical_PIs" />
+Typical PIs</h3>
+<div class="standard"><a id='magicparlabel-98' />
+Add PI custom insets as desired for the desired PIs.</div>
+<h3 class="subsection"><span class="subsection_label">3.2</span> <a id='magicparlabel-99' />
+<a id="sub_Author_Metadata" />
+Author Metadata</h3>
+<div class="standard"><a id='magicparlabel-100' />
+Open a line in 'Author' style for each author of the document and write the author's name, then add several custom insets for xml2rfc author metadata:</div>
+
+<dl class='description'><dt class="description_label">AuthorRole</dt>
+<dd class="description_item"><a id='magicparlabel-101' />
+ 'author' or 'editor'.</dd>
+<dt class="description_label">AuthorInitials</dt>
+<dd class="description_item"><a id='magicparlabel-102' />
+ The author's initials (not including the surname).</dd>
+<dt class="description_label">AuthorSurname</dt>
+<dd class="description_item"><a id='magicparlabel-103' />
+ The author's surname.</dd>
+<dt class="description_label">AuthorOrg</dt>
+<dd class="description_item"><a id='magicparlabel-104' />
+ The name of the author's organization (e.g., university or employer company name).</dd>
+<dt class="description_label">AuthorOrgAbbrev</dt>
+<dd class="description_item"><a id='magicparlabel-105' />
+ The abbreviation of the author's organization for the front page of the rendered Internet-Draft/RFC.</dd>
+<dt class="description_label">AuthorEmailAddr</dt>
+<dd class="description_item"><a id='magicparlabel-106' />
+ The author's e-mail address</dd>
+<dt class="description_label">AuthorAddrStreet</dt>
+<dd class="description_item"><a id='magicparlabel-107' />
+ The street portion of the author's postal address.</dd>
+<dt class="description_label">AuthorAddrCity</dt>
+<dd class="description_item"><a id='magicparlabel-108' />
+ The city portion of the author's postal address.</dd>
+<dt class="description_label">AuthorAddrRegion</dt>
+<dd class="description_item"><a id='magicparlabel-109' />
+ The region (state, province, ...) portion of the author's postal address.</dd>
+<dt class="description_label">AuthorAddrCountry</dt>
+<dd class="description_item"><a id='magicparlabel-110' />
+ The country name portion of the author's postal address.</dd>
+</dl>
+<h3 class="subsection"><span class="subsection_label">3.3</span> <a id='magicparlabel-111' />
+<a id="sub_Abstract" />
+Abstract</h3>
+<div class="standard"><a id='magicparlabel-112' />
+Open a line below the last author line and style it 'Abstract'. Write your abstract. Use the enter key to start another abstract paragraph.</div>
+<h2 class="section"><span class="section_label">4</span> <a id='magicparlabel-113' />
+<a id="sec_Middle_Matter" />
+Middle Matter</h2>
+<div class="standard"><a id='magicparlabel-114' />
+The meat of an Internet-Draft is organized into sections. Each section, sub-section, and sub-sub-section has a title. Open a line, style it 'Section', and write in the section title, then enter to start the contents of the section in 'Standard' (paragraph) style.</div>
+<h3 class="subsection"><span class="subsection_label">4.1</span> <a id='magicparlabel-115' />
+<a id="sub_Paragraphs" />
+Paragraphs</h3>
+<div class="standard"><a id='magicparlabel-116' />
+You've seen paragraphs: they're just text in 'Standard' style.</div>
+<h3 class="subsection"><span class="subsection_label">4.2</span> <a id='magicparlabel-117' />
+<a id="sub_Lists" />
+Lists</h3>
+<div class="standard"><a id='magicparlabel-118' />
+LyX supports numbered, bulleted, and description lists, as well as list nesting. The lyx2rfc tool supports all of these.</div>
+
+<div class="standard"><a id='magicparlabel-119' />
+Simply use in the obvious way.</div>
+
+<div class="standard"><a id='magicparlabel-120' />
+Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of a description list entry.</div>
+<h3 class="subsection"><span class="subsection_label">4.3</span> <a id='magicparlabel-121' />
+<a id="sub_Figures" />
+Figures</h3>
+<div class="standard"><a id='magicparlabel-122' />
+Insert-&gt;Float-&gt;Figure, then left arrow, then Insert-&gt;Program Listing, then write/paste ASCII figure text. Don't forget to set the figure title.</div>
+
+<div class="standard"><a id='magicparlabel-123' />
+For example:</div>
+
+<div class="standard"><a id='magicparlabel-124' />
+</div>
+<div class='float float-figure'><div class="plain_layout"><a id='magicparlabel-128' />
+<div class='float-caption float-caption-figure'>Figure 1:<div class="plain_layout"><a id='magicparlabel-138' />
+Example figure</div>
+</div></div>
+<div class='float float-listings'><pre>+=======+
+| a box |
++=======+</pre></div>
+
+</div>
+
+<h3 class="subsection"><span class="subsection_label">4.4</span> <a id='magicparlabel-139' />
+<a id="sub_Tables" />
+Tables</h3>
+<div class="standard"><a id='magicparlabel-140' />
+Click on the insert table icon in the toolbar and select the table form (NxM). You may want to enable the table toolbar as well.</div>
+
+<div class="standard"><a id='magicparlabel-141' />
+For example:</div>
+
+<div class="standard"><a id='magicparlabel-142' />
+
+
+
+<table><tbody><tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-166' />
+A</div>
+</td>
+
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-169' />
+2x2</div>
+</td>
+
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-172' />
+table</div>
+</td>
+</tr>
+<tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-175' />
+...</div>
+</td>
+
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-178' />
+...</div>
+</td>
+
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-181' />
+...</div>
+</td>
+</tr></tbody>
+</table>
+</div>
+<h3 class="subsection"><span class="subsection_label">4.5</span> <a id='magicparlabel-182' />
+<a id="sub_Intra_Document_Cross_References" />
+Intra-Document Cross-References</h3>
+<div class="standard"><a id='magicparlabel-183' />
+Use Insert-&gt;Label... to insert a label at strategic places, such as:</div>
+
+<ul class="itemize"><li class="itemize_item"><a id='magicparlabel-184' />
+in section titles</li>
+<li class="itemize_item"><a id='magicparlabel-185' />
+in figure titles</li>
+<li class="itemize_item"><a id='magicparlabel-186' />
+etcetera.</li>
+</ul>
+<div class="standard"><a id='magicparlabel-187' />
+To reference a label use Insert-&gt;Cross-Reference...</div>
+<h3 class="subsection"><span class="subsection_label">4.6</span> <a id='magicparlabel-188' />
+<a id="sub_Citations" />
+Citations</h3>
+<div class="standard"><a id='magicparlabel-189' />
+To reference an RFC or Internet-Draft, or any bibxml item use the EntityXRef custom inset (Insert-&gt;Custom Insets-&gt;EntityXRef) and set the contents of the inset to be the name that would have to be used as the 'target' attribute value in an xml2rfc 'xref' element.</div>
+<h2 class="section"><span class="section_label">5</span> <a id='magicparlabel-190' />
+<a id="sec_Back_Matter" />
+Back Matter</h2>
+<div class="standard"><a id='magicparlabel-191' />
+Back matter consists of:</div>
+
+<ul class="itemize"><li class="itemize_item"><a id='magicparlabel-192' />
+Author contact information, which is derived automatically from the author metadata custom insets as described in <a href="#sub_Author_Metadata">3.2</a>;</li>
+<li class="itemize_item"><a id='magicparlabel-193' />
+Acknowledgements (not yet supported as back matter by lyx2rfc);</li>
+<li class="itemize_item"><a id='magicparlabel-194' />
+References sections;</li>
+<li class="itemize_item"><a id='magicparlabel-195' />
+Appendices.</li>
+</ul>
+<h3 class="subsection"><span class="subsection_label">5.1</span> <a id='magicparlabel-196' />
+<a id="sub_References_Sections" />
+References Sections</h3>
+<h3 class="subsection"><span class="subsection_label">5.2</span> <a id='magicparlabel-197' />
+<a id="sub_Appendices" />
+Appendices</h3>
+<h2 class="section"><span class="section_label">6</span> <a id='magicparlabel-198' />
+<a id="sec_Running_the_lyx2rfc" />
+Running the lyx2rfc Tool</h2>
+<div class="standard"><a id='magicparlabel-199' />
+The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX document as LyXHTML, then runs the Saxon XSLT processor to convert the document from the LyXHTML schema to the xml2rfc XML schema, then it applies xml2rfc and XSLT again to render as text and HTML.</div>
+<h2 class="section"><span class="section_label">7</span> <a id='magicparlabel-200' />
+<a id="sec_Lyx2RFC_Internals" />
+Lyx2RFC Internals</h2>
+<h2 class="section"><span class="section_label">8</span> <a id='magicparlabel-201' />
+<a id="sec_References" />
+References</h2>
+<div class="bibliography"><a id='magicparlabel-202' />
+<a id='' />
+<span class='bibitemlabel'>1</span><div class="flex_autorfcreferenceentity"><div class="plain_layout"><a id='magicparlabel-206' />
+rfc2629</div>
+</div><a href="http://www.ietf.org/rfc/rfc2629.txt">RFC2629</a></div>
+
+<div class="standard"><a id='magicparlabel-207' />
+...</div>
+</body>
+</html>

@@ -1,0 +1,672 @@
+
+
+
+yes                                                          N. Williams
+                                                                Williams
+                                                         August 12, 2012
+
+
+A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
+
+Abstract
+
+   This is the user guide for lyx2rfc, a program for converting LyX
+   documents into XML in the xml2rfc schema, then formatting to text and
+   HTML via the xml2rfc and related tools.  LyX is a graphical What You
+   See Is What You Mean (WYSIWYM) editor.
+
+
+Table of Contents
+
+   1.    Internet-Drafts and RFCs . . . . . . . . . . . . . . . . . .  2
+   2.    Using LyX to Edit Internet-Drafts  . . . . . . . . . . . . .  3
+   2.1.  LyX Basics . . . . . . . . . . . . . . . . . . . . . . . . .  3
+   2.2.  Lyx2rfc Basics . . . . . . . . . . . . . . . . . . . . . . .  3
+   3.    Front Matter . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.1.  Typical PIs  . . . . . . . . . . . . . . . . . . . . . . . .  4
+   3.2.  Author Metadata  . . . . . . . . . . . . . . . . . . . . . .  4
+   3.3.  Abstract . . . . . . . . . . . . . . . . . . . . . . . . . .  5
+   4.    Middle Matter  . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.1.  Paragraphs . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.2.  Lists  . . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.3.  Figures  . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.4.  Tables . . . . . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.5.  Intra-Document Cross-References  . . . . . . . . . . . . . .  7
+   4.6.  Citations  . . . . . . . . . . . . . . . . . . . . . . . . .  7
+   5.    Back Matter  . . . . . . . . . . . . . . . . . . . . . . . .  8
+   5.1.  References Sections  . . . . . . . . . . . . . . . . . . . .  8
+   5.2.  Appendices . . . . . . . . . . . . . . . . . . . . . . . . .  8
+   6.    Running the lyx2rfc Tool . . . . . . . . . . . . . . . . . .  9
+   7.    Lyx2RFC Internals  . . . . . . . . . . . . . . . . . . . . . 10
+   8.    References . . . . . . . . . . . . . . . . . . . . . . . . . 11
+         Author's Address . . . . . . . . . . . . . . . . . . . . . . 12
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 1]
+
+                           LyX2RFC User Guide                August 2012
+
+
+1.  Internet-Drafts and RFCs
+
+   Internet Requests For Comment (RFCs) are published by the RFC-Editor,
+   typically on behalf of the Internet Engineering Task Force (IETF).
+   The process involves a phase during which the RFC-to-be document is
+   called an "Internet-Draft".
+
+   Historically Internet-Drafts and RFCs have been kept as nroff
+   documents and typeset with the nroff tool.  In recent years nroff has
+   been mostly replaced by a tool named xml2rfc
+
+   <http://xml.resource.org/>that uses XML to represent the source to an
+   Internet-Draft or RFC.  See the guide to xml2rfc
+
+   <http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html>;
+   see also [RFC2629].
+
+   XML is a great step forward in user-friendliness - from nroff
+   anyways.  But XML is not really user-friendly unless used with XML
+   editors.  The lyx2rfc tool is intended to allow the use of LyX, a
+   WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.
+
+   This document itself, although it is not an Internet-Draft, much less
+   an RFC, is written in LyX and rendered as text and HTML using
+   lyx2rfc.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 2]
+
+                           LyX2RFC User Guide                August 2012
+
+
+2.  Using LyX to Edit Internet-Drafts
+
+   The first step to using LyX to edit an Internet-Draft is to start LyX
+   and then use Document->Settings->Local Layout to add the "custom
+   insets" that lyx2rfc requires: just paste them in, click on Validate,
+   then OK.  Alternatively start by copying the 'test-i-d.lyx' sample
+   Internet-Draft.
+
+2.1.  LyX Basics
+
+   In the upper left hand corner of the LyX window there is a drop-down
+   box for 'style' of text.  'Standard' here means 'paragraph'.  Other
+   styles include 'Title', 'Abstract', 'Section', etcetera.  These
+   correspond roughly to xml2rfc XML elements like 't', 'title',
+   'abstract', and 'section', but without any notion of elements
+   containing elements.
+
+   For the rest, LyX is very similar to many WYSIWYG graphical editors.
+
+2.2.  Lyx2rfc Basics
+
+   While most xml2rfc input document elements can be mapped from
+   existing LyX elements trivially, some xml2rfc elements have no LyX
+   equivalents.  To support these elements there are "custom insets"
+   that are added via Document->Settings->Local Layout.  To set XML
+   Processing Instructions ("PIs") simply write <pi>=<value>, use the
+   mouse to select that text, then Insert->Custom Insets->PI.  Several
+   custom insets are provided as LyX equivalents of various xml2rfc
+   elements not found natively in LyX.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 3]
+
+                           LyX2RFC User Guide                August 2012
+
+
+3.  Front Matter
+
+   All the front matter should be in the first page, although lyx2rfc
+   does not actually require this.
+
+   The first line of the document should be set to the style of 'Title',
+   then add a line below as 'Standard' where a number of custom insets
+   will be added.  A number of custom insets are REQUIRED:
+
+   DocName  This corresponds to the Internet-Draft "handle" (e.g.,
+      draft-ietf-somewg-foobar-00).
+
+   TitleAbbrev  This is the abbreviation of the document title that is
+      to appear at the bottom of every page (when formatted as text).
+
+   Other custom insets related to the document itself:
+
+   IPR  This is the value of the 'ipr' attribute of the 'rfc' element
+      (e.g., full3978).
+
+   IETFArea  The IETF area that this document is specific to (e.g.,
+      "Applications").
+
+   IETFWorkingGroup  The IETF Working Group (WG) that this document is
+      specific to (e.g., "TLS").
+
+   IntendedStatus  The intended status for the RFC that would be
+      published from the Internet-Draft, if it progresses that far
+      (e.g., "Informational").
+
+3.1.  Typical PIs
+
+   Add PI custom insets as desired for the desired PIs.
+
+3.2.  Author Metadata
+
+   Open a line in 'Author' style for each author of the document and
+   write the author's name, then add several custom insets for xml2rfc
+   author metadata:
+
+   AuthorRole  'author' or 'editor'.
+
+   AuthorInitials  The author's initials (not including the surname).
+
+   AuthorSurname  The author's surname.
+
+
+
+
+
+
+Williams                                                        [Page 4]
+
+                           LyX2RFC User Guide                August 2012
+
+
+   AuthorOrg  The name of the author's organization (e.g., university or
+      employer company name).
+
+   AuthorOrgAbbrev  The abbreviation of the author's organization for
+      the front page of the rendered Internet-Draft/RFC.
+
+   AuthorEmailAddr  The author's e-mail address
+
+   AuthorAddrStreet  The street portion of the author's postal address.
+
+   AuthorAddrCity  The city portion of the author's postal address.
+
+   AuthorAddrRegion  The region (state, province, ...) portion of the
+      author's postal address.
+
+   AuthorAddrCountry  The country name portion of the author's postal
+      address.
+
+3.3.  Abstract
+
+   Open a line below the last author line and style it 'Abstract'.
+   Write your abstract.  Use the enter key to start another abstract
+   paragraph.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 5]
+
+                           LyX2RFC User Guide                August 2012
+
+
+4.  Middle Matter
+
+   The meat of an Internet-Draft is organized into sections.  Each
+   section, sub-section, and sub-sub-section has a title.  Open a line,
+   style it 'Section', and write in the section title, then enter to
+   start the contents of the section in 'Standard' (paragraph) style.
+
+4.1.  Paragraphs
+
+   You've seen paragraphs: they're just text in 'Standard' style.
+
+4.2.  Lists
+
+   LyX supports numbered, bulleted, and description lists, as well as
+   list nesting.  The lyx2rfc tool supports all of these.
+
+   Simply use in the obvious way.
+
+   Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the
+   title of a description list entry.
+
+4.3.  Figures
+
+   Insert->Float->Figure, then left arrow, then Insert->Program Listing,
+   then write/paste ASCII figure text.  Don't forget to set the figure
+   title.
+
+   For example:
+
+   +=======+
+   | a box |
+   +=======+
+   Figure 1: Example figure
+
+                                 Figure 1
+
+4.4.  Tables
+
+   Click on the insert table icon in the toolbar and select the table
+   form (NxM).  You may want to enable the table toolbar as well.
+
+   For example:
+
+                           +-----+-----+-------+
+                           |  A  | 2x2 | table |
+                           +-----+-----+-------+
+                           | ... | ... |  ...  |
+                           +-----+-----+-------+
+
+
+
+Williams                                                        [Page 6]
+
+                           LyX2RFC User Guide                August 2012
+
+
+4.5.  Intra-Document Cross-References
+
+   Use Insert->Label... to insert a label at strategic places, such as:
+
+   o  in section titles
+
+   o  in figure titles
+
+   o  etcetera.
+
+   To reference a label use Insert->Cross-Reference...
+
+4.6.  Citations
+
+   To reference an RFC or Internet-Draft, or any bibxml item use the
+   EntityXRef custom inset (Insert->Custom Insets->EntityXRef) and set
+   the contents of the inset to be the name that would have to be used
+   as the 'target' attribute value in an xml2rfc 'xref' element.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 7]
+
+                           LyX2RFC User Guide                August 2012
+
+
+5.  Back Matter
+
+   Back matter consists of:
+
+   o  Author contact information, which is derived automatically from
+      the author metadata custom insets as described in Section 3.2;
+
+   o  Acknowledgements (not yet supported as back matter by lyx2rfc);
+
+   o  References sections;
+
+   o  Appendices.
+
+5.1.  References Sections
+
+5.2.  Appendices
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 8]
+
+                           LyX2RFC User Guide                August 2012
+
+
+6.  Running the lyx2rfc Tool
+
+   The lyx2rfc tool is a simple shell script that uses lyx(1) to export
+   your LyX document as LyXHTML, then runs the Saxon XSLT processor to
+   convert the document from the LyXHTML schema to the xml2rfc XML
+   schema, then it applies xml2rfc and XSLT again to render as text and
+   HTML.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                        [Page 9]
+
+                           LyX2RFC User Guide                August 2012
+
+
+7.  Lyx2RFC Internals
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                       [Page 10]
+
+                           LyX2RFC User Guide                August 2012
+
+
+8.  References
+
+   [RFC2629]  Rose, M., "Writing I-Ds and RFCs using XML", RFC 2629,
+              June 1999.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                       [Page 11]
+
+                           LyX2RFC User Guide                August 2012
+
+
+Author's Address
+
+   Nicolas Williams
+   Cryptonector LLC
+
+   Email: nico@cryptonector.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                       [Page 12]
+
