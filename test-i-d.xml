@@ -10,6 +10,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc1113 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml">
+<!ENTITY rfc5246 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml">
 ]>
 <rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info">
   <front>
@@ -28,7 +29,7 @@
       </address>
     </author>
     <author initials="J." surname="Sixpack" fullname="Joe Sixpack"/>
-    <date month="July" year="2012"/>
+    <date month="August" year="2012"/>
     <area>
 Security Area
 </area>
@@ -57,7 +58,7 @@ Another comment.</cref>
       <t>
 </t>
       <t>
-        <figure anchor="magicparlabel-106">
+        <figure anchor="magicparlabel-118">
           <artwork>+=======================+
 |     A box             |
 |                       |
@@ -122,13 +123,13 @@ Now a desc list:</t>
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
       </section>
     </section>
-    <section title="Details" anchor="d1e344">
+    <section title="Details" anchor="d1e347">
       <t>
 Some text. Here's a protected space, and here's a bunch of them:      , see?</t>
       <section title="A sub-section" anchor="sub_A_sub_section">
         <t>
 and</t>
-        <section title="A sub-sub-section" anchor="d1e364">
+        <section title="A sub-sub-section" anchor="d1e367">
           <t>
 cool.</t>
           <t>
@@ -162,6 +163,7 @@ And some text after it. See also section  <xref target="sub_A_sub_section"/>.</t
   <back>
     <references title="References">&rfc2119;
 &rfc1113;
+&rfc5246;
 </references>
     <section title="First Appendix" anchor="d1e489">
       <t>
@@ -171,7 +173,7 @@ Appendici.</t>
 Whatever.</t>
       </section>
     </section>
-    <section title="Last Appendix" anchor="d1e508">
+    <section title="Last Appendix" anchor="d1e507">
       <t>
 Last word.</t>
     </section>
