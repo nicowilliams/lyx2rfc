@@ -73,6 +73,11 @@ InsetLayout Flex:IETFArea
     HTMLTag div
 End
 
+InsetLayout Flex:IETFWorkingGroup
+    LyXType Custom
+    HTMLTag div
+End
+
 InsetLayout Flex:XML2RFCKeyword
     LyXType Custom
     HTMLTag div
@@ -139,6 +144,26 @@ InsetLayout Flex:AuthorAddrCountry
 End
 
 InsetLayout Flex:ReferenceEntity
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:AutoReferenceEntity
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:AutoRFCReferenceEntity
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:AutoIDReferenceEntity
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:EntityXRef
     LyXType Custom
     HTMLTag div
 End
