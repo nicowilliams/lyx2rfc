@@ -40,5 +40,8 @@ BUGS:
    Still, we could add a custom inset by which to specify column widths
    in percentage and render that into xml2rfc's schema.
 
+ - Hyperlinks are rendered as <t><eref>..., even if we're already in a
+   <t>, and then xml2rfc complains.
+
 [0] http://www.lyx.org/
 [1] What You See Is What You Mean.
