@@ -4,7 +4,7 @@
 Network Working Group                                             J. Doe
 Internet-Draft                                                       Doe
 Intended status: Informational                                J. Sixpack
-Expires: February 13, 2013                               August 12, 2012
+Expires: February 14, 2013                               August 13, 2012
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -32,7 +32,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 13, 2013.
+   This Internet-Draft will expire on February 14, 2013.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 1]
+Doe & Sixpack           Expires February 14, 2013               [Page 1]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -108,7 +108,7 @@ Table of Contents
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 2]
+Doe & Sixpack           Expires February 14, 2013               [Page 2]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -164,7 +164,7 @@ Internet-Draft                Skeleton I-D                   August 2012
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 3]
+Doe & Sixpack           Expires February 14, 2013               [Page 3]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -220,7 +220,7 @@ Internet-Draft                Skeleton I-D                   August 2012
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 4]
+Doe & Sixpack           Expires February 14, 2013               [Page 4]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -276,7 +276,7 @@ Internet-Draft                Skeleton I-D                   August 2012
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 5]
+Doe & Sixpack           Expires February 14, 2013               [Page 5]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -290,8 +290,6 @@ Internet-Draft                Skeleton I-D                   August 2012
               mail: Part I - message encipherment and authentication
               procedures", RFC 1113, August 1989.
 
-   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
-              (TLS) Protocol Version 1.2", RFC 5246, August 2008.
 
 
 
@@ -332,7 +330,9 @@ Internet-Draft                Skeleton I-D                   August 2012
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 6]
+
+
+Doe & Sixpack           Expires February 14, 2013               [Page 6]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -388,7 +388,7 @@ A.1.  Sub-Appendix
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 7]
+Doe & Sixpack           Expires February 14, 2013               [Page 7]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -444,7 +444,7 @@ Appendix B.  Last Appendix
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 8]
+Doe & Sixpack           Expires February 14, 2013               [Page 8]
 
 Internet-Draft                Skeleton I-D                   August 2012
 
@@ -500,5 +500,5 @@ Authors' Addresses
 
 
 
-Doe & Sixpack           Expires February 13, 2013               [Page 9]
+Doe & Sixpack           Expires February 14, 2013               [Page 9]
 

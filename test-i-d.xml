@@ -10,7 +10,6 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc1113 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml">
-<!ENTITY rfc5246 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml">
 ]>
 <rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info">
   <front>
@@ -161,19 +160,18 @@ And some text after it. See also section  <xref target="sub_A_sub_section"/>.</t
     </section>
   </middle>
   <back>
-    <references title="References">&rfc2119;
+    <references title="References" anchor="sec_References">&rfc2119;
 &rfc1113;
-&rfc5246;
 </references>
-    <section title="First Appendix" anchor="d1e489">
+    <section title="First Appendix" anchor="d1e468">
       <t>
 Appendici.</t>
-      <section title="Sub-Appendix" anchor="d1e498">
+      <section title="Sub-Appendix" anchor="d1e477">
         <t>
 Whatever.</t>
       </section>
     </section>
-    <section title="Last Appendix" anchor="d1e507">
+    <section title="Last Appendix" anchor="d1e486">
       <t>
 Last word.</t>
     </section>

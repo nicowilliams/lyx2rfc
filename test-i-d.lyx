@@ -153,27 +153,12 @@ InsetLayout Flex:AuthorAddrCountry
     HTMLTag div
 End
 
-InsetLayout Flex:ReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
-InsetLayout Flex:AutoReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
-InsetLayout Flex:AutoRFCReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
-InsetLayout Flex:AutoIDReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
 InsetLayout Flex:EntityXRef
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:BibXML
     LyXType Custom
     HTMLTag div
 End
@@ -832,59 +817,29 @@ reference "sub:A-sub-section"
 \end_layout
 
 \begin_layout Section
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:References"
+
+\end_inset
+
 References
 \end_layout
 
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-1"
-
-\end_inset
-
-
-\begin_inset Flex AutoRFCReferenceEntity
+\begin_layout Standard
+\begin_inset Flex BibXML
 status collapsed
 
 \begin_layout Plain Layout
-rfc2119
-\end_layout
-
-\end_inset
-
-
 \begin_inset CommandInset href
 LatexCommand href
-name "RFC2119"
-target "http://www.ietf.org/rfc/rfc2119.txt"
+name "rfc2119"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"
 
 \end_inset
 
 
 \end_layout
-
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-2"
-
-\end_inset
-
-
-\begin_inset Flex AutoRFCReferenceEntity
-status collapsed
-
-\begin_layout Plain Layout
-rfc1113
-\end_layout
-
-\end_inset
-
-
-\begin_inset CommandInset href
-LatexCommand href
-name "RFC1113"
-target "http://www.ietf.org/rfc/rfc1113.txt"
 
 \end_inset
 
@@ -892,22 +847,18 @@ target "http://www.ietf.org/rfc/rfc1113.txt"
 \end_layout
 
 \begin_layout Standard
-Some text.
-\end_layout
+\begin_inset Flex BibXML
+status collapsed
 
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-3"
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "rfc1113"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml"
 
 \end_inset
 
 
-\begin_inset Flex AutoRFCReferenceEntity
-status collapsed
-
-\begin_layout Plain Layout
-rfc5246
 \end_layout
 
 \end_inset
