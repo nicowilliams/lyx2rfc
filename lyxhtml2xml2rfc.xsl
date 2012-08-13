@@ -402,6 +402,7 @@
         </xsl:attribute>
     </xsl:element>
 </xsl:template>
+<!-- XXX Remove this -->
 <xsl:template match="a[@href and starts-with(@href, '#key-')]"><!-- workaround for LyX bug -->
     <xsl:variable name="key" select="substring(@href, 6)"/>
     <xsl:element name="xref">
@@ -461,43 +462,35 @@
 <xsl:template match="h2[matches(@class, '^section') and
     not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References'))]">
     <xsl:element name="section">
-        <xsl:attribute name="title">
-            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
-        </xsl:attribute>
-        <xsl:attribute name="anchor">
-            <xsl:choose>
-                <xsl:when test="string-length(a[not(starts-with(@id, 'magicparlabel-'))]/@id) > 0">
-                    <xsl:value-of select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="generate-id()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
+        <!-- LyXHTML sadly adds unnecessary newlines to hN elements'
+             text nodes -->
+        <xsl:attribute name="title"
+            select="normalize-space(string-join(text(), ''))"/>
 
-        <!-- Some variables needed to help select sub-sets of following
-             siblings (an "in sequence" operator would make this
-             simpler, and would allow us to move this into a common,
-             callable template) -->
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::h2[contains(@class, 'section')]) |
-            following-sibling::*[$num-siblings])[1]"/>
+        <!-- Make sure there's an anchor -->
+        <xsl:variable name="id"
+            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+        <xsl:attribute name="anchor"
+            select="if (string-length($id) > 0) then $id else generate-id()"/>
 
-        <!-- Handle the contents of this section -->
-        <xsl:for-each select="following-sibling::*[. &lt;&lt; $next-hN]">
-            <!-- Debug xsl:text's and xsl:value-of's
-            <xsl:text>
-h2: handling section content node tag: </xsl:text>
-            <xsl:value-of select="name()"/> -->
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
+        <!-- We refer to this <h2> in various XPath contexts below where
+             current() will no longer be this <h2>, so we need to save it -->
+        <xsl:variable name="cur_sect" select="current()"/>
 
-        <!-- Handle sub-sections of this section -->
-        <xsl:apply-templates select="following-sibling::h3[. &lt;&lt; $end-hN]"/>
+        <!-- Handle the contents of just this section.  Ask for all
+             siblings of this <h2> where the nodes we're looking for are
+             NOT h2/h3/h4, and their preceding <h2> is this one. -->
+        <xsl:apply-templates
+            select="(following-sibling::*[not(matches(name(), '^h[234]')) and
+                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect])"/>
+
+        <!-- Handle sub-sections of this section.  Ask for all sibling
+             h3 (and h4) nodes of this h2 where their preceding h2 is
+             this one.  -->
+        <xsl:apply-templates 
+            select="following-sibling::*[matches(name(), '^h[34]') and
+                (preceding-sibling::h2)[last()] is $cur_sect]"/>
+
     </xsl:element>
 </xsl:template>
 
