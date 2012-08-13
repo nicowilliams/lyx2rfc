@@ -337,15 +337,18 @@
 <!-- Description list elements -->
 <xsl:template match="dt">
     <xsl:element name="t">
-        <xsl:attribute name="hangText">
-            <!-- XXX This should probably be an apply-templates -->
-            <xsl:value-of select="."/>
-        </xsl:attribute>
+        <!-- Since the dt goes in an attribute value using
+             apply-templates here seems risky - we'd have to have a
+             predicate on various templates checking that we're a child
+             (or not) of a <dt> element.  If not risky, then at least
+             very verbose. -->
+        <xsl:attribute name="hangText" select="."/>
         <!-- Grab the immediately following dd element -->
         <xsl:apply-templates select="(following-sibling::dd)[1]"/>
     </xsl:element>
 </xsl:template>
 <xsl:template match="dd">
+    <!-- Whereas here it's safe to apply-templates -->
     <xsl:apply-templates/>
 </xsl:template>
 
@@ -370,7 +373,7 @@
     </xsl:element>
 </xsl:template>
 
-<!-- xrefs -->
+<!-- xrefs (internal cross-references) -->
 <xsl:template match="a[@href and starts-with(@href, '#')]">
     <!-- We add a space here to avoid running this xref onto the end of
          the preceding text() node. -->
@@ -409,13 +412,13 @@
         <xsl:for-each select='tr[position() = 1]/td/div'>
             <xsl:element name="ttcol">
                 <xsl:apply-templates select="../@align"/>
-                <!-- XXX Could this be an apply-templates? -->
+                <!-- XXX Could this be an apply-templates?  Maybe...  -->
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
         <xsl:for-each select="tr[position() > 1]/td/div">
             <xsl:element name="c">
-                <!-- XXX Could this be an apply-templates? -->
+                <!-- XXX Could this be an apply-templates?  Maybe...  -->
                 <xsl:value-of select="."/>
             </xsl:element>
         </xsl:for-each>
@@ -556,7 +559,7 @@
     <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
 </xsl:template>
 
-<!-- Author information -->
+<!-- Author metadata templates (for the <author> elements) -->
 <xsl:template match="div[@class='flex_authororg']">
     <xsl:element name='organization'>
         <xsl:choose>
