@@ -40,5 +40,8 @@ BUGS:
    Still, we could add a custom inset by which to specify column widths
    in percentage and render that into xml2rfc's schema.
 
+ - If the document ends in a bibliography entry, that entry gets
+   ignored.
+
 [0] http://www.lyx.org/
 [1] What You See Is What You Mean.

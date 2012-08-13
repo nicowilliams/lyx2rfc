@@ -184,7 +184,7 @@ To reference a label use Insert-&gt;Cross-Reference...</t>
       </section>
       <section title="Citations" anchor="sub_Citations">
         <t>
-To reference an RFC or Internet-Draft, or any bibxml item use the EntityXRef custom inset (Insert-&gt;Custom Insets-&gt;EntityXRef) and set the contents of the inset to be the name that would have to be used as the 'target' attribute value in an xml2rfc 'xref' element.</t>
+To reference an RFC or Internet-Draft, or any bibxml item use the EntityXRef custom inset (Insert-&gt;Custom Insets-&gt;EntityXRef) and set the contents of the inset to be the anchor of the bibxml reference (the name that would have to be used as the 'target' attribute value in an xml2rfc 'xref' element). See  <xref target="sub_Adding__bibxml__References"/> for how to add references sections.</t>
       </section>
     </section>
     <section title="Back Matter" anchor="sec_Back_Matter">
@@ -202,16 +202,28 @@ References sections;</t>
 Appendices.</t>
         </list>
       </t>
-      <section title="References Sections" anchor="sub_References_Sections"/>
-      <section title="Appendices" anchor="sub_Appendices"/>
+      <section title="References Sections" anchor="sub_References_Sections">
+        <t>
+To add a references section simply create a section titled “References”, “Normative References”, or “Informative References”.</t>
+      </section>
+      <section title="Adding 'bibxml' References" anchor="sub_Adding__bibxml__References">
+        <t>
+xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</t>
+        <t>
+To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</t>
+      </section>
+      <section title="Appendices" anchor="sub_Appendices">
+        <t>
+To add an appendix scroll to the end of your document, hit enter, then Document-&gt;Start Appendix Here, then select the style 'Section' to set the appendix title.</t>
+      </section>
     </section>
     <section title="Running the lyx2rfc Tool" anchor="sec_Running_the_lyx2rfc">
       <t>
 The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX document as LyXHTML, then runs the Saxon XSLT processor to convert the document from the LyXHTML schema to the xml2rfc XML schema, then it applies xml2rfc and XSLT again to render as text and HTML.</t>
     </section>
-    <section title="Lyx2RFC Internals" anchor="sec_Lyx2RFC_Internals"/>
   </middle>
   <back>
     <references title="References">&rfc2629;</references>
+    <section title="Lyx2RFC Internals" anchor="d1e747"/>
   </back>
 </rfc>

@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                         August 12, 2012
+                                                         August 13, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -18,28 +18,29 @@ Abstract
 
 Table of Contents
 
-   1.    Internet-Drafts and RFCs
-   2.    Using LyX to Edit Internet-Drafts
-   2.1.  LyX Basics
-   2.2.  Lyx2rfc Basics
-   3.    Front Matter
-   3.1.  Typical PIs
-   3.2.  Author Metadata
-   3.3.  Abstract
-   4.    Middle Matter
-   4.1.  Paragraphs
-   4.2.  Lists
-   4.3.  Figures
-   4.4.  Tables
-   4.5.  Intra-Document Cross-References
-   4.6.  Citations
-   5.    Back Matter
-   5.1.  References Sections
-   5.2.  Appendices
-   6.    Running the lyx2rfc Tool
-   7.    Lyx2RFC Internals
-   8.    References
-         Author's Address
+   1.          Internet-Drafts and RFCs
+   2.          Using LyX to Edit Internet-Drafts
+   2.1.        LyX Basics
+   2.2.        Lyx2rfc Basics
+   3.          Front Matter
+   3.1.        Typical PIs
+   3.2.        Author Metadata
+   3.3.        Abstract
+   4.          Middle Matter
+   4.1.        Paragraphs
+   4.2.        Lists
+   4.3.        Figures
+   4.4.        Tables
+   4.5.        Intra-Document Cross-References
+   4.6.        Citations
+   5.          Back Matter
+   5.1.        References Sections
+   5.2.        Adding 'bibxml' References
+   5.3.        Appendices
+   6.          Running the lyx2rfc Tool
+   7.          References
+   Appendix A. Lyx2RFC Internals
+               Author's Address
 
 
 1.  Internet-Drafts and RFCs
@@ -234,8 +235,10 @@ Table of Contents
 
    To reference an RFC or Internet-Draft, or any bibxml item use the
    EntityXRef custom inset (Insert->Custom Insets->EntityXRef) and set
-   the contents of the inset to be the name that would have to be used
-   as the 'target' attribute value in an xml2rfc 'xref' element.
+   the contents of the inset to be the anchor of the bibxml reference
+   (the name that would have to be used as the 'target' attribute value
+   in an xml2rfc 'xref' element).  See Section 5.2 for how to add
+   references sections.
 
 
 5.  Back Matter
@@ -253,7 +256,29 @@ Table of Contents
 
 5.1.  References Sections
 
-5.2.  Appendices
+   To add a references section simply create a section titled
+   "References", "Normative References", or "Informative References".
+
+5.2.  Adding 'bibxml' References
+
+   xml2rfc can only handle references defined in its own particular
+   schema.  LyX's bibliography library support cannot trivially be
+   mapped to/from the xml2rfc 'bibxml' library.  Therefore lyx2rfc
+   handles this by using LyX hyperlinks.
+
+   To add bibxml references just start a paragraph in a references
+   section and then Insert->Hyperlink, setting the link target to the
+   URL of a bibxml reference and the link text to any text that is
+   suitable for use as the name of an XML entity.  E.g., to add a
+   reference to some RFC use 'rfcXXXX' as the link text and
+   http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as
+   the link target.
+
+5.3.  Appendices
+
+   To add an appendix scroll to the end of your document, hit enter,
+   then Document->Start Appendix Here, then select the style 'Section'
+   to set the appendix title.
 
 
 6.  Running the lyx2rfc Tool
@@ -265,13 +290,13 @@ Table of Contents
    HTML.
 
 
-7.  Lyx2RFC Internals
-
-
-8.  References
+7.  References
 
    [RFC2629]  Rose, M., "Writing I-Ds and RFCs using XML", RFC 2629,
               June 1999.
+
+
+Appendix A.  Lyx2RFC Internals
 
 
 Author's Address

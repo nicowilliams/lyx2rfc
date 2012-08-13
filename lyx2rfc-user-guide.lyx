@@ -177,6 +177,11 @@ InsetLayout Flex:EntityXRef
     LyXType Custom
     HTMLTag div
 End
+
+InsetLayout Flex:BibXML
+    LyXType Custom
+    HTMLTag div
+End
 \end_local_layout
 \language english
 \language_package default
@@ -830,12 +835,12 @@ For example:
 \begin_inset Float figure
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset listings
 inline false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 
@@ -1007,8 +1012,16 @@ Citations
 \begin_layout Standard
 To reference an RFC or Internet-Draft, or any bibxml item use the EntityXRef
  custom inset (Insert->Custom Insets->EntityXRef) and set the contents of
- the inset to be the name that would have to be used as the 'target' attribute
- value in an xml2rfc 'xref' element.
+ the inset to be the anchor of the bibxml reference (the name that would
+ have to be used as the 'target' attribute value in an xml2rfc 'xref' element).
+ See 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Adding-'bibxml'-References"
+
+\end_inset
+
+ for how to add references sections.
 \end_layout
 
 \begin_layout Section
@@ -1059,6 +1072,60 @@ name "sub:References-Sections"
 References Sections
 \end_layout
 
+\begin_layout Standard
+To add a references section simply create a section titled 
+\begin_inset Quotes eld
+\end_inset
+
+References
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Normative References
+\begin_inset Quotes erd
+\end_inset
+
+, or 
+\begin_inset Quotes eld
+\end_inset
+
+Informative References
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Adding-'bibxml'-References"
+
+\end_inset
+
+Adding 'bibxml' References
+\end_layout
+
+\begin_layout Standard
+xml2rfc can only handle references defined in its own particular schema.
+ LyX's bibliography library support cannot trivially be mapped to/from the
+ xml2rfc 'bibxml' library.
+ Therefore lyx2rfc handles this by using LyX hyperlinks.
+\end_layout
+
+\begin_layout Standard
+To add bibxml references just start a paragraph in a references section
+ and then Insert->Hyperlink, setting the link target to the URL of a bibxml
+ reference and the link text to any text that is suitable for use as the
+ name of an XML entity.
+ E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xm
+l.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.
+\end_layout
+
 \begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
@@ -1067,6 +1134,12 @@ name "sub:Appendices"
 \end_inset
 
 Appendices
+\end_layout
+
+\begin_layout Standard
+To add an appendix scroll to the end of your document, hit enter, then Document-
+>Start Appendix Here, then select the style 'Section' to set the appendix
+ title.
 \end_layout
 
 \begin_layout Section
@@ -1089,16 +1162,6 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your
 \begin_layout Section
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Lyx2RFC-Internals"
-
-\end_inset
-
-Lyx2RFC Internals
-\end_layout
-
-\begin_layout Section
-\begin_inset CommandInset label
-LatexCommand label
 name "sec:References"
 
 \end_inset
@@ -1106,36 +1169,38 @@ name "sec:References"
 References
 \end_layout
 
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-1"
-
-\end_inset
-
-
-\begin_inset Flex AutoRFCReferenceEntity
+\begin_layout Standard
+\begin_inset Flex BibXML
 status collapsed
 
 \begin_layout Plain Layout
-rfc2629
+\begin_inset CommandInset href
+LatexCommand href
+name "rfc2629"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2629.xml"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
-\begin_inset CommandInset href
-LatexCommand href
-name "RFC2629"
-target "http://www.ietf.org/rfc/rfc2629.txt"
+\end_layout
 
-\end_inset
-
-
+\begin_layout Section
+\start_of_appendix
+Lyx2RFC Internals
 \end_layout
 
 \begin_layout Standard
-...
+lyx2rfc begins by invoking LyX to export the document into LyXHTML format.
+ Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert
+ the LyXHTML intermediate form to XML in xml2rfc's schema.
+ lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output.
+ Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc
+ documents to HTML.
 \end_layout
 
 \end_body
