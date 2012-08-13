@@ -88,20 +88,28 @@
     <xsl:text>&#xA;</xsl:text>
     <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE rfc SYSTEM "rfc2629.dtd" [</xsl:text>
     <xsl:text>&#xA;</xsl:text>
+
     <!-- Emit XML ENTITY declarations for bibxml references -->
     <xsl:for-each
         select="//div[@class = 'flex_bibxml']//a[ends-with(@href, '.xml')]">
+        <!-- NOTE: For some reason moving this into templates causes the
+             ENTITY generation to fail... -->
         <xsl:text disable-output-escaping="yes">
             &lt;!ENTITY </xsl:text>
+
         <!-- Entity name -->
         <xsl:value-of select="normalize-space(.)"/>
         <xsl:text disable-output-escaping="yes"> PUBLIC "" "</xsl:text>
+
         <!-- URL -->
         <xsl:value-of select="./@href"/>
         <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
     </xsl:for-each>
+
     <!-- Emit DOCTYPE close -->
     <xsl:text disable-output-escaping="yes">&#xA;]&gt;&#xA;</xsl:text>
+
+    <!-- Emit <rfc> element -->
     <xsl:element name="rfc">
         <xsl:attribute name="docName"><xsl:value-of
                 select="normalize-space(body//div[@class='flex_docname']/div)"/>
@@ -113,35 +121,38 @@
                 select="normalize-space(body//div[@class='flex_intendedstatus']/div)"/>
         </xsl:attribute>
 
+        <!-- Emit <front> element -->
         <xsl:element name="front">
             <!-- Grab the title -->
             <xsl:element name="title">
                 <xsl:if test="//div[@class = 'flex_titleabbrev']">
-                    <xsl:attribute name="abbrev">
-                        <xsl:value-of
-                            select="normalize-space(//div[@class = 'flex_titleabbrev'])"/>
-                    </xsl:attribute>
+                    <xsl:attribute name="abbrev"
+                        select="normalize-space(//div[@class = 'flex_titleabbrev'])"/>
                 </xsl:if>
                 <xsl:value-of select="./head/title"/>
             </xsl:element>
-            <!-- Grab the authors -->
+
+            <!-- Emit the <author> elements -->
             <xsl:apply-templates select="//div[@class='author']/div[@class='author_item']"/>
-            <!-- date -->
+
+            <!-- Emit <date> -->
             <xsl:element name="date">
-                <xsl:attribute name="month">
-                    <xsl:value-of
-                        select="$months/rfc:m[number(month-from-dateTime(current-dateTime()))]"/>
-                </xsl:attribute>
-                <xsl:attribute name="year">
-                    <xsl:value-of
-                        select="year-from-dateTime(current-dateTime())"/>
-                </xsl:attribute>
+                <xsl:attribute name="month"
+                    select="$months/rfc:m[number(month-from-dateTime(current-dateTime()))]"/>
+                <xsl:attribute name="year"
+                    select="year-from-dateTime(current-dateTime())"/>
             </xsl:element>
+
+            <!-- Emit <area> and <workgroup> elements -->
             <xsl:apply-templates select=".//div[starts-with(@class, 'flex_ietf')]"/>
+
+            <!-- Emit <keyword> element -->
             <xsl:element name="keyword">
                 <xsl:value-of select="normalize-space(.//div[@class='flex_xml_rfckeyword'])"/>
             </xsl:element>
-            <!-- Grab the abstract -->
+
+            <!-- Grab the abstract (should use apply-templates instead
+                 of for-each...) -->
             <xsl:element name="abstract">
                 <xsl:for-each select="//div[@class='abstract_item']">
                     <xsl:element name="t">
@@ -150,6 +161,8 @@
                 </xsl:for-each>
             </xsl:element>
         </xsl:element>
+
+        <!-- Process middle and back matter -->
         <xsl:apply-templates select="body"/>
     </xsl:element>
 </xsl:template>
@@ -165,17 +178,23 @@
     </xsl:element>
 </xsl:template>
 
+<!-- Process middle and back matter -->
 <xsl:template match="body">
-    <!-- Handle only top-level sections -->
+    <!-- Middle matter (only top-level sections; the matching templates
+         will recurse to get subsections and subsubsections). -->
     <xsl:element name="middle">
         <xsl:apply-templates
             select="h2[not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')) and
                 not(matches(span, '^[A-Z].*'))]"/>
     </xsl:element>
-    <!-- Now back matter -->
+
+    <!-- Back matter -->
     <xsl:element name="back">
+
+        <!-- References -->
         <xsl:apply-templates
             select="h2[matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')]"/>
+
         <!-- Appendices, but don't include references since we've
              already handled those (just in case the references sections
              were made into appendices) -->
@@ -194,7 +213,8 @@
 <xsl:template match="div[@class='abstract']"/>
 
 <!-- LyXHTML uses span elements for things we don't care about, like
-     section numbering.  Also ignore the table of contents and
+     section numbering (but we do use that to distinguish between normal
+     sections and appendices!).  Also ignore the table of contents and
      automatically-generated anchors.  -->
 <xsl:template match="span"/>
 <xsl:template match="div[@class='toc']"/>
@@ -219,19 +239,18 @@
         </xsl:when>
         <xsl:otherwise>
             <xsl:element name="t">
-                <!--
-                     Applies templates to the text() nodes and child elements in
+                <!-- Applies templates to the text() nodes and child elements in
                      order.  This is important.  Selecting the string-join() of
                      text() then applying templates to children would cause
                      <xref>s, <em>s, <a>s, and such to be added at the
-                     end of the paragraphs, which would be incorrect.
-                     -->
+                     end of the paragraphs, which would be incorrect.  -->
                 <xsl:apply-templates/>
             </xsl:element>
         </xsl:otherwise>
     </xsl:choose>
 </xsl:template>
 
+<!-- XXX What was this about? XXX Remove? -->
 <xsl:template match="text()[starts-with(., ']') or ends-with(., '[')]">
     <xsl:value-of select="replace(replace(., '\[$', ''), '^\]', '')"/>
 </xsl:template>
@@ -245,7 +264,7 @@
     </xsl:element>
 </xsl:template>
 
-<!-- Auto-reference -->
+<!-- xrefs to bibxml (citations) -->
 <xsl:template match="div[@class = 'flex_entityxref']">
     <xsl:element name="xref">
         <xsl:attribute name="target">
@@ -257,9 +276,7 @@
 <!-- Emphasis (<spanx>) -->
 <xsl:template match="em">
     <xsl:element name="spanx">
-        <xsl:attribute name="style">
-            <xsl:text>emph</xsl:text>
-        </xsl:attribute>
+        <xsl:attribute name="style" select="emph"/>
         <xsl:apply-templates/>
     </xsl:element>
     <xsl:text> </xsl:text>
@@ -363,15 +380,6 @@
     <xsl:element name="xref">
         <xsl:attribute name="target">
             <xsl:value-of select="substring(./@href, 2)"/>
-        </xsl:attribute>
-    </xsl:element>
-</xsl:template>
-<!-- XXX Remove this -->
-<xsl:template match="a[@href and starts-with(@href, '#key-')]"><!-- workaround for LyX bug -->
-    <xsl:variable name="key" select="substring(@href, 6)"/>
-    <xsl:element name="xref">
-        <xsl:attribute name="target">
-            <xsl:value-of select="normalize-space(//div[@class='bibliography' and normalize-space(./span) = $key]/a[@href and normalize-space(text()) != '(bibxml)'])"/>
         </xsl:attribute>
     </xsl:element>
 </xsl:template>
