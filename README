@@ -6,29 +6,29 @@ xml2rfc's XML schema, then applying xml2rfc and/or the Greenbytes
 XSL template.
 
 Currently the project is quite functional, though not every xml2rfc
-feature is supported (iref is missing).  It consists of an XSLT 2.0
+feature is supported (e.g., iref is missing).  It consists of an XSLT 2.0
 template to convert LyX XHTML output to the xml2rfc schema, at which
-point one can run the xml2rfc tool to typeset in any of the normal
-I-D/RFC formats (text, HTML, and PDF).  The lyx2rfc script automates all
-of this work.
+point the xml2rfc tool is run to typeset in any of the normal I-D/RFC
+formats (text, HTML, and PDF).  The lyx2rfc script automates all of this
+work.
 
 In order to use this one must add the custom inset definitions from the
 custom_insets file.  These custom insets are used to handle metadata
-needed by xml2rfc but not provided by LyX (e.g., draftname, intended
-status, and so on, as well as author metadata, and xml2rfc processing
-instructions).
+needed by xml2rfc but not provided by LyX: draftname, intended status,
+and so on, as well as author metadata, and xml2rfc processing
+instructions.
 
-See the user guide for more information: lyx2rfc-user-guide (in this same directory).
+See the user guide for more information: lyx2rfc-user-guide (in this
+same directory).
 
 The user guide is itself written in LyX and rendered with xml2rfc as a
-private document (i.e., not as an Internet-Draft).
+private document (i.e., not as an Internet-Draft, to avoid the I-D
+boilerplate).
 
 TODO:
 
  - Add iref support?
- - Add support for bibxml references other than to RFC and I-Ds.
- - Add support for a variable/parameter for specifying alternate base
-   URLs for bibxml references.
+ - Add inline reference support?  bibxml works so well now...
 
 BUGS:
 
@@ -39,9 +39,6 @@ BUGS:
 
    Still, we could add a custom inset by which to specify column widths
    in percentage and render that into xml2rfc's schema.
-
- - If the document ends in a bibliography entry, that entry gets
-   ignored.
 
 [0] http://www.lyx.org/
 [1] What You See Is What You Mean.
