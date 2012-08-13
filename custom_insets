@@ -143,27 +143,12 @@ InsetLayout Flex:AuthorAddrCountry
     HTMLTag div
 End
 
-InsetLayout Flex:ReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
-InsetLayout Flex:AutoReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
-InsetLayout Flex:AutoRFCReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
-InsetLayout Flex:AutoIDReferenceEntity
-    LyXType Custom
-    HTMLTag div
-End
-
 InsetLayout Flex:EntityXRef
+    LyXType Custom
+    HTMLTag div
+End
+
+InsetLayout Flex:BibXML
     LyXType Custom
     HTMLTag div
 End
