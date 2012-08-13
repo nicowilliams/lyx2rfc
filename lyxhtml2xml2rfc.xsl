@@ -466,8 +466,7 @@
              h3 (and h4) nodes of this h2 where their preceding h2 is
              this one.  -->
         <xsl:apply-templates 
-            select="following-sibling::*[matches(name(), '^h[34]') and
-                (preceding-sibling::h2)[last()] is $cur_sect]"/>
+            select="following-sibling::h3[(preceding-sibling::h2)[last()] is $cur_sect]"/>
 
     </xsl:element>
 </xsl:template>
@@ -489,7 +488,7 @@
 
         <!-- Handle sub-sections of this section -->
         <xsl:apply-templates 
-            select="following-sibling::h4[(preceding-sibling::h2)[last()] is $cur_sect]"/>
+            select="following-sibling::h4[(preceding-sibling::h3)[last()] is $cur_sect]"/>
 
     </xsl:element>
 </xsl:template>
