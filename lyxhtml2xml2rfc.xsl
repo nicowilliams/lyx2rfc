@@ -496,39 +496,24 @@
 
 <xsl:template match="h3[starts-with(@class, 'subsection')]">
     <xsl:element name="section">
-        <xsl:attribute name="title">
-            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
-        </xsl:attribute>
-        <xsl:attribute name="anchor">
-            <xsl:choose>
-                <xsl:when test="string-length(a[not(starts-with(@id, 'magicparlabel-'))]/@id) > 0">
-                    <xsl:value-of select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="generate-id()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
+        <xsl:attribute name="title"
+            select="normalize-space(string-join(text(), ''))"/>
+        <xsl:variable name="id"
+            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+        <xsl:attribute name="anchor"
+            select="if (string-length($id) > 0) then $id else generate-id()"/>
 
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3')]) |
-            following-sibling::*[$num-siblings])[1]"/>
+        <xsl:variable name="cur_sect" select="current()"/>
 
-        <!-- Handle the contents of this section -->
-        <xsl:for-each select="following-sibling::*[. &lt;&lt; $next-hN]">
-            <!-- Debug xsl:text's and xsl:value-of's
-            <xsl:text>
-h3: handling section content node tag: </xsl:text>
-            <xsl:value-of select="name()"/> -->
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
+        <!-- Handle the contents of just this section  -->
+        <xsl:apply-templates
+            select="(following-sibling::*[not(matches(name(), '^h[234]')) and
+                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect])"/>
 
         <!-- Handle sub-sections of this section -->
-        <xsl:apply-templates select="following-sibling::h4[. &lt;&lt; $end-hN]"/>
+        <xsl:apply-templates 
+            select="following-sibling::h4[(preceding-sibling::h2)[last()] is $cur_sect]"/>
+
     </xsl:element>
 </xsl:template>
 
