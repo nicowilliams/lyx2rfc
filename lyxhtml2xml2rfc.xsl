@@ -205,22 +205,19 @@
     <!-- Handle only top-level sections -->
     <xsl:element name="middle">
         <xsl:apply-templates
-            select="h2[not(starts-with(normalize-space(string-join(text(), '')), 'References')) and
-                        not(starts-with(normalize-space(string-join(text(), '')), 'Normative References')) and
-                        not(starts-with(normalize-space(string-join(text(), '')), 'Informative References'))
-                        and not(matches(span, '^[A-Z].*'))]"/>
+            select="h2[not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')) and
+                not(matches(span, '^[A-Z].*'))]"/>
     </xsl:element>
     <!-- Now back matter -->
     <xsl:element name="back">
         <xsl:apply-templates
-            select="h2[starts-with(normalize-space(string-join(text(), '')), 'References') or
-            starts-with(normalize-space(string-join(text(), '')), 'Normative References') or
-            starts-with(normalize-space(string-join(text(), '')), 'Informative References')]"/>
+            select="h2[matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')]"/>
+        <!-- Appendices, but don't include references since we've
+             already handled those (just in case the references sections
+             were made into appendices) -->
         <xsl:apply-templates
             select="h2[matches(span, '^[A-Z].*') and
-            not(starts-with(normalize-space(string-join(text(), '')), 'References')) and
-            not(starts-with(normalize-space(string-join(text(), '')), 'Normative References')) and
-            not(starts-with(normalize-space(string-join(text(), '')), 'Informative References'))]"/>
+                not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References'))]"/>
     </xsl:element>
 </xsl:template>
 
@@ -461,10 +458,8 @@
 
 <!-- Sections -->
 
-<xsl:template match="h2[starts-with(@class, 'section') and
-    not(starts-with(normalize-space(string-join(text(), '')), 'References')) and
-    not(starts-with(normalize-space(string-join(text(), '')), 'Normative References')) and
-    not(starts-with(normalize-space(string-join(text(), '')), 'InformativeReferences'))]">
+<xsl:template match="h2[matches(@class, '^section') and
+    not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References'))]">
     <xsl:element name="section">
         <xsl:attribute name="title">
             <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
@@ -581,9 +576,7 @@ h4: handling section content node tag: </xsl:text>
 
 <!-- References -->
 
-<xsl:template match="h2[starts-with(normalize-space(string-join(text(), '')), 'References') or
-            starts-with(normalize-space(string-join(text(), '')), 'Normative References') or
-            starts-with(normalize-space(string-join(text(), '')), 'Informative References')]">
+<xsl:template match="h2[matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')]">
     <xsl:element name="references">
         <xsl:attribute name="title">
             <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
