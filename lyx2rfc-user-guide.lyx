@@ -773,6 +773,50 @@ The meat of an Internet-Draft is organized into sections.
 \end_layout
 
 \begin_layout Subsection
+Subsections
+\end_layout
+
+\begin_layout Standard
+Open a line and set the style to 
+\begin_inset Quotes eld
+\end_inset
+
+Subsection
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+NOTE: LyX allows subsections of no section: these are treated as subsections
+ of section 0.
+ lyx2rfc will ignore such subsections!
+\end_layout
+
+\begin_layout Subsubsection
+Sub-subsections
+\end_layout
+
+\begin_layout Standard
+Open a line and set the style to 
+\begin_inset Quotes eld
+\end_inset
+
+SunSubsection
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+NOTE: LyX allows sub-subsections of no subsection: these are treated as
+ sub-subsections of subsection 0.
+ lyx2rfc will ignore such sub-subsections!
+\end_layout
+
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Paragraphs"
@@ -797,9 +841,27 @@ Lists
 \end_layout
 
 \begin_layout Standard
-LyX supports numbered, bulleted, and description lists, as well as list
- nesting.
- The lyx2rfc tool supports all of these.
+LyX supports all the sorts of lists that xml2rfc supports:
+\end_layout
+
+\begin_layout Itemize
+numbered;
+\end_layout
+
+\begin_layout Itemize
+bulleted;
+\end_layout
+
+\begin_layout Itemize
+description lists;
+\end_layout
+
+\begin_layout Itemize
+nested lists.
+\end_layout
+
+\begin_layout Standard
+The lyx2rfc tool supports all of these.
 \end_layout
 
 \begin_layout Standard
@@ -808,7 +870,15 @@ Simply use in the obvious way.
 
 \begin_layout Standard
 Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of
- a description list entry.
+ a description list entry, like so:
+\end_layout
+
+\begin_layout Description
+Description
+\begin_inset space ~
+\end_inset
+
+list A list where each list item has a title.
 \end_layout
 
 \begin_layout Subsection

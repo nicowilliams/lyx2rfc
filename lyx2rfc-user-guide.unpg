@@ -27,12 +27,14 @@ Table of Contents
    3.2.        Author Metadata
    3.3.        Abstract
    4.          Middle Matter
-   4.1.        Paragraphs
-   4.2.        Lists
-   4.3.        Figures
-   4.4.        Tables
-   4.5.        Intra-Document Cross-References
-   4.6.        Citations
+   4.1.        Subsections
+   4.1.1.      Sub-subsections
+   4.2.        Paragraphs
+   4.3.        Lists
+   4.4.        Figures
+   4.5.        Tables
+   4.6.        Intra-Document Cross-References
+   4.7.        Citations
    5.          Back Matter
    5.1.        References Sections
    5.2.        Adding 'bibxml' References
@@ -177,21 +179,47 @@ Table of Contents
    style it 'Section', and write in the section title, then enter to
    start the contents of the section in 'Standard' (paragraph) style.
 
-4.1.  Paragraphs
+4.1.  Subsections
+
+   Open a line and set the style to "Subsection".
+
+   NOTE: LyX allows subsections of no section: these are treated as
+   subsections of section 0. lyx2rfc will ignore such subsections!
+
+4.1.1.  Sub-subsections
+
+   Open a line and set the style to "SunSubsection".
+
+   NOTE: LyX allows sub-subsections of no subsection: these are treated
+   as sub-subsections of subsection 0. lyx2rfc will ignore such sub-
+   subsections!
+
+4.2.  Paragraphs
 
    You've seen paragraphs: they're just text in 'Standard' style.
 
-4.2.  Lists
+4.3.  Lists
 
-   LyX supports numbered, bulleted, and description lists, as well as
-   list nesting.  The lyx2rfc tool supports all of these.
+   LyX supports all the sorts of lists that xml2rfc supports:
+
+   o  numbered;
+
+   o  bulleted;
+
+   o  description lists;
+
+   o  nested lists.
+
+   The lyx2rfc tool supports all of these.
 
    Simply use in the obvious way.
 
    Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the
-   title of a description list entry.
+   title of a description list entry, like so:
 
-4.3.  Figures
+   Description list  A list where each list item has a title.
+
+4.4.  Figures
 
    Insert->Float->Figure, then left arrow, then Insert->Program Listing,
    then write/paste ASCII figure text.  Don't forget to set the figure
@@ -206,7 +234,7 @@ Table of Contents
 
                                  Figure 1
 
-4.4.  Tables
+4.5.  Tables
 
    Click on the insert table icon in the toolbar and select the table
    form (NxM).  You may want to enable the table toolbar as well.
@@ -219,7 +247,7 @@ Table of Contents
                            | ... | ... |  ...  |
                            +-----+-----+-------+
 
-4.5.  Intra-Document Cross-References
+4.6.  Intra-Document Cross-References
 
    Use Insert->Label... to insert a label at strategic places, such as:
 
@@ -231,7 +259,7 @@ Table of Contents
 
    To reference a label use Insert->Cross-Reference...
 
-4.6.  Citations
+4.7.  Citations
 
    To reference an RFC or Internet-Draft, or any bibxml item use the
    EntityXRef custom inset (Insert->Custom Insets->EntityXRef) and set

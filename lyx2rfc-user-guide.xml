@@ -116,17 +116,49 @@ Open a line below the last author line and style it 'Abstract'. Write your abstr
     <section title="Middle Matter" anchor="sec_Middle_Matter">
       <t>
 The meat of an Internet-Draft is organized into sections. Each section, sub-section, and sub-sub-section has a title. Open a line, style it 'Section', and write in the section title, then enter to start the contents of the section in 'Standard' (paragraph) style.</t>
+      <section title="Subsections" anchor="d1e517">
+        <t>
+Open a line and set the style to “Subsection”.</t>
+        <t>
+NOTE: LyX allows subsections of no section: these are treated as subsections of section 0. lyx2rfc will ignore such subsections!</t>
+        <section title="Sub-subsections" anchor="d1e529">
+          <t>
+Open a line and set the style to “SunSubsection”.</t>
+          <t>
+NOTE: LyX allows sub-subsections of no subsection: these are treated as sub-subsections of subsection 0. lyx2rfc will ignore such sub-subsections!</t>
+        </section>
+      </section>
       <section title="Paragraphs" anchor="sub_Paragraphs">
         <t>
 You've seen paragraphs: they're just text in 'Standard' style.</t>
       </section>
       <section title="Lists" anchor="sub_Lists">
         <t>
-LyX supports numbered, bulleted, and description lists, as well as list nesting. The lyx2rfc tool supports all of these.</t>
+LyX supports all the sorts of lists that xml2rfc supports:</t>
+        <t>
+          <list style="symbols">
+            <t>
+numbered;</t>
+            <t>
+bulleted;</t>
+            <t>
+description lists;</t>
+            <t>
+nested lists.</t>
+          </list>
+        </t>
+        <t>
+The lyx2rfc tool supports all of these.</t>
         <t>
 Simply use in the obvious way.</t>
         <t>
-Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of a description list entry.</t>
+Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of a description list entry, like so:</t>
+        <t>
+          <list style="hanging">
+            <t hangText="Description list">
+ A list where each list item has a title.</t>
+          </list>
+        </t>
       </section>
       <section title="Figures" anchor="sub_Figures">
         <t>
@@ -136,7 +168,7 @@ For example:</t>
         <t>
 </t>
         <t>
-          <figure anchor="magicparlabel-138">
+          <figure anchor="magicparlabel-150">
             <artwork>+=======+
 | a box |
 +=======+</artwork>
@@ -224,7 +256,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
   </middle>
   <back>
     <references title="References" anchor="sec_References">&rfc2629;</references>
-    <section title="Lyx2RFC Internals" anchor="d1e747">
+    <section title="Lyx2RFC Internals" anchor="d1e809">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>
     </section>
