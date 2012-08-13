@@ -223,7 +223,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
     </section>
   </middle>
   <back>
-    <references title="References">&rfc2629;</references>
+    <references title="References" anchor="sec_References">&rfc2629;</references>
     <section title="Lyx2RFC Internals" anchor="d1e747">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>

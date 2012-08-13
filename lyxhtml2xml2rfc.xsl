@@ -100,42 +100,6 @@
         <xsl:value-of select="./@href"/>
         <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
     </xsl:for-each>
-    <!-- XXX Remove this: Generate ENTITYs for RFCs -->
-    <xsl:for-each
-        select="//div[@class = 'bibliography']/div[@class = 'flex_autorfcreferenceentity'] intersect
-                //div[@class = 'bibliography']/div[@class = 'flex_autorfcreferenceentity']">
-        <xsl:text disable-output-escaping="yes">
-            &lt;!ENTITY </xsl:text>
-        <xsl:value-of select="normalize-space(.)"/>
-        <xsl:text disable-output-escaping="yes"> PUBLIC "" "</xsl:text>
-        <xsl:text>http://xml.resource.org/public/rfc/bibxml/reference.RFC.</xsl:text>
-        <xsl:value-of select="substring-after(normalize-space(.), 'rfc')"/>
-        <xsl:text>.xml</xsl:text>
-        <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
-    </xsl:for-each>
-    <!-- XXX Remove this: Generate ENTITYs for I-Ds -->
-    <xsl:for-each
-        select="//div[@class = 'bibliography']/div[@class = 'flex_autoidreferenceentity'] intersect
-                //div[@class = 'bibliography']/div[@class = 'flex_autoidreferenceentity']">
-        <xsl:text disable-output-escaping="yes">
-            &lt;!ENTITY </xsl:text>
-        <xsl:value-of select="normalize-space(.)"/>
-        <xsl:text disable-output-escaping="yes"> PUBLIC "" "</xsl:text>
-        <xsl:text>http://xml.resource.org/public/rfc/bibxml3/reference.</xsl:text>
-        <xsl:value-of select="normalize-space(.)"/>
-        <xsl:text>.xml</xsl:text>
-        <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
-    </xsl:for-each>
-    <!-- TODO: Remove flex_referenceentity eventually -->
-    <!-- Emit ENTITY declarations for bibxml references -->
-    <xsl:for-each select="//div[@class = 'bibliography']/div[@class = 'flex_referenceentity']">
-        <xsl:text disable-output-escaping="yes">
-            &lt;!ENTITY </xsl:text>
-        <xsl:value-of select="normalize-space(.)"/>
-        <xsl:text disable-output-escaping="yes"> PUBLIC '' '</xsl:text>
-        <xsl:value-of select="parent::div/a[ends-with(@href, '.xml')]/@href"/>
-        <xsl:text disable-output-escaping="yes">'&gt;&#xA;</xsl:text>
-    </xsl:for-each>
     <!-- Emit DOCTYPE close -->
     <xsl:text disable-output-escaping="yes">&#xA;]&gt;&#xA;</xsl:text>
     <xsl:element name="rfc">
@@ -459,6 +423,11 @@
 
 <!-- Sections -->
 
+<!-- XXX I could generalize this so one template handles h2, h3, and
+     h4.  I could have an xsl:variable to hold a cast-as-integer form of
+     the N in hN, then in the sub-sections XPath expression match on
+     hN+1...  -->
+
 <xsl:template match="h2[matches(@class, '^section') and
     not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References'))]">
     <xsl:element name="section">
@@ -502,7 +471,6 @@
             select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
         <xsl:attribute name="anchor"
             select="if (string-length($id) > 0) then $id else generate-id()"/>
-
         <xsl:variable name="cur_sect" select="current()"/>
 
         <!-- Handle the contents of just this section  -->
@@ -519,36 +487,20 @@
 
 <xsl:template match="h4[starts-with(@class, 'subsubsection')]">
     <xsl:element name="section">
-        <xsl:attribute name="title">
-            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
-        </xsl:attribute>
-        <xsl:attribute name="anchor">
-            <xsl:choose>
-                <xsl:when test="string-length(a[not(starts-with(@id, 'magicparlabel-'))]/@id) > 0">
-                    <xsl:value-of select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-                </xsl:when>
-                <xsl:otherwise>
-                    <xsl:value-of select="generate-id()"/>
-                </xsl:otherwise>
-            </xsl:choose>
-        </xsl:attribute>
+        <xsl:attribute name="title"
+            select="normalize-space(string-join(text(), ''))"/>
+        <xsl:variable name="id"
+            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+        <xsl:attribute name="anchor"
+            select="if (string-length($id) > 0) then $id else generate-id()"/>
+        <xsl:variable name="cur_sect" select="current()"/>
 
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
+        <!-- Handle the contents of just this section  -->
+        <xsl:apply-templates
+            select="(following-sibling::*[not(matches(name(), '^h[234]')) and
+                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect])"/>
 
-        <!-- Handle the contents of this section -->
-        <xsl:for-each select="following-sibling::*[. &lt;&lt; $next-hN]">
-            <!-- Debug xsl:text's and xsl:value-of's
-            <xsl:text>
-h4: handling section content node tag: </xsl:text>
-            <xsl:value-of select="name()"/> -->
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
+        <!-- There are no sub-sub-subsections -->
     </xsl:element>
 </xsl:template>
 
@@ -556,42 +508,18 @@ h4: handling section content node tag: </xsl:text>
 
 <xsl:template match="h2[matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')]">
     <xsl:element name="references">
-        <xsl:attribute name="title">
-            <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
-        </xsl:attribute>
+        <xsl:attribute name="title"
+            select="normalize-space(string-join(text(), ''))"/>
+        <xsl:variable name="id"
+            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+        <xsl:attribute name="anchor"
+            select="if (string-length($id) > 0) then $id else generate-id()"/>
+        <xsl:variable name="cur_sect" select="current()"/>
 
-        <!-- Experimental replacement for the old new way of dealing
-             with references.
-             -->
         <xsl:apply-templates
-            select="//div[@class = 'flex_bibxml']/div/a
-                except
-                following-sibling::*[preceding-sibling::*[. is current()]]"/>
-
-        <!-- XXX Use 'except' to make this simpler? -->
-        <!-- Figure out which elements are in this section -->
-        <xsl:variable name="num-siblings" select="count(following-sibling::*)"/>
-        <xsl:variable name="next-hN"
-            select="((following-sibling::*[contains(@class, 'section') and (name() = 'h2' or name() = 'h3' or name() = 'h4')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-        <xsl:variable name="end-hN"
-            select="((following-sibling::h2[contains(@class, 'section')]) |
-            following-sibling::*[$num-siblings])[1]"/>
-
-        <!-- Handle the contents of this section -->
-        <!-- XXX Use apply-templates with select="<the select from the for-each" -->
-        <xsl:for-each select="following-sibling::div[@class = 'bibliography' and . &lt;&lt; $next-hN]/div[@class = 'flex_autorfcreferenceentity']">
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-        <xsl:for-each select="following-sibling::div[@class = 'bibliography' and . &lt;&lt; $next-hN]/div[@class = 'flex_autoidreferenceentity']">
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-        <!-- TODO: Add more bibxml reference entities here -->
-
-        <!-- TODO: Remove this and all traces of flex_referenceentity -->
-        <xsl:for-each select="following-sibling::div[@class = 'bibliography' and . &lt;&lt; $next-hN]/div[@class = 'flex_referenceentity']">
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
+            select="(following-sibling::div[
+                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect]/div[
+                @class = 'flex_bibxml']/div/a)"/>
 
         <!-- Sorry, no sub-sections for references, though there have
              been I-Ds and RFCs with such sub-sections.  Make this a
@@ -617,22 +545,6 @@ h4: handling section content node tag: </xsl:text>
 <!-- Emit references -->
 <xsl:template
     match="a[ends-with(@href, '.xml') and ../..[@class = 'flex_bibxml']]">
-    <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
-    <xsl:value-of select="normalize-space(.)"/>
-    <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
-</xsl:template>
-<!-- XXX Remove this crap: -->
-<xsl:template match="div[@class = 'flex_autorfcreferenceentity']">
-    <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
-    <xsl:value-of select="normalize-space(.)"/>
-    <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
-</xsl:template>
-<xsl:template match="div[@class = 'flex_autoidreferenceentity']">
-    <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
-    <xsl:value-of select="normalize-space(.)"/>
-    <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
-</xsl:template>
-<xsl:template match="div[@class = 'flex_referenceentity']">
     <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
     <xsl:value-of select="normalize-space(.)"/>
     <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
