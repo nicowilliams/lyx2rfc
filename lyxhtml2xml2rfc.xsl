@@ -349,22 +349,20 @@
     <xsl:apply-templates/>
 </xsl:template>
 
-<!-- Figures -->
+<!-- Figures (we only really support ASCII figures) -->
 <xsl:template match="div[@class='float float-figure']">
     <xsl:element name="t">
         <xsl:element name="figure">
-            <xsl:attribute name="anchor">
-                <!-- Any anchor will do, but hopefully we have one added
-                     by the author -->
-                <xsl:value-of select="(.//div/a/@id)[last()]"/>
-            </xsl:attribute>
+            <!-- Any anchor will do, but hopefully we have one added by
+                 the author -->
+            <xsl:attribute name="anchor" select="(.//div/a/@id)[last()]"/>
+
+            <!-- The actual figure (no need to deal with escaping!) -->
             <xsl:element name="artwork">
-                <!--<xsl:text disable-output-escaping='yes'>&lt;![CDATA[
-</xsl:text>-->
                 <xsl:value-of select="div/pre"/>
-                <!--<xsl:text disable-output-escaping='yes'>
-]]&gt;</xsl:text>-->
             </xsl:element>
+
+            <!-- Caption -->
             <xsl:element name="postamble">
                 <xsl:value-of select="div/div[@class='float-caption float-caption-figure']"/>
             </xsl:element>
@@ -373,7 +371,7 @@
 </xsl:template>
 
 <!-- xrefs -->
-<xsl:template match="a[@href and starts-with(@href, '#') and not(starts-with(@href, '#key-'))]"><!-- workaround for LyX bug -->
+<xsl:template match="a[@href and starts-with(@href, '#')]">
     <!-- We add a space here to avoid running this xref onto the end of
          the preceding text() node. -->
     <xsl:text> </xsl:text>
