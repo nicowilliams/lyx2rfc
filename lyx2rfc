@@ -40,37 +40,76 @@ if [[ "$0" = */* ]]; then
 else
     ORIGIN=${PWD}
 fi
+
 XSL=$ORIGIN/lyxhtml2xml2rfc.xsl
 
+# Various DTDs
 LYX_XHTML_DTD=http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd
 XHTML_DTD=http://www.w3.org/TR/2001/REC-MathML2-20010221/dtd/xhtml-math11-f.dtd
 LOCAL_XHTML_DTD=$ORIGIN/xhtml-math11-f.dtd
 
 function usage {
-    printf "Usage: $PROG lyx_file [out_file]\n"
+    cat <<EOF
+Usage: $PROG lyx_file [out_file]
+    Supported output file types:
+        .xhtml (LyXHTML)
+        .xml (xml2rfc source)
+        .txt (xml2rfc text output)
+        .unpg (xml2rfc unpaginated text output)
+        .html (using the Greenbytes XSL)
+
+    By default all outputs are generated.
+EOF
     exit 1
 }
 
-# Very, very lame command-line parsing (should use getopts).
+function check_already_done {
+    typeset -u ftype
+
+    ftype=${out##*.}
+    if [[ "$requested" = "$out" && -f "$out" && "$out" -nt "$input" ]];
+    then
+        printf "$ftype already up to date\n"
+        exit 0
+    fi
+}
+
+function requested {
+    [[ -z "$requested" || "$requested" = "$1" ]]
+    return $?
+}
+
+# Very, *very* lame command-line parsing; should use getopts, as we
+# might want options for, e.g., not leaving behind intermediate files
+# like .xhtml or .xml.
 #
 # The first argument must be a LyX document filename.  If it doesn't end
 # in .lyx we'll tack on the .lyx extension.
 #
-# The second argument must be an output filename.  The extension must be
-# one of txt, pdf, html, or xml.  If no extension is provided we'll tack
-# on '.txt'.
+# The second argument (optional) must be an output filename.  The
+# extension must be one of txt, unpg, html, or xml.
 (($# > 0)) || usage
 (($# < 3)) || usage
-lyxf=$1
-[[ "$lyxf" != *.lyx && "$lyxf" != *.* ]] && lyxf=${lyxf}.lyx
-[[ "$lyxf" != *.lyx ]] && usage
+input=$1
+[[ "$input" != *.lyx && "$input" != *.* ]] && input=${input}.lyx
+[[ "$input" != *.lyx ]] && usage
 xhtml=${1:%.lyx}.xhtml
-out=${2:-${lyxf%.lyx}.txt}
-unpg=${2:-${lyxf%.lyx}.unpg}
+
+[[ -n "$2" && "$2" != *.@(xhtml|xml|txt|unpg|html) ]] && usage
+
+requested=
+[[ "$2" = *.* ]] && requested=$2
+
+# Normalize $1 if no $2
+out=${2:-${input%.lyx}.txt}
 [[ "$out" != *.* ]] && out=${out}.txt
-[[ "$out" != *.@(txt|pdf|html|xml) ]] && usage
-xmlout=${out%.@(txt|pdf|html|xml)}.xml
-htmlout=${out%.@(txt|pdf|html|xml)}.html
+[[ "$out" != *.@(txt|unpg|html|xml) ]] && usage
+
+# 
+txt=${2:-${out%.*}.txt}
+unpg=${2:-${out%.*}.unpg}
+xml=${out%.*}.xml
+html=${out%.*}.html
 
 # Get and cache a local copy of the XHTML DTD:
 if [[ ! -f "$LOCAL_XHTML_DTD" ]]; then
@@ -78,29 +117,41 @@ if [[ ! -f "$LOCAL_XHTML_DTD" ]]; then
 fi
 
 # Export LyX document as XHTML:
+check_already_done
 printf "Exporting LyX document as XHTML...\n"
-lyx -e xhtml "$lyxf"
+lyx -e xhtml "$input"
 
 # Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
 sed --in-place -e "s,${LYX_XHTML_DTD},file://${LOCAL_XHTML_DTD}," "$xhtml"
+[[ "$requested" = "$xhtml" ]] && exit 0
+
 
 # Apply the lyx2rfc XSTL stylesheet and pretty-print result:
 # (the old xml2rfc tool doesn't grok xmlns attributes; remove them)
+check_already_done
 printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
 java net/sf/saxon/Transform "$xhtml" $XSL | 
     sed -e 's,xmlns="xml2rfc",,' -e 's/></>\n</g' |
-    xmllint --format - > "$xmlout"
+    xmllint --format - > "$xml"
 
-# Set the correct DTD URL, just so we don't have a local path left here
-sed --in-place -e "s,file://${LOCAL_XHTML_DTD},${XHTML_DTD}," "$xhtml"
+## Set the correct DTD URL, just so we don't have a local path left here
+#sed --in-place -e "s,file://${LOCAL_XHTML_DTD},${XHTML_DTD}," "$xml"
+[[ "$requested" = "$xml" ]] && exit 0
 
 # Run xml2rfc to do the final conversion if desired:
-printf "Applying xml2rfc for final paginated formatting...\n"
-[[ "$out" != *.xml ]] && DISPLAY= xml2rfc "$xmlout" "$out"
+if requested "$txt"; then
+    printf "Applying xml2rfc for final paginated formatting...\n"
+    DISPLAY= xml2rfc "$xml" "$txt"
+fi
 
-printf "Applying xml2rfc for final unpaginated formatting...\n"
-[[ "$out" != *.xml ]] && DISPLAY= xml2rfc "$xmlout" "$unpg"
+if requested "$unpg"; then
+    printf "Applying xml2rfc for final unpaginated formatting...\n"
+    DISPLAY= xml2rfc "$xml" "$unpg"
+fi
 
 # Use Greenbytes' XSLT to produce HTML
-printf "Applying the Julian Reschke's (Greenbytes) XSLT to produce HTML...\n"
-java net/sf/saxon/Transform  "$xmlout" rfc2629.xslt > "$htmlout"
+if requested "$html"; then
+    printf "Applying the Julian Reschke's (Greenbytes) XSLT to produce HTML...\n"
+    java net/sf/saxon/Transform  "$xml" rfc2629.xslt > "$html"
+fi
+
