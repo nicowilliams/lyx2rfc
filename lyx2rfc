@@ -103,7 +103,6 @@ requested=
 # Normalize $1 if no $2
 out=${2:-${input%.lyx}.txt}
 [[ "$out" != *.* ]] && out=${out}.txt
-[[ "$out" != *.@(txt|unpg|html|xml) ]] && usage
 
 # 
 txt=${2:-${out%.*}.txt}
