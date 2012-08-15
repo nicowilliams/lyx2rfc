@@ -32,6 +32,10 @@ TODO:
 
 BUGS:
 
+ - Empty lines in code listings (used for ASCII figures) must have at
+   least one space character, else the LyX export to XHTML function
+   fails.
+
  - LyX does not pass through any table column widths.  Besides, LyX lets
    the user set column widths only in centimeters, while xml2rfc allows
    only percentages.  Since the XSLT won't see any column width, there's
