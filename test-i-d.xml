@@ -57,14 +57,11 @@ Another comment.</cref>
       <t>
 </t>
       <t>
-        <figure anchor="magicparlabel-118">
+        <figure anchor="magicparlabel-118" title="A figure of some sort">
           <artwork>+=======================+
 |     A box             |
 |                       |
 +=======================+</artwork>
-          <postamble>Figure 1:
-A figure of some sort
-</postamble>
         </figure>
       </t>
       <t>

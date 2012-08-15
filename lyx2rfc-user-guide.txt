@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                         August 13, 2012
+                                                         August 14, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -34,7 +34,7 @@ Table of Contents
    4.4.        Figures  . . . . . . . . . . . . . . . . . . . . . . .  7
    4.5.        Tables . . . . . . . . . . . . . . . . . . . . . . . .  7
    4.6.        Intra-Document Cross-References  . . . . . . . . . . .  7
-   4.7.        Citations  . . . . . . . . . . . . . . . . . . . . . .  7
+   4.7.        Citations  . . . . . . . . . . . . . . . . . . . . . .  8
    5.          Back Matter  . . . . . . . . . . . . . . . . . . . . .  9
    5.1.        References Sections  . . . . . . . . . . . . . . . . .  9
    5.2.        Adding 'bibxml' References . . . . . . . . . . . . . .  9
@@ -345,14 +345,17 @@ Williams                                                        [Page 6]
    then write/paste ASCII figure text.  Don't forget to set the figure
    title.
 
+   NOTE: Every otherwise empty line of a program listing (used to hold
+   the artwork) must have at least one space in it, otherwise the LyX
+   export to XHTML function will fail.
+
    For example:
 
    +=======+
    | a box |
    +=======+
-   Figure 1: Example figure
 
-                                 Figure 1
+                         Figure 1: Example figure
 
 4.5.  Tables
 
@@ -379,12 +382,9 @@ Williams                                                        [Page 6]
 
    To reference a label use Insert->Cross-Reference...
 
-4.7.  Citations
 
-   To reference an RFC or Internet-Draft, or any bibxml item use the
-   EntityXRef custom inset (Insert->Custom Insets->EntityXRef) and set
-   the contents of the inset to be the anchor of the bibxml reference
-   (the name that would have to be used as the 'target' attribute value
+
+
 
 
 
@@ -393,14 +393,14 @@ Williams                                                        [Page 7]
                            LyX2RFC User Guide                August 2012
 
 
+4.7.  Citations
+
+   To reference an RFC or Internet-Draft, or any bibxml item use the
+   EntityXRef custom inset (Insert->Custom Insets->EntityXRef) and set
+   the contents of the inset to be the anchor of the bibxml reference
+   (the name that would have to be used as the 'target' attribute value
    in an xml2rfc 'xref' element).  See Section 5.2 for how to add
    references sections.
-
-
-
-
-
-
 
 
 

@@ -360,14 +360,17 @@
                  the author -->
             <xsl:attribute name="anchor" select="(.//div/a/@id)[last()]"/>
 
-            <!-- The actual figure (no need to deal with escaping!) -->
+            <!-- Caption (title).  Once more we must clean up
+                 gratouitous newlines inserted by LyX.  -->
+            <xsl:attribute name="title"
+                select="normalize-space(string-join(div/div[@class='float-caption float-caption-figure']/div/text(), ''))"/>
+
+            <!-- The actual figure.  No need to deal with escaping
+                 (or, rather, treating the artwork as CDATA) because LyX
+                 already takes care of it in its LyXHTML export
+                 function.  -->
             <xsl:element name="artwork">
                 <xsl:value-of select="div/pre"/>
-            </xsl:element>
-
-            <!-- Caption -->
-            <xsl:element name="postamble">
-                <xsl:value-of select="div/div[@class='float-caption float-caption-figure']"/>
             </xsl:element>
         </xsl:element>
     </xsl:element>

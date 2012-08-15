@@ -244,7 +244,7 @@ A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
 
 \begin_layout Standard
 \begin_inset Flex DocName
-status collapsed
+status open
 
 \begin_layout Plain Layout
 lyx2rfc-user-guide
@@ -254,7 +254,7 @@ lyx2rfc-user-guide
 
 
 \begin_inset Flex IntendedStatus
-status collapsed
+status open
 
 \begin_layout Plain Layout
 info
@@ -264,7 +264,7 @@ info
 
 
 \begin_inset Flex TitleAbbrev
-status collapsed
+status open
 
 \begin_layout Plain Layout
 LyX2RFC User Guide
@@ -274,7 +274,7 @@ LyX2RFC User Guide
 
 
 \begin_inset Flex XML2RFCKeyword
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Internet-Draft
@@ -284,7 +284,7 @@ Internet-Draft
 
 
 \begin_inset Flex IPR
-status collapsed
+status open
 
 \begin_layout Plain Layout
 noDerivatives3978
@@ -297,7 +297,7 @@ noDerivatives3978
 
 \begin_layout Standard
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 private="Lyx2RFC UserGuide"
@@ -307,7 +307,7 @@ private="Lyx2RFC UserGuide"
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 toc="yes"
@@ -317,7 +317,7 @@ toc="yes"
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 symrefs="yes"
@@ -327,7 +327,7 @@ symrefs="yes"
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 tocindent="no"
@@ -337,7 +337,7 @@ tocindent="no"
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 comments="yes"
@@ -347,7 +347,7 @@ comments="yes"
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 inline="yes"
@@ -361,7 +361,7 @@ inline="yes"
 \begin_layout Author
 Nicolas Williams 
 \begin_inset Flex AuthorOrg
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Cryptonector LLC
@@ -371,7 +371,7 @@ Cryptonector LLC
 
 
 \begin_inset Flex AuthorOrgAbbrev
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Williams
@@ -381,7 +381,7 @@ Williams
 
 
 \begin_inset Flex AuthorInitials
-status collapsed
+status open
 
 \begin_layout Plain Layout
 N.
@@ -391,7 +391,7 @@ N.
 
 
 \begin_inset Flex AuthorSurname
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Williams
@@ -401,7 +401,7 @@ Williams
 
 
 \begin_inset Flex AuthorEmailAddr
-status collapsed
+status open
 
 \begin_layout Plain Layout
 nico@cryptonector.com
@@ -476,7 +476,7 @@ target "http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html"
 
 ; see also 
 \begin_inset Flex EntityXRef
-status collapsed
+status open
 
 \begin_layout Plain Layout
 RFC2629
@@ -898,6 +898,16 @@ Insert->Float->Figure, then left arrow, then Insert->Program Listing, then
 \end_layout
 
 \begin_layout Standard
+NOTE: Every otherwise empty line of a program listing (used to hold the
+ artwork) 
+\emph on
+must
+\emph default
+ have at least one space in it, otherwise the LyX export to XHTML function
+ will fail.
+\end_layout
+
+\begin_layout Standard
 For example:
 \end_layout
 
@@ -905,12 +915,12 @@ For example:
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset listings
 inline false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
@@ -1241,7 +1251,7 @@ References
 
 \begin_layout Standard
 \begin_inset Flex BibXML
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset CommandInset href

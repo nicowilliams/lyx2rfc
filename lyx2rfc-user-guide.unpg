@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                         August 13, 2012
+                                                         August 14, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -225,14 +225,17 @@ Table of Contents
    then write/paste ASCII figure text.  Don't forget to set the figure
    title.
 
+   NOTE: Every otherwise empty line of a program listing (used to hold
+   the artwork) must have at least one space in it, otherwise the LyX
+   export to XHTML function will fail.
+
    For example:
 
    +=======+
    | a box |
    +=======+
-   Figure 1: Example figure
 
-                                 Figure 1
+                         Figure 1: Example figure
 
 4.5.  Tables
 

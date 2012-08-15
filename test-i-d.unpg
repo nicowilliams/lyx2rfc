@@ -4,7 +4,7 @@
 Network Working Group                                             J. Doe
 Internet-Draft                                                       Doe
 Intended status: Informational                                J. Sixpack
-Expires: February 14, 2013                               August 13, 2012
+Expires: February 15, 2013                               August 14, 2012
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -32,7 +32,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 14, 2013.
+   This Internet-Draft will expire on February 15, 2013.
 
 Copyright Notice
 
@@ -79,9 +79,8 @@ Table of Contents
    |     A box             |
    |                       |
    +=======================+
-   Figure 1: A figure of some sort
 
-                                 Figure 1
+                      Figure 1: A figure of some sort
 
    A numbered list:
 

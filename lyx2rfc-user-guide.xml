@@ -164,17 +164,16 @@ Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of a desc
         <t>
 Insert-&gt;Float-&gt;Figure, then left arrow, then Insert-&gt;Program Listing, then write/paste ASCII figure text. Don't forget to set the figure title.</t>
         <t>
+NOTE: Every otherwise empty line of a program listing (used to hold the artwork) <spanx style="">must</spanx>  have at least one space in it, otherwise the LyX export to XHTML function will fail.</t>
+        <t>
 For example:</t>
         <t>
 </t>
         <t>
-          <figure anchor="magicparlabel-150">
+          <figure anchor="magicparlabel-151" title="Example figure">
             <artwork>+=======+
 | a box |
 +=======+</artwork>
-            <postamble>Figure 1:
-Example figure
-</postamble>
           </figure>
         </t>
       </section>
@@ -256,7 +255,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
   </middle>
   <back>
     <references title="References" anchor="sec_References">&rfc2629;</references>
-    <section title="Lyx2RFC Internals" anchor="d1e809">
+    <section title="Lyx2RFC Internals" anchor="d1e815">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>
     </section>
