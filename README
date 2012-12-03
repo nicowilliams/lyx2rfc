@@ -25,6 +25,11 @@ The user guide is itself written in LyX and rendered with xml2rfc as a
 private document (i.e., not as an Internet-Draft, to avoid the I-D
 boilerplate).
 
+NOTE:
+
+ - You must install docbook-sgml packages then reconfigure LyX
+   (Tools->Reconfigure).
+
 TODO:
 
  - Add iref support?
