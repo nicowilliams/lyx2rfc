@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                         August 14, 2012
+                                                        December 4, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -23,8 +23,8 @@ Table of Contents
    2.1.        LyX Basics
    2.2.        Lyx2rfc Basics
    3.          Front Matter
-   3.1.        Typical PIs
-   3.2.        Author Metadata
+   3.1.        Processing Instructions
+   3.2.        Author Information
    3.3.        Abstract
    4.          Middle Matter
    4.1.        Subsections
@@ -38,6 +38,7 @@ Table of Contents
    5.          Back Matter
    5.1.        References Sections
    5.2.        Adding 'bibxml' References
+   5.2.1.      Citations
    5.3.        Appendices
    6.          Running the lyx2rfc Tool
    7.          References
@@ -72,11 +73,16 @@ Table of Contents
 
 2.  Using LyX to Edit Internet-Drafts
 
+   In order to represent I-D/RFC metadata that LyX does not provide for,
+   we use "custom insets".  There are multiple custom insets, each for
+   various purposes.
+
    The first step to using LyX to edit an Internet-Draft is to start LyX
    and then use Document->Settings->Local Layout to add the "custom
    insets" that lyx2rfc requires: just paste them in, click on Validate,
    then OK.  Alternatively start by copying the 'test-i-d.lyx' sample
-   Internet-Draft.
+   Internet-Draft.  Remember to use View->Open All Insets to ensure that
+   the inset label (the type of inset) is displayed.
 
 2.1.  LyX Basics
 
@@ -131,39 +137,62 @@ Table of Contents
       published from the Internet-Draft, if it progresses that far
       (e.g., "Informational").
 
-3.1.  Typical PIs
+   RFCNumber  RFC number.
 
-   Add PI custom insets as desired for the desired PIs.
+   XML2RFCKeyword  Keyword element.
 
-3.2.  Author Metadata
+3.1.  Processing Instructions
 
-   Open a line in 'Author' style for each author of the document and
-   write the author's name, then add several custom insets for xml2rfc
-   author metadata:
+   The following custom insets can be used to specify xml2rfc processing
+   instructions (PIs):
 
-   AuthorRole  'author' or 'editor'.
+   PI Formatting directive for xml2rfc.  The text in this inset should
+      be <directive>="<value>".  This inset can be used to specify
+      arbitrary PIs.
 
-   AuthorInitials  The author's initials (not including the surname).
+   PI_SortRefs  Sort references.
 
-   AuthorSurname  The author's surname.
+   PI_Strict  Strict PI.
 
-   AuthorOrg  The name of the author's organization (e.g., university or
-      employer company name).
+   PI_SymRefs  Use symbolic references.
 
-   AuthorOrgAbbrev  The abbreviation of the author's organization for
-      the front page of the rendered Internet-Draft/RFC.
+   PI_TOC  Generate a table of contents.
 
-   AuthorEmailAddr  The author's e-mail address
+   PI_TOCAppendix  Include appendici in the TOC.
 
-   AuthorAddrStreet  The street portion of the author's postal address.
+   PI_TOCCompact  Generate compact TOCs.
 
-   AuthorAddrCity  The city portion of the author's postal address.
+   PI_TOCDepth  Max depth of sub-sections in TOC.
 
-   AuthorAddrRegion  The region (state, province, ...) portion of the
-      author's postal address.
+   PI_TOCIndent  Indent TOC.
 
-   AuthorAddrCountry  The country name portion of the author's postal
-      address.
+3.2.  Author Information
+
+   For each author start a line with Author style, write the author's
+   name, then Insert->Custom Insets to insert the following custome
+   insets:
+
+   AuthorAddrCity  City portion of postal address.
+
+   AuthorAddrCode  Postal code portion of postal address.
+
+   AuthorAddrCountry  Country name portion of postal address.
+
+   AuthorAddrRegion  State/province portion of postal address.
+
+   AuthorAddrStreet  Street portion of postal address.
+
+   AuthorEmailAddr  E-mail address.
+
+   AuthorInitials  Author initials.
+
+   AuthorOrg  Name of author's organization.
+
+   AuthorOrgAbbrev  Abbreviation of author's organization name.
+
+   AuthorRole  Role of author ("author" or "editor").
+
+   AuthorSurname  Surname.
 
 3.3.  Abstract
 
@@ -304,6 +333,10 @@ Table of Contents
    reference to some RFC use 'rfcXXXX' as the link text and
    http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as
    the link target.
+
+5.2.1.  Citations
+
+   See Section 4.7.
 
 5.3.  Appendices
 

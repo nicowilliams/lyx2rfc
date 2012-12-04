@@ -521,6 +521,20 @@ Using LyX to Edit Internet-Drafts
 \end_layout
 
 \begin_layout Standard
+In order to represent I-D/RFC metadata that LyX does not provide for, we
+ use 
+\begin_inset Quotes eld
+\end_inset
+
+custom insets
+\begin_inset Quotes erd
+\end_inset
+
+.
+ There are multiple custom insets, each for various purposes.
+\end_layout
+
+\begin_layout Standard
 The first step to using LyX to edit an Internet-Draft is to start LyX and
  then use Document->Settings->Local Layout to add the 
 \begin_inset Quotes eld
@@ -532,6 +546,8 @@ custom insets
 
  that lyx2rfc requires: just paste them in, click on Validate, then OK.
  Alternatively start by copying the 'test-i-d.lyx' sample Internet-Draft.
+ Remember to use View->Open All Insets to ensure that the inset label (the
+ type of inset) is displayed.
 \end_layout
 
 \begin_layout Subsection
@@ -678,18 +694,59 @@ Informational
 ).
 \end_layout
 
+\begin_layout Description
+RFCNumber RFC number.
+\end_layout
+
+\begin_layout Description
+XML2RFCKeyword Keyword element.
+\end_layout
+
 \begin_layout Subsection
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Typical-PIs"
-
-\end_inset
-
-Typical PIs
+Processing Instructions
 \end_layout
 
 \begin_layout Standard
-Add PI custom insets as desired for the desired PIs.
+The following custom insets can be used to specify xml2rfc processing instructio
+ns (PIs):
+\end_layout
+
+\begin_layout Description
+PI Formatting directive for xml2rfc.
+ The text in this inset should be <directive>="<value>".
+ This inset can be used to specify arbitrary PIs.
+\end_layout
+
+\begin_layout Description
+PI_SortRefs Sort references.
+\end_layout
+
+\begin_layout Description
+PI_Strict Strict PI.
+\end_layout
+
+\begin_layout Description
+PI_SymRefs Use symbolic references.
+\end_layout
+
+\begin_layout Description
+PI_TOC Generate a table of contents.
+\end_layout
+
+\begin_layout Description
+PI_TOCAppendix Include appendici in the TOC.
+\end_layout
+
+\begin_layout Description
+PI_TOCCompact Generate compact TOCs.
+\end_layout
+
+\begin_layout Description
+PI_TOCDepth Max depth of sub-sections in TOC.
+\end_layout
+
+\begin_layout Description
+PI_TOCIndent Indent TOC.
 \end_layout
 
 \begin_layout Subsection
@@ -699,55 +756,72 @@ name "sub:Author-Metadata"
 
 \end_inset
 
-Author Metadata
+Author Information
 \end_layout
 
 \begin_layout Standard
-Open a line in 'Author' style for each author of the document and write
- the author's name, then add several custom insets for xml2rfc author metadata:
+For each author start a line with Author style, write the author's name,
+ then Insert->Custom Insets to insert the following custome insets:
 \end_layout
 
 \begin_layout Description
-AuthorRole 'author' or 'editor'.
+AuthorAddrCity City portion of postal address.
 \end_layout
 
 \begin_layout Description
-AuthorInitials The author's initials (not including the surname).
+AuthorAddrCode Postal code portion of postal address.
 \end_layout
 
 \begin_layout Description
-AuthorSurname The author's surname.
+AuthorAddrCountry Country name portion of postal address.
 \end_layout
 
 \begin_layout Description
-AuthorOrg The name of the author's organization (e.g., university or employer
- company name).
+AuthorAddrRegion State/province portion of postal address.
 \end_layout
 
 \begin_layout Description
-AuthorOrgAbbrev The abbreviation of the author's organization for the front
- page of the rendered Internet-Draft/RFC.
+AuthorAddrStreet Street portion of postal address.
 \end_layout
 
 \begin_layout Description
-AuthorEmailAddr The author's e-mail address
+AuthorEmailAddr E-mail address.
 \end_layout
 
 \begin_layout Description
-AuthorAddrStreet The street portion of the author's postal address.
+AuthorInitials Author initials.
 \end_layout
 
 \begin_layout Description
-AuthorAddrCity The city portion of the author's postal address.
+AuthorOrg Name of author's organization.
 \end_layout
 
 \begin_layout Description
-AuthorAddrRegion The region (state, province, ...) portion of the author's
- postal address.
+AuthorOrgAbbrev Abbreviation of author's organization name.
 \end_layout
 
 \begin_layout Description
-AuthorAddrCountry The country name portion of the author's postal address.
+AuthorRole Role of author (
+\begin_inset Quotes eld
+\end_inset
+
+author
+\begin_inset Quotes erd
+\end_inset
+
+ or 
+\begin_inset Quotes eld
+\end_inset
+
+editor
+\begin_inset Quotes erd
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Description
+AuthorSurname Surname.
 \end_layout
 
 \begin_layout Subsection
@@ -1215,6 +1289,21 @@ To add bibxml references just start a paragraph in a references section
  name of an XML entity.
  E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xm
 l.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.
+\end_layout
+
+\begin_layout Subsubsection
+Citations
+\end_layout
+
+\begin_layout Standard
+See 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "sub:Citations"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection

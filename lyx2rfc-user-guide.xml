@@ -17,7 +17,7 @@
         <email>nico@cryptonector.com</email>
       </address>
     </author>
-    <date month="August" year="2012"/>
+    <date month="December" year="2012"/>
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>
@@ -37,7 +37,9 @@ This document itself, although it is not an Internet-Draft, much less an RFC, is
     </section>
     <section title="Using LyX to Edit Internet-Drafts" anchor="sec_Using_LyX_to">
       <t>
-The first step to using LyX to edit an Internet-Draft is to start LyX and then use Document-&gt;Settings-&gt;Local Layout to add the “custom insets” that lyx2rfc requires: just paste them in, click on Validate, then OK. Alternatively start by copying the 'test-i-d.lyx' sample Internet-Draft.</t>
+In order to represent I-D/RFC metadata that LyX does not provide for, we use “custom insets”. There are multiple custom insets, each for various purposes.</t>
+      <t>
+The first step to using LyX to edit an Internet-Draft is to start LyX and then use Document-&gt;Settings-&gt;Local Layout to add the “custom insets” that lyx2rfc requires: just paste them in, click on Validate, then OK. Alternatively start by copying the 'test-i-d.lyx' sample Internet-Draft. Remember to use View-&gt;Open All Insets to ensure that the inset label (the type of inset) is displayed.</t>
       <section title="LyX Basics" anchor="sub_LyX_Basics">
         <t>
 In the upper left hand corner of the LyX window there is a drop-down box for 'style' of text. 'Standard' here means 'paragraph'. Other styles include 'Title', 'Abstract', 'Section', etcetera. These correspond roughly to xml2rfc XML elements like 't', 'title', 'abstract', and 'section', but without any notion of elements containing elements.</t>
@@ -74,37 +76,65 @@ Other custom insets related to the document itself:</t>
  The IETF Working Group (WG) that this document is specific to (e.g., “TLS”).</t>
           <t hangText="IntendedStatus">
  The intended status for the RFC that would be published from the Internet-Draft, if it progresses that far (e.g., “Informational”).</t>
+          <t hangText="RFCNumber">
+ RFC number.</t>
+          <t hangText="XML2RFCKeyword">
+ Keyword element.</t>
         </list>
       </t>
-      <section title="Typical PIs" anchor="sub_Typical_PIs">
+      <section title="Processing Instructions" anchor="d1e442">
         <t>
-Add PI custom insets as desired for the desired PIs.</t>
-      </section>
-      <section title="Author Metadata" anchor="sub_Author_Metadata">
-        <t>
-Open a line in 'Author' style for each author of the document and write the author's name, then add several custom insets for xml2rfc author metadata:</t>
+The following custom insets can be used to specify xml2rfc processing instructions (PIs):</t>
         <t>
           <list style="hanging">
-            <t hangText="AuthorRole">
- 'author' or 'editor'.</t>
-            <t hangText="AuthorInitials">
- The author's initials (not including the surname).</t>
-            <t hangText="AuthorSurname">
- The author's surname.</t>
-            <t hangText="AuthorOrg">
- The name of the author's organization (e.g., university or employer company name).</t>
-            <t hangText="AuthorOrgAbbrev">
- The abbreviation of the author's organization for the front page of the rendered Internet-Draft/RFC.</t>
-            <t hangText="AuthorEmailAddr">
- The author's e-mail address</t>
-            <t hangText="AuthorAddrStreet">
- The street portion of the author's postal address.</t>
+            <t hangText="PI">
+ Formatting directive for xml2rfc. The text in this inset should be &lt;directive&gt;="&lt;value&gt;". This inset can be used to specify arbitrary PIs.</t>
+            <t hangText="PI_SortRefs">
+ Sort references.</t>
+            <t hangText="PI_Strict">
+ Strict PI.</t>
+            <t hangText="PI_SymRefs">
+ Use symbolic references.</t>
+            <t hangText="PI_TOC">
+ Generate a table of contents.</t>
+            <t hangText="PI_TOCAppendix">
+ Include appendici in the TOC.</t>
+            <t hangText="PI_TOCCompact">
+ Generate compact TOCs.</t>
+            <t hangText="PI_TOCDepth">
+ Max depth of sub-sections in TOC.</t>
+            <t hangText="PI_TOCIndent">
+ Indent TOC.</t>
+          </list>
+        </t>
+      </section>
+      <section title="Author Information" anchor="sub_Author_Metadata">
+        <t>
+For each author start a line with Author style, write the author's name, then Insert-&gt;Custom Insets to insert the following custome insets:</t>
+        <t>
+          <list style="hanging">
             <t hangText="AuthorAddrCity">
- The city portion of the author's postal address.</t>
-            <t hangText="AuthorAddrRegion">
- The region (state, province, ...) portion of the author's postal address.</t>
+ City portion of postal address.</t>
+            <t hangText="AuthorAddrCode">
+ Postal code portion of postal address.</t>
             <t hangText="AuthorAddrCountry">
- The country name portion of the author's postal address.</t>
+ Country name portion of postal address.</t>
+            <t hangText="AuthorAddrRegion">
+ State/province portion of postal address.</t>
+            <t hangText="AuthorAddrStreet">
+ Street portion of postal address.</t>
+            <t hangText="AuthorEmailAddr">
+ E-mail address.</t>
+            <t hangText="AuthorInitials">
+ Author initials.</t>
+            <t hangText="AuthorOrg">
+ Name of author's organization.</t>
+            <t hangText="AuthorOrgAbbrev">
+ Abbreviation of author's organization name.</t>
+            <t hangText="AuthorRole">
+ Role of author (“author” or “editor”).</t>
+            <t hangText="AuthorSurname">
+ Surname.</t>
           </list>
         </t>
       </section>
@@ -116,12 +146,12 @@ Open a line below the last author line and style it 'Abstract'. Write your abstr
     <section title="Middle Matter" anchor="sec_Middle_Matter">
       <t>
 The meat of an Internet-Draft is organized into sections. Each section, sub-section, and sub-sub-section has a title. Open a line, style it 'Section', and write in the section title, then enter to start the contents of the section in 'Standard' (paragraph) style.</t>
-      <section title="Subsections" anchor="d1e517">
+      <section title="Subsections" anchor="d1e589">
         <t>
 Open a line and set the style to “Subsection”.</t>
         <t>
 NOTE: LyX allows subsections of no section: these are treated as subsections of section 0. lyx2rfc will ignore such subsections!</t>
-        <section title="Sub-subsections" anchor="d1e529">
+        <section title="Sub-subsections" anchor="d1e601">
           <t>
 Open a line and set the style to “SunSubsection”.</t>
           <t>
@@ -170,7 +200,7 @@ For example:</t>
         <t>
 </t>
         <t>
-          <figure anchor="magicparlabel-151" title="Example figure">
+          <figure anchor="magicparlabel-164" title="Example figure">
             <artwork>+=======+
 | a box |
 +=======+</artwork>
@@ -242,6 +272,10 @@ To add a references section simply create a section titled “References”, “
 xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</t>
         <t>
 To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</t>
+        <section title="Citations" anchor="d1e846">
+          <t>
+See  <xref target="sub_Citations"/>.</t>
+        </section>
       </section>
       <section title="Appendices" anchor="sub_Appendices">
         <t>
@@ -255,7 +289,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
   </middle>
   <back>
     <references title="References" anchor="sec_References">&rfc2629;</references>
-    <section title="Lyx2RFC Internals" anchor="d1e815">
+    <section title="Lyx2RFC Internals" anchor="d1e899">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>
     </section>
