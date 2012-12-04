@@ -119,67 +119,67 @@ End
 InsetLayout Flex:AuthorRole
     LyXType Custom
     HTMLTag div
-    LabelString AuthorRole
+    LabelString AuthRole
 End
 
 InsetLayout Flex:AuthorInitials
     LyXType Custom
     HTMLTag div
-    LabelString AuthorInitials
+    LabelString AuthInitials
 End
 
 InsetLayout Flex:AuthorSurname
     LyXType Custom
     HTMLTag div
-    LabelString AuthorSurname
+    LabelString AuthSurname
 End
 
 InsetLayout Flex:AuthorOrg
     LyXType Custom
     HTMLTag div
-    LabelString AuthorOrg
+    LabelString AuthOrg
 End
 
 InsetLayout Flex:AuthorOrgAbbrev
     LyXType Custom
     HTMLTag div
-    LabelString AuthorOrgAbbrev
+    LabelString AuthOrgAbbrev
 End
 
 InsetLayout Flex:AuthorEmailAddr
     LyXType Custom
     HTMLTag div
-    LabelString AuthorEmailAddr
+    LabelString AuthEmailAddr
 End
 
 InsetLayout Flex:AuthorAddrStreet
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrStreet
+    LabelString AuthAddrStreet
 End
 
 InsetLayout Flex:AuthorAddrCity
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrCity
+    LabelString AuthAddrCity
 End
 
 InsetLayout Flex:AuthorAddrRegion
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrRegion
+    LabelString AuthAddrRegion
 End
 
 InsetLayout Flex:AuthorAddrCode
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrCode
+    LabelString AuthAddrCode
 End
 
 InsetLayout Flex:AuthorAddrCountry
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrCountry
+    LabelString AuthAddrCountry
 End
 
 InsetLayout Flex:EntityXRef
@@ -255,7 +255,7 @@ A Skeleton Internet-Draft Written in LyX
 
 \begin_layout Standard
 \begin_inset Flex DocName
-status collapsed
+status open
 
 \begin_layout Plain Layout
 draft-doe-something-or-other-00
@@ -265,7 +265,7 @@ draft-doe-something-or-other-00
 
 
 \begin_inset Flex IPR
-status collapsed
+status open
 
 \begin_layout Plain Layout
 trust200902
@@ -275,7 +275,7 @@ trust200902
 
 
 \begin_inset Flex IntendedStatus
-status collapsed
+status open
 
 \begin_layout Plain Layout
 info
@@ -285,7 +285,7 @@ info
 
 
 \begin_inset Flex TitleAbbrev
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Skeleton I-D
@@ -295,7 +295,7 @@ Skeleton I-D
 
 
 \begin_inset Flex IETFArea
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Security Area
@@ -305,7 +305,7 @@ Security Area
 
 
 \begin_inset Flex XML2RFCKeyword
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Internet-Draft
@@ -318,7 +318,7 @@ Internet-Draft
 
 \begin_layout Standard
 \begin_inset Flex PI TOC
-status collapsed
+status open
 
 \begin_layout Plain Layout
 yes
@@ -328,7 +328,7 @@ yes
 
 
 \begin_inset Flex PI SymRefs
-status collapsed
+status open
 
 \begin_layout Plain Layout
 yes
@@ -338,7 +338,7 @@ yes
 
 
 \begin_inset Flex PI TOCIndent
-status collapsed
+status open
 
 \begin_layout Plain Layout
 no
@@ -348,7 +348,7 @@ no
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 comments="yes"
@@ -358,7 +358,7 @@ comments="yes"
 
 
 \begin_inset Flex PI
-status collapsed
+status open
 
 \begin_layout Plain Layout
 inline="yes"
@@ -372,7 +372,7 @@ inline="yes"
 \begin_layout Author
 Jane Doe
 \begin_inset Flex AuthorOrg
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Doe Corp.
@@ -382,7 +382,7 @@ Doe Corp.
 
 
 \begin_inset Flex AuthorOrgAbbrev
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Doe
@@ -392,7 +392,7 @@ Doe
 
 
 \begin_inset Flex AuthorInitials
-status collapsed
+status open
 
 \begin_layout Plain Layout
 J.
@@ -402,7 +402,7 @@ J.
 
 
 \begin_inset Flex AuthorSurname
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Doe
@@ -412,7 +412,7 @@ Doe
 
 
 \begin_inset Flex AuthorAddrStreet
-status collapsed
+status open
 
 \begin_layout Plain Layout
 12345 Some St
@@ -422,7 +422,7 @@ status collapsed
 
 
 \begin_inset Flex AuthorAddrCity
-status collapsed
+status open
 
 \begin_layout Plain Layout
 Somewhere
@@ -432,7 +432,7 @@ Somewhere
 
 
 \begin_inset Flex AuthorAddrRegion
-status collapsed
+status open
 
 \begin_layout Plain Layout
 NY
@@ -452,7 +452,7 @@ USA
 
 
 \begin_inset Flex AuthorAddrCode
-status collapsed
+status open
 
 \begin_layout Plain Layout
 10001
@@ -462,7 +462,7 @@ status collapsed
 
 
 \begin_inset Flex AuthorEmailAddr
-status collapsed
+status open
 
 \begin_layout Plain Layout
 jane@doecorp.example
@@ -476,7 +476,7 @@ jane@doecorp.example
 \begin_layout Author
 Joe Sixpack
 \begin_inset Flex AuthorRole
-status collapsed
+status open
 
 \begin_layout Plain Layout
 editor
@@ -661,7 +661,7 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
  "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are
  to be interpreted as described in 
 \begin_inset Flex EntityXRef
-status collapsed
+status open
 
 \begin_layout Plain Layout
 RFC2119
@@ -859,7 +859,7 @@ References
 
 \begin_layout Standard
 \begin_inset Flex BibXML
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset CommandInset href
@@ -879,7 +879,7 @@ target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"
 
 \begin_layout Standard
 \begin_inset Flex BibXML
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset CommandInset href

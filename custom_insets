@@ -109,67 +109,67 @@ End
 InsetLayout Flex:AuthorRole
     LyXType Custom
     HTMLTag div
-    LabelString AuthorRole
+    LabelString AuthRole
 End
 
 InsetLayout Flex:AuthorInitials
     LyXType Custom
     HTMLTag div
-    LabelString AuthorInitials
+    LabelString AuthInitials
 End
 
 InsetLayout Flex:AuthorSurname
     LyXType Custom
     HTMLTag div
-    LabelString AuthorSurname
+    LabelString AuthSurname
 End
 
 InsetLayout Flex:AuthorOrg
     LyXType Custom
     HTMLTag div
-    LabelString AuthorOrg
+    LabelString AuthOrg
 End
 
 InsetLayout Flex:AuthorOrgAbbrev
     LyXType Custom
     HTMLTag div
-    LabelString AuthorOrgAbbrev
+    LabelString AuthOrgAbbrev
 End
 
 InsetLayout Flex:AuthorEmailAddr
     LyXType Custom
     HTMLTag div
-    LabelString AuthorEmailAddr
+    LabelString AuthEmailAddr
 End
 
 InsetLayout Flex:AuthorAddrStreet
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrStreet
+    LabelString AuthAddrStreet
 End
 
 InsetLayout Flex:AuthorAddrCity
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrCity
+    LabelString AuthAddrCity
 End
 
 InsetLayout Flex:AuthorAddrRegion
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrRegion
+    LabelString AuthAddrRegion
 End
 
 InsetLayout Flex:AuthorAddrCode
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrCode
+    LabelString AuthAddrCode
 End
 
 InsetLayout Flex:AuthorAddrCountry
     LyXType Custom
     HTMLTag div
-    LabelString AuthorAddrCountry
+    LabelString AuthAddrCountry
 End
 
 InsetLayout Flex:EntityXRef
