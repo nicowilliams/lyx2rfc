@@ -1,154 +1,185 @@
 InsetLayout Flex:PI_Strict
     LyXType Custom
     HTMLTag div
+    LabelString PI_Strict
 End
 
 InsetLayout Flex:PI
     LyXType Custom
     HTMLTag div
+    LabelString PI
 End
 
 InsetLayout Flex:PI_SymRefs
     LyXType Custom
     HTMLTag div
+    LabelString PI_SymRefs
 End
 
 InsetLayout Flex:PI_SortRefs
     LyXType Custom
     HTMLTag div
+    LabelString PI_SortRefs
 End
 
 InsetLayout Flex:PI_TOC
     LyXType Custom
     HTMLTag div
+    LabelString PI_TOC
 End
 
 InsetLayout Flex:PI_TOCIndent
     LyXType Custom
     HTMLTag div
+    LabelString PI_TOCIndent
 End
 
 InsetLayout Flex:PI_TOCDepth
     LyXType Custom
     HTMLTag div
+    LabelString PI_TOCDepth
 End
 
 InsetLayout Flex:PI_TOCNarrow
     LyXType Custom
     HTMLTag div
+    LabelString PI_TOCNarrow
 End
 
 InsetLayout Flex:PI_TOCCompact
     LyXType Custom
     HTMLTag div
+    LabelString PI_TOCCompact
 End
 
 InsetLayout Flex:PI_TOCAppendix
     LyXType Custom
     HTMLTag div
+    LabelString PI_TOCAppendix
 End
 
 InsetLayout Flex:DocName
     LyXType Custom
     HTMLTag div
+    LabelString DocName
 End
 
 InsetLayout Flex:IntendedStatus
     LyXType Custom
     HTMLTag div
+    LabelString IntendedStatus
 End
 
 InsetLayout Flex:RFCNumber
     LyXType Custom
     HTMLTag div
+    LabelString RFCNumber
 End
 
 InsetLayout Flex:IPR
     LyXType Custom
     HTMLTag div
+    LabelString IPR
 End
 
 InsetLayout Flex:IETFArea
     LyXType Custom
     HTMLTag div
+    LabelString IETFArea
 End
 
 InsetLayout Flex:IETFWorkingGroup
     LyXType Custom
     HTMLTag div
+    LabelString IETFWorkingGroup
 End
 
 InsetLayout Flex:XML2RFCKeyword
     LyXType Custom
     HTMLTag div
+    LabelString XML2RFCKeyword
 End
 
 InsetLayout Flex:TitleAbbrev
     LyXType Custom
     HTMLTag div
+    LabelString TitleAbbrev
 End
 
 InsetLayout Flex:AuthorRole
     LyXType Custom
     HTMLTag div
+    LabelString AuthorRole
 End
 
 InsetLayout Flex:AuthorInitials
     LyXType Custom
     HTMLTag div
+    LabelString AuthorInitials
 End
 
 InsetLayout Flex:AuthorSurname
     LyXType Custom
     HTMLTag div
+    LabelString AuthorSurname
 End
 
 InsetLayout Flex:AuthorOrg
     LyXType Custom
     HTMLTag div
+    LabelString AuthorOrg
 End
 
 InsetLayout Flex:AuthorOrgAbbrev
     LyXType Custom
     HTMLTag div
+    LabelString AuthorOrgAbbrev
 End
 
 InsetLayout Flex:AuthorEmailAddr
     LyXType Custom
     HTMLTag div
+    LabelString AuthorEmailAddr
 End
 
 InsetLayout Flex:AuthorAddrStreet
     LyXType Custom
     HTMLTag div
+    LabelString AuthorAddrStreet
 End
 
 InsetLayout Flex:AuthorAddrCity
     LyXType Custom
     HTMLTag div
+    LabelString AuthorAddrCity
 End
 
 InsetLayout Flex:AuthorAddrRegion
     LyXType Custom
     HTMLTag div
+    LabelString AuthorAddrRegion
 End
 
 InsetLayout Flex:AuthorAddrCode
     LyXType Custom
     HTMLTag div
+    LabelString AuthorAddrCode
 End
 
 InsetLayout Flex:AuthorAddrCountry
     LyXType Custom
     HTMLTag div
+    LabelString AuthorAddrCountry
 End
 
 InsetLayout Flex:EntityXRef
     LyXType Custom
     HTMLTag div
+    LabelString EntityXRef
 End
 
 InsetLayout Flex:BibXML
     LyXType Custom
     HTMLTag div
+    LabelString BibXML
 End
