@@ -370,7 +370,7 @@ inline="yes"
 \end_layout
 
 \begin_layout Author
-Jane Doe
+Jane Doe 
 \begin_inset Flex AuthorOrg
 status open
 
@@ -380,7 +380,7 @@ Doe Corp.
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorOrgAbbrev
 status open
 
@@ -390,7 +390,7 @@ Doe
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorInitials
 status open
 
@@ -400,7 +400,7 @@ J.
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorSurname
 status open
 
@@ -410,7 +410,7 @@ Doe
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorAddrStreet
 status open
 
@@ -430,7 +430,7 @@ Somewhere
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorAddrRegion
 status open
 
@@ -440,7 +440,7 @@ NY
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorAddrCountry
 status open
 
@@ -450,7 +450,7 @@ USA
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorAddrCode
 status open
 
@@ -460,7 +460,7 @@ status open
 
 \end_inset
 
-
+ 
 \begin_inset Flex AuthorEmailAddr
 status open
 
