@@ -1,4 +1,4 @@
-#!/bin/ksh
+#!/bin/bash
 
 # Copyright (c) 2012, Cryptonector, LLC.
 # All rights reserved.
@@ -93,18 +93,26 @@ function requested {
 input=$1
 [[ "$input" != *.lyx && "$input" != *.* ]] && input=${input}.lyx
 [[ "$input" != *.lyx ]] && usage
-xhtml=${1:%.lyx}.xhtml
+xhtml=${1%%.lyx}.xhtml
 
 [[ -n "$2" && "$2" != *.@(xhtml|xml|txt|unpg|html) ]] && usage
 
 requested=
 [[ "$2" = *.* ]] && requested=$2
 
+target_dir=.
+if [[ -n "$requested" ]]; then
+    [[ "${requested}" = */* ]] && target_dir=${requested%/*}
+else
+    [[ "${input}" = */* ]] && target_dir=${input%/*}
+fi
+
+
 # Normalize $1 if no $2
 out=${2:-${input%.lyx}.txt}
 [[ "$out" != *.* ]] && out=${out}.txt
 
-# 
+#
 txt=${2:-${out%.*}.txt}
 unpg=${2:-${out%.*}.unpg}
 xml=${out%.*}.xml
@@ -129,7 +137,8 @@ sed --in-place -e "s,${LYX_XHTML_DTD},file://${LOCAL_XHTML_DTD}," "$xhtml"
 # (the old xml2rfc tool doesn't grok xmlns attributes; remove them)
 check_already_done
 printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
-java net/sf/saxon/Transform "$xhtml" $XSL | 
+# java net/sf/saxon/Transform "$xhtml" $XSL |
+saxonb-xslt -xsl:$XSL -s:"$xhtml" |
     sed -e 's,xmlns="xml2rfc",,' -e 's/></>\n</g' |
     xmllint --format - > "$xml"
 
@@ -151,6 +160,15 @@ fi
 # Use Greenbytes' XSLT to produce HTML
 if requested "$html"; then
     printf "Applying the Julian Reschke's (Greenbytes) XSLT to produce HTML...\n"
-    java net/sf/saxon/Transform  "$xml" rfc2629.xslt > "$html"
-fi
+    # Ugh: XSLT requires dependent files to be collocated with input file
+    if [[ ! -f $target_dir/rfc2629.dtd ]]; then
+	temp_files=1
+	cp $ORIGIN/rfc2629.dtd $ORIGIN/rfc2629-xhtml.ent $ORIGIN/rfc2629-other.ent $target_dir
+    fi
 
+    saxonb-xslt -s:"$xml" -xsl:${ORIGIN}/rfc2629.xslt > "$html"
+
+    if [[ $temp_files ]]; then
+	rm -f $target_dir/{rfc2629.dtd,rfc2629-xhtml.ent,rfc2629-other.ent}
+    fi
+fi
