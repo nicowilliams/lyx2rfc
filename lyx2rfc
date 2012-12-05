@@ -121,7 +121,7 @@ html=${out%.*}.html
 
 # Get and cache a local copy of the XHTML DTD:
 if [[ ! -f "$LOCAL_XHTML_DTD" ]]; then
-    wget $XHTML_DTD
+    wget -O $LOCAL_XHTML_DTD $XHTML_DTD
 fi
 
 # Export LyX document as XHTML:
