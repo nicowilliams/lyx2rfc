@@ -100,11 +100,12 @@ xhtml=${1%%.lyx}.xhtml
 requested=
 [[ "$2" = *.* ]] && requested=$2
 
-target_dir=.
-if [[ -n "$requested" ]]; then
-    [[ "${requested}" = */* ]] && target_dir=${requested%/*}
+if [[ -n "$requested" && "${requested}" = */* ]]; then
+    target_dir=${requested%/*}
+elif [[ "${input}" = */* ]]; then
+    target_dir=${input%/*}
 else
-    [[ "${input}" = */* ]] && target_dir=${input%/*}
+    target_dir=.
 fi
 
 
