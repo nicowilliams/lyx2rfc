@@ -3,8 +3,9 @@
 
 Network Working Group                                             J. Doe
 Internet-Draft                                                       Doe
-Intended status: Informational                                J. Sixpack
-Expires: June 7, 2013                                   December 4, 2012
+Updates: RFC2119 (if approved)                                J. Sixpack
+Intended status: Informational                          December 5, 2012
+Expires: June 8, 2013
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -32,7 +33,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 7, 2013.
+   This Internet-Draft will expire on June 8, 2013.
 
 Copyright Notice
 

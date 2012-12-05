@@ -120,6 +120,15 @@
         <xsl:attribute name="category"><xsl:value-of
                 select="normalize-space(body//div[@class='flex_intendedstatus']/div)"/>
         </xsl:attribute>
+        <xsl:attribute name="updates"><xsl:value-of
+                select="normalize-space(body//div[@class='flex_updates']/div)"/>
+        </xsl:attribute>
+        <xsl:attribute name="obsoletes"><xsl:value-of
+                select="normalize-space(body//div[@class='flex_obsoletes']/div)"/>
+        </xsl:attribute>
+        <xsl:attribute name="seriesNo"><xsl:value-of
+                select="normalize-space(body//div[@class='flex_seriesno']/div)"/>
+        </xsl:attribute>
 
         <!-- Emit <front> element -->
         <xsl:element name="front">

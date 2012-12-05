@@ -11,7 +11,7 @@
 <!ENTITY rfc2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY rfc1113 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml">
 ]>
-<rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info">
+<rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info" updates="RFC2119" obsoletes="" seriesNo="">
   <front>
     <title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title>
     <author initials="J." surname="Doe" fullname="Jane Doe">
@@ -41,7 +41,7 @@ Two paragrap abstract, eh?</t>
     </abstract>
   </front>
   <middle>
-    <section title="Introduction" anchor="d1e240">
+    <section title="Introduction" anchor="d1e245">
       <t>
 A paragraph. Text after a vspace (currently doesn't work due to a bug in LyX's XHTML exporter).</t>
       <t>
@@ -57,7 +57,7 @@ Another comment.</cref>
       <t>
 </t>
       <t>
-        <figure anchor="magicparlabel-118" title="A figure of some sort">
+        <figure anchor="magicparlabel-122" title="A figure of some sort">
           <artwork>+=======================+
 |     A box             |
 |                       |
@@ -114,18 +114,18 @@ Now a desc list:</t>
  description of item 2</t>
         </list>
       </t>
-      <section title="Conventions used in this document" anchor="d1e340">
+      <section title="Conventions used in this document" anchor="d1e345">
         <t>
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
       </section>
     </section>
-    <section title="Details" anchor="d1e355">
+    <section title="Details" anchor="d1e360">
       <t>
 Some text. Here's a protected space, and here's a bunch of them:      , see?</t>
       <section title="A sub-section" anchor="sub_A_sub_section">
         <t>
 and</t>
-        <section title="A sub-sub-section" anchor="d1e375">
+        <section title="A sub-sub-section" anchor="d1e380">
           <t>
 cool.</t>
           <t>
@@ -160,15 +160,15 @@ And some text after it. See also section  <xref target="sub_A_sub_section"/>.</t
     <references title="References" anchor="sec_References">&rfc2119;
 &rfc1113;
 </references>
-    <section title="First Appendix" anchor="d1e476">
+    <section title="First Appendix" anchor="d1e481">
       <t>
 Appendici.</t>
-      <section title="Sub-Appendix" anchor="d1e485">
+      <section title="Sub-Appendix" anchor="d1e490">
         <t>
 Whatever.</t>
       </section>
     </section>
-    <section title="Last Appendix" anchor="d1e494">
+    <section title="Last Appendix" anchor="d1e499">
       <t>
 Last word.</t>
     </section>

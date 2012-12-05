@@ -80,6 +80,24 @@ InsetLayout Flex:IntendedStatus
     LabelString IntendedStatus
 End
 
+InsetLayout Flex:Updates
+    LyXType Custom
+    HTMLTag div
+    LabelString Updates
+End
+
+InsetLayout Flex:Obsoletes
+    LyXType Custom
+    HTMLTag div
+    LabelString Obsoletes
+End
+
+InsetLayout Flex:SeriesNo
+    LyXType Custom
+    HTMLTag div
+    LabelString SeriesNo
+End
+
 InsetLayout Flex:RFCNumber
     LyXType Custom
     HTMLTag div
@@ -309,6 +327,16 @@ status open
 
 \begin_layout Plain Layout
 Internet-Draft
+\end_layout
+
+\end_inset
+
+
+\begin_inset Flex Updates
+status collapsed
+
+\begin_layout Plain Layout
+RFC2119
 \end_layout
 
 \end_inset
