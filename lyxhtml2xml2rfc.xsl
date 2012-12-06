@@ -91,7 +91,7 @@
 
     <!-- Emit XML ENTITY declarations for bibxml references -->
     <xsl:for-each
-        select="//div[@class = 'flex_bibxml']//a[ends-with(@href, '.xml')]">
+        select="//div[@class = 'flex_bibxml']//a[ends-with(@href, '.xml') and not(starts-with(@href, 'file:'))]">
         <!-- NOTE: For some reason moving this into templates causes the
              ENTITY generation to fail... -->
         <xsl:text disable-output-escaping="yes">
@@ -103,6 +103,23 @@
 
         <!-- URL -->
         <xsl:value-of select="./@href"/>
+        <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
+    </xsl:for-each>
+
+    <!-- Emit XML ENTITY declarations for *local* bibxml references -->
+    <xsl:for-each
+        select="//div[@class = 'flex_bibxml']//a[ends-with(@href, '.xml') and starts-with(@href, 'file:')]">
+        <!-- NOTE: For some reason moving this into templates causes the
+             ENTITY generation to fail... -->
+        <xsl:text disable-output-escaping="yes">
+            &lt;!ENTITY </xsl:text>
+
+        <!-- Entity name -->
+        <xsl:value-of select="normalize-space(.)"/>
+        <xsl:text disable-output-escaping="yes"> SYSTEM "</xsl:text>
+
+        <!-- URL -->
+        <xsl:value-of select="substring-after(./@href, 'file://')"/>
         <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
     </xsl:for-each>
 
