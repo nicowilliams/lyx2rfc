@@ -4,8 +4,8 @@
 Network Working Group                                             J. Doe
 Internet-Draft                                                       Doe
 Updates: RFC2119 (if approved)                                J. Sixpack
-Intended status: Informational                          December 5, 2012
-Expires: June 8, 2013
+Intended status: Informational                          December 6, 2012
+Expires: June 9, 2013
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -33,7 +33,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 8, 2013.
+   This Internet-Draft will expire on June 9, 2013.
 
 Copyright Notice
 
@@ -52,7 +52,7 @@ Copyright Notice
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 1]
+Doe & Sixpack             Expires June 9, 2013                  [Page 1]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -65,6 +65,8 @@ Table of Contents
    2.1.        A sub-section . . . . . . . . . . . . . . . . . . . . . 5
    2.1.1.      A sub-sub-section . . . . . . . . . . . . . . . . . . . 5
    3.          References  . . . . . . . . . . . . . . . . . . . . . . 6
+   3.1.        Normative References  . . . . . . . . . . . . . . . . . 6
+   3.2.        Informative References  . . . . . . . . . . . . . . . . 6
    Appendix A. First Appendix  . . . . . . . . . . . . . . . . . . . . 7
    A.1.        Sub-Appendix  . . . . . . . . . . . . . . . . . . . . . 7
    Appendix B. Last Appendix . . . . . . . . . . . . . . . . . . . . . 8
@@ -106,9 +108,7 @@ Table of Contents
 
 
 
-
-
-Doe & Sixpack             Expires June 8, 2013                  [Page 2]
+Doe & Sixpack             Expires June 9, 2013                  [Page 2]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -164,7 +164,7 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 3]
+Doe & Sixpack             Expires June 9, 2013                  [Page 3]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -220,7 +220,7 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 4]
+Doe & Sixpack             Expires June 9, 2013                  [Page 4]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -276,12 +276,14 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 5]
+Doe & Sixpack             Expires June 9, 2013                  [Page 5]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
 
 3.  References
+
+3.1.  Normative References
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -290,6 +292,7 @@ Internet-Draft                Skeleton I-D                 December 2012
               mail: Part I - message encipherment and authentication
               procedures", RFC 1113, August 1989.
 
+3.2.  Informative References
 
 
 
@@ -329,10 +332,7 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-
-
-
-Doe & Sixpack             Expires June 8, 2013                  [Page 6]
+Doe & Sixpack             Expires June 9, 2013                  [Page 6]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -388,7 +388,7 @@ A.1.  Sub-Appendix
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 7]
+Doe & Sixpack             Expires June 9, 2013                  [Page 7]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -444,7 +444,7 @@ Appendix B.  Last Appendix
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 8]
+Doe & Sixpack             Expires June 9, 2013                  [Page 8]
 
 Internet-Draft                Skeleton I-D                 December 2012
 
@@ -500,5 +500,5 @@ Authors' Addresses
 
 
 
-Doe & Sixpack             Expires June 8, 2013                  [Page 9]
+Doe & Sixpack             Expires June 9, 2013                  [Page 9]
 

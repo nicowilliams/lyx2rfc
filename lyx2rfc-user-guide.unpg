@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                        December 4, 2012
+                                                        December 6, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -318,6 +318,8 @@ Table of Contents
 
    To add a references section simply create a section titled
    "References", "Normative References", or "Informative References".
+   These must be top-level sections, but they will be put into sub-
+   sections correctly.
 
 5.2.  Adding 'bibxml' References
 

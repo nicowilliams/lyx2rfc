@@ -882,7 +882,7 @@ name "sec:References"
 
 \end_inset
 
-References
+Normative References
 \end_layout
 
 \begin_layout Standard
@@ -923,6 +923,10 @@ target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Informative References
 \end_layout
 
 \begin_layout Section

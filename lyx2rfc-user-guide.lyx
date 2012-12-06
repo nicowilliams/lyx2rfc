@@ -1263,6 +1263,8 @@ Informative References
 \end_inset
 
 .
+ These must be top-level sections, but they will be put into sub-sections
+ correctly.
 \end_layout
 
 \begin_layout Subsection
