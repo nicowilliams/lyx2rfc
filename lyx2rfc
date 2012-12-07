@@ -28,6 +28,10 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
 # OF THE POSSIBILITY OF SUCH DAMAGE.
 
+## Useful for debugging invocations from LyX
+#exec > /tmp/l2r.log 2>&1
+#set -x
+
 set -e
 set -o noglob
 
@@ -84,7 +88,7 @@ function requested {
 # like .xhtml or .xml.
 #
 # The first argument must be a LyX document filename.  If it doesn't end
-# in .lyx we'll tack on the .lyx extension.
+# in .lyx we'll tack on the .lyx extension.  Or it could be a .xml file.
 #
 # The second argument (optional) must be an output filename.  The
 # extension must be one of txt, unpg, html, or xml.
@@ -92,13 +96,11 @@ function requested {
 (($# < 3)) || usage
 input=$1
 [[ "$input" != *.lyx && "$input" != *.* ]] && input=${input}.lyx
-[[ "$input" != *.lyx ]] && usage
+[[ "$input" != *.@(lyx|xhtml|xml) ]] && usage
 xhtml=${1%%.lyx}.xhtml
 
 [[ -n "$2" && "$2" != *.@(xhtml|xml|txt|unpg|html) ]] && usage
-
-requested=
-[[ "$2" = *.* ]] && requested=$2
+requested=$2
 
 if [[ -n "$requested" && "${requested}" = */* ]]; then
     target_dir=${requested%/*}
@@ -125,23 +127,27 @@ if [[ ! -f "$LOCAL_XHTML_DTD" ]]; then
 fi
 
 # Export LyX document as XHTML:
-check_already_done
-printf "Exporting LyX document as XHTML...\n"
-lyx -e xhtml "$input"
+if [[ "$input" = *.lyx ]]; then
+    check_already_done
+    printf "Exporting LyX document as XHTML...\n"
+    lyx -e xhtml "$input"
 
-# Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
-sed --in-place -e "s,${LYX_XHTML_DTD},file://${LOCAL_XHTML_DTD}," "$xhtml"
-[[ "$requested" = "$xhtml" ]] && exit 0
+    # Fix DTD URL in XHTML to refer to the local copy (LyX uses a dead URL):
+    sed --in-place -e "s,${LYX_XHTML_DTD},file://${LOCAL_XHTML_DTD}," "$xhtml"
+    [[ "$requested" = "$xhtml" ]] && exit 0
+fi
 
 
 # Apply the lyx2rfc XSTL stylesheet and pretty-print result:
 # (the old xml2rfc tool doesn't grok xmlns attributes; remove them)
-check_already_done
-printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
-# java net/sf/saxon/Transform "$xhtml" $XSL |
-saxonb-xslt -xsl:$XSL -s:"$xhtml" |
-    sed -e 's,xmlns="xml2rfc",,' -e 's/></>\n</g' |
-    xmllint --format - > "$xml"
+if [[ "$input" = *.@(lyx|xhtml) ]]; then
+    check_already_done
+    printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
+    # java net/sf/saxon/Transform "$xhtml" $XSL |
+    saxonb-xslt -xsl:$XSL -s:"$xhtml" |
+        sed -e 's,xmlns="xml2rfc",,' -e 's/></>\n</g' |
+        xmllint --format - > "$xml"
+fi
 
 ## Set the correct DTD URL, just so we don't have a local path left here
 #sed --in-place -e "s,file://${LOCAL_XHTML_DTD},${XHTML_DTD}," "$xml"
