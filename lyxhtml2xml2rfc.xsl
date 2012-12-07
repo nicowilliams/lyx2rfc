@@ -314,7 +314,9 @@
 <!-- Emphasis (<spanx>) -->
 <xsl:template match="em">
     <xsl:element name="spanx">
-        <xsl:attribute name="style" select="emph"/>
+        <xsl:if test="emph">
+            <xsl:attribute name="style" select="emph"/>
+        </xsl:if>
         <xsl:apply-templates/>
     </xsl:element>
     <xsl:text> </xsl:text>
