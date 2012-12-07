@@ -41,6 +41,7 @@
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:rfc="xml2rfc"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
     exclude-result-prefixes="rfc"
     >
 
@@ -472,13 +473,20 @@
 
 <!-- Sections -->
 
-<!-- XXX I could generalize this so one template handles h2, h3, and
-     h4.  I could have an xsl:variable to hold a cast-as-integer form of
-     the N in hN, then in the sub-sections XPath expression match on
-     hN+1...  -->
+<xsl:variable name="isRefsSect" select="xs:boolean(0)"/>
 
-<xsl:template match="h2[matches(@class, '^section') and
-    not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References'))]">
+<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section') and
+    not($isRefsSect) and
+    not(ends-with(normalize-space(string-join(text(), '')), 'References'))]">
+
+    <!-- N is the integer in hN -->
+    <xsl:variable name="N" select="substring-after(name(), 'h') cast as xs:integer"/>
+    <xsl:variable name="thisHN" select="name()"/>
+    <xsl:variable name="id" select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+    <!-- We refer to this <hN> in various XPath contexts below where
+         current() will no longer be this <h2>, so we need to save it -->
+    <xsl:variable name="cur_sect" select="current()"/>
+
     <xsl:element name="section">
         <!-- LyXHTML sadly adds unnecessary newlines to hN elements'
              text nodes -->
@@ -486,93 +494,65 @@
             select="normalize-space(string-join(text(), ''))"/>
 
         <!-- Make sure there's an anchor -->
-        <xsl:variable name="id"
-            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
         <xsl:attribute name="anchor"
             select="if (string-length($id) > 0) then $id else generate-id()"/>
-
-        <!-- We refer to this <h2> in various XPath contexts below where
-             current() will no longer be this <h2>, so we need to save it -->
-        <xsl:variable name="cur_sect" select="current()"/>
 
         <!-- Handle the contents of just this section.  Ask for all
-             siblings of this <h2> where the nodes we're looking for are
-             NOT h2/h3/h4, and their preceding <h2> is this one. -->
+             siblings of this <hN> where the nodes we're looking for are
+             NOT hN, and their preceding <hN> is this one. -->
         <xsl:apply-templates
-            select="(following-sibling::*[not(matches(name(), '^h[234]')) and
-                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect])"/>
+            select="(following-sibling::*[not(matches(name(), '^h[2-9]')) and
+                (preceding-sibling::*[matches(name(), '^h[2-9]')])[last()] is $cur_sect])"/>
 
         <!-- Handle sub-sections of this section.  Ask for all sibling
-             h3 (and h4) nodes of this h2 where their preceding h2 is
+             hNs of this hN where their preceding parent hN is
              this one.  -->
-        <xsl:apply-templates 
-            select="following-sibling::h3[(preceding-sibling::h2)[last()] is $cur_sect]"/>
-
-    </xsl:element>
-</xsl:template>
-
-<xsl:template match="h3[starts-with(@class, 'subsection')]">
-    <xsl:element name="section">
-        <xsl:attribute name="title"
-            select="normalize-space(string-join(text(), ''))"/>
-        <xsl:variable name="id"
-            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-        <xsl:attribute name="anchor"
-            select="if (string-length($id) > 0) then $id else generate-id()"/>
-        <xsl:variable name="cur_sect" select="current()"/>
-
-        <!-- Handle the contents of just this section  -->
         <xsl:apply-templates
-            select="(following-sibling::*[not(matches(name(), '^h[234]')) and
-                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect])"/>
+            select="following-sibling::*[matches(name(), '^h[2-9]') and
+                (preceding-sibling::*[name() = $thisHN])[last()] is $cur_sect and
+                (substring-after(name(), 'h') cast as xs:integer = ($N + 1))
+                ]"
+            />
 
-        <!-- Handle sub-sections of this section -->
-        <xsl:apply-templates 
-            select="following-sibling::h4[(preceding-sibling::h3)[last()] is $cur_sect]"/>
-
-    </xsl:element>
-</xsl:template>
-
-<xsl:template match="h4[starts-with(@class, 'subsubsection')]">
-    <xsl:element name="section">
-        <xsl:attribute name="title"
-            select="normalize-space(string-join(text(), ''))"/>
-        <xsl:variable name="id"
-            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
-        <xsl:attribute name="anchor"
-            select="if (string-length($id) > 0) then $id else generate-id()"/>
-        <xsl:variable name="cur_sect" select="current()"/>
-
-        <!-- Handle the contents of just this section  -->
-        <xsl:apply-templates
-            select="(following-sibling::*[not(matches(name(), '^h[234]')) and
-                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect])"/>
-
-        <!-- There are no sub-sub-subsections -->
     </xsl:element>
 </xsl:template>
 
 <!-- References -->
 
-<xsl:template match="h2[matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')]">
+<xsl:template match="*[matches(name(), '^h[2-9]') and
+    (ends-with(normalize-space(string-join(text(), '')), 'References')
+    or $isRefsSect)]">
+
+    <xsl:variable name="isRefsSect" select="xs:boolean(1)"/>
+    <xsl:variable name="N" select="substring-after(name(), 'h') cast as xs:integer"/>
+    <xsl:variable name="thisHN" select="name()"/>
+    <xsl:variable name="id" select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+    <xsl:variable name="cur_sect" select="current()"/>
+
     <xsl:element name="references">
         <xsl:attribute name="title"
             select="normalize-space(string-join(text(), ''))"/>
-        <xsl:variable name="id"
-            select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
         <xsl:attribute name="anchor"
             select="if (string-length($id) > 0) then $id else generate-id()"/>
-        <xsl:variable name="cur_sect" select="current()"/>
 
+        <!-- Get the references -->
         <xsl:apply-templates
             select="(following-sibling::div[
-                (preceding-sibling::*[matches(name(), '^h[234]')])[last()] is $cur_sect]/div[
+                (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/div[
                 @class = 'flex_bibxml']/div/a)"/>
 
-        <!-- Sorry, no sub-sections for references, though there have
-             been I-Ds and RFCs with such sub-sections.  Make this a
-             TODO. -->
     </xsl:element>
+
+    <!-- xml2rfc doesn't know support nested <references>, but that
+         doesn't mean that we can't support nested references sections
+         in LyX.  Note that this code is the same as for regular
+         sections, except that it follows the <references> element. -->
+    <xsl:apply-templates
+        select="following-sibling::*[matches(name(), '^h[2-9]') and
+            (preceding-sibling::*[name() = $thisHN])[last()] is $cur_sect and
+            (substring-after(name(), 'h') cast as xs:integer = ($N + 1))
+            ]"
+        />
 </xsl:template>
 
 <!-- Emit processing instructions -->
