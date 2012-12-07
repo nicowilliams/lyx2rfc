@@ -33,14 +33,13 @@ NOTE:
 TODO:
 
  - Add iref support?
- - Add inline reference support?  bibxml works so well now...
 
  - Rewrite lyx2rfc in Python so it works on Windows too
  - Make lyx2rfc work as a converter for LyX, so we can File->Export...
  - Provide a mechanism for updating ~/.lyx/preferences to define RFC
    formats and conversions
  - Make lyx2rfc copy DTDs to the LyX temporary working directory
- - Package lyx2rfc
+ - Absorb Yaron's packaging of lyx2rfc
 
 BUGS:
 
