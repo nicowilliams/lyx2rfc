@@ -83,6 +83,33 @@
     <xsl:apply-templates select="html"/>
 </xsl:template>
 
+<!-- Handle attributes of <rfc> -->
+<!-- XXX Dang, we lose the case in custom inset names, so we must
+     special-case docName and seriesNo :( -->
+<xsl:template match="div[@class='flex_docname']">
+    <xsl:attribute name="docName"><xsl:value-of
+            select="normalize-space(./div)"/>
+    </xsl:attribute>
+</xsl:template>
+<!-- XXX Should have used a custom inset name of Category -->
+<xsl:template match="div[@class='flex_intendedstatus']">
+    <xsl:attribute name="category"><xsl:value-of
+            select="normalize-space(./div)"/>
+    </xsl:attribute>
+</xsl:template>
+<xsl:template match="div[@class='flex_seriesno']">
+    <xsl:attribute name="seriesNo"><xsl:value-of
+            select="normalize-space(./div)"/>
+    </xsl:attribute>
+</xsl:template>
+<xsl:template match="div[matches(@class, 'flex_(ipr|updates|obsoletes)')]">
+    <xsl:variable name="attrname" select="substring-after(@class,
+        'flex_')"/>
+    <xsl:attribute name="{$attrname}"><xsl:value-of
+            select="normalize-space(./div)"/>
+    </xsl:attribute>
+</xsl:template>
+
 <xsl:template match="html">
     <!-- Emit DOCTYPE -->
     <xsl:text>&#xA;</xsl:text>
@@ -128,24 +155,8 @@
 
     <!-- Emit <rfc> element -->
     <xsl:element name="rfc">
-        <xsl:attribute name="docName"><xsl:value-of
-                select="normalize-space(body//div[@class='flex_docname']/div)"/>
-        </xsl:attribute>
-        <xsl:attribute name="ipr"><xsl:value-of
-                select="normalize-space(body//div[@class='flex_ipr']/div)"/>
-        </xsl:attribute>
-        <xsl:attribute name="category"><xsl:value-of
-                select="normalize-space(body//div[@class='flex_intendedstatus']/div)"/>
-        </xsl:attribute>
-        <xsl:attribute name="updates"><xsl:value-of
-                select="normalize-space(body//div[@class='flex_updates']/div)"/>
-        </xsl:attribute>
-        <xsl:attribute name="obsoletes"><xsl:value-of
-                select="normalize-space(body//div[@class='flex_obsoletes']/div)"/>
-        </xsl:attribute>
-        <xsl:attribute name="seriesNo"><xsl:value-of
-                select="normalize-space(body//div[@class='flex_seriesno']/div)"/>
-        </xsl:attribute>
+        <!-- Handle attributes of <rfc> -->
+        <xsl:apply-templates select="body//div[matches(@class, 'flex_(docname|intendedstatus|ipr|updates|obsoletes|seriesno)')]"/>
 
         <!-- Emit <front> element -->
         <xsl:element name="front">

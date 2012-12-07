@@ -8,7 +8,7 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2629 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2629.xml">
 ]>
-<rfc docName="lyx2rfc-user-guide" ipr="noDerivatives3978" category="info" updates="" obsoletes="" seriesNo="">
+<rfc docName="lyx2rfc-user-guide" category="info" ipr="noDerivatives3978">
   <front>
     <title abbrev="LyX2RFC User Guide">A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX</title>
     <author initials="N." surname="Williams" fullname="Nicolas Williams">
