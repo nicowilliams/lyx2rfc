@@ -551,13 +551,198 @@ custom insets
 \end_layout
 
 \begin_layout Subsection
+Installing LyX, DocBook SGML, Saxon, and lyx2rfc
+\end_layout
+
+\begin_layout Standard
+Install LyX and DocBook SGML pacakages.
+ For example, on Ubuntu and most Linux systems you can install these packages:
+\end_layout
+
+\begin_layout Itemize
+elyxer
+\end_layout
+
+\begin_layout Itemize
+lyx
+\end_layout
+
+\begin_layout Itemize
+lyx-common
+\end_layout
+
+\begin_layout Itemize
+ttf-lyx
+\end_layout
+
+\begin_layout Itemize
+docbook
+\end_layout
+
+\begin_layout Itemize
+docbook-dsssl
+\end_layout
+
+\begin_layout Itemize
+docbook-utils
+\end_layout
+
+\begin_layout Itemize
+docbook-xml
+\end_layout
+
+\begin_layout Itemize
+docbook-xsl
+\end_layout
+
+\begin_layout Itemize
+libsaxon-java
+\end_layout
+
+\begin_layout Itemize
+libsaxon-java-doc
+\end_layout
+
+\begin_layout Itemize
+libsaxonb-java
+\end_layout
+
+\begin_layout Itemize
+libsaxonb-java-doc
+\end_layout
+
+\begin_layout Standard
+The lyx2rfc software is currently available via git, soon to be packaged:
+\end_layout
+
+\begin_layout Code
+
+git clone https://github.com/nicowilliams/lyx2rfc
+\end_layout
+
+\begin_layout Code
+
+cd lyx2rfc
+\end_layout
+
+\begin_layout Code
+
+<install into a bin directory in $PATH or modify $PATH to find lyx2rfc here>
+\end_layout
+
+\begin_layout Standard
+Start LyX, Tools->Reconfigure (so LyX can find DocBook SGML software).
+\end_layout
+
+\begin_layout Subsubsection
+Configure LyX to Know lyx2rfc Conversions
+\end_layout
+
+\begin_layout Standard
+Add the following to ~/.lyx/preferences:
+\end_layout
+
+\begin_layout Code
+
+#
+\end_layout
+
+\begin_layout Code
+
+# FORMATS SECTION ##########################
+\end_layout
+
+\begin_layout Code
+
+#
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+format "rfchtml" "html" "RFC (HTML)" "" "firefox" "gvim" "document,menu=export"
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+format "rfctxt" "txt" "RFC (txt)" "" "" "gvim" "document,menu=export"
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+format "rfcunpg" "unpg" "RFC (unpg txt)" "" "" "gvim" "document,menu=export"
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+format "xml2rfc" "xml" "RFC (XML)" "" "" "gvim" "document,menu=export"
+\end_layout
+
+\begin_layout Code
+
+#
+\end_layout
+
+\begin_layout Code
+
+# CONVERTERS SECTION ##########################
+\end_layout
+
+\begin_layout Code
+
+#
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+converter "xml2rfc" "rfchtml" "lyx2rfc $$p/$$i $$r/$$o" ""
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+converter "lyx" "xml2rfc" "lyx2rfc $$p/$$i $$r/$$o" ""
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+converter "xml2rfc" "rfctxt" "xml2rfc $$p/$$i $$r/$$o" ""
+\end_layout
+
+\begin_layout Code
+
+
+\backslash
+converter "xml2rfc" "rfcunpg" "xml2rfc $$p/$$i $$r/$$o" ""
+\end_layout
+
+\begin_layout Standard
+
+Restart LyX.
+ You should now have additional export formats in File->Export...
+ for various RFC formats.
+\end_layout
+
+\begin_layout Subsection
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:LyX-Basics"
 
 \end_inset
 
-LyX Basics
+LyX2 Basics
 \end_layout
 
 \begin_layout Standard

@@ -20,8 +20,10 @@ Table of Contents
 
    1.          Internet-Drafts and RFCs
    2.          Using LyX to Edit Internet-Drafts
-   2.1.        LyX Basics
-   2.2.        Lyx2rfc Basics
+   2.1.        Installing LyX, DocBook SGML, Saxon, and lyx2rfc
+   2.1.1.      Configure LyX to Know lyx2rfc Conversions
+   2.2.        LyX2 Basics
+   2.3.        Lyx2rfc Basics
    3.          Front Matter
    3.1.        Processing Instructions
    3.2.        Author Information
@@ -85,7 +87,51 @@ Table of Contents
    Internet-Draft.  Remember to use View->Open All Insets to ensure that
    the inset label (the type of inset) is displayed.
 
-2.1.  LyX Basics
+2.1.  Installing LyX, DocBook SGML, Saxon, and lyx2rfc
+
+   Install LyX and DocBook SGML pacakages.  For example, on Ubuntu and
+   most Linux systems you can install these packages:
+
+   o  elyxer
+
+   o  lyx
+
+   o  lyx-common
+
+   o  ttf-lyx
+
+   o  docbook
+
+   o  docbook-dsssl
+
+   o  docbook-utils
+
+   o  docbook-xml
+
+   o  docbook-xsl
+
+   o  libsaxon-java
+
+   o  libsaxon-java-doc
+
+   o  libsaxonb-java
+
+   o  libsaxonb-java-doc
+
+   The lyx2rfc software is currently available via git, soon to be
+   packaged:
+
+   Start LyX, Tools->Reconfigure (so LyX can find DocBook SGML
+   software).
+
+2.1.1.  Configure LyX to Know lyx2rfc Conversions
+
+   Add the following to ~/.lyx/preferences:
+
+   Restart LyX.  You should now have additional export formats in
+   File->Export... for various RFC formats.
+
+2.2.  LyX2 Basics
 
    In the upper left hand corner of the LyX window there is a drop-down
    box for 'style' of text.  'Standard' here means 'paragraph'.  Other
@@ -96,7 +142,7 @@ Table of Contents
 
    For the rest, LyX is very similar to many WYSIWYG graphical editors.
 
-2.2.  Lyx2rfc Basics
+2.3.  Lyx2rfc Basics
 
    While most xml2rfc input document elements can be mapped from
    existing LyX elements trivially, some xml2rfc elements have no LyX

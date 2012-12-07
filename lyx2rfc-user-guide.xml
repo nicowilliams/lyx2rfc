@@ -40,7 +40,63 @@ This document itself, although it is not an Internet-Draft, much less an RFC, is
 In order to represent I-D/RFC metadata that LyX does not provide for, we use “custom insets”. There are multiple custom insets, each for various purposes.</t>
       <t>
 The first step to using LyX to edit an Internet-Draft is to start LyX and then use Document-&gt;Settings-&gt;Local Layout to add the “custom insets” that lyx2rfc requires: just paste them in, click on Validate, then OK. Alternatively start by copying the 'test-i-d.lyx' sample Internet-Draft. Remember to use View-&gt;Open All Insets to ensure that the inset label (the type of inset) is displayed.</t>
-      <section title="LyX Basics" anchor="sub_LyX_Basics">
+      <section title="Installing LyX, DocBook SGML, Saxon, and lyx2rfc" anchor="d1e378"><t>
+Install LyX and DocBook SGML pacakages. For example, on Ubuntu and most Linux systems you can install these packages:</t><t><list style="symbols"><t>
+elyxer</t><t>
+lyx</t><t>
+lyx-common</t><t>
+ttf-lyx</t><t>
+docbook</t><t>
+docbook-dsssl</t><t>
+docbook-utils</t><t>
+docbook-xml</t><t>
+docbook-xsl</t><t>
+libsaxon-java</t><t>
+libsaxon-java-doc</t><t>
+libsaxonb-java</t><t>
+libsaxonb-java-doc</t></list></t><t>
+The lyx2rfc software is currently available via git, soon to be packaged:</t>
+git clone https://github.com/nicowilliams/lyx2rfc
+
+cd lyx2rfc
+
+&lt;install into a bin directory in $PATH or modify $PATH to find lyx2rfc here&gt;
+<t>
+Start LyX, Tools-&gt;Reconfigure (so LyX can find DocBook SGML software).</t>
+<section title="Configure LyX to Know lyx2rfc Conversions" anchor="d1e447"><t>
+Add the following to ~/.lyx/preferences:</t>
+#
+
+# FORMATS SECTION ##########################
+
+#
+
+\format "rfchtml" "html" "RFC (HTML)" "" "firefox" "gvim" "document,menu=export"
+
+\format "rfctxt" "txt" "RFC (txt)" "" "" "gvim" "document,menu=export"
+
+\format "rfcunpg" "unpg" "RFC (unpg txt)" "" "" "gvim" "document,menu=export"
+
+\format "xml2rfc" "xml" "RFC (XML)" "" "" "gvim" "document,menu=export"
+
+#
+
+# CONVERTERS SECTION ##########################
+
+#
+
+\converter "xml2rfc" "rfchtml" "lyx2rfc $$p/$$i $$r/$$o" ""
+
+\converter "lyx" "xml2rfc" "lyx2rfc $$p/$$i $$r/$$o" ""
+
+\converter "xml2rfc" "rfctxt" "xml2rfc $$p/$$i $$r/$$o" ""
+
+\converter "xml2rfc" "rfcunpg" "xml2rfc $$p/$$i $$r/$$o" ""
+<t>
+Restart LyX. You should now have additional export formats in File-&gt;Export... for various RFC formats.</t>
+</section>
+</section>
+      <section title="LyX2 Basics" anchor="sub_LyX_Basics">
         <t>
 In the upper left hand corner of the LyX window there is a drop-down box for 'style' of text. 'Standard' here means 'paragraph'. Other styles include 'Title', 'Abstract', 'Section', etcetera. These correspond roughly to xml2rfc XML elements like 't', 'title', 'abstract', and 'section', but without any notion of elements containing elements.</t>
         <t>
@@ -82,7 +138,7 @@ Other custom insets related to the document itself:</t>
  Keyword element.</t>
         </list>
       </t>
-      <section title="Processing Instructions" anchor="d1e449">
+      <section title="Processing Instructions" anchor="d1e605">
         <t>
 The following custom insets can be used to specify xml2rfc processing instructions (PIs):</t>
         <t>
@@ -146,12 +202,12 @@ Open a line below the last author line and style it 'Abstract'. Write your abstr
     <section title="Middle Matter" anchor="sec_Middle_Matter">
       <t>
 The meat of an Internet-Draft is organized into sections. Each section, sub-section, and sub-sub-section has a title. Open a line, style it 'Section', and write in the section title, then enter to start the contents of the section in 'Standard' (paragraph) style.</t>
-      <section title="Subsections" anchor="d1e596">
+      <section title="Subsections" anchor="d1e752">
         <t>
 Open a line and set the style to “Subsection”.</t>
         <t>
 NOTE: LyX allows subsections of no section: these are treated as subsections of section 0. lyx2rfc will ignore such subsections!</t>
-        <section title="Sub-subsections" anchor="d1e608">
+        <section title="Sub-subsections" anchor="d1e764">
           <t>
 Open a line and set the style to “SunSubsection”.</t>
           <t>
@@ -200,7 +256,7 @@ For example:</t>
         <t>
 </t>
         <t>
-          <figure anchor="magicparlabel-164" title="Example figure">
+          <figure anchor="magicparlabel-201" title="Example figure">
             <artwork>+=======+
 | a box |
 +=======+</artwork>
@@ -272,7 +328,7 @@ To add a references section simply create a section titled “References”, “
 xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</t>
         <t>
 To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</t>
-        <section title="Citations" anchor="d1e853">
+        <section title="Citations" anchor="d1e1009">
           <t>
 See  <xref target="sub_Citations"/>.</t>
         </section>
@@ -282,7 +338,7 @@ See  <xref target="sub_Citations"/>.</t>
 To add an appendix scroll to the end of your document, hit enter, then Document-&gt;Start Appendix Here, then select the style 'Section' to set the appendix title.</t>
       </section>
     </section>
-    <section title="Oddities and Bugs" anchor="d1e877">
+    <section title="Oddities and Bugs" anchor="d1e1033">
       <t>
 Sections that are not references sections <spanx>must not</spanx>  section titles that end in “References”, while sections that are references sections <spanx>must</spanx> .</t>
       <t>
@@ -295,7 +351,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
   </middle>
   <back>
     <references title="References" anchor="sec_References">&rfc2629;</references>
-    <section title="Lyx2RFC Internals" anchor="d1e924">
+    <section title="Lyx2RFC Internals" anchor="d1e1080">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>
     </section>

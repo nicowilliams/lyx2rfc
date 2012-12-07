@@ -20,33 +20,33 @@ Table of Contents
 
    1.          Internet-Drafts and RFCs . . . . . . . . . . . . . . .  2
    2.          Using LyX to Edit Internet-Drafts  . . . . . . . . . .  3
-   2.1.        LyX Basics . . . . . . . . . . . . . . . . . . . . . .  3
-   2.2.        Lyx2rfc Basics . . . . . . . . . . . . . . . . . . . .  3
-   3.          Front Matter . . . . . . . . . . . . . . . . . . . . .  4
-   3.1.        Processing Instructions  . . . . . . . . . . . . . . .  4
-   3.2.        Author Information . . . . . . . . . . . . . . . . . .  5
-   3.3.        Abstract . . . . . . . . . . . . . . . . . . . . . . .  5
-   4.          Middle Matter  . . . . . . . . . . . . . . . . . . . .  6
-   4.1.        Subsections  . . . . . . . . . . . . . . . . . . . . .  6
-   4.1.1.      Sub-subsections  . . . . . . . . . . . . . . . . . . .  6
-   4.2.        Paragraphs . . . . . . . . . . . . . . . . . . . . . .  6
-   4.3.        Lists  . . . . . . . . . . . . . . . . . . . . . . . .  6
-   4.4.        Figures  . . . . . . . . . . . . . . . . . . . . . . .  7
-   4.5.        Tables . . . . . . . . . . . . . . . . . . . . . . . .  7
-   4.6.        Cross-References Intra-Document  . . . . . . . . . . .  7
-   4.7.        Citations  . . . . . . . . . . . . . . . . . . . . . .  8
-   5.          Back Matter  . . . . . . . . . . . . . . . . . . . . .  9
-   5.1.        References Sections  . . . . . . . . . . . . . . . . .  9
-   5.2.        Adding 'bibxml'  . . . . . . . . . . . . . . . . . . .  9
-   5.2.1.      Citations  . . . . . . . . . . . . . . . . . . . . . .  9
-   5.3.        Appendices . . . . . . . . . . . . . . . . . . . . . .  9
-   6.          Oddities and Bugs  . . . . . . . . . . . . . . . . . . 10
-   7.          Running the lyx2rfc Tool . . . . . . . . . . . . . . . 11
-   8.          References . . . . . . . . . . . . . . . . . . . . . . 12
-   Appendix A. Lyx2RFC Internals  . . . . . . . . . . . . . . . . . . 13
-               Author's Address . . . . . . . . . . . . . . . . . . . 14
-
-
+   2.1.        Installing LyX, DocBook SGML, Saxon, and lyx2rfc . . .  3
+   2.1.1.      Configure LyX to Know lyx2rfc Conversions  . . . . . .  4
+   2.2.        LyX2 Basics  . . . . . . . . . . . . . . . . . . . . .  4
+   2.3.        Lyx2rfc Basics . . . . . . . . . . . . . . . . . . . .  4
+   3.          Front Matter . . . . . . . . . . . . . . . . . . . . .  5
+   3.1.        Processing Instructions  . . . . . . . . . . . . . . .  5
+   3.2.        Author Information . . . . . . . . . . . . . . . . . .  6
+   3.3.        Abstract . . . . . . . . . . . . . . . . . . . . . . .  6
+   4.          Middle Matter  . . . . . . . . . . . . . . . . . . . .  7
+   4.1.        Subsections  . . . . . . . . . . . . . . . . . . . . .  7
+   4.1.1.      Sub-subsections  . . . . . . . . . . . . . . . . . . .  7
+   4.2.        Paragraphs . . . . . . . . . . . . . . . . . . . . . .  7
+   4.3.        Lists  . . . . . . . . . . . . . . . . . . . . . . . .  7
+   4.4.        Figures  . . . . . . . . . . . . . . . . . . . . . . .  8
+   4.5.        Tables . . . . . . . . . . . . . . . . . . . . . . . .  8
+   4.6.        Cross-References Intra-Document  . . . . . . . . . . .  8
+   4.7.        Citations  . . . . . . . . . . . . . . . . . . . . . .  9
+   5.          Back Matter  . . . . . . . . . . . . . . . . . . . . . 10
+   5.1.        References Sections  . . . . . . . . . . . . . . . . . 10
+   5.2.        Adding 'bibxml'  . . . . . . . . . . . . . . . . . . . 10
+   5.2.1.      Citations  . . . . . . . . . . . . . . . . . . . . . . 10
+   5.3.        Appendices . . . . . . . . . . . . . . . . . . . . . . 10
+   6.          Oddities and Bugs  . . . . . . . . . . . . . . . . . . 11
+   7.          Running the lyx2rfc Tool . . . . . . . . . . . . . . . 12
+   8.          References . . . . . . . . . . . . . . . . . . . . . . 13
+   Appendix A. Lyx2RFC Internals  . . . . . . . . . . . . . . . . . . 14
+               Author's Address . . . . . . . . . . . . . . . . . . . 15
 
 
 
@@ -126,7 +126,59 @@ Williams                                                        [Page 2]
    Internet-Draft.  Remember to use View->Open All Insets to ensure that
    the inset label (the type of inset) is displayed.
 
-2.1.  LyX Basics
+2.1.  Installing LyX, DocBook SGML, Saxon, and lyx2rfc
+
+   Install LyX and DocBook SGML pacakages.  For example, on Ubuntu and
+   most Linux systems you can install these packages:
+
+   o  elyxer
+
+   o  lyx
+
+   o  lyx-common
+
+   o  ttf-lyx
+
+   o  docbook
+
+   o  docbook-dsssl
+
+   o  docbook-utils
+
+   o  docbook-xml
+
+   o  docbook-xsl
+
+   o  libsaxon-java
+
+   o  libsaxon-java-doc
+
+   o  libsaxonb-java
+
+   o  libsaxonb-java-doc
+
+   The lyx2rfc software is currently available via git, soon to be
+   packaged:
+
+   Start LyX, Tools->Reconfigure (so LyX can find DocBook SGML
+
+
+
+Williams                                                        [Page 3]
+
+                           LyX2RFC User Guide              December 2012
+
+
+   software).
+
+2.1.1.  Configure LyX to Know lyx2rfc Conversions
+
+   Add the following to ~/.lyx/preferences:
+
+   Restart LyX.  You should now have additional export formats in
+   File->Export... for various RFC formats.
+
+2.2.  LyX2 Basics
 
    In the upper left hand corner of the LyX window there is a drop-down
    box for 'style' of text.  'Standard' here means 'paragraph'.  Other
@@ -137,7 +189,7 @@ Williams                                                        [Page 2]
 
    For the rest, LyX is very similar to many WYSIWYG graphical editors.
 
-2.2.  Lyx2rfc Basics
+2.3.  Lyx2rfc Basics
 
    While most xml2rfc input document elements can be mapped from
    existing LyX elements trivially, some xml2rfc elements have no LyX
@@ -164,7 +216,11 @@ Williams                                                        [Page 2]
 
 
 
-Williams                                                        [Page 3]
+
+
+
+
+Williams                                                        [Page 4]
 
                            LyX2RFC User Guide              December 2012
 
@@ -220,7 +276,7 @@ Williams                                                        [Page 3]
 
 
 
-Williams                                                        [Page 4]
+Williams                                                        [Page 5]
 
                            LyX2RFC User Guide              December 2012
 
@@ -276,7 +332,7 @@ Williams                                                        [Page 4]
 
 
 
-Williams                                                        [Page 5]
+Williams                                                        [Page 6]
 
                            LyX2RFC User Guide              December 2012
 
@@ -332,7 +388,7 @@ Williams                                                        [Page 5]
 
 
 
-Williams                                                        [Page 6]
+Williams                                                        [Page 7]
 
                            LyX2RFC User Guide              December 2012
 
@@ -388,7 +444,7 @@ Williams                                                        [Page 6]
 
 
 
-Williams                                                        [Page 7]
+Williams                                                        [Page 8]
 
                            LyX2RFC User Guide              December 2012
 
@@ -444,7 +500,7 @@ Williams                                                        [Page 7]
 
 
 
-Williams                                                        [Page 8]
+Williams                                                        [Page 9]
 
                            LyX2RFC User Guide              December 2012
 
@@ -500,7 +556,7 @@ Williams                                                        [Page 8]
 
 
 
-Williams                                                        [Page 9]
+Williams                                                       [Page 10]
 
                            LyX2RFC User Guide              December 2012
 
@@ -556,7 +612,7 @@ Williams                                                        [Page 9]
 
 
 
-Williams                                                       [Page 10]
+Williams                                                       [Page 11]
 
                            LyX2RFC User Guide              December 2012
 
@@ -612,7 +668,7 @@ Williams                                                       [Page 10]
 
 
 
-Williams                                                       [Page 11]
+Williams                                                       [Page 12]
 
                            LyX2RFC User Guide              December 2012
 
@@ -668,7 +724,7 @@ Williams                                                       [Page 11]
 
 
 
-Williams                                                       [Page 12]
+Williams                                                       [Page 13]
 
                            LyX2RFC User Guide              December 2012
 
@@ -724,7 +780,7 @@ Appendix A.  Lyx2RFC Internals
 
 
 
-Williams                                                       [Page 13]
+Williams                                                       [Page 14]
 
                            LyX2RFC User Guide              December 2012
 
@@ -780,5 +836,5 @@ Author's Address
 
 
 
-Williams                                                       [Page 14]
+Williams                                                       [Page 15]
 
