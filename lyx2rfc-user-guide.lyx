@@ -1140,7 +1140,7 @@ name "sub:Intra-Document-Cross-References"
 
 \end_inset
 
-Intra-Document Cross-References
+Cross-References Intra-Document
 \end_layout
 
 \begin_layout Standard
@@ -1274,7 +1274,7 @@ name "sub:Adding-'bibxml'-References"
 
 \end_inset
 
-Adding 'bibxml' References
+Adding 'bibxml'
 \end_layout
 
 \begin_layout Standard
@@ -1322,6 +1322,36 @@ Appendices
 To add an appendix scroll to the end of your document, hit enter, then Document-
 >Start Appendix Here, then select the style 'Section' to set the appendix
  title.
+\end_layout
+
+\begin_layout Section
+Oddities and Bugs
+\end_layout
+
+\begin_layout Standard
+Sections that are not references sections 
+\emph on
+must not
+\emph default
+ section titles that end in 
+\begin_inset Quotes eld
+\end_inset
+
+References
+\begin_inset Quotes erd
+\end_inset
+
+, while sections that are references sections 
+\emph on
+must
+\emph default
+.
+\end_layout
+
+\begin_layout Standard
+On the other hand, while xml2rfc cannot nest references sections, lyx2rfc
+ does allow nesting of references sections in LyX, though it flattens them
+ out in the translation to XML.
 \end_layout
 
 \begin_layout Section

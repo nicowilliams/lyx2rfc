@@ -326,7 +326,7 @@ This is the user guide for lyx2rfc, a program for converting LyX documents into 
 
 <div class='lyxtoc-2'><a href='#magicparlabel-165' class='tocentry'>4.5 Tables</a> <a href='#magicparlabel-165' class='tocarrow'>&gt;</a></div>
 
-<div class='lyxtoc-2'><a href='#magicparlabel-208' class='tocentry'>4.6 Intra-Document Cross-References</a> <a href='#magicparlabel-208' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-2'><a href='#magicparlabel-208' class='tocentry'>4.6 Cross-References Intra-Document</a> <a href='#magicparlabel-208' class='tocarrow'>&gt;</a></div>
 
 <div class='lyxtoc-2'><a href='#magicparlabel-214' class='tocentry'>4.7 Citations</a> <a href='#magicparlabel-214' class='tocarrow'>&gt;</a></div>
 </div>
@@ -335,7 +335,7 @@ This is the user guide for lyx2rfc, a program for converting LyX documents into 
 
 <div class='lyxtoc-2'><a href='#magicparlabel-222' class='tocentry'>5.1 References Sections</a> <a href='#magicparlabel-222' class='tocarrow'>&gt;</a></div>
 
-<div class='lyxtoc-2'><a href='#magicparlabel-224' class='tocentry'>5.2 Adding 'bibxml' References</a> <a href='#magicparlabel-224' class='tocarrow'>&gt;</a>
+<div class='lyxtoc-2'><a href='#magicparlabel-224' class='tocentry'>5.2 Adding 'bibxml'</a> <a href='#magicparlabel-224' class='tocarrow'>&gt;</a>
 
 <div class='lyxtoc-3'><a href='#magicparlabel-227' class='tocentry'>5.2.1 Citations</a> <a href='#magicparlabel-227' class='tocarrow'>&gt;</a></div>
 </div>
@@ -343,11 +343,13 @@ This is the user guide for lyx2rfc, a program for converting LyX documents into 
 <div class='lyxtoc-2'><a href='#magicparlabel-229' class='tocentry'>5.3 Appendices</a> <a href='#magicparlabel-229' class='tocarrow'>&gt;</a></div>
 </div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-231' class='tocentry'>6 Running the lyx2rfc Tool</a> <a href='#magicparlabel-231' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-1'><a href='#magicparlabel-231' class='tocentry'>6 Oddities and Bugs</a> <a href='#magicparlabel-231' class='tocarrow'>&gt;</a></div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-233' class='tocentry'>7 References</a> <a href='#magicparlabel-233' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-1'><a href='#magicparlabel-234' class='tocentry'>7 Running the lyx2rfc Tool</a> <a href='#magicparlabel-234' class='tocarrow'>&gt;</a></div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-239' class='tocentry'>A Lyx2RFC Internals</a> <a href='#magicparlabel-239' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-1'><a href='#magicparlabel-236' class='tocentry'>8 References</a> <a href='#magicparlabel-236' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-1'><a href='#magicparlabel-242' class='tocentry'>A Lyx2RFC Internals</a> <a href='#magicparlabel-242' class='tocarrow'>&gt;</a></div>
 </div>
 
 <h2 class="section"><span class="section_label">1</span> <a id='magicparlabel-71' />
@@ -620,7 +622,7 @@ table</div>
 </div>
 <h3 class="subsection"><span class="subsection_label">4.6</span> <a id='magicparlabel-208' />
 <a id="sub_Intra_Document_Cross_References" />
-Intra-Document Cross-References</h3>
+Cross-References Intra-Document</h3>
 <div class="standard"><a id='magicparlabel-209' />
 Use Insert-&gt;Label... to insert a label at strategic places, such as:</div>
 
@@ -660,7 +662,7 @@ References Sections</h3>
 To add a references section simply create a section titled &ldquo;References&rdquo;, &ldquo;Normative References&rdquo;, or &ldquo;Informative References&rdquo;. These must be top-level sections, but they will be put into sub-sections correctly.</div>
 <h3 class="subsection"><span class="subsection_label">5.2</span> <a id='magicparlabel-224' />
 <a id="sub_Adding__bibxml__References" />
-Adding 'bibxml' References</h3>
+Adding 'bibxml'</h3>
 <div class="standard"><a id='magicparlabel-225' />
 xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</div>
 
@@ -676,20 +678,27 @@ Appendices</h3>
 <div class="standard"><a id='magicparlabel-230' />
 To add an appendix scroll to the end of your document, hit enter, then Document-&gt;Start Appendix Here, then select the style 'Section' to set the appendix title.</div>
 <h2 class="section"><span class="section_label">6</span> <a id='magicparlabel-231' />
+Oddities and Bugs</h2>
+<div class="standard"><a id='magicparlabel-232' />
+Sections that are not references sections <em>must not</em> section titles that end in &ldquo;References&rdquo;, while sections that are references sections <em>must</em>.</div>
+
+<div class="standard"><a id='magicparlabel-233' />
+On the other hand, while xml2rfc cannot nest references sections, lyx2rfc does allow nesting of references sections in LyX, though it flattens them out in the translation to XML.</div>
+<h2 class="section"><span class="section_label">7</span> <a id='magicparlabel-234' />
 <a id="sec_Running_the_lyx2rfc" />
 Running the lyx2rfc Tool</h2>
-<div class="standard"><a id='magicparlabel-232' />
+<div class="standard"><a id='magicparlabel-235' />
 The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX document as LyXHTML, then runs the Saxon XSLT processor to convert the document from the LyXHTML schema to the xml2rfc XML schema, then it applies xml2rfc and XSLT again to render as text and HTML.</div>
-<h2 class="section"><span class="section_label">7</span> <a id='magicparlabel-233' />
+<h2 class="section"><span class="section_label">8</span> <a id='magicparlabel-236' />
 <a id="sec_References" />
 References</h2>
-<div class="standard"><a id='magicparlabel-234' />
-<div class="flex_bibxml"><div class="plain_layout"><a id='magicparlabel-238' />
+<div class="standard"><a id='magicparlabel-237' />
+<div class="flex_bibxml"><div class="plain_layout"><a id='magicparlabel-241' />
 <a href="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2629.xml">rfc2629</a></div>
 </div></div>
-<h2 class="section"><span class="section_label">A</span> <a id='magicparlabel-239' />
+<h2 class="section"><span class="section_label">A</span> <a id='magicparlabel-242' />
 Lyx2RFC Internals</h2>
-<div class="standard"><a id='magicparlabel-240' />
+<div class="standard"><a id='magicparlabel-243' />
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</div>
 </body>
 </html>

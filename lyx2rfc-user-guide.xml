@@ -82,7 +82,7 @@ Other custom insets related to the document itself:</t>
  Keyword element.</t>
         </list>
       </t>
-      <section title="Processing Instructions" anchor="d1e442">
+      <section title="Processing Instructions" anchor="d1e449">
         <t>
 The following custom insets can be used to specify xml2rfc processing instructions (PIs):</t>
         <t>
@@ -146,12 +146,12 @@ Open a line below the last author line and style it 'Abstract'. Write your abstr
     <section title="Middle Matter" anchor="sec_Middle_Matter">
       <t>
 The meat of an Internet-Draft is organized into sections. Each section, sub-section, and sub-sub-section has a title. Open a line, style it 'Section', and write in the section title, then enter to start the contents of the section in 'Standard' (paragraph) style.</t>
-      <section title="Subsections" anchor="d1e589">
+      <section title="Subsections" anchor="d1e596">
         <t>
 Open a line and set the style to “Subsection”.</t>
         <t>
 NOTE: LyX allows subsections of no section: these are treated as subsections of section 0. lyx2rfc will ignore such subsections!</t>
-        <section title="Sub-subsections" anchor="d1e601">
+        <section title="Sub-subsections" anchor="d1e608">
           <t>
 Open a line and set the style to “SunSubsection”.</t>
           <t>
@@ -194,7 +194,7 @@ Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of a desc
         <t>
 Insert-&gt;Float-&gt;Figure, then left arrow, then Insert-&gt;Program Listing, then write/paste ASCII figure text. Don't forget to set the figure title.</t>
         <t>
-NOTE: Every otherwise empty line of a program listing (used to hold the artwork) <spanx style="">must</spanx>  have at least one space in it, otherwise the LyX export to XHTML function will fail.</t>
+NOTE: Every otherwise empty line of a program listing (used to hold the artwork) <spanx>must</spanx>  have at least one space in it, otherwise the LyX export to XHTML function will fail.</t>
         <t>
 For example:</t>
         <t>
@@ -227,7 +227,7 @@ table</ttcol>
 ...</c>
         </texttable>
       </section>
-      <section title="Intra-Document Cross-References" anchor="sub_Intra_Document_Cross_References">
+      <section title="Cross-References Intra-Document" anchor="sub_Intra_Document_Cross_References">
         <t>
 Use Insert-&gt;Label... to insert a label at strategic places, such as:</t>
         <t>
@@ -267,12 +267,12 @@ Appendices.</t>
         <t>
 To add a references section simply create a section titled “References”, “Normative References”, or “Informative References”. These must be top-level sections, but they will be put into sub-sections correctly.</t>
       </section>
-      <section title="Adding 'bibxml' References" anchor="sub_Adding__bibxml__References">
+      <section title="Adding 'bibxml'" anchor="sub_Adding__bibxml__References">
         <t>
 xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</t>
         <t>
 To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</t>
-        <section title="Citations" anchor="d1e846">
+        <section title="Citations" anchor="d1e853">
           <t>
 See  <xref target="sub_Citations"/>.</t>
         </section>
@@ -282,6 +282,12 @@ See  <xref target="sub_Citations"/>.</t>
 To add an appendix scroll to the end of your document, hit enter, then Document-&gt;Start Appendix Here, then select the style 'Section' to set the appendix title.</t>
       </section>
     </section>
+    <section title="Oddities and Bugs" anchor="d1e877">
+      <t>
+Sections that are not references sections <spanx>must not</spanx>  section titles that end in “References”, while sections that are references sections <spanx>must</spanx> .</t>
+      <t>
+On the other hand, while xml2rfc cannot nest references sections, lyx2rfc does allow nesting of references sections in LyX, though it flattens them out in the translation to XML.</t>
+    </section>
     <section title="Running the lyx2rfc Tool" anchor="sec_Running_the_lyx2rfc">
       <t>
 The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX document as LyXHTML, then runs the Saxon XSLT processor to convert the document from the LyXHTML schema to the xml2rfc XML schema, then it applies xml2rfc and XSLT again to render as text and HTML.</t>
@@ -289,7 +295,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
   </middle>
   <back>
     <references title="References" anchor="sec_References">&rfc2629;</references>
-    <section title="Lyx2RFC Internals" anchor="d1e899">
+    <section title="Lyx2RFC Internals" anchor="d1e924">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>
     </section>

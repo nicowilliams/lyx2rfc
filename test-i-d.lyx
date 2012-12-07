@@ -926,10 +926,6 @@ target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml"
 \end_layout
 
 \begin_layout Section
-Informative References
-\end_layout
-
-\begin_layout Section
 \start_of_appendix
 First Appendix
 \end_layout

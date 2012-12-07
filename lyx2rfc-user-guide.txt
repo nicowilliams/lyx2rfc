@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                        December 6, 2012
+                                                        December 7, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -33,18 +33,18 @@ Table of Contents
    4.3.        Lists  . . . . . . . . . . . . . . . . . . . . . . . .  6
    4.4.        Figures  . . . . . . . . . . . . . . . . . . . . . . .  7
    4.5.        Tables . . . . . . . . . . . . . . . . . . . . . . . .  7
-   4.6.        Intra-Document Cross-References  . . . . . . . . . . .  7
+   4.6.        Cross-References Intra-Document  . . . . . . . . . . .  7
    4.7.        Citations  . . . . . . . . . . . . . . . . . . . . . .  8
    5.          Back Matter  . . . . . . . . . . . . . . . . . . . . .  9
    5.1.        References Sections  . . . . . . . . . . . . . . . . .  9
-   5.2.        Adding 'bibxml' References . . . . . . . . . . . . . .  9
+   5.2.        Adding 'bibxml'  . . . . . . . . . . . . . . . . . . .  9
    5.2.1.      Citations  . . . . . . . . . . . . . . . . . . . . . .  9
    5.3.        Appendices . . . . . . . . . . . . . . . . . . . . . .  9
-   6.          Running the lyx2rfc Tool . . . . . . . . . . . . . . . 10
-   7.          References . . . . . . . . . . . . . . . . . . . . . . 11
-   Appendix A. Lyx2RFC Internals  . . . . . . . . . . . . . . . . . . 12
-               Author's Address . . . . . . . . . . . . . . . . . . . 13
-
+   6.          Oddities and Bugs  . . . . . . . . . . . . . . . . . . 10
+   7.          Running the lyx2rfc Tool . . . . . . . . . . . . . . . 11
+   8.          References . . . . . . . . . . . . . . . . . . . . . . 12
+   Appendix A. Lyx2RFC Internals  . . . . . . . . . . . . . . . . . . 13
+               Author's Address . . . . . . . . . . . . . . . . . . . 14
 
 
 
@@ -346,7 +346,7 @@ Williams                                                        [Page 6]
    title.
 
    NOTE: Every otherwise empty line of a program listing (used to hold
-   the artwork) must have at least one space in it, otherwise the LyX
+   the artwork) _must_ have at least one space in it, otherwise the LyX
    export to XHTML function will fail.
 
    For example:
@@ -370,7 +370,7 @@ Williams                                                        [Page 6]
                            | ... | ... |  ...  |
                            +-----+-----+-------+
 
-4.6.  Intra-Document Cross-References
+4.6.  Cross-References Intra-Document
 
    Use Insert->Label... to insert a label at strategic places, such as:
 
@@ -469,7 +469,7 @@ Williams                                                        [Page 8]
    These must be top-level sections, but they will be put into sub-
    sections correctly.
 
-5.2.  Adding 'bibxml' References
+5.2.  Adding 'bibxml'
 
    xml2rfc can only handle references defined in its own particular
    schema.  LyX's bibliography library support cannot trivially be
@@ -505,7 +505,63 @@ Williams                                                        [Page 9]
                            LyX2RFC User Guide              December 2012
 
 
-6.  Running the lyx2rfc Tool
+6.  Oddities and Bugs
+
+   Sections that are not references sections _must not_ section titles
+   that end in "References", while sections that are references sections
+   _must_ .
+
+   On the other hand, while xml2rfc cannot nest references sections,
+   lyx2rfc does allow nesting of references sections in LyX, though it
+   flattens them out in the translation to XML.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Williams                                                       [Page 10]
+
+                           LyX2RFC User Guide              December 2012
+
+
+7.  Running the lyx2rfc Tool
 
    The lyx2rfc tool is a simple shell script that uses lyx(1) to export
    your LyX document as LyXHTML, then runs the Saxon XSLT processor to
@@ -556,12 +612,12 @@ Williams                                                        [Page 9]
 
 
 
-Williams                                                       [Page 10]
+Williams                                                       [Page 11]
 
                            LyX2RFC User Guide              December 2012
 
 
-7.  References
+8.  References
 
    [RFC2629]  Rose, M., "Writing I-Ds and RFCs using XML", RFC 2629,
               June 1999.
@@ -612,7 +668,7 @@ Williams                                                       [Page 10]
 
 
 
-Williams                                                       [Page 11]
+Williams                                                       [Page 12]
 
                            LyX2RFC User Guide              December 2012
 
@@ -668,7 +724,7 @@ Appendix A.  Lyx2RFC Internals
 
 
 
-Williams                                                       [Page 12]
+Williams                                                       [Page 13]
 
                            LyX2RFC User Guide              December 2012
 
@@ -724,5 +780,5 @@ Author's Address
 
 
 
-Williams                                                       [Page 13]
+Williams                                                       [Page 14]
 
