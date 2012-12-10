@@ -221,24 +221,20 @@
     <!-- Middle matter (only top-level sections; the matching templates
          will recurse to get subsections and subsubsections). -->
     <xsl:element name="middle">
-        <xsl:apply-templates
-            select="h2[not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')) and
-                not(matches(span, '^[A-Z].*'))]"/>
+        <xsl:apply-templates select="h2[not(matches(span, '^[A-Z].*'))]" mode="midsect1"/>
     </xsl:element>
 
     <!-- Back matter -->
     <xsl:element name="back">
 
         <!-- References -->
-        <xsl:apply-templates
-            select="h2[matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References')]"/>
+        <xsl:apply-templates select="h2[not(matches(span, '^[A-Z].*'))]" mode="refsect1"/>
 
         <!-- Appendices, but don't include references since we've
              already handled those (just in case the references sections
              were made into appendices) -->
         <xsl:apply-templates
-            select="h2[matches(span, '^[A-Z].*') and
-                not(matches(normalize-space(string-join(text(), '')), '^(Normative |Informative |)References'))]"/>
+            select="h2[matches(span, '^[A-Z].*')]" mode="midsect1"/>
     </xsl:element>
 </xsl:template>
 
@@ -475,11 +471,16 @@
 
 <!-- Sections -->
 
-<xsl:variable name="isRefsSect" select="xs:boolean(0)"/>
+<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section')]" mode="midsect1">
+    <xsl:variable name="cur_sect" select="current()"/>
+    <xsl:if test="not(following-sibling::div[
+            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
+        ]/div[@class = 'flex_bibxml']/div/a)">
+        <xsl:apply-templates select="current()" mode="midsect2"/>
+    </xsl:if>
+</xsl:template>
 
-<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section') and
-    not($isRefsSect) and
-    not(ends-with(normalize-space(string-join(text(), '')), 'References'))]">
+<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section')]" mode="midsect2">
 
     <!-- N is the integer in hN -->
     <xsl:variable name="N" select="substring-after(name(), 'h') cast as xs:integer"/>
@@ -514,18 +515,24 @@
                 (preceding-sibling::*[name() = $thisHN])[last()] is $cur_sect and
                 (substring-after(name(), 'h') cast as xs:integer = ($N + 1))
                 ]"
-            />
+            mode="midsect2"/>
 
     </xsl:element>
 </xsl:template>
 
 <!-- References -->
 
-<xsl:template match="*[matches(name(), '^h[2-9]') and
-    (ends-with(normalize-space(string-join(text(), '')), 'References')
-    or $isRefsSect)]">
+<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section')]" mode="refsect1">
+    <xsl:variable name="cur_sect" select="current()"/>
+    <xsl:if test="following-sibling::div[
+            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
+        ]/div[@class = 'flex_bibxml']/div/a">
+        <xsl:apply-templates select="current()" mode="refsect2"/>
+    </xsl:if>
+</xsl:template>
 
-    <xsl:variable name="isRefsSect" select="xs:boolean(1)"/>
+<xsl:template match="*[matches(name(), '^h[2-9]')]" mode="refsect2">
+
     <xsl:variable name="N" select="substring-after(name(), 'h') cast as xs:integer"/>
     <xsl:variable name="thisHN" select="name()"/>
     <xsl:variable name="id" select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
@@ -554,7 +561,7 @@
             (preceding-sibling::*[name() = $thisHN])[last()] is $cur_sect and
             (substring-after(name(), 'h') cast as xs:integer = ($N + 1))
             ]"
-        />
+        mode="refsect2"/>
 </xsl:template>
 
 <!-- Emit processing instructions -->

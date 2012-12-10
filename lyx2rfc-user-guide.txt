@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                        December 7, 2012
+                                                       December 10, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -35,7 +35,7 @@ Table of Contents
    4.3.        Lists  . . . . . . . . . . . . . . . . . . . . . . . .  7
    4.4.        Figures  . . . . . . . . . . . . . . . . . . . . . . .  8
    4.5.        Tables . . . . . . . . . . . . . . . . . . . . . . . .  8
-   4.6.        Cross-References Intra-Document  . . . . . . . . . . .  8
+   4.6.        Intra-Document Cross-References  . . . . . . . . . . .  8
    4.7.        Citations  . . . . . . . . . . . . . . . . . . . . . .  9
    5.          Back Matter  . . . . . . . . . . . . . . . . . . . . . 10
    5.1.        References Sections  . . . . . . . . . . . . . . . . . 10
@@ -426,7 +426,7 @@ Williams                                                        [Page 7]
                            | ... | ... |  ...  |
                            +-----+-----+-------+
 
-4.6.  Cross-References Intra-Document
+4.6.  Intra-Document Cross-References
 
    Use Insert->Label... to insert a label at strategic places, such as:
 

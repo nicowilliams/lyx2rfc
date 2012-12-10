@@ -5,17 +5,20 @@ ever wanted to, RFCs).  It works by converting LyX documents to
 xml2rfc's XML schema, then applying xml2rfc and/or the Greenbytes
 XSL template.
 
-Currently the project is quite functional.  It consists of an XSLT 2.0
-template to convert LyX XHTML output to the xml2rfc schema, at which
-point the xml2rfc tool is run to typeset in any of the normal I-D/RFC
-formats (text, HTML, and PDF).  The lyx2rfc script automates all of this
-work and integrates with LyX by a) telling LyX about RFC formats, b)
-telling LyX how to convert between LyX and RFC formats (this is as simple
-as appending a few lines to ~/.lyx/preferences).
+Currently the project is quite functional; several Internet-Drafts have
+been authored with LyX.
+
+Lyx2rfc consists of an XSLT 2.0 template to convert LyX XHTML output to
+the xml2rfc schema, at which point the xml2rfc tool is run to typeset in
+any of the normal I-D/RFC formats (text, HTML, and PDF).  The lyx2rfc
+script automates all of this work and integrates with LyX by a) telling
+LyX about RFC formats, b) telling LyX how to convert between LyX and RFC
+formats (this is as simple as appending a few lines to
+~/.lyx/preferences).
 
 In order to use this one must add some custom inset definitions from the
-custom_insets file to one's document.  These custom insets are used to
-handle metadata needed by xml2rfc but not provided by LyX: draftname,
+custom_insets file to one's LyX document.  These custom insets are used
+to handle metadata needed by xml2rfc but not provided by LyX: draftname,
 intended status, and so on, as well as author metadata, and xml2rfc
 processing instructions.
 
@@ -33,15 +36,16 @@ INSTALL
 
 See the User Guide.
 
-Basically: install LyX, docbook-sgml, and Sason packages, run LyX,
+Basically: install LyX, docbook-sgml, and Saxon packages, run LyX,
 Tools->Reconfigure, append format and conversion specifications to
-~/.lyx/preferences, restart LyX, and you're done.
+~/.lyx/preferences, restart LyX, and you're ready to edit.
 
 
 TODO
 ----
 
- - Add iref support?
+ - Add iref support?  It'd be pretty easy, but I've never seen an
+   Internet-Draft or RFC with an index!
 
  - Rewrite lyx2rfc in Python so it works on Windows too
  - Make lyx2rfc copy DTDs to the LyX temporary working directory
@@ -52,11 +56,23 @@ TODO
  - Add support for figures with graphic and text variants?
  - Add support for automatic SVG<->ASCII art? (and image carmelization?)
 
+ - Add support for using bibtex instead of / in addition to bibxml??
+
+   This would require first providing a bibxml->bibtex conversion, which
+   would be most easily done through bibutils and some XSL to convert
+   bibxml to mods.  Next we'd have to provide a way to sort references
+   into references sections, since LyX only supports a single references
+   section (or multiple ones, but not with different titles).  The
+   advantage of this would be that we'd be using more native LyX support
+   and fewer custom insets, but the disadvantage is clear: it'd be a lot
+   more work to add references to a document (or more work to keep the
+   bibtex DBs in sync with the bibxml DBs)!
+
 BUGS:
 
  - Empty lines in code listings (used for ASCII figures) must have at
    least one space character, else the LyX export to XHTML function
-   fails.
+   fails miserably.
 
  - LyX does not pass through any table column widths.  Besides, LyX lets
    the user set column widths only in centimeters, while xml2rfc allows
@@ -65,9 +81,6 @@ BUGS:
 
    Still, we could add a custom inset by which to specify column widths
    in percentage and render that into xml2rfc's schema.
-
- - References sections must have titles that end in "References";
-   non-references sections must not.
 
 [0] http://www.lyx.org/
 [1] What You See Is What You Mean.

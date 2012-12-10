@@ -283,7 +283,7 @@ table</ttcol>
 ...</c>
         </texttable>
       </section>
-      <section title="Cross-References Intra-Document" anchor="sub_Intra_Document_Cross_References">
+      <section title="Intra-Document Cross-References" anchor="sub_Intra_Document_Cross_References">
         <t>
 Use Insert-&gt;Label... to insert a label at strategic places, such as:</t>
         <t>

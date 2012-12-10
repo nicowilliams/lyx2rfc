@@ -729,7 +729,6 @@ converter "xml2rfc" "rfcunpg" "xml2rfc $$p/$$i $$r/$$o" ""
 \end_layout
 
 \begin_layout Standard
-
 Restart LyX.
  You should now have additional export formats in File->Export...
  for various RFC formats.
@@ -1325,7 +1324,7 @@ name "sub:Intra-Document-Cross-References"
 
 \end_inset
 
-Cross-References Intra-Document
+Intra-Document Cross-References
 \end_layout
 
 \begin_layout Standard
