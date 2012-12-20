@@ -42,6 +42,8 @@
     xmlns:rfc="xml2rfc"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:url="http://whatever/java/java.net.URLDecoder"
+    xmlns:jxml="http://whatever/java/org.apache.commons.lang.StringEscapeUtils"
     exclude-result-prefixes="rfc"
     >
 
@@ -147,7 +149,7 @@
         <xsl:text disable-output-escaping="yes"> SYSTEM "</xsl:text>
 
         <!-- URL -->
-        <xsl:value-of select="substring-after(./@href, 'file://')"/>
+        <xsl:value-of select="url:decode(substring-after(./@href, 'file://'))"/>
         <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
     </xsl:for-each>
 
@@ -549,6 +551,10 @@
             select="(following-sibling::div[
                 (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/div[
                 @class = 'flex_bibxml']/div/a)"/>
+        <xsl:apply-templates
+            select="(following-sibling::div[
+                (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/div[
+                @class = 'flex_embeddedbibxml'])"/>
 
     </xsl:element>
 
@@ -585,6 +591,11 @@
     <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
     <xsl:value-of select="normalize-space(.)"/>
     <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
+</xsl:template>
+
+<xsl:template
+    match="div[@class = 'flex_embeddedbibxml']">
+    <xsl:value-of disable-output-escaping="yes" select="./div[@class = 'plain_layout']"/>
 </xsl:template>
 
 <!-- Author metadata templates (for the <author> elements) -->

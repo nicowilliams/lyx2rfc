@@ -144,7 +144,7 @@ if [[ "$input" = *.@(lyx|xhtml) ]]; then
     check_already_done
     printf "Applying XSLT stylesheet for XHTML->rfc2629.dtd conversion...\n"
     # java net/sf/saxon/Transform "$xhtml" $XSL |
-    saxonb-xslt -xsl:$XSL -s:"$xhtml" |
+    saxonb-xslt -ext:on -xsl:$XSL -s:"$xhtml" |
         sed -e 's,xmlns="xml2rfc",,' -e 's/></>\n</g' |
         xmllint --format - > "$xml"
 fi

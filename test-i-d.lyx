@@ -211,6 +211,12 @@ InsetLayout Flex:BibXML
     HTMLTag div
     LabelString BibXML
 End
+
+InsetLayout Flex:EmbeddedBibXML
+    LyXType Custom
+    HTMLTag div
+    LabelString EmbeddedBibXML
+End
 \end_local_layout
 \language english
 \language_package default
@@ -906,18 +912,21 @@ target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex BibXML
-status open
+\begin_inset Flex EmbeddedBibXML
+status collapsed
 
 \begin_layout Plain Layout
-\begin_inset CommandInset href
-LatexCommand href
-name "rfc1113"
-target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml"
-
-\end_inset
-
-
+<reference anchor='RFC1113'> <front> <title abbrev='Mail Privacy: Procedures'>Pr
+ivacy enhancement for Internet electronic mail: Part I - message encipherment
+ and authentication procedures</title> <author initials='J.' surname='Linn'
+ fullname='John Linn'> <organization>Digital Equipment Corporation (DEC),
+ Secure Systems</organization> <address> <postal> <street>85 Swanson Road</stree
+t> <street>BXB1-2/D04</street> <city>Boxborough</city> <region>MA</region>
+ <code>01719-1326</code> <country>US</country></postal> <phone>+1 508 264
+ 5491</phone> <email>Linn@ultra.enet.dec.com</email></address></author> <date
+ year='1989' day='1' month='August' /></front> <seriesInfo name='RFC' value='111
+3' /> <format type='TXT' octets='89293' target='http://www.rfc-editor.org/rfc/rfc1
+113.txt' /> </reference> 
 \end_layout
 
 \end_inset

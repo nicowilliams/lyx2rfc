@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                       December 10, 2012
+                                                       December 20, 2012
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -302,7 +302,7 @@ Table of Contents
    title.
 
    NOTE: Every otherwise empty line of a program listing (used to hold
-   the artwork) _must_ have at least one space in it, otherwise the LyX
+   the artwork) must have at least one space in it, otherwise the LyX
    export to XHTML function will fail.
 
    For example:
@@ -373,7 +373,8 @@ Table of Contents
    xml2rfc can only handle references defined in its own particular
    schema.  LyX's bibliography library support cannot trivially be
    mapped to/from the xml2rfc 'bibxml' library.  Therefore lyx2rfc
-   handles this by using LyX hyperlinks.
+   handles this by using LyX hyperlinks.  Alternatively you can embed
+   fully-formed bibxml in the EmbeddedBibXml custom inset.
 
    To add bibxml references just start a paragraph in a references
    section and then Insert->Hyperlink, setting the link target to the
@@ -396,9 +397,9 @@ Table of Contents
 
 6.  Oddities and Bugs
 
-   Sections that are not references sections _must not_ section titles
+   Sections that are not references sections must not section titles
    that end in "References", while sections that are references sections
-   _must_ .
+   must.
 
    On the other hand, while xml2rfc cannot nest references sections,
    lyx2rfc does allow nesting of references sections in LyX, though it

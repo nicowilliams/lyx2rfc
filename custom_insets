@@ -201,3 +201,9 @@ InsetLayout Flex:BibXML
     HTMLTag div
     LabelString BibXML
 End
+
+InsetLayout Flex:EmbeddedBibXML
+    LyXType Custom
+    HTMLTag div
+    LabelString EmbeddedBibXML
+End

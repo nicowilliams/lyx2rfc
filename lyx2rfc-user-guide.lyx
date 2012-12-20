@@ -616,17 +616,14 @@ The lyx2rfc software is currently available via git, soon to be packaged:
 \end_layout
 
 \begin_layout Code
-
 git clone https://github.com/nicowilliams/lyx2rfc
 \end_layout
 
 \begin_layout Code
-
 cd lyx2rfc
 \end_layout
 
 \begin_layout Code
-
 <install into a bin directory in $PATH or modify $PATH to find lyx2rfc here>
 \end_layout
 
@@ -643,22 +640,18 @@ Add the following to ~/.lyx/preferences:
 \end_layout
 
 \begin_layout Code
-
 #
 \end_layout
 
 \begin_layout Code
-
 # FORMATS SECTION ##########################
 \end_layout
 
 \begin_layout Code
-
 #
 \end_layout
 
 \begin_layout Code
-
 
 \backslash
 format "rfchtml" "html" "RFC (HTML)" "" "firefox" "gvim" "document,menu=export"
@@ -666,13 +659,11 @@ format "rfchtml" "html" "RFC (HTML)" "" "firefox" "gvim" "document,menu=export"
 
 \begin_layout Code
 
-
 \backslash
 format "rfctxt" "txt" "RFC (txt)" "" "" "gvim" "document,menu=export"
 \end_layout
 
 \begin_layout Code
-
 
 \backslash
 format "rfcunpg" "unpg" "RFC (unpg txt)" "" "" "gvim" "document,menu=export"
@@ -680,28 +671,23 @@ format "rfcunpg" "unpg" "RFC (unpg txt)" "" "" "gvim" "document,menu=export"
 
 \begin_layout Code
 
-
 \backslash
 format "xml2rfc" "xml" "RFC (XML)" "" "" "gvim" "document,menu=export"
 \end_layout
 
 \begin_layout Code
-
 #
 \end_layout
 
 \begin_layout Code
-
 # CONVERTERS SECTION ##########################
 \end_layout
 
 \begin_layout Code
-
 #
 \end_layout
 
 \begin_layout Code
-
 
 \backslash
 converter "xml2rfc" "rfchtml" "lyx2rfc $$p/$$i $$r/$$o" ""
@@ -709,20 +695,17 @@ converter "xml2rfc" "rfchtml" "lyx2rfc $$p/$$i $$r/$$o" ""
 
 \begin_layout Code
 
-
 \backslash
 converter "lyx" "xml2rfc" "lyx2rfc $$p/$$i $$r/$$o" ""
 \end_layout
 
 \begin_layout Code
 
-
 \backslash
 converter "xml2rfc" "rfctxt" "xml2rfc $$p/$$i $$r/$$o" ""
 \end_layout
 
 \begin_layout Code
-
 
 \backslash
 converter "xml2rfc" "rfcunpg" "xml2rfc $$p/$$i $$r/$$o" ""
@@ -1168,12 +1151,8 @@ Insert->Float->Figure, then left arrow, then Insert->Program Listing, then
 
 \begin_layout Standard
 NOTE: Every otherwise empty line of a program listing (used to hold the
- artwork) 
-\emph on
-must
-\emph default
- have at least one space in it, otherwise the LyX export to XHTML function
- will fail.
+ artwork) must have at least one space in it, otherwise the LyX export to
+ XHTML function will fail.
 \end_layout
 
 \begin_layout Standard
@@ -1466,6 +1445,8 @@ xml2rfc can only handle references defined in its own particular schema.
  LyX's bibliography library support cannot trivially be mapped to/from the
  xml2rfc 'bibxml' library.
  Therefore lyx2rfc handles this by using LyX hyperlinks.
+ Alternatively you can embed fully-formed bibxml in the EmbeddedBibXml custom
+ inset.
 \end_layout
 
 \begin_layout Standard
@@ -1513,11 +1494,8 @@ Oddities and Bugs
 \end_layout
 
 \begin_layout Standard
-Sections that are not references sections 
-\emph on
-must not
-\emph default
- section titles that end in 
+Sections that are not references sections must not section titles that end
+ in 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1525,11 +1503,7 @@ References
 \begin_inset Quotes erd
 \end_inset
 
-, while sections that are references sections 
-\emph on
-must
-\emph default
-.
+, while sections that are references sections must.
 \end_layout
 
 \begin_layout Standard

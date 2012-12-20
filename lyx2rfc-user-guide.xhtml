@@ -658,7 +658,7 @@ Figures</h3>
 Insert-&gt;Float-&gt;Figure, then left arrow, then Insert-&gt;Program Listing, then write/paste ASCII figure text. Don't forget to set the figure title.</div>
 
 <div class="standard"><a id='magicparlabel-185' />
-NOTE: Every otherwise empty line of a program listing (used to hold the artwork) <em>must</em> have at least one space in it, otherwise the LyX export to XHTML function will fail.</div>
+NOTE: Every otherwise empty line of a program listing (used to hold the artwork) must have at least one space in it, otherwise the LyX export to XHTML function will fail.</div>
 
 <div class="standard"><a id='magicparlabel-186' />
 For example:</div>
@@ -758,7 +758,7 @@ To add a references section simply create a section titled &ldquo;References&rdq
 <a id="sub_Adding__bibxml__References" />
 Adding 'bibxml'</h3>
 <div class="standard"><a id='magicparlabel-262' />
-xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</div>
+xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks. Alternatively you can embed fully-formed bibxml in the EmbeddedBibXml custom inset.</div>
 
 <div class="standard"><a id='magicparlabel-263' />
 To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</div>
@@ -774,7 +774,7 @@ To add an appendix scroll to the end of your document, hit enter, then Document-
 <h2 class="section"><span class="section_label">6</span> <a id='magicparlabel-268' />
 Oddities and Bugs</h2>
 <div class="standard"><a id='magicparlabel-269' />
-Sections that are not references sections <em>must not</em> section titles that end in &ldquo;References&rdquo;, while sections that are references sections <em>must</em>.</div>
+Sections that are not references sections must not section titles that end in &ldquo;References&rdquo;, while sections that are references sections must.</div>
 
 <div class="standard"><a id='magicparlabel-270' />
 On the other hand, while xml2rfc cannot nest references sections, lyx2rfc does allow nesting of references sections in LyX, though it flattens them out in the translation to XML.</div>

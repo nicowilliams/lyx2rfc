@@ -9,7 +9,6 @@
 <?rfc inline="yes"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY rfc2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
-<!ENTITY rfc1113 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1113.xml">
 ]>
 <rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info" updates="RFC2119">
   <front>
@@ -157,18 +156,16 @@ And some text after it. See also section  <xref target="sub_A_sub_section"/>.</t
     </section>
   </middle>
   <back>
-    <references title="Normative References" anchor="sec_References">&rfc2119;
-&rfc1113;
-</references>
-    <section title="First Appendix" anchor="d1e481">
+    <references title="Normative References" anchor="sec_References">&rfc2119;<reference anchor="RFC1113"><front><title abbrev="Mail Privacy: Procedures">Privacy enhancement for Internet electronic mail: Part I - message encipherment and authentication procedures</title><author initials="J." surname="Linn" fullname="John Linn"><organization>Digital Equipment Corporation (DEC), Secure Systems</organization><address><postal><street>85 Swanson Road</street><street>BXB1-2/D04</street><city>Boxborough</city><region>MA</region><code>01719-1326</code><country>US</country></postal><phone>+1 508 264 5491</phone><email>Linn@ultra.enet.dec.com</email></address></author><date year="1989" day="1" month="August"/></front><seriesInfo name="RFC" value="1113"/><format type="TXT" octets="89293" target="http://www.rfc-editor.org/rfc/rfc1113.txt"/></reference></references>
+    <section title="First Appendix" anchor="d1e479">
       <t>
 Appendici.</t>
-      <section title="Sub-Appendix" anchor="d1e490">
+      <section title="Sub-Appendix" anchor="d1e488">
         <t>
 Whatever.</t>
       </section>
     </section>
-    <section title="Last Appendix" anchor="d1e499">
+    <section title="Last Appendix" anchor="d1e497">
       <t>
 Last word.</t>
     </section>

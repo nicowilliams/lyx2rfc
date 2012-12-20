@@ -250,7 +250,7 @@ Tip: use non-breaking spaces (Ctrl-Space) to embed spaces in the title of a desc
         <t>
 Insert-&gt;Float-&gt;Figure, then left arrow, then Insert-&gt;Program Listing, then write/paste ASCII figure text. Don't forget to set the figure title.</t>
         <t>
-NOTE: Every otherwise empty line of a program listing (used to hold the artwork) <spanx>must</spanx>  have at least one space in it, otherwise the LyX export to XHTML function will fail.</t>
+NOTE: Every otherwise empty line of a program listing (used to hold the artwork) must have at least one space in it, otherwise the LyX export to XHTML function will fail.</t>
         <t>
 For example:</t>
         <t>
@@ -325,10 +325,10 @@ To add a references section simply create a section titled “References”, “
       </section>
       <section title="Adding 'bibxml'" anchor="sub_Adding__bibxml__References">
         <t>
-xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks.</t>
+xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks. Alternatively you can embed fully-formed bibxml in the EmbeddedBibXml custom inset.</t>
         <t>
 To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</t>
-        <section title="Citations" anchor="d1e1009">
+        <section title="Citations" anchor="d1e1006">
           <t>
 See  <xref target="sub_Citations"/>.</t>
         </section>
@@ -338,9 +338,9 @@ See  <xref target="sub_Citations"/>.</t>
 To add an appendix scroll to the end of your document, hit enter, then Document-&gt;Start Appendix Here, then select the style 'Section' to set the appendix title.</t>
       </section>
     </section>
-    <section title="Oddities and Bugs" anchor="d1e1033">
+    <section title="Oddities and Bugs" anchor="d1e1030">
       <t>
-Sections that are not references sections <spanx>must not</spanx>  section titles that end in “References”, while sections that are references sections <spanx>must</spanx> .</t>
+Sections that are not references sections must not section titles that end in “References”, while sections that are references sections must.</t>
       <t>
 On the other hand, while xml2rfc cannot nest references sections, lyx2rfc does allow nesting of references sections in LyX, though it flattens them out in the translation to XML.</t>
     </section>
@@ -351,7 +351,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
   </middle>
   <back>
     <references title="References" anchor="sec_References">&rfc2629;</references>
-    <section title="Lyx2RFC Internals" anchor="d1e1080">
+    <section title="Lyx2RFC Internals" anchor="d1e1071">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>
     </section>
