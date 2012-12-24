@@ -477,7 +477,10 @@
     <xsl:variable name="cur_sect" select="current()"/>
     <xsl:if test="not(following-sibling::div[
             (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
-        ]/div[@class = 'flex_bibxml']/div/a)">
+            ]/div[@class = 'flex_bibxml']/div/a or
+            following-sibling::div[
+            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()]
+            is $cur_sect]/div[@class = 'flex_embeddedbibxml'])">
         <xsl:apply-templates select="current()" mode="midsect2"/>
     </xsl:if>
 </xsl:template>
@@ -528,7 +531,10 @@
     <xsl:variable name="cur_sect" select="current()"/>
     <xsl:if test="following-sibling::div[
             (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
-        ]/div[@class = 'flex_bibxml']/div/a">
+            ]/div[@class = 'flex_bibxml']/div/a or
+            following-sibling::div[
+            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
+            ]/div[@class = 'flex_embeddedbibxml']">
         <xsl:apply-templates select="current()" mode="refsect2"/>
     </xsl:if>
 </xsl:template>
