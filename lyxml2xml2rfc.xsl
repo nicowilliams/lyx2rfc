@@ -198,11 +198,8 @@
             <!-- Grab the abstract (should use apply-templates instead
                  of for-each...) -->
             <xsl:element name="abstract">
-                <xsl:for-each select="//layout:Abstract">
-                    <xsl:element name="t">
-                        <xsl:value-of select="."/>
-                    </xsl:element>
-                </xsl:for-each>
+                <xsl:apply-templates select="//layout:Abstract"
+                    mode="front"/>
             </xsl:element>
         </xsl:element>
 
@@ -247,29 +244,27 @@
 <!-- We don't have any use for the style elements in xml2rfc -->
 <xsl:template match="style"/>
 <!-- xml2rfc has its own way of handling toc, see PIs -->
-<xsl:template match="div[@class='toc']"/>
+<xsl:template match="inset:CommandInset[@CommandInset='toc']"/>
 <!-- Strip out things for the front matter that we handle above -->
-<xsl:template match="h1[@class='title']"/>
-<xsl:template match="div[@class='abstract']"/>
+<xsl:template match="layout:Title"/>
+<xsl:template match="layout:Abstract"/>
 
-<!-- LyXHTML uses span elements for things we don't care about, like
-     section numbering (but we do use that to distinguish between normal
-     sections and appendices!).  Also ignore the table of contents and
-     automatically-generated anchors.  -->
-<xsl:template match="span"/>
-<xsl:template match="div[@class='toc']"/>
-<xsl:template match="a[starts-with(@id, 'magicparlabel-')]"/>
+<xsl:template match="layout:Abstract" mode="front">
+    <xsl:element name="t">
+        <xsl:apply-templates/>
+    </xsl:element>
+</xsl:template>
 
 <!-- Plain paragraphs -->
-<xsl:template match="div[@class='standard']">
+<xsl:template match="layout:Standard">
     <xsl:choose>
-        <xsl:when test="./table/tbody">
-            <!-- Tables are generated inside an otherwise empty div with
-                 class='standard'.  We don't want to generate an
+        <xsl:when test="./inset:Tabular">
+            <!-- Tables are generated inside an otherwise empty
+                 layout:Standard.  We don't want to generate an
                  unnecessary <t></t> around the <texttable>.  -->
-            <xsl:apply-templates select="child::table"/>
+            <xsl:apply-templates select="./inset:Tabular/lyxtabular"/>
         </xsl:when>
-        <xsl:when test="..[name() = 'li']">
+        <xsl:when test="../layout:Enumerate or ../layout:Itemize or ../">
             <!-- Paragraphs in list items should generate vspace
                  elements but no t elements.  -->
                  <xsl:element name="vspace">
@@ -290,13 +285,83 @@
     </xsl:choose>
 </xsl:template>
 
+
+<!-- Lists -->
+<xsl:template match="layout:Itemize[not(preceding-sibling::layout:Itemize)]">
+    <xsl:variable name="dot" value="."/>
+    <!-- Put contiguous layout:Itemize elements into a bullet list -->
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="symbols"/>
+        <xsl:for-each-group
+            select="layout:Itemize"
+            group-adjacent="boolean(self::layout:Itemize) or boolean(self::deeper)">
+            <xsl:if test="current-group()[1] is $dot">
+                <xsl:apply-templates select="current-group()" mode="li">
+            </xsl:if>
+        </xsl:for-each-group>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="layout:Enumerate[not(preceding-sibling::layout:Enumerate)]">
+    <xsl:variable name="dot" value="."/>
+    <!-- Put contiguous layout:Enumerate elements into a numbered list -->
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="numbers"/>
+        <xsl:for-each-group
+            select="layout:Enumerate"
+            group-adjacent="boolean(self::layout:Enumerate) or boolean(self::deeper)">
+            <xsl:if test="current-group()[1] is $dot">
+                <xsl:apply-templates select="current-group()" mode="li">
+            </xsl:if>
+        </xsl:for-each-group>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="layout:Description[not(preceding-sibling::layout:Description)]">
+    <xsl:variable name="dot" value="."/>
+    <!-- Put contiguous layout:Enumerate elements into a numbered list -->
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="hanging"/>
+        <xsl:for-each-group
+            select="layout:Description"
+            group-adjacent="boolean(self::layout:Description) or boolean(self::deeper)">
+            <xsl:if test="current-group()[1] is $dot">
+                <xsl:apply-templates select="current-group()" mode="li">
+            </xsl:if>
+        </xsl:for-each-group>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="layout:deeper">
+    <!-- There should only be list elements here.  If there's any
+         standard layouts... they'll just screw things up.  As long as
+         there's just list item child elements we'll get a nice nested
+         list as a result of this. -->
+    <xsl:apply-templates select="*"/>
+</xsl:template>
+
+<!-- List elements -->
+<xsl:template mode="li" match="layout:*[local-name() = 'Itemize' or local-name = 'Enumerate']">
+    <xsl:element name="t">
+        <xsl:copy-of select="text()"/>
+    </xsl:element>
+</xsl:template>
+<!-- Description lists require parsing out the freaking first text()
+     node.  Argh.  This is really not satisfactory though.  -->
+<xsl:template mode="li" match="layout:Description">
+    <xsl:element name="t">
+        <xsl:attribute name="hangText">
+            <xsl:value-of select="substring-before(text()[1], ' ')"/>
+        </xsl:attribute>
+        <xsl:text><xsl:value-of select="substring-after(text()[1], ' ')"/></xsl:text>
+        <xsl:copy-of select="(*|text()) except (text()[1])"/>
+    </xsl:element>
+</xsl:template>
+
 <!-- XXX What was this about? XXX Remove? -->
 <xsl:template match="text()[starts-with(., ']') or ends-with(., '[')]">
     <xsl:value-of select="replace(replace(., '\[$', ''), '^\]', '')"/>
 </xsl:template>
 
 <!-- crefs (editorial comments) -->
-<xsl:template match="div[@class='revisionremark']">
+<xsl:template match="layout:RevisionRemark">
     <xsl:element name="t">
         <xsl:element name="cref">
             <xsl:apply-templates/>
@@ -395,17 +460,14 @@
 </xsl:template>
 
 <!-- Figures (we only really support ASCII figures) -->
-<xsl:template match="div[@class='float float-figure']">
+<xsl:template match="inset:Float[@Float='figure']">
     <xsl:element name="t">
         <xsl:element name="figure">
-            <!-- Any anchor will do, but hopefully we have one added by
-                 the author -->
-            <xsl:attribute name="anchor" select="(.//div/a/@id)[last()]"/>
+            <xsl:attribute name="anchor"
+                select="(./inset:CommandInset[@CommandInset='label']/@name)[1] or generate-id()"/>
 
-            <!-- Caption (title).  Once more we must clean up
-                 gratouitous newlines inserted by LyX.  -->
             <xsl:attribute name="title"
-                select="normalize-space(string-join(div/div[@class='float-caption float-caption-figure']/div/text(), ''))"/>
+                select="normalize-space(layout:Plain/inset:Caption/layout:Plain)"/>
 
             <!-- The actual figure.  No need to deal with escaping
                  (or, rather, treating the artwork as CDATA) because LyX
