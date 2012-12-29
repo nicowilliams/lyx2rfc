@@ -108,9 +108,8 @@
             select="normalize-space(./div)"/>
     </xsl:attribute>
 </xsl:template>
-<xsl:template match="div[matches(@class, 'flex_(ipr|updates|obsoletes)')]">
-    <xsl:variable name="attrname" select="substring-after(@class,
-        'flex_')"/>
+<xsl:template match="flex:IPR or flex:Updates or flex:Obsoletes">
+    <xsl:variable name="attrname" select="substring-after(local-name(), ':')"/>
     <xsl:attribute name="{$attrname}"><xsl:value-of
             select="normalize-space(./div)"/>
     </xsl:attribute>
@@ -124,7 +123,7 @@
 
     <!-- Emit XML ENTITY declarations for bibxml references -->
     <xsl:for-each
-        select="//div[@class = 'flex_bibxml']//a[ends-with(@href, '.xml') and not(starts-with(@href, 'file:'))]">
+        select="//flex:BibXML/layout:Plain/inset:CommandInset[@CommandInset='href' and not(starts-with(@target, 'file:'))]/@name">
         <!-- NOTE: For some reason moving this into templates causes the
              ENTITY generation to fail... -->
         <xsl:text disable-output-escaping="yes">
@@ -141,7 +140,7 @@
 
     <!-- Emit XML ENTITY declarations for *local* bibxml references -->
     <xsl:for-each
-        select="//div[@class = 'flex_bibxml']//a[ends-with(@href, '.xml') and starts-with(@href, 'file:')]">
+        select="//flex:BibXML/layout:Plain/inset:CommandInset[starts-with(@target, 'file:')]/@name">
         <!-- NOTE: For some reason moving this into templates causes the
              ENTITY generation to fail... -->
         <xsl:text disable-output-escaping="yes">
@@ -162,15 +161,17 @@
     <!-- Emit <rfc> element -->
     <xsl:element name="rfc">
         <!-- Handle attributes of <rfc> -->
-        <xsl:apply-templates select="body//div[matches(@class, 'flex_(docname|intendedstatus|ipr|updates|obsoletes|seriesno)')]"/>
+        <xsl:apply-templates select="body//flex:*[matches(local-name(), '(DocName|IntendedStatus|IPR|Updates|Obsoletes|SeriesNo)')]"/>
 
         <!-- Emit <front> element -->
         <xsl:element name="front">
             <!-- Grab the title -->
             <xsl:element name="title">
-                <xsl:if test="//div[@class = 'flex_titleabbrev']">
+                <!-- XXX Should we count() and make sure there's only
+                     one flex:TitleAbbrev? -->
+                <xsl:if test="//flex:TitleAbbrev">
                     <xsl:attribute name="abbrev"
-                        select="normalize-space(//div[@class = 'flex_titleabbrev'])"/>
+                        select="normalize-space((//flex:TitleAbbrev)[0])"/>
                 </xsl:if>
                 <xsl:value-of select="./head/title"/>
             </xsl:element>
@@ -187,11 +188,11 @@
             </xsl:element>
 
             <!-- Emit <area> and <workgroup> elements -->
-            <xsl:apply-templates select=".//div[starts-with(@class, 'flex_ietf')]"/>
+            <xsl:apply-templates select=".//flex:[starts-with(local-name(), 'IETF')]"/>
 
             <!-- Emit <keyword> element -->
             <xsl:element name="keyword">
-                <xsl:value-of select="normalize-space(.//div[@class='flex_xml_rfckeyword'])"/>
+                <xsl:value-of select="normalize-space(.//flex:XML2RFCKeyword)"/>
             </xsl:element>
 
             <!-- Grab the abstract (should use apply-templates instead
@@ -210,12 +211,12 @@
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:ietfarea">
+<xsl:template match="flex:IETFArea">
     <xsl:element name="area">
         <xsl:value-of select="."/>
     </xsl:element>
 </xsl:template>
-<xsl:template match="flex:ietfworkinggroup">
+<xsl:template match="flex:IETFWorkingGroup">
     <xsl:element name="workgroup">
         <xsl:value-of select="."/>
     </xsl:element>
@@ -304,7 +305,7 @@
 </xsl:template>
 
 <!-- xrefs to bibxml (citations) -->
-<xsl:template match="flex:entityxref">
+<xsl:template match="flex:EntityXRef">
     <xsl:element name="xref">
         <xsl:attribute name="target">
             <xsl:value-of select="normalize-space(.)"/>
@@ -430,10 +431,10 @@
 </xsl:template>
 
 <!-- erefs -->
-<xsl:template match="a[@href and not(starts-with(@href, '#')) and ../..[name() != 'div' or @class != 'flex_bibxml']]">
+<xsl:template match="inset:CommandInset[@CommandInset = 'ref']">
     <xsl:element name="eref">
         <xsl:attribute name="target">
-            <xsl:value-of select="./@href"/>
+            <xsl:value-of select="./@reference"/>
         </xsl:attribute>
     </xsl:element>
 </xsl:template>
@@ -480,10 +481,10 @@
     <xsl:variable name="cur_sect" select="current()"/>
     <xsl:if test="not(following-sibling::div[
             (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
-            ]/div[@class = 'flex_bibxml']/div/a or
+            ]/flex:BibXML or
             following-sibling::div[
             (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()]
-            is $cur_sect]/div[@class = 'flex_embeddedbibxml'])">
+            is $cur_sect]/flex:EmbeddedBibXML)">
         <xsl:apply-templates select="current()" mode="midsect2"/>
     </xsl:if>
 </xsl:template>
@@ -534,10 +535,10 @@
     <xsl:variable name="cur_sect" select="current()"/>
     <xsl:if test="following-sibling::div[
             (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
-            ]/div[@class = 'flex_bibxml']/div/a or
+            ]/flex:BibXML/div/a or
             following-sibling::div[
             (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
-            ]/div[@class = 'flex_embeddedbibxml']">
+            ]/flex:EmbeddedBibXML">
         <xsl:apply-templates select="current()" mode="refsect2"/>
     </xsl:if>
 </xsl:template>
@@ -558,12 +559,10 @@
         <!-- Get the references -->
         <xsl:apply-templates
             select="(following-sibling::div[
-                (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/div[
-                @class = 'flex_bibxml']/div/a)"/>
+                (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/flex:BibXML/layout:Plain/inset:CommandInset)"/>
         <xsl:apply-templates
             select="(following-sibling::div[
-                (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/div[
-                @class = 'flex_embeddedbibxml'])"/>
+                (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/flex:EmbeddedBibXML)"/>
 
     </xsl:element>
 
@@ -580,15 +579,15 @@
 </xsl:template>
 
 <!-- Emit processing instructions -->
-<xsl:template match="div[starts-with(@class, 'flex_pi_')]">
+<xsl:template match="flex:*[starts-with(local-name(), 'PI_')]">
     <xsl:processing-instruction name="rfc">
-        <xsl:value-of select="replace(@class, '^flex_pi_', '')"/>
+        <xsl:value-of select="replace(local-name(), '^PI_', '')"/>
         <xsl:text>="</xsl:text>
         <xsl:value-of select="normalize-space(.)"/>
         <xsl:text>"</xsl:text>
     </xsl:processing-instruction>
 </xsl:template>
-<xsl:template match="flex:pi">
+<xsl:template match="flex:PI">
     <xsl:processing-instruction name="rfc">
         <xsl:value-of select="normalize-space(.)"/>
     </xsl:processing-instruction>
@@ -596,7 +595,7 @@
 
 <!-- Emit references -->
 <xsl:template
-    match="a[ends-with(@href, '.xml') and ../..[@class = 'flex_bibxml']]">
+    match="inset:CommandInset[@CommandInset = 'href' and ends-with(@target, '.xml') and ../..[@local-name = 'BibXML']]">
     <xsl:text disable-output-escaping="yes">&amp;</xsl:text>
     <xsl:value-of select="normalize-space(.)"/>
     <xsl:text disable-output-escaping="yes">;&#xA;</xsl:text>
@@ -611,9 +610,9 @@
 <xsl:template match="flex:authororg">
     <xsl:element name='organization'>
         <xsl:choose>
-            <xsl:when test="../div[@class = 'flex_authororgabbrev']">
+            <xsl:when test="../flex:AuthorOrgAbbrev">
                 <xsl:attribute name="abbrev">
-                    <xsl:value-of select="normalize-space(../div[@class = 'flex_authororgabbrev']/div)"/>
+                    <xsl:value-of select="normalize-space(../flex:AuthorOrgAbbrev/layout:Plain)"/>
                 </xsl:attribute>
             </xsl:when>
         </xsl:choose>
