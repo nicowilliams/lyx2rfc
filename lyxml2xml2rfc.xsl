@@ -92,26 +92,26 @@
 <!-- Handle attributes of <rfc> -->
 <!-- XXX Dang, we lose the case in custom inset names, so we must
      special-case docName and seriesNo :( -->
-<xsl:template match="flex:docname">
+<xsl:template match="flex:DocName">
     <xsl:attribute name="docName"><xsl:value-of
-            select="normalize-space(./div)"/>
+            select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
 <!-- XXX Should have used a custom inset name of Category -->
-<xsl:template match="flex:intendedstatus">
+<xsl:template match="flex:IntendedStatus">
     <xsl:attribute name="category"><xsl:value-of
-            select="normalize-space(./div)"/>
+            select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
-<xsl:template match="flex:seriesno">
+<xsl:template match="flex:SeriesNo">
     <xsl:attribute name="seriesNo"><xsl:value-of
-            select="normalize-space(./div)"/>
+            select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
 <xsl:template match="flex:IPR or flex:Updates or flex:Obsoletes">
     <xsl:variable name="attrname" select="substring-after(local-name(), ':')"/>
     <xsl:attribute name="{$attrname}"><xsl:value-of
-            select="normalize-space(./div)"/>
+            select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
 
@@ -177,7 +177,7 @@
             </xsl:element>
 
             <!-- Emit the <author> elements -->
-            <xsl:apply-templates select="//div[@class='author']/div[@class='author_item']"/>
+            <xsl:apply-templates select="//layout:Author"/>
 
             <!-- Emit <date> -->
             <xsl:element name="date">
@@ -198,7 +198,7 @@
             <!-- Grab the abstract (should use apply-templates instead
                  of for-each...) -->
             <xsl:element name="abstract">
-                <xsl:for-each select="//div[@class='abstract_item']">
+                <xsl:for-each select="//layout:Abstract">
                     <xsl:element name="t">
                         <xsl:value-of select="."/>
                     </xsl:element>
@@ -602,12 +602,12 @@
 </xsl:template>
 
 <xsl:template
-    match="flex:embeddedbibxml">
+    match="flex:EmbeddedBibXML">
     <xsl:value-of disable-output-escaping="yes" select="./div[@class = 'plain_layout']"/>
 </xsl:template>
 
 <!-- Author metadata templates (for the <author> elements) -->
-<xsl:template match="flex:authororg">
+<xsl:template match="flex:AuthorOrg">
     <xsl:element name='organization'>
         <xsl:choose>
             <xsl:when test="../flex:AuthorOrgAbbrev">
@@ -620,58 +620,58 @@
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoraddrstreet">
+<xsl:template match="flex:AuthorAddrStreet">
     <xsl:element name='street'>
         <xsl:value-of select="normalize-space(.)"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoraddrcity">
+<xsl:template match="flex:AuthorAddrCity">
     <xsl:element name='city'>
         <xsl:value-of select="normalize-space(.)"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoraddrregion">
+<xsl:template match="flex:AuthorAddrRegion">
     <xsl:element name='region'>
         <xsl:value-of select="normalize-space(.)"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoraddrcode">
+<xsl:template match="flex:AuthorAddrCode">
     <xsl:element name='code'>
         <xsl:value-of select="normalize-space(.)"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoraddrcountry">
+<xsl:template match="flex:AuthorAddrCountry">
     <!-- We don't want to have to nest insets for these things in LyX
          documents, but xml2rfc requires nesting, thus the use of ..
          here. -->
     <xsl:element name='postal'>
-        <xsl:apply-templates select="../div[@class = 'flex_authoraddrstreet']"/>
-        <xsl:apply-templates select="../div[@class = 'flex_authoraddrcity']"/>
-        <xsl:apply-templates select="../div[@class = 'flex_authoraddrregion']"/>
-        <xsl:apply-templates select="../div[@class = 'flex_authoraddrcode']"/>
+        <xsl:apply-templates select="../flex:AuthorAddrStreet"/>
+        <xsl:apply-templates select="../flex:AuthorAddrCity"/>
+        <xsl:apply-templates select="../flex:AuthorAddrRegion"/>
+        <xsl:apply-templates select="../flex:AuthorAddrCode"/>
         <xsl:element name="country">
             <xsl:value-of select="normalize-space(./div)"/>
         </xsl:element>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authorphone">
+<xsl:template match="flex:AuthorPhone">
     <xsl:element name='phone'>
         <xsl:value-of select="normalize-space(./div)"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoruri">
+<xsl:template match="flex:AuthorURI">
     <xsl:element name='uri'>
         <xsl:value-of select="normalize-space(./div)"/>
     </xsl:element>
 </xsl:template>
 
-<xsl:template match="flex:authoremailaddr">
+<xsl:template match="flex:AuthorEmailAddr">
     <xsl:element name='email'>
         <xsl:value-of select="normalize-space(./div)"/>
     </xsl:element>
@@ -689,8 +689,8 @@
              XSLT conditionals are exceedingly verbose! :( -->
         <xsl:attribute name="initials">
             <xsl:choose>
-                <xsl:when test="./div[@class='flex_authorinitials']/div">
-                    <xsl:value-of select="normalize-space(./div[@class='flex_authorinitials']/div)"/>
+                <xsl:when test="./flex:AuthorInitials/layout:Plain">
+                    <xsl:value-of select="normalize-space(./flex:authorinitials/layout:Plain)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of
@@ -700,8 +700,8 @@
         </xsl:attribute>
         <xsl:attribute name="surname">
             <xsl:choose>
-                <xsl:when test="./div[@class='flex_authorsurname']/div">
-                    <xsl:value-of select="normalize-space(./div[@class='flex_authorsurname']/div)"/>
+                <xsl:when test="./flex:authorsurname/layout:Plain">
+                    <xsl:value-of select="normalize-space(./flex:authorsurname/layout:Plain)"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:value-of
@@ -714,7 +714,7 @@
         </xsl:attribute>
 
         <!-- Organization element -->
-        <xsl:apply-templates select=".//div[@class='flex_authororg']"/>
+        <xsl:apply-templates select=".//flex:authororg"/>
 
         <!-- Address element.  We try hard to avoid an empty address
              element.  It'd be so nice to have an attribute of
@@ -724,17 +724,17 @@
             <!-- Add an address element IFF there are either author
                  postal address elements, author phone number, author
                  URI, or author e-mail elements -->
-            <xsl:when test=".//div[@class='flex_authoremailaddr'] |
-                            .//div[@class='flex_authoruri'] |
-                            .//div[@class='flex_authorphone'] |
-                            .//div[@class='flex_authoraddrcountry']">
+            <xsl:when test=".//flex:AuthorEmailAddr |
+                            .//flex:AuthorURI |
+                            .//flex:AuthorPhone |
+                            .//flex:AuthorAddrCountry">
                 <xsl:element name='address'>
                     <!-- Add a postal element IFF there's a country name -->
-                    <xsl:apply-templates select=".//div[@class='flex_authoraddrcountry']"/>
+                    <xsl:apply-templates select=".//flex:AuthorAddrCountry"/>
                     <!-- Add phone, email, uri elements -->
-                    <xsl:apply-templates select=".//div[@class='flex_authoremailaddr']"/>
-                    <xsl:apply-templates select=".//div[@class='flex_authorphone']"/>
-                    <xsl:apply-templates select=".//div[@class='flex_authoruri']"/>
+                    <xsl:apply-templates select=".//flex:AuthorEmailAddr"/>
+                    <xsl:apply-templates select=".//flex:AuthorPhone"/>
+                    <xsl:apply-templates select=".//flex:AuthorURI"/>
                 </xsl:element>
             </xsl:when>
         </xsl:choose>
