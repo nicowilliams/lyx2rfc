@@ -293,7 +293,7 @@
     <xsl:element name="list">
         <xsl:attribute name="style" select="symbols"/>
         <xsl:for-each-group
-            select="layout:Itemize"
+            select=". | following-sibling::layout:Itemize"
             group-adjacent="boolean(self::layout:Itemize) or boolean(self::deeper)">
             <xsl:if test="current-group()[1] is $dot">
                 <xsl:apply-templates select="current-group()" mode="li">
@@ -307,7 +307,7 @@
     <xsl:element name="list">
         <xsl:attribute name="style" select="numbers"/>
         <xsl:for-each-group
-            select="layout:Enumerate"
+            select=". | following-sibling::layout:Enumerate"
             group-adjacent="boolean(self::layout:Enumerate) or boolean(self::deeper)">
             <xsl:if test="current-group()[1] is $dot">
                 <xsl:apply-templates select="current-group()" mode="li">
@@ -321,7 +321,7 @@
     <xsl:element name="list">
         <xsl:attribute name="style" select="hanging"/>
         <xsl:for-each-group
-            select="layout:Description"
+            select=". | following-sibling::layout:Description"
             group-adjacent="boolean(self::layout:Description) or boolean(self::deeper)">
             <xsl:if test="current-group()[1] is $dot">
                 <xsl:apply-templates select="current-group()" mode="li">
@@ -539,31 +539,31 @@
 
 <!-- Sections -->
 
-<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section')]" mode="midsect1">
+<xsl:template match="*[matches(local-name(), '^(Subsubs|Subs|S)ection')]" mode="midsect1">
     <xsl:variable name="cur_sect" select="current()"/>
-    <xsl:if test="not(following-sibling::div[
-            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
+    <xsl:if test="not(following-sibling::*[
+            (preceding-sibling::*[matches(name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect
             ]/flex:BibXML or
-            following-sibling::div[
-            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()]
-            is $cur_sect]/flex:EmbeddedBibXML)">
+            following-sibling::*[
+            (preceding-sibling::*[matches(name(), '(Subsubs|Subs|S)ection')])[last()] is $cur_sect]/flex:EmbeddedBibXML)">
         <xsl:apply-templates select="current()" mode="midsect2"/>
     </xsl:if>
 </xsl:template>
 
-<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section')]" mode="midsect2">
+<xsl:template match="*[matches(name(), '^(Subsubs|Subs|S)ection') and ends-with(@class, 'section')]" mode="midsect2">
 
-    <!-- N is the integer in hN -->
-    <xsl:variable name="N" select="substring-after(name(), 'h') cast as xs:integer"/>
-    <xsl:variable name="thisHN" select="name()"/>
-    <xsl:variable name="id" select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+    <!-- N is the section depth -->
+    <xsl:variable name="N" select="if (local-name() = 'Section') then 1
+        else if (local-name() = 'Subsection') then 2 else 3"/>
+    <xsl:variable name="thisSect" select="name()"/>
+    <xsl:variable name="id" select="inset:CommandInset[@CommandInset='label']/@label"/>
     <!-- We refer to this <hN> in various XPath contexts below where
          current() will no longer be this <h2>, so we need to save it -->
     <xsl:variable name="cur_sect" select="current()"/>
 
     <xsl:element name="section">
-        <!-- LyXHTML sadly adds unnecessary newlines to hN elements'
-             text nodes -->
+        <!-- LyX sadly adds unnecessary newlines to section elements'
+             text() nodes -->
         <xsl:attribute name="title"
             select="normalize-space(string-join(text(), ''))"/>
 
@@ -575,15 +575,15 @@
              siblings of this <hN> where the nodes we're looking for are
              NOT hN, and their preceding <hN> is this one. -->
         <xsl:apply-templates
-            select="(following-sibling::*[not(matches(name(), '^h[2-9]')) and
-                (preceding-sibling::*[matches(name(), '^h[2-9]')])[last()] is $cur_sect])"/>
+            select="(following-sibling::*[not(matches(name(), '^(Subsubs|Subs|S)ection')) and
+                (preceding-sibling::*[matches(name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect])"/>
 
         <!-- Handle sub-sections of this section.  Ask for all sibling
              hNs of this hN where their preceding parent hN is
              this one.  -->
         <xsl:apply-templates
-            select="following-sibling::*[matches(name(), '^h[2-9]') and
-                (preceding-sibling::*[name() = $thisHN])[last()] is $cur_sect and
+            select="following-sibling::*[matches(name(), '^(Subsubs|Subs|S)ection') and
+                (preceding-sibling::*[name() = $thisSect])[last()] is $cur_sect and
                 (substring-after(name(), 'h') cast as xs:integer = ($N + 1))
                 ]"
             mode="midsect2"/>
@@ -593,23 +593,25 @@
 
 <!-- References -->
 
-<xsl:template match="*[matches(name(), '^h[2-9]') and ends-with(@class, 'section')]" mode="refsect1">
+<xsl:template match="*[matches(name(), '^(Subsubs|Subs|S)ection') and ends-with(@class, 'section')]" mode="refsect1">
     <xsl:variable name="cur_sect" select="current()"/>
-    <xsl:if test="following-sibling::div[
-            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
-            ]/flex:BibXML/div/a or
-            following-sibling::div[
-            (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect
+    <xsl:if test="following-sibling::layout:*[
+            (preceding-sibling::*[matches(name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect
+            ]/flex:BibXML or
+            following-sibling::*[
+            (preceding-sibling::*[matches(name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect
             ]/flex:EmbeddedBibXML">
         <xsl:apply-templates select="current()" mode="refsect2"/>
     </xsl:if>
 </xsl:template>
 
-<xsl:template match="*[matches(name(), '^h[2-9]')]" mode="refsect2">
+<xsl:template match="*[matches(name(), '^(Subsubs|Subs|S)ection')]" mode="refsect2">
 
-    <xsl:variable name="N" select="substring-after(name(), 'h') cast as xs:integer"/>
-    <xsl:variable name="thisHN" select="name()"/>
-    <xsl:variable name="id" select="a[not(starts-with(@id, 'magicparlabel-'))]/@id"/>
+    <!-- N is the section depth -->
+    <xsl:variable name="N" select="if (local-name() = 'Section') then 1
+        else if (local-name() = 'Subsection') then 2 else 3"/>
+    <xsl:variable name="thisSect" select="name()"/>
+    <xsl:variable name="id" select="inset:CommandInset[@CommandInset='label']/@label"/>
     <xsl:variable name="cur_sect" select="current()"/>
 
     <xsl:element name="references">
@@ -620,10 +622,10 @@
 
         <!-- Get the references -->
         <xsl:apply-templates
-            select="(following-sibling::div[
+            select="(following-sibling::*[
                 (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/flex:BibXML/layout:Plain/inset:CommandInset)"/>
         <xsl:apply-templates
-            select="(following-sibling::div[
+            select="(following-sibling::*[
                 (preceding-sibling::*[matches(name(), '^h[0-9]')])[last()] is $cur_sect]/flex:EmbeddedBibXML)"/>
 
     </xsl:element>
@@ -633,8 +635,8 @@
          in LyX.  Note that this code is the same as for regular
          sections, except that it follows the <references> element. -->
     <xsl:apply-templates
-        select="following-sibling::*[matches(name(), '^h[2-9]') and
-            (preceding-sibling::*[name() = $thisHN])[last()] is $cur_sect and
+        select="following-sibling::*[matches(name(), '^(Subsubs|Subs|S)ection') and
+            (preceding-sibling::*[name() = $thisSect])[last()] is $cur_sect and
             (substring-after(name(), 'h') cast as xs:integer = ($N + 1))
             ]"
         mode="refsect2"/>
@@ -665,7 +667,7 @@
 
 <xsl:template
     match="flex:EmbeddedBibXML">
-    <xsl:value-of disable-output-escaping="yes" select="./div[@class = 'plain_layout']"/>
+    <xsl:value-of disable-output-escaping="yes" select="./layout:Plain"/>
 </xsl:template>
 
 <!-- Author metadata templates (for the <author> elements) -->
@@ -678,7 +680,7 @@
                 </xsl:attribute>
             </xsl:when>
         </xsl:choose>
-        <xsl:value-of select="normalize-space(div)"/>
+        <xsl:value-of select="normalize-space(layout:Plain)"/>
     </xsl:element>
 </xsl:template>
 
@@ -716,31 +718,31 @@
         <xsl:apply-templates select="../flex:AuthorAddrRegion"/>
         <xsl:apply-templates select="../flex:AuthorAddrCode"/>
         <xsl:element name="country">
-            <xsl:value-of select="normalize-space(./div)"/>
+            <xsl:value-of select="normalize-space(./layout:Plain)"/>
         </xsl:element>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="flex:AuthorPhone">
     <xsl:element name='phone'>
-        <xsl:value-of select="normalize-space(./div)"/>
+        <xsl:value-of select="normalize-space(./layout:Plain)"/>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="flex:AuthorURI">
     <xsl:element name='uri'>
-        <xsl:value-of select="normalize-space(./div)"/>
+        <xsl:value-of select="normalize-space(./layout:Plain)"/>
     </xsl:element>
 </xsl:template>
 
 <xsl:template match="flex:AuthorEmailAddr">
     <xsl:element name='email'>
-        <xsl:value-of select="normalize-space(./div)"/>
+        <xsl:value-of select="normalize-space(./layout:Plain)"/>
     </xsl:element>
 </xsl:template>
 
 <!-- Process author data -->
-<xsl:template match="div[@class='author_item']">
+<xsl:template match="layout:Author">
     <!-- Author element -->
     <xsl:element name='author'>
         <!-- Initials and surname attributes and various sub-elements...
