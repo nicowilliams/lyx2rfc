@@ -255,6 +255,11 @@
     </xsl:element>
 </xsl:template>
 
+<!-- Weird LyX quotes -->
+<xsl:template match="Quotes[@Quotes='eld' or @Quotes='erd']">
+    <xsl:text>"</xsl:text>
+</xsl:template>
+
 <!-- Plain paragraphs -->
 <xsl:template match="layout:Standard">
     <xsl:choose>
@@ -387,76 +392,6 @@
         <xsl:apply-templates/>
     </xsl:element>
     <xsl:text> </xsl:text>
-</xsl:template>
-
-<!-- Lists! -->
-<xsl:template match="ul[../name() != 'dd' and ../name() != 'li']">
-    <!-- Unnumbered list NOT nested in a another list -->
-    <xsl:element name="t">
-        <xsl:element name="list">
-            <xsl:attribute name="style">symbols</xsl:attribute>
-            <xsl:apply-templates select="li"/>
-        </xsl:element>
-    </xsl:element>
-</xsl:template>
-<xsl:template match="ul[../name() = 'dd' or ../name() = 'li']">
-    <!-- Unnumbered list nested in a list.  In a nested list we don't
-         want to nest <t> in <t>. -->
-    <xsl:element name="list">
-        <xsl:attribute name="style">symbols</xsl:attribute>
-        <xsl:apply-templates select="li"/>
-    </xsl:element>
-</xsl:template>
-
-<!-- Ditto numbered lists -->
-<xsl:template match="ol[../name() != 'dd' and ../name() != 'li']">
-    <xsl:element name="t">
-        <xsl:element name="list">
-            <xsl:attribute name="style">numbers</xsl:attribute>
-            <xsl:apply-templates select="li"/>
-        </xsl:element>
-    </xsl:element>
-</xsl:template>
-<xsl:template match="ol[../name() = 'dd' or ../name() = 'li']">
-    <xsl:element name="list">
-        <xsl:attribute name="style">numbers</xsl:attribute>
-        <xsl:apply-templates select="li"/>
-    </xsl:element>
-</xsl:template>
-
-<!-- List elements -->
-<xsl:template match="li">
-    <xsl:element name="t">
-        <xsl:apply-templates/>
-    </xsl:element>
-</xsl:template>
-
-<!-- Description lists -->
-<xsl:template match="dl">
-    <xsl:element name="t">
-        <xsl:element name="list">
-            <xsl:attribute name="style">hanging</xsl:attribute>
-            <xsl:apply-templates select="dt"/>
-        </xsl:element>
-    </xsl:element>
-</xsl:template>
-
-<!-- Description list elements -->
-<xsl:template match="dt">
-    <xsl:element name="t">
-        <!-- Since the dt goes in an attribute value using
-             apply-templates here seems risky - we'd have to have a
-             predicate on various templates checking that we're a child
-             (or not) of a <dt> element.  If not risky, then at least
-             very verbose. -->
-        <xsl:attribute name="hangText" select="."/>
-        <!-- Grab the immediately following dd element -->
-        <xsl:apply-templates select="(following-sibling::dd)[1]"/>
-    </xsl:element>
-</xsl:template>
-<xsl:template match="dd">
-    <!-- Whereas here it's safe to apply-templates -->
-    <xsl:apply-templates/>
 </xsl:template>
 
 <!-- Figures (we only really support ASCII figures) -->
