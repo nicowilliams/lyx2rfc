@@ -1,0 +1,107 @@
+Description: Initial makefile and man page
+ .
+ lyx2rfc (1.0-1) unstable; urgency=low
+ .
+   * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+Author: Yaron Sheffer <yaronf.ietf@gmail.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- /dev/null
++++ lyx2rfc-1.0/lyx2rfc.1
+@@ -0,0 +1,61 @@
++.\"                                      Hey, EMACS: -*- nroff -*-
++.\" First parameter, NAME, should be all caps
++.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
++.\" other parameters are allowed: see man(7), man(1)
++.TH LYX2RFC 1 "December  7, 2012"
++.\" Please adjust this date whenever revising the manpage.
++.\"
++.\" Some roff macros, for reference:
++.\" .nh        disable hyphenation
++.\" .hy        enable hyphenation
++.\" .ad l      left justify
++.\" .ad b      justify to both left and right margins
++.\" .nf        disable filling
++.\" .fi        enable filling
++.\" .br        insert line break
++.\" .sp <n>    insert n+1 empty lines
++.\" for manpage-specific macros, see man(7)
++.SH NAME
++lyx2rfc \- converts lyx Internet Drafts and RFCs into other formats
++.SH SYNOPSIS
++.B lyx2rfc
++.RI [ options ] " files" ...
++.br
++.SH DESCRIPTION
++This manual page documents briefly the
++.B lyx2rfc
++command.
++.PP
++.\" TeX users may be more comfortable with the \fB<whatever>\fP and
++.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
++.\" respectively.
++\fBlyx2rfc\fP converts a source document into text, HTML and XML formats. The
++text and XML formats can be used when submitting the document as an Internet
++Draft (I-D) to the IETF.
++.br
++See more information in the User's Guide (under /usr/share/doc/lyx2rfc), or
++simply start by copying the sample I-D (in the same directory)
++and editing it to your taste.
++.SH OPTIONS
++This program follows the usual GNU command line syntax, with long
++options starting with two dashes (`-').
++A summary of options is included below.
++For a complete description, see the Info files.
++.TP
++.B \-h, \-\-help
++Show summary of options.
++.TP
++.B \-v, \-\-version
++Show version of program.
++.SH SEE ALSO
++.BR xml2rfc (1),
++.BR lyx (1).
++.br
++The program is documented fully by
++.IR "The lyx2rfc User's Guide",
++available in several formats under /usr/share/doc/lyx2rfc.
++.SH AUTHOR
++lyx2rfc was written by Nico Williams.
++.PP
++This manual page was written by Yaron Sheffer <yaronf.ietf@gmail.com>,
++for the Debian project (and may be used by others).
+--- /dev/null
++++ lyx2rfc-1.0/Makefile
+@@ -0,0 +1,20 @@
++prefix = /usr
++bindir = $(prefix)/bin
++sharedir = $(prefix)/share
++mandir = $(sharedir)/man
++man1dir = $(mandir)/man1
++mydir = $(sharedir)/lyx2rfc
++
++my_files = lyxhtml2xml2rfc.xsl rfc2629.dtd rfc2629-other.ent rfc2629-xhtml.ent xhtml-math11-f.dtd custom_insets rfc2629.xslt
++
++all: 
++
++clean:
++	rm -f $(DESTDIR)$(bindir)/lyx2rfc
++	rm -f $(DESTDIR)$(man1dir)/lyx2rfc.1
++	rm -rf $(DESTDIR)$(mydir)
++
++install: all
++	install lyx2rfc $(DESTDIR)$(bindir)
++	install -m 0644 lyx2rfc.1 $(DESTDIR)$(man1dir)
++	install -m 0444 $(my_files) $(DESTDIR)$(mydir)

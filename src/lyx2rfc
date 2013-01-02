@@ -45,12 +45,30 @@ else
     ORIGIN=${PWD}
 fi
 
-XSL=$ORIGIN/lyxhtml2xml2rfc.xsl
+if [[ -d "$ORIGIN/../share/lyx2rfc" ]]; then
+    DATADIR=$ORIGIN/../share/lyx2rfc
+elif [[ -f "$ORIGIN/../data/rfc2629.dtd" ]]; then
+    DATADIR=$ORIGIN/../data
+elif [[ -f "$ORIGIN/rfc2629.dtd" ]]; then
+    DATADIR=$ORIGIN
+elif [[ "$ORIGIN" != $PWD && -f "$PWD/rfc2629.dtd" ]]; then
+    DATADIR=$PWD
+else
+    printf "Error: can't find lyx2rfc data directory; check installation\n" 1>&2
+    exit 1
+fi
+
+XSL=$DATADIR/lyxhtml2xml2rfc.xsl
 
 # Various DTDs
 LYX_XHTML_DTD=http://www.w3.org/TR/MathML2/dtd/xhtml-math11-f.dtd
 XHTML_DTD=http://www.w3.org/TR/2001/REC-MathML2-20010221/dtd/xhtml-math11-f.dtd
-LOCAL_XHTML_DTD=$ORIGIN/xhtml-math11-f.dtd
+
+if [[ -f $DATADIR/xhtml-math11-f.dtd ]]; then
+    LOCAL_XHTML_DTD=$DATADIR/xhtml-math11-f.dtd
+else
+    LOCAL_XHTML_DTD=$PWD/xhtml-math11-f.dtd
+fi
 
 function usage {
     cat <<EOF
@@ -165,17 +183,16 @@ if requested "$unpg"; then
 fi
 
 # Use Greenbytes' XSLT to produce HTML
+temp_files=false
 if requested "$html"; then
     printf "Applying the Julian Reschke's (Greenbytes) XSLT to produce HTML...\n"
     # Ugh: XSLT requires dependent files to be collocated with input file
     if [[ ! -f $target_dir/rfc2629.dtd ]]; then
-	temp_files=1
-	cp $ORIGIN/rfc2629.dtd $ORIGIN/rfc2629-xhtml.ent $ORIGIN/rfc2629-other.ent $target_dir
+	temp_files=true
+	cp $DATADIR/{rfc2629.dtd,rfc2629-xhtml.ent,rfc2629-other.ent} $target_dir
     fi
 
-    saxonb-xslt -s:"$xml" -xsl:${ORIGIN}/rfc2629.xslt > "$html"
+    saxonb-xslt -s:"$xml" -xsl:${DATADIR}/rfc2629.xslt > "$html"
 
-    if [[ $temp_files ]]; then
-	rm -f $target_dir/{rfc2629.dtd,rfc2629-xhtml.ent,rfc2629-other.ent}
-    fi
+    $temp_files && $target_dir/{rfc2629.dtd,rfc2629-xhtml.ent,rfc2629-other.ent}
 fi
