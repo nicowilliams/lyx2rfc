@@ -194,5 +194,5 @@ if requested "$html"; then
 
     saxonb-xslt -s:"$xml" -xsl:${DATADIR}/rfc2629.xslt > "$html"
 
-    $temp_files && $target_dir/{rfc2629.dtd,rfc2629-xhtml.ent,rfc2629-other.ent}
+    $temp_files && rm -f $target_dir/{rfc2629.dtd,rfc2629-xhtml.ent,rfc2629-other.ent}
 fi
