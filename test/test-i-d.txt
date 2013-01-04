@@ -4,8 +4,8 @@
 Network Working Group                                             J. Doe
 Internet-Draft                                                       Doe
 Updates: RFC2119 (if approved)                                J. Sixpack
-Intended status: Informational                         December 24, 2012
-Expires: June 27, 2013
+Intended status: Informational                           January 4, 2013
+Expires: July 8, 2013
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -16,7 +16,7 @@ Abstract
    This document proposes a classification scheme for HTTPbis
    authentication proposals, to help with analysis and selection.
 
-   Two paragrap abstract, eh?
+   Two paragraph abstract, eh?
 
 Status of this Memo
 
@@ -33,11 +33,11 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 27, 2013.
+   This Internet-Draft will expire on July 8, 2013.
 
 Copyright Notice
 
-   Copyright (c) 2012 IETF Trust and the persons identified as the
+   Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -52,9 +52,9 @@ Copyright Notice
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 1]
+Doe & Sixpack             Expires July 8, 2013                  [Page 1]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 Table of Contents
@@ -108,9 +108,9 @@ Table of Contents
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 2]
+Doe & Sixpack             Expires July 8, 2013                  [Page 2]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 1.  Introduction
@@ -156,7 +156,7 @@ Internet-Draft                Skeleton I-D                 December 2012
 
    o  or other
 
-   Now a desc list:
+   Now a description list:
 
 
 
@@ -164,9 +164,9 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 3]
+Doe & Sixpack             Expires July 8, 2013                  [Page 3]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
    item1  description of item 1
@@ -220,9 +220,9 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 4]
+Doe & Sixpack             Expires July 8, 2013                  [Page 4]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 2.  Details
@@ -276,9 +276,9 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 5]
+Doe & Sixpack             Expires July 8, 2013                  [Page 5]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 3.  Normative References
@@ -332,9 +332,9 @@ Internet-Draft                Skeleton I-D                 December 2012
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 6]
+Doe & Sixpack             Expires July 8, 2013                  [Page 6]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 Appendix A.  First Appendix
@@ -388,9 +388,9 @@ A.1.  Sub-Appendix
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 7]
+Doe & Sixpack             Expires July 8, 2013                  [Page 7]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 Appendix B.  Last Appendix
@@ -444,9 +444,9 @@ Appendix B.  Last Appendix
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 8]
+Doe & Sixpack             Expires July 8, 2013                  [Page 8]
 
-Internet-Draft                Skeleton I-D                 December 2012
+Internet-Draft                Skeleton I-D                  January 2013
 
 
 Authors' Addresses
@@ -500,5 +500,5 @@ Authors' Addresses
 
 
 
-Doe & Sixpack             Expires June 27, 2013                 [Page 9]
+Doe & Sixpack             Expires July 8, 2013                  [Page 9]
 
