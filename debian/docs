@@ -1,7 +1,7 @@
-lyx2rfc-user-guide.txt
-lyx2rfc-user-guide.lyx
-lyx2rfc-user-guide.html
+doc/lyx2rfc-user-guide.txt
+doc/lyx2rfc-user-guide.lyx
+doc/lyx2rfc-user-guide.html
 README
-test-i-d.txt
-test-i-d.lyx
-test-i-d.html
+test/test-i-d.txt
+test/test-i-d.lyx
+test/test-i-d.html

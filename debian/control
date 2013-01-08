@@ -11,7 +11,7 @@ Homepage: https://github.com/nicowilliams/lyx2rfc
 Package: lyx2rfc
 Architecture: all
 Depends: ${misc:Depends}, lyx, xml2rfc, libxml2-utils, libsaxonb-java
-Description: Create IETF document using the Lyx word processor	
- Forget about XML! Use the friendly Lyx word processor to create
+Description: Create IETF documents using the LyX word processor	
+ Forget about XML! Use the friendly LyX word processor to create
  Internet Drafts and RFCs. This package includes the conversion tool,
  a user guide and sample documents.
