@@ -549,8 +549,6 @@
     <xsl:element name="references">
         <xsl:attribute name="title"
             select="normalize-space(string-join(text(), ''))"/>
-        <xsl:attribute name="anchor"
-            select="if (string-length($id) > 0) then $id else generate-id()"/>
 
         <!-- Get the references -->
         <xsl:apply-templates
