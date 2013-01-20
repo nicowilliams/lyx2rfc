@@ -322,7 +322,7 @@
 </xsl:template>
 <xsl:template match="layout:Description[not(preceding-sibling::layout:Description)]">
     <xsl:variable name="dot" value="."/>
-    <!-- Put contiguous layout:Enumerate elements into a numbered list -->
+    <!-- Put contiguous layout:Description elements into a numbered list -->
     <xsl:element name="list">
         <xsl:attribute name="style" select="hanging"/>
         <xsl:for-each-group
@@ -348,21 +348,32 @@
         <xsl:copy-of select="text()"/>
     </xsl:element>
 </xsl:template>
-<!-- Description lists require parsing out the freaking first text()
-     node.  Argh.  This is really not satisfactory though.  -->
+
+<!-- Description lists have a description title and body, but the two
+     are separated by a solitary space in LyX.  What a pain!
+
+     We handle this by first setting the hangText attribute of the list
+     item (t) to substring-before(., ' ').  We obviously can't have
+     bolded/italicized/whatever text in the DL item title.
+
+     Then we apply template a special template to . that handles the DL
+     body and which does allow bolding and such.
+     -->
 <xsl:template mode="li" match="layout:Description">
+    <xsl:variable name='firstNodeWithSpace' select="(./*|text())[matches(., ' ')]"/>
     <xsl:element name="t">
-        <xsl:attribute name="hangText">
-            <xsl:value-of select="substring-before(text()[1], ' ')"/>
-        </xsl:attribute>
-        <xsl:text><xsl:value-of select="substring-after(text()[1], ' ')"/></xsl:text>
-        <xsl:copy-of select="(*|text()) except (text()[1])"/>
+        <xsl:attribute name="hangText" select="substring-before(., ' ')"/>
+        <xsl:apply-templates select="." mode="descriptionBody"/>
     </xsl:element>
 </xsl:template>
 
-<!-- XXX What was this about? XXX Remove? -->
-<xsl:template match="text()[starts-with(., ']') or ends-with(., '[')]">
-    <xsl:value-of select="replace(replace(., '\[$', ''), '^\]', '')"/>
+<xsl:template mode="descriptionBody">
+    <!-- Find the first text() node with a space in it -->
+    <xsl:variable name="nodeWithSpace" select="(text()[matches(., ' ')])[1]"/>
+    <!-- Grab the body part of that one text() node that has that space -->
+    <xsl:text select="substring-after($nodeWithSpace, ' ')"/>
+    <!-- Now apply templates to the siblings of that node. -->
+    <xsl:apply-templates select="(./*|text())[preceding-sibling::*[. is $nodeWithSpace]]"/>
 </xsl:template>
 
 <!-- crefs (editorial comments) -->
