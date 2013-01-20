@@ -44,6 +44,9 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:url="http://whatever/java/java.net.URLDecoder"
     xmlns:jxml="http://whatever/java/org.apache.commons.lang.StringEscapeUtils"
+    xmlns:flex="flex"
+    xmlns:layout="layout"
+    xmlns:inset="inset"
     exclude-result-prefixes="rfc"
     >
 
@@ -64,7 +67,7 @@
 <xsl:template match="/">
     <!-- Emit processing instructions -->
     <xsl:apply-templates select="//flex:PI"/>
-    <xsl:apply-templates select="//*[starts-with(name(), 'flex:PI_')"/>
+    <xsl:apply-templates select="//*[starts-with(name(), 'flex:PI_')]"/>
 
     <!-- Emit toc="yes" PI by default (but we could look for a 
          <inset:CommandInset CommandInset="toc" LatexCommand="tableofcontents">
@@ -108,7 +111,7 @@
             select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
-<xsl:template match="flex:IPR or flex:Updates or flex:Obsoletes">
+<xsl:template match="flex:IPR | flex:Updates | flex:Obsoletes">
     <xsl:variable name="attrname" select="substring-after(local-name(), ':')"/>
     <xsl:attribute name="{$attrname}"><xsl:value-of
             select="normalize-space(./layout:Plain)"/>
@@ -123,7 +126,7 @@
 
     <!-- Emit XML ENTITY declarations for bibxml references -->
     <xsl:for-each
-        select="//flex:BibXML/layout:Plain/inset:CommandInset[@CommandInset='href' and not(starts-with(@target, 'file:'))]/@name">
+        select="//flex:BibXML/layout:Plain/inset:CommandInset[@CommandInset='href' and not(starts-with(@target, 'file:'))]">
         <!-- NOTE: For some reason moving this into templates causes the
              ENTITY generation to fail... -->
         <xsl:text disable-output-escaping="yes">
@@ -140,7 +143,7 @@
 
     <!-- Emit XML ENTITY declarations for *local* bibxml references -->
     <xsl:for-each
-        select="//flex:BibXML/layout:Plain/inset:CommandInset[starts-with(@target, 'file:')]/@name">
+        select="//flex:BibXML/layout:Plain/inset:CommandInset[starts-with(@target, 'file:')]">
         <!-- NOTE: For some reason moving this into templates causes the
              ENTITY generation to fail... -->
         <xsl:text disable-output-escaping="yes">
@@ -188,7 +191,7 @@
             </xsl:element>
 
             <!-- Emit <area> and <workgroup> elements -->
-            <xsl:apply-templates select=".//flex:[starts-with(local-name(), 'IETF')]"/>
+            <xsl:apply-templates select=".//flex:*[starts-with(local-name(), 'IETF')]"/>
 
             <!-- Emit <keyword> element -->
             <xsl:element name="keyword">
@@ -269,7 +272,7 @@
                  unnecessary <t></t> around the <texttable>.  -->
             <xsl:apply-templates select="./inset:Tabular/lyxtabular"/>
         </xsl:when>
-        <xsl:when test="../layout:Enumerate or ../layout:Itemize or ../">
+        <xsl:when test="../layout:Enumerate | ../layout:Itemize | ../layout:Description">
             <!-- Paragraphs in list items should generate vspace
                  elements but no t elements.  -->
                  <xsl:element name="vspace">
@@ -293,7 +296,7 @@
 
 <!-- Lists -->
 <xsl:template match="layout:Itemize[not(preceding-sibling::layout:Itemize)]">
-    <xsl:variable name="dot" value="."/>
+    <xsl:variable name="dot" select="."/>
     <!-- Put contiguous layout:Itemize elements into a bullet list -->
     <xsl:element name="list">
         <xsl:attribute name="style" select="symbols"/>
@@ -301,13 +304,13 @@
             select=". | following-sibling::layout:Itemize"
             group-adjacent="boolean(self::layout:Itemize) or boolean(self::deeper)">
             <xsl:if test="current-group()[1] is $dot">
-                <xsl:apply-templates select="current-group()" mode="li">
+                <xsl:apply-templates select="current-group()" mode="li"/>
             </xsl:if>
         </xsl:for-each-group>
     </xsl:element>
 </xsl:template>
 <xsl:template match="layout:Enumerate[not(preceding-sibling::layout:Enumerate)]">
-    <xsl:variable name="dot" value="."/>
+    <xsl:variable name="dot" select="."/>
     <!-- Put contiguous layout:Enumerate elements into a numbered list -->
     <xsl:element name="list">
         <xsl:attribute name="style" select="numbers"/>
@@ -315,13 +318,13 @@
             select=". | following-sibling::layout:Enumerate"
             group-adjacent="boolean(self::layout:Enumerate) or boolean(self::deeper)">
             <xsl:if test="current-group()[1] is $dot">
-                <xsl:apply-templates select="current-group()" mode="li">
+                <xsl:apply-templates select="current-group()" mode="li"/>
             </xsl:if>
         </xsl:for-each-group>
     </xsl:element>
 </xsl:template>
 <xsl:template match="layout:Description[not(preceding-sibling::layout:Description)]">
-    <xsl:variable name="dot" value="."/>
+    <xsl:variable name="dot" select="."/>
     <!-- Put contiguous layout:Description elements into a numbered list -->
     <xsl:element name="list">
         <xsl:attribute name="style" select="hanging"/>
@@ -329,7 +332,7 @@
             select=". | following-sibling::layout:Description"
             group-adjacent="boolean(self::layout:Description) or boolean(self::deeper)">
             <xsl:if test="current-group()[1] is $dot">
-                <xsl:apply-templates select="current-group()" mode="li">
+                <xsl:apply-templates select="current-group()" mode="li"/>
             </xsl:if>
         </xsl:for-each-group>
     </xsl:element>
@@ -367,11 +370,11 @@
     </xsl:element>
 </xsl:template>
 
-<xsl:template mode="descriptionBody">
+<xsl:template mode="descriptionBody" match="layout:Description">
     <!-- Find the first text() node with a space in it -->
     <xsl:variable name="nodeWithSpace" select="(text()[matches(., ' ')])[1]"/>
     <!-- Grab the body part of that one text() node that has that space -->
-    <xsl:text select="substring-after($nodeWithSpace, ' ')"/>
+    <xsl:value-of select="substring-after($nodeWithSpace, ' ')"/>
     <!-- Now apply templates to the siblings of that node. -->
     <xsl:apply-templates select="(./*|text())[preceding-sibling::*[. is $nodeWithSpace]]"/>
 </xsl:template>
