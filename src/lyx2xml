@@ -4,7 +4,7 @@
 " Program used to convert between different versions of the lyx file format."
 import optparse
 import sys
-import LyX
+#import LyX
 from lyx2xml import LyX2XML
 
 def outcb(text):
