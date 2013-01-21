@@ -38,17 +38,19 @@
 <xsl:stylesheet version="2.0"
     xpath-default-namespace="http://www.w3.org/1999/xhtml"
     xmlns="xml2rfc"
+    xmlns:lyx="urn:cryptonector.com:lyx-other"
+    xmlns:layout="urn:cryptonector.com:lyx-layout"
+    xmlns:inset="urn:cryptonector.com:lyx-inset"
+    xmlns:flex="urn:cryptonector.com:lyx-flex"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:rfc="xml2rfc"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:url="http://whatever/java/java.net.URLDecoder"
     xmlns:jxml="http://whatever/java/org.apache.commons.lang.StringEscapeUtils"
-    xmlns:flex="flex"
-    xmlns:layout="layout"
-    xmlns:inset="inset"
     exclude-result-prefixes="rfc"
     >
+<xsl:output method="xml" omit-xml-declaration="no"/>
 
 <!-- 
     This XSLT stylesheet applies to LyXML output and converts
@@ -62,7 +64,6 @@
     <m>September</m><m>October</m><m>November</m><m>December</m>
 </xsl:variable>
 
-<xsl:output method="xml" omit-xml-declaration="no"/>
 
 <xsl:template match="/">
     <!-- Emit processing instructions -->
@@ -88,8 +89,14 @@
         </xsl:processing-instruction>
     </xsl:if>
 
+    <!--
+    <xsl:text>&#xA;</xsl:text>
+    <xsl:value-of select="node-name(/*)"/>
+    <xsl:text>&#xA;</xsl:text>
+    -->
+
     <!-- Emit the rfc element and its contents -->
-    <xsl:apply-templates select="document"/>
+    <xsl:apply-templates select="lyx:document"/>
 </xsl:template>
 
 <!-- Handle attributes of <rfc> -->
@@ -102,23 +109,30 @@
 </xsl:template>
 <!-- XXX Should have used a custom inset name of Category -->
 <xsl:template match="flex:IntendedStatus">
-    <xsl:attribute name="category"><xsl:value-of
-            select="normalize-space(./layout:Plain)"/>
-    </xsl:attribute>
+    <xsl:attribute name="category" select="normalize-space(./layout:Plain)"/>
 </xsl:template>
 <xsl:template match="flex:SeriesNo">
     <xsl:attribute name="seriesNo"><xsl:value-of
             select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
-<xsl:template match="flex:IPR | flex:Updates | flex:Obsoletes">
-    <xsl:variable name="attrname" select="substring-after(local-name(), ':')"/>
-    <xsl:attribute name="{$attrname}"><xsl:value-of
+<xsl:template match="flex:IPR">
+    <xsl:attribute name="IPR"><xsl:value-of
+            select="normalize-space(./layout:Plain)"/>
+    </xsl:attribute>
+</xsl:template>
+<xsl:template match="flex:Updates">
+    <xsl:attribute name="Updates"><xsl:value-of
+            select="normalize-space(./layout:Plain)"/>
+    </xsl:attribute>
+</xsl:template>
+<xsl:template match="flex:Obsoletes">
+    <xsl:attribute name="Updates"><xsl:value-of
             select="normalize-space(./layout:Plain)"/>
     </xsl:attribute>
 </xsl:template>
 
-<xsl:template match="html">
+<xsl:template match="lyx:document">
     <!-- Emit DOCTYPE -->
     <xsl:text>&#xA;</xsl:text>
     <xsl:text disable-output-escaping="yes">&lt;!DOCTYPE rfc SYSTEM "rfc2629.dtd" [</xsl:text>
@@ -164,7 +178,7 @@
     <!-- Emit <rfc> element -->
     <xsl:element name="rfc">
         <!-- Handle attributes of <rfc> -->
-        <xsl:apply-templates select="body//flex:*[matches(local-name(), '(DocName|IntendedStatus|IPR|Updates|Obsoletes|SeriesNo)')]"/>
+        <xsl:apply-templates select="lyx:body//flex:*[matches(local-name(), '(DocName|IntendedStatus|IPR|Updates|Obsoletes|SeriesNo)')]"/>
 
         <!-- Emit <front> element -->
         <xsl:element name="front">
@@ -176,7 +190,7 @@
                     <xsl:attribute name="abbrev"
                         select="normalize-space((//flex:TitleAbbrev)[0])"/>
                 </xsl:if>
-                <xsl:value-of select="./head/title"/>
+                <xsl:value-of select="./lyx:body/layout:Title"/>
             </xsl:element>
 
             <!-- Emit the <author> elements -->
@@ -207,7 +221,7 @@
         </xsl:element>
 
         <!-- Process middle and back matter -->
-        <xsl:apply-templates select="body"/>
+        <xsl:apply-templates select="lyx:body"/>
     </xsl:element>
 </xsl:template>
 
@@ -223,7 +237,7 @@
 </xsl:template>
 
 <!-- Process middle and back matter -->
-<xsl:template match="body">
+<xsl:template match="lyx:body">
     <!-- Middle matter (only top-level sections; the matching templates
          will recurse to get subsections and subsubsections). -->
     <xsl:element name="middle">
@@ -245,7 +259,7 @@
 </xsl:template>
 
 <!-- We don't have any use for the style elements in xml2rfc -->
-<xsl:template match="style"/>
+<xsl:template match="lyx:style"/>
 <!-- xml2rfc has its own way of handling toc, see PIs -->
 <xsl:template match="inset:CommandInset[@CommandInset='toc']"/>
 <!-- Strip out things for the front matter that we handle above -->
@@ -259,7 +273,7 @@
 </xsl:template>
 
 <!-- Weird LyX quotes -->
-<xsl:template match="Quotes[@Quotes='eld' or @Quotes='erd']">
+<xsl:template match="lyx:Quotes[@Quotes='eld' or @Quotes='erd']">
     <xsl:text>"</xsl:text>
 </xsl:template>
 

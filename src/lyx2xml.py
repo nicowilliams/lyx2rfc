@@ -414,6 +414,7 @@ class LyX2XML(object):
                 if el == 'document':
                     # Default XML namespace
                     xout.attr('xmlns', 'urn:cryptonector.com:lyx-other')
+                    xout.attr('xmlns:lyx', 'urn:cryptonector.com:lyx-other')
                     # We put layouts, insets, and custome insets into
                     # separate namespaces
                     xout.attr('xmlns:layout', 'urn:cryptonector.com:lyx-layout')
