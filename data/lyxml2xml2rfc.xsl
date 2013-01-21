@@ -502,6 +502,8 @@
 
 <xsl:template match="layout:*[matches(local-name(), '^(Subsubs|Subs|S)ection')]" mode="midsect1">
     <xsl:variable name="cur_sect" select="current()"/>
+    <!-- Middle matter sections are ones that don't have any
+         reference-defining contents.  -->
     <xsl:if test="not(following-sibling::*[
             (preceding-sibling::layout:*[matches(local-name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect
             ]/flex:BibXML or
@@ -530,18 +532,18 @@
             select="if (string-length($id) > 0) then $id else generate-id()"/>
 
         <!-- Handle the contents of just this section.  Ask for all
-             siblings of this <hN> where the nodes we're looking for are
-             NOT hN, and their preceding <hN> is this one. -->
+             siblings of this section where the nodes we're looking for
+             are subsections, and their preceding section is this one. -->
         <xsl:apply-templates
-            select="(following-sibling::*[not(matches(name(), '^(Subsubs|Subs|S)ection')) and
-                (preceding-sibling::layout:*[matches(name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect])"/>
+            select="(following-sibling::layout:*[not(matches(local-name(), '^(Subsubs|Subs|S)ection')) and
+                (preceding-sibling::layout:*[matches(local-name(), '^(Subsubs|Subs|S)ection')])[last()] is $cur_sect])"/>
 
         <!-- Handle sub-sections of this section.  Ask for all sibling
-             hNs of this hN where their preceding parent hN is
-             this one.  -->
+             subsections of this section where their preceding parent
+             section is this one.  -->
         <xsl:apply-templates
-            select="following-sibling::layout:*[matches(name(), '^(Subsubs|Subs|S)ection') and
-                (preceding-sibling::layout:*[name() = $thisSect])[last()] is $cur_sect]"
+            select="following-sibling::layout:*[local-name() = concat('Sub', lower-case($thisSect)) and
+                (preceding-sibling::layout:*[local-name() = $thisSect])[last()] is $cur_sect]"
             mode="midsect2"/>
 
     </xsl:element>
