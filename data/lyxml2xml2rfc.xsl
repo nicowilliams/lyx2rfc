@@ -48,9 +48,10 @@
     xmlns:xs="http://www.w3.org/2001/XMLSchema"
     xmlns:url="http://whatever/java/java.net.URLDecoder"
     xmlns:jxml="http://whatever/java/org.apache.commons.lang.StringEscapeUtils"
+    xmlns:saxon="http://icl.com/saxon"
     exclude-result-prefixes="rfc"
     >
-<xsl:output method="xml" omit-xml-declaration="no"/>
+<xsl:output method="xml" omit-xml-declaration="no" indent="no" saxon:line-length='100000'/>
 
 <!-- 
     This XSLT stylesheet applies to LyXML output and converts
@@ -68,7 +69,7 @@
 <xsl:template match="/">
     <!-- Emit processing instructions -->
     <xsl:apply-templates select="//flex:PI"/>
-    <xsl:apply-templates select="//*[starts-with(name(), 'flex:PI_')]"/>
+    <xsl:apply-templates select="//flex:*[starts-with(local-name(), 'flex:PI_')]"/>
 
     <!-- Emit toc="yes" PI by default (but we could look for a 
          <inset:CommandInset CommandInset="toc" LatexCommand="tableofcontents">
@@ -88,12 +89,6 @@
             <xsl:text>symrefs="yes"</xsl:text>
         </xsl:processing-instruction>
     </xsl:if>
-
-    <!--
-    <xsl:text>&#xA;</xsl:text>
-    <xsl:value-of select="node-name(/*)"/>
-    <xsl:text>&#xA;</xsl:text>
-    -->
 
     <!-- Emit the rfc element and its contents -->
     <xsl:apply-templates select="lyx:document"/>
@@ -148,7 +143,7 @@
         <xsl:text disable-output-escaping="yes"> PUBLIC "" "</xsl:text>
 
         <!-- URL -->
-        <xsl:value-of select="./@href"/>
+        <xsl:value-of select="./@target"/>
         <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
     </xsl:for-each>
 
@@ -165,7 +160,7 @@
         <xsl:text disable-output-escaping="yes"> SYSTEM "</xsl:text>
 
         <!-- URL -->
-        <xsl:value-of select="url:decode(substring-after(./@href, 'file://'))"/>
+        <xsl:value-of select="url:decode(substring-after(./@target, 'file://'))"/>
         <xsl:text disable-output-escaping="yes">"&gt;&#xA;</xsl:text>
     </xsl:for-each>
 
@@ -250,13 +245,14 @@
         <!-- Appendices, but don't include references since we've
              already handled those (just in case the references sections
              were made into appendices) -->
-        <xsl:apply-templates select="layout:Section[@start_of_appendix]" mode="midsect1"/>
+        <xsl:apply-templates select="layout:Section[@start_of_appendix or preceding-sibling::Section[@start_of_appendix]]" mode="midsect1"/>
     </xsl:element>
 </xsl:template>
 
 <!-- We don't have any use for the style elements in xml2rfc -->
 <xsl:template match="lyx:style"/>
-<!-- xml2rfc has its own way of handling toc, see PIs -->
+<!-- xml2rfc has its own way of handling toc, see PIs, though using this
+     would be nice!  -->
 <xsl:template match="inset:CommandInset[@CommandInset='toc']"/>
 <!-- Strip out things for the front matter that we handle above -->
 <xsl:template match="layout:Title"/>
@@ -309,7 +305,7 @@
     <xsl:variable name="dot" select="."/>
     <!-- Put contiguous layout:Itemize elements into a bullet list -->
     <xsl:element name="list">
-        <xsl:attribute name="style" select="symbols"/>
+        <xsl:attribute name="style" select="'symbols'"/>
         <xsl:for-each-group
             select=". | following-sibling::layout:Itemize"
             group-adjacent="boolean(self::layout:Itemize) or boolean(self::deeper)">
@@ -323,7 +319,7 @@
     <xsl:variable name="dot" select="."/>
     <!-- Put contiguous layout:Enumerate elements into a numbered list -->
     <xsl:element name="list">
-        <xsl:attribute name="style" select="numbers"/>
+        <xsl:attribute name="style" select="'numbers'"/>
         <xsl:for-each-group
             select=". | following-sibling::layout:Enumerate"
             group-adjacent="boolean(self::layout:Enumerate) or boolean(self::deeper)">
@@ -337,7 +333,7 @@
     <xsl:variable name="dot" select="."/>
     <!-- Put contiguous layout:Description elements into a numbered list -->
     <xsl:element name="list">
-        <xsl:attribute name="style" select="hanging"/>
+        <xsl:attribute name="style" select="'hanging'"/>
         <xsl:for-each-group
             select=". | following-sibling::layout:Description"
             group-adjacent="boolean(self::layout:Description) or boolean(self::deeper)">
@@ -347,12 +343,35 @@
         </xsl:for-each-group>
     </xsl:element>
 </xsl:template>
-<xsl:template match="layout:deeper">
-    <!-- There should only be list elements here.  If there's any
-         standard layouts... they'll just screw things up.  As long as
-         there's just list item child elements we'll get a nice nested
-         list as a result of this. -->
-    <xsl:apply-templates select="*"/>
+
+<!-- Nested lists -->
+<xsl:template match="layout:deeper[preceding-sibling::layout:Itemize]">
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="'symbols'"/>
+        <xsl:apply-templates select="*"/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="layout:deeper[preceding-sibling::layout:Enumerate]">
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="'numbers'"/>
+        <xsl:apply-templates select="*"/>
+    </xsl:element>
+</xsl:template>
+<xsl:template match="layout:deeper[preceding-sibling::layout:Description]">
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="'hanging'"/>
+        <xsl:apply-templates select="*"/>
+    </xsl:element>
+</xsl:template>
+
+<!-- Indented paragraphs -->
+<xsl:template match="layout:deeper[not(preceding-sibling::layout:Itemize or
+                        preceding-sibling::layout:Enumerate or
+                        preceding-sibling::layout:Description)]">
+    <xsl:element name="list">
+        <xsl:attribute name="style" select="''"/>
+        <xsl:apply-templates select="*"/>
+    </xsl:element>
 </xsl:template>
 
 <!-- List elements -->
@@ -407,10 +426,10 @@
     </xsl:element>
 </xsl:template>
 
-<!-- Emphasis (<spanx>) -->
-<xsl:template match="em">
+<!-- Emphasis (<spanx>) (XXX What to do about bolding and such?) -->
+<xsl:template match="lyx:emph">
     <xsl:element name="spanx">
-        <xsl:if test="emph">
+        <xsl:if test="lyx:emph">
             <xsl:attribute name="style" select="emph"/>
         </xsl:if>
         <xsl:apply-templates/>
@@ -440,6 +459,7 @@
 </xsl:template>
 
 <!-- xrefs (internal cross-references) -->
+<!-- XXX Fix to match LyXML -->
 <xsl:template match="a[@href and starts-with(@href, '#')]">
     <!-- We add a space here to avoid running this xref onto the end of
          the preceding text() node. -->
