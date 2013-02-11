@@ -1,0 +1,24 @@
+Amazon micro instance, Ubuntu 12.04.1 64-bit, 16 Gb root disk.
+DNS: lyx2rfc.d.porticor.net
+
+copy multiverse lines to /etc/apt/sources.list.d/lyx2rfc
+
+apache
+php5 php5-suhosin
+unzip
+xml2rfc
+lyx
+libxml2-utils
+libsaxonb-java
+default-jre
+
+/var/www/lyx2rfc
+/var/www/lyx2rfc/lyx2rfc.html
+/var/www/favicon.ico
+
+/var/local/lyx2rfc
+/var/local/lyx2rfc/update.sh
+
+/etc/apache2/conf.d/lyx2rfc
+
+

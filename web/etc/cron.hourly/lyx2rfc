@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find /tmp -name "php*" -amin +10 -exec rm {} \;
