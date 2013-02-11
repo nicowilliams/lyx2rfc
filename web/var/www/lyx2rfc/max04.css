@@ -1,0 +1,182 @@
+/* -----------------------------------
+Site:       Max Design
+CSS author: Russ Weakley
+Updated:    5/1/10
+Updated by: Russ Weakley
+----------------------------------- */
+
+/* -----------------------------------
+general
+----------------------------------- */
+
+body
+{
+	margin: 1em 5%;
+	background-color: #FFF;
+	background-image: url(/lyx2rfc/media/two-column-background.jpg);
+	background-repeat: repeat-y;
+	border: 1px solid #333;
+	color: #000;
+}
+
+h1, h2, h3, h4, h5, h6
+{
+	margin: 0 0 1em;
+	line-height: 1.1;
+}
+
+h2, h3 { color: #003d5d; }
+h2 { font-size: 218.75%; }
+h3 { font-size: 137.5%; }
+h4 { font-size: 118.75%; }
+h5 { font-size: 112.5%; }
+p { margin: 0 0 1em; }
+img { border: none; }
+a:link { color: #035389; }
+a:visited { color: #09619C; }
+
+a:focus
+{
+	color: #fff;
+	background: #000;
+}
+
+a:hover { color: #000; }
+
+a:active
+{
+	color: #cc0000;
+	background: #fff;
+}
+
+table
+{
+	margin: 1em 0;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+table caption
+{
+	text-align: left;
+	font-weight: bold;
+	padding: 0 0 5px;
+	text-transform: uppercase;
+	color: #236271;
+}
+
+table td, table th
+{
+	text-align: left;
+	border: 1px solid #b1d2e4;
+	padding: 5px 10px;
+	vertical-align: top;
+}
+
+table th { background: #ecf7fd; }
+
+blockquote
+{
+	background: #ecf7fd;
+	margin: 1em 0;
+	padding: 1.5em;
+}
+
+blockquote p.source
+{
+	margin: 0;
+	font-size: 87.5%;
+	padding: 2px 0 5px 25px;
+	background: url(../images/icon-tweet.gif) no-repeat;
+}
+
+code
+{
+	background: #ecf7fd;
+	font: 115% courier, monaco, monospace;
+	margin: 0 .3em;
+}
+
+abbr, acronym
+{
+	border-bottom: .1em dotted;
+	cursor: help;
+}
+
+/* -----------------------------------
+classes
+----------------------------------- */
+
+.edit
+{
+	clear: left;
+	margin: 2em 0;
+}
+
+.edit a
+{
+	font-weight: bold;
+	color: #fff;
+	background: red;
+	text-decoration: none;
+	padding: 5px 10px;
+}
+
+pre.codesample
+{
+	background: #444;
+	color: #fff;
+	margin: 1em 0;
+	padding: 1.5em;
+	overflow: auto;
+}
+
+.codesample code
+{
+	background: none;
+	line-height: 1;
+	margin: 0;
+}
+
+.copyright { margin: 3em 0 0; }
+
+/* We are using sample04 from the original CSS */
+
+#banner
+{
+	background-color: #666;
+	border-bottom: 1px solid #333;
+}
+
+#banner h1
+{
+	margin: 0;
+	padding: .5em;
+}
+
+#nav
+{
+	float: left;
+	width: 160px;
+	margin-left: 10px;
+	padding-top: 1em;
+}
+
+#nav p { margin-top: 0; }
+
+#content
+{
+	padding-top: 1em;
+	margin: 0 2em 0 200px;
+}
+
+#content h2 { margin-top: 0; }
+
+#footer
+{
+	clear: both;
+	background-color: #666;
+	padding: 1em;
+	text-align: right;
+	border-top: 1px solid #333;
+}

@@ -1,0 +1,45 @@
+<html><head>
+<title>Lyx2RFC</title>
+<link rel="stylesheet" href="lyx2rfc.css" type="text/css" media="screen" />
+</head>
+<body>
+
+<h1>Lyx2RFC</h1>
+<p>This tool will convert your <a href='http://www.lyx.org'>LyX</a> Internet Drafts into text you can <a href="https://datatracker.ietf.org/submit/">submit</a>, or into HTML that's nice to read. Alternatively, convert to XML, which you can use with <a href="http://xml.resource.org/">xml2rfc</a>.
+If you're lucky, you might <b>never have to edit XML</b> again!</p>
+<div id="nav">
+<div id='icons'>
+</div>
+<h2>Online Conversion</h2> 
+<form enctype="multipart/form-data" action="convert.php" method="post">
+<table>
+	<tr><td>Choose a file to upload:</td><td><input size="30" type="file" name="uploadedFile" value="filename" /></td></tr>
+	<tr><td>Convert to:</td><td><input type="radio" name="format" value="html" checked="checked" />HTML</td></tr>
+	<tr><td></td><td><input type="radio" name="format" value="text" />Text</td></tr>
+	<tr><td></td><td><input type="radio" name="format" value="xml" />XML</td></tr>
+	<tr><td>Give me the output:</td><td><input type="radio" name="rendertype" value="file" checked="checked" />In a file</td></tr>
+	<tr><td></td><td><input type="radio" name="rendertype" value="window" />In a window</td></tr>
+</table>
+<button type="submit" name="formSubmit" value="Submit">Convert!</button>
+</form>
+</div>
+<p>Tip: instead of starting from scratch, you can get started much quicker if you use
+<a href="/lyx2rfc/files/test-i-d.lyx">this sample Internet Draft</a> (right-click and save as ".lyx".).
+There's also
+an extensive User's Guide (<a href="/lyx2rfc/files/lyx2rfc-user-guide.html">HTML</a>, <a href="/lyx2rfc/files/lyx2rfc-user-guide.lyx">LyX</a>)</p>
+<p>Alternatively, you can <a href="https://github.com/nicowilliams/lyx2rfc">download the tool</a> and try it on your own computer.
+More detailed instructions <a href="#install">below</a>.</p>
+<p>Please report any issues <a href="https://github.com/nicowilliams/lyx2rfc/issues">here</a>.</p>
+<hr>
+<h2>Installing the Tool Locally</h2>
+<p>The following instructions are known to work on Ubuntu (tested on 12.04), but the tool should run on any Linux variant, and can be modified to
+run in other environments (let us know if you did!).</p>
+<ol>
+	<li>Read the README file and install all the prerequisite packages.</li>
+	<li><a href='https://github.com/nicowilliams/lyx2rfc/archive/master.zip'>Download</a> the lyx2rfc tool.</li>
+	<li>Unzip the tool, and make sure "src/lyx2rfc" is in your search path.</li>
+	<li>If you are <b>not</b> starting from the template I-D,
+	open the file in LyX, and copy/paste the "custom insets" file into
+	Document/Settings/Local Layout.</li>
+</ol>
+</body></html>
