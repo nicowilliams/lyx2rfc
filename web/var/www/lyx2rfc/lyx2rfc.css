@@ -1,0 +1,29 @@
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+div#nav {
+	background-color:#F1EE68;
+	padding: 10px;
+}
+
+div#icons {
+	float: right;
+	height: 300px;
+	width: 200px;
+	margin-top: 40px;
+	background-image: url('/lyx2rfc/media/ietf-with-lyx.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+img#ietf-logo {
+	height: 80px;
+	width: 120px;
+	position: relative;
+}
+img#lyx-logo {
+	height: 100px;
+	bottom: 0;
+	right: 0;
+}

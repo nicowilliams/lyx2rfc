@@ -1,0 +1,4 @@
+# deb http://us-west-1.ec2.archive.ubuntu.com/ubuntu/ precise multiverse
+# deb-src http://us-west-1.ec2.archive.ubuntu.com/ubuntu/ precise multiverse
+# deb http://us-west-1.ec2.archive.ubuntu.com/ubuntu/ precise-updates multiverse
+# deb-src http://us-west-1.ec2.archive.ubuntu.com/ubuntu/ precise-updates multiverse
