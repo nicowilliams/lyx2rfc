@@ -36,7 +36,7 @@
 
 <!DOCTYPE xsl:stylesheet [ ]>
 <xsl:stylesheet version="2.0"
-    xpath-default-namespace="http://www.w3.org/1999/xhtml"
+    xpath-default-namespace="urn:cryptonector.com:lyx-other"
     xmlns="xml2rfc"
     xmlns:lyx="urn:cryptonector.com:lyx-other"
     xmlns:layout="urn:cryptonector.com:lyx-layout"
