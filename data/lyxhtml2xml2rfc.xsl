@@ -420,6 +420,30 @@
     </xsl:element>
 </xsl:template>
 
+<xsl:template match="div[@class='float float-listings' and not(../div[@lass='float float-figure'])]">
+    <xsl:element name="t">
+        <xsl:element name="figure">
+            <!-- Any anchor will do, but hopefully we have one added by
+                 the author -->
+            <xsl:attribute name="anchor" select="(.//div/a/@id)[last()]"/>
+
+            <!-- Since there was no figure float we should have a
+                 title-less figure. -->
+            <xsl:attribute name="suppress-title" select="true"/>
+            <xsl:attribute name="align" select="center"/>
+
+            <!-- The actual figure.  No need to deal with escaping
+                 (or, rather, treating the artwork as CDATA) because LyX
+                 already takes care of it in its LyXHTML export
+                 function.  -->
+            <xsl:element name="artwork">
+                <xsl:value-of select="pre"/>
+            </xsl:element>
+        </xsl:element>
+    </xsl:element>
+</xsl:template>
+
+
 <!-- xrefs (internal cross-references) -->
 <xsl:template match="a[@href and starts-with(@href, '#')]">
     <!-- We add a space here to avoid running this xref onto the end of
