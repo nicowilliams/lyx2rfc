@@ -423,10 +423,6 @@
 <xsl:template match="div[@class='float float-listings' and not(../div[@lass='float float-figure'])]">
     <xsl:element name="t">
         <xsl:element name="figure">
-            <!-- Any anchor will do, but hopefully we have one added by
-                 the author -->
-            <xsl:attribute name="anchor" select="(.//div/a/@id)[last()]"/>
-
             <!-- Since there was no figure float we should have a
                  title-less figure. -->
             <xsl:attribute name="suppress-title" select="true"/>
