@@ -4,7 +4,7 @@ DNS: lyx2rfc.d.porticor.net
 copy multiverse lines to /etc/apt/sources.list.d/lyx2rfc
 
 apache
-php5 php5-suhosin
+php5 php5-suhosin php-log
 unzip
 xml2rfc
 lyx
