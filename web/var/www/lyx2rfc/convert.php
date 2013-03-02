@@ -1,10 +1,20 @@
 <?php
+require_once 'Log.php';
+
 class Converter {
 	const SCRIPT = '/var/local/lyx2rfc/lyx2rfc-master/src/lyx2rfc';
 	const TMP_DIR = '/tmp';
 
-	private function report_error($msg) {
-		echo("<p style='color:red'>".$msg."</p>");
+	private function report_error($msg, $output) {
+		$logger = Log::factory('syslog', LOG_LOCAL0, 'lyx2rfc');
+		$logger->log('Error reported: '.$msg);
+		echo("<title>Lyx2RFC Error</title>");
+		echo("<p style='color:red; font-weight:bold; font-size:200%'>".$msg."</p>");
+		if ($output) {
+			echo("<hr><pre>");
+			echo(join("\n", $output));
+			echo("</pre>");
+		}
 		exit(1);
 	}
 
@@ -16,9 +26,9 @@ class Converter {
 		$command = self::SCRIPT . ' ' . $infile_name . ' ' . $outfile_name;
 		$command = escapeshellcmd($command); // just in case
 		// echo "run: $command\n";
-		exec($command, $output, $status); // swallows stdout into $output
+		exec($command . ' 2>&1', $output, $status); // swallows stdout into $output
 		if ($status != 0) {
-			$this->report_error("Conversion failed");
+			$this->report_error("Conversion failed", $output);
 		}
 	}
 
@@ -52,6 +62,8 @@ class Converter {
 	}
 }
 
+$logger = Log::factory('syslog', LOG_LOCAL0, 'lyx2rfc');
+
 function usage($script) {
 	echo "Usage: $script text/html/xml source_file\n";
 }
@@ -81,6 +93,7 @@ if (isset($argc)) { // running from CLI
 	}
 	$infile_name = $tmp_name . '.lyx';
 	rename($tmp_name, $infile_name);
+	$logger->log('Converting input file: '.$orig_file_name);
 	// echo "Hi! $format $rendertype $orig_file_name $tmp_name\n";
 	$converter = new Converter();
 	$converter->convert($format, $infile_name, $outfile_name);
@@ -98,6 +111,9 @@ if (isset($argc)) { // running from CLI
 			header("Content-Type: text/xml");
 			break;
 	}
+
+	$logger->log('Successful conversion of input file: '.$orig_file_name);
+
 	if ($rendertype == 'file') {
 		header('Content-Disposition: attachment; filename="'.$fname.'"');
 	}
