@@ -1,0 +1,15 @@
+function _lyx2rfc()
+{
+    local cmd="${1##*/}"
+    local word=${COMP_WORDS[COMP_CWORD]}
+    local line=${COMP_LINE}
+
+    if [ "$COMP_CWORD" -eq 1 ]; then
+        COMPREPLY=($(compgen -G "*.lyx" -- "${word}"))
+    else
+        COMPREPLY=($(compgen -f -- "${word}"))
+    fi
+}
+
+complete -o filenames -F _lyx2rfc lyx2rfc
+
