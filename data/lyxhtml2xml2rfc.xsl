@@ -426,8 +426,8 @@
         <xsl:element name="figure">
             <!-- Since there was no figure float we should have a
                  title-less figure. -->
-            <xsl:attribute name="suppress-title" select="true"/>
-            <xsl:attribute name="align" select="center"/>
+            <xsl:attribute name="suppress-title" select="'true'"/>
+            <xsl:attribute name="align" select="'center'"/>
 
             <!-- The actual figure.  No need to deal with escaping
                  (or, rather, treating the artwork as CDATA) because LyX
