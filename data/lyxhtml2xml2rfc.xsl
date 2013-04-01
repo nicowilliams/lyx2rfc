@@ -59,9 +59,10 @@
     <m>September</m><m>October</m><m>November</m><m>December</m>
 </xsl:variable>
 
-<xsl:output method="xml" omit-xml-declaration="no" use-character-maps="dashes"/>
+<xsl:output method="xml" omit-xml-declaration="no" use-character-maps="charmap"/>
 
-<xsl:character-map name="dashes">
+<xsl:character-map name="charmap">
+    <xsl:output-character character="&#160;" string="&#160;"/>
     <xsl:output-character character="&#x2013;" string="--"/>
     <xsl:output-character character="&#x2014;" string="--"/>
     <!-- XXX Add lots of other mappings? -->
