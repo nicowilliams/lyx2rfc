@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                       December 20, 2012
+                                                           July 11, 2013
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -54,7 +54,7 @@ Table of Contents
 
 Williams                                                        [Page 1]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 1.  Internet-Drafts and RFCs
@@ -72,7 +72,7 @@ Williams                                                        [Page 1]
    xml.resource.org/authoring/draft-mrose-writing-rfcs.html>; see also
    [RFC2629].
 
-   XML is a great step forward in user-friendliness - from nroff
+   XML is a great step forward in user-friendliness -- from nroff
    anyways.  But XML is not really user-friendly unless used with XML
    editors.  The lyx2rfc tool is intended to allow the use of LyX, a
    WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.
@@ -110,7 +110,7 @@ Williams                                                        [Page 1]
 
 Williams                                                        [Page 2]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 2.  Using LyX to Edit Internet-Drafts
@@ -166,7 +166,7 @@ Williams                                                        [Page 2]
 
 Williams                                                        [Page 3]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
    software).
@@ -222,7 +222,7 @@ Williams                                                        [Page 3]
 
 Williams                                                        [Page 4]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 3.  Front Matter
@@ -278,7 +278,7 @@ Williams                                                        [Page 4]
 
 Williams                                                        [Page 5]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
    PI_Strict  Strict PI.
@@ -334,7 +334,7 @@ Williams                                                        [Page 5]
 
 Williams                                                        [Page 6]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 4.  Middle Matter
@@ -390,7 +390,7 @@ Williams                                                        [Page 6]
 
 Williams                                                        [Page 7]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
    Description list  A list where each list item has a title.
@@ -446,7 +446,7 @@ Williams                                                        [Page 7]
 
 Williams                                                        [Page 8]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 4.7.  Citations
@@ -502,7 +502,7 @@ Williams                                                        [Page 8]
 
 Williams                                                        [Page 9]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 5.  Back Matter
@@ -530,8 +530,9 @@ Williams                                                        [Page 9]
    xml2rfc can only handle references defined in its own particular
    schema.  LyX's bibliography library support cannot trivially be
    mapped to/from the xml2rfc 'bibxml' library.  Therefore lyx2rfc
-   handles this by using LyX hyperlinks.  Alternatively you can embed
-   fully-formed bibxml in the EmbeddedBibXml custom inset.
+   handles this by using LyX hyperlinks to the xml2rfc citation
+   repository (or any clones, partial or complete).  Alternatively you
+   can embed fully-formed bibxml in the EmbeddedBibXml custom inset.
 
    To add bibxml references just start a paragraph in a references
    section and then Insert->Hyperlink, setting the link target to the
@@ -555,10 +556,9 @@ Williams                                                        [Page 9]
 
 
 
-
 Williams                                                       [Page 10]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 6.  Oddities and Bugs
@@ -614,7 +614,7 @@ Williams                                                       [Page 10]
 
 Williams                                                       [Page 11]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 7.  Running the lyx2rfc Tool
@@ -670,7 +670,7 @@ Williams                                                       [Page 11]
 
 Williams                                                       [Page 12]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 8.  References
@@ -726,7 +726,7 @@ Williams                                                       [Page 12]
 
 Williams                                                       [Page 13]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 Appendix A.  Lyx2RFC Internals
@@ -782,7 +782,7 @@ Appendix A.  Lyx2RFC Internals
 
 Williams                                                       [Page 14]
 
-                           LyX2RFC User Guide              December 2012
+                           LyX2RFC User Guide                  July 2013
 
 
 Author's Address

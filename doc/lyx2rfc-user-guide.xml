@@ -17,7 +17,7 @@
         <email>nico@cryptonector.com</email>
       </address>
     </author>
-    <date month="December" year="2012"/>
+    <date month="July" year="2013"/>
     <keyword>Internet-Draft</keyword>
     <abstract>
       <t>
@@ -31,7 +31,7 @@ Internet Requests For Comment (RFCs) are published by the RFC-Editor, typically 
       <t>
 Historically Internet-Drafts and RFCs have been kept as nroff documents and typeset with the nroff tool. In recent years nroff has been mostly replaced by a tool named xml2rfc <eref target="http://xml.resource.org/"/> that uses XML to represent the source to an Internet-Draft or RFC. See the guide to xml2rfc<eref target="http://xml.resource.org/authoring/draft-mrose-writing-rfcs.html"/>; see also <xref target="RFC2629"/>.</t>
       <t>
-XML is a great step forward in user-friendliness – from nroff anyways. But XML is not really user-friendly unless used with XML editors. The lyx2rfc tool is intended to allow the use of LyX, a WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.</t>
+XML is a great step forward in user-friendliness -- from nroff anyways. But XML is not really user-friendly unless used with XML editors. The lyx2rfc tool is intended to allow the use of LyX, a WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.</t>
       <t>
 This document itself, although it is not an Internet-Draft, much less an RFC, is written in LyX and rendered as text and HTML using lyx2rfc.</t>
     </section>
@@ -325,7 +325,7 @@ To add a references section simply create a section titled “References”, “
       </section>
       <section title="Adding 'bibxml'" anchor="sub_Adding__bibxml__References">
         <t>
-xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks. Alternatively you can embed fully-formed bibxml in the EmbeddedBibXml custom inset.</t>
+xml2rfc can only handle references defined in its own particular schema. LyX's bibliography library support cannot trivially be mapped to/from the xml2rfc 'bibxml' library. Therefore lyx2rfc handles this by using LyX hyperlinks to the xml2rfc citation repository (or any clones, partial or complete). Alternatively you can embed fully-formed bibxml in the EmbeddedBibXml custom inset.</t>
         <t>
 To add bibxml references just start a paragraph in a references section and then Insert-&gt;Hyperlink, setting the link target to the URL of a bibxml reference and the link text to any text that is suitable for use as the name of an XML entity. E.g., to add a reference to some RFC use 'rfcXXXX' as the link text and http://xml.resource.org/public/rfc/bibxml/reference.RFC.XXX.xml as the link target.</t>
         <section title="Citations" anchor="d1e1006">
@@ -350,7 +350,7 @@ The lyx2rfc tool is a simple shell script that uses lyx(1) to export your LyX do
     </section>
   </middle>
   <back>
-    <references title="References" anchor="sec_References">&rfc2629;</references>
+    <references title="References">&rfc2629;</references>
     <section title="Lyx2RFC Internals" anchor="d1e1071">
       <t>
 lyx2rfc begins by invoking LyX to export the document into LyXHTML format. Then lyx2rfc applies an XSL sheel with the Saxon XSLT 2.0 processor to convert the LyXHTML intermediate form to XML in xml2rfc's schema. lyx2rfc then applies xml2rfc to obtain .txt and .unpg (unpaginated .txt) output. Finally, lyx2rfc applies Saxon with the Greenbytes XSL for converting xml2rfc documents to HTML.</t>

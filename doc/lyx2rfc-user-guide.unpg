@@ -3,7 +3,7 @@
 
 Lyx2RFC UserGuide                                            N. Williams
                                                                 Williams
-                                                       December 20, 2012
+                                                           July 11, 2013
 
 
 A User Guide for the 'lyx2rfc' Tool for Editing Internet-Drafts with LyX
@@ -64,7 +64,7 @@ Table of Contents
    xml.resource.org/authoring/draft-mrose-writing-rfcs.html>; see also
    [RFC2629].
 
-   XML is a great step forward in user-friendliness - from nroff
+   XML is a great step forward in user-friendliness -- from nroff
    anyways.  But XML is not really user-friendly unless used with XML
    editors.  The lyx2rfc tool is intended to allow the use of LyX, a
    WYSIWYM graphical editor, for editing Internet-Drafts and RFCs.
@@ -373,8 +373,9 @@ Table of Contents
    xml2rfc can only handle references defined in its own particular
    schema.  LyX's bibliography library support cannot trivially be
    mapped to/from the xml2rfc 'bibxml' library.  Therefore lyx2rfc
-   handles this by using LyX hyperlinks.  Alternatively you can embed
-   fully-formed bibxml in the EmbeddedBibXml custom inset.
+   handles this by using LyX hyperlinks to the xml2rfc citation
+   repository (or any clones, partial or complete).  Alternatively you
+   can embed fully-formed bibxml in the EmbeddedBibXml custom inset.
 
    To add bibxml references just start a paragraph in a references
    section and then Insert->Hyperlink, setting the link target to the

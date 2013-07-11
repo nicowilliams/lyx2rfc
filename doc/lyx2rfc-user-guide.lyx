@@ -1444,7 +1444,8 @@ Adding 'bibxml'
 xml2rfc can only handle references defined in its own particular schema.
  LyX's bibliography library support cannot trivially be mapped to/from the
  xml2rfc 'bibxml' library.
- Therefore lyx2rfc handles this by using LyX hyperlinks.
+ Therefore lyx2rfc handles this by using LyX hyperlinks to the xml2rfc citation
+ repository (or any clones, partial or complete).
  Alternatively you can embed fully-formed bibxml in the EmbeddedBibXml custom
  inset.
 \end_layout
