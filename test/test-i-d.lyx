@@ -687,6 +687,33 @@ item2 description of item 2
 \end_layout
 
 \begin_layout Subsection
+Example References
+\end_layout
+
+\begin_layout Standard
+Here's a reference to an Internet-Draft (by now published as an RFC): 
+\begin_inset Flex EntityXRef
+status collapsed
+
+\begin_layout Plain Layout
+I-D.ietf-oauth-v2
+\end_layout
+
+\end_inset
+
+.
+ Note that we have a reference to RFC1113 that we're not referencing outside
+ the references section (so there will be a warning about an unused reference
+ when exporting to RFC); this reference is defined in XML embedded within
+ an EmbeddedBibXML inset.
+\end_layout
+
+\begin_layout Standard
+Note that the content in EntityXRef custom insets (used to refer to citations
+ within the document) must be the anchors of those references.
+\end_layout
+
+\begin_layout Subsection
 Conventions used in this document
 \end_layout
 
@@ -892,35 +919,38 @@ Normative References
 \end_layout
 
 \begin_layout Standard
-\begin_inset Flex EmbeddedBibXML
-status open
+\begin_inset Flex BibXML
+status collapsed
 
 \begin_layout Plain Layout
-<reference anchor='RFC2119'> <front> <title abbrev='RFC Key Words'>Key words
- for use in RFCs to Indicate Requirement Levels</title> <author initials='S.'
- surname='Bradner' fullname='Scott Bradner'> <organization>Harvard University</o
-rganization> <address> <postal> <street>1350 Mass.
- Ave.</street> <street>Cambridge</street> <street>MA 02138</street></postal>
- <phone>- +1 617 495 3864</phone> <email>sob@harvard.edu</email></address></autho
-r> <date year='1997' month='March' /> <area>General</area> <keyword>keyword</key
-word> <abstract> <t> In many standards track documents several words are
- used to signify the requirements in the specification.
- These words are often capitalized.
- This document defines these words as they should be interpreted in IETF
- documents.
- Authors who follow these guidelines should incorporate this phrase near
- the beginning of their document: <list> <t> The key words "MUST", "MUST
- NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED",
- "MAY", and "OPTIONAL" in this document are to be interpreted as described
- in RFC 2119.
- </t></list></t> <t> Note that the force of these words is modified by the
- requirement level of the document in which they are used.
- </t></abstract></front> <seriesInfo name='BCP' value='14' /> <seriesInfo
- name='RFC' value='2119' /> <format type='TXT' octets='4723' target='http://www.r
-fc-editor.org/rfc/rfc2119.txt' /> <format type='HTML' octets='17970' target='http:
-//xml.resource.org/public/rfc/html/rfc2119.html' /> <format type='XML' octets='5777
-' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' /> </reference>
- 
+\begin_inset CommandInset href
+LatexCommand href
+name "RFC2119"
+target "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Flex BibXML
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset CommandInset href
+LatexCommand href
+name "I-D.ietf-oauth-v2"
+target "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-v2.xml"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset

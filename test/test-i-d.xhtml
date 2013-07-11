@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "file:///home/yaronf/misc/lyx2rfc/lyx2rfc-master/xhtml-math11-f.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0//EN" "file:///home/nico/I-Ds/test/test/../src/../data/xhtml-math11-f.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta name="GENERATOR" content="LyX 2.0.2" />
@@ -323,6 +323,13 @@ font-style: normal;
 font-variant: normal;
 font-size: medium;
 }
+div.flex_bibxml {
+font-family: serif;
+font-weight: normal;
+font-style: normal;
+font-variant: normal;
+font-size: medium;
+}
 div.flex_embeddedbibxml {
 font-family: serif;
 font-weight: normal;
@@ -405,25 +412,27 @@ Two paragraph abstract, eh?</div>
 
 <div class='lyxtoc-1'><a href='#magicparlabel-101' class='tocentry'>1 Introduction</a> <a href='#magicparlabel-101' class='tocarrow'>&gt;</a>
 
-<div class='lyxtoc-2'><a href='#magicparlabel-138' class='tocentry'>1.1 Conventions used in this document</a> <a href='#magicparlabel-138' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-2'><a href='#magicparlabel-138' class='tocentry'>1.1 Example References</a> <a href='#magicparlabel-138' class='tocarrow'>&gt;</a></div>
+
+<div class='lyxtoc-2'><a href='#magicparlabel-145' class='tocentry'>1.2 Conventions used in this document</a> <a href='#magicparlabel-145' class='tocarrow'>&gt;</a></div>
 </div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-144' class='tocentry'>2 Details</a> <a href='#magicparlabel-144' class='tocarrow'>&gt;</a>
+<div class='lyxtoc-1'><a href='#magicparlabel-151' class='tocentry'>2 Details</a> <a href='#magicparlabel-151' class='tocarrow'>&gt;</a>
 
-<div class='lyxtoc-2'><a href='#magicparlabel-146' class='tocentry'>2.1 A sub-section</a> <a href='#magicparlabel-146' class='tocarrow'>&gt;</a>
+<div class='lyxtoc-2'><a href='#magicparlabel-153' class='tocentry'>2.1 A sub-section</a> <a href='#magicparlabel-153' class='tocarrow'>&gt;</a>
 
-<div class='lyxtoc-3'><a href='#magicparlabel-148' class='tocentry'>2.1.1 A sub-sub-section</a> <a href='#magicparlabel-148' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-3'><a href='#magicparlabel-155' class='tocentry'>2.1.1 A sub-sub-section</a> <a href='#magicparlabel-155' class='tocarrow'>&gt;</a></div>
 </div>
 </div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-207' class='tocentry'>3 Normative References</a> <a href='#magicparlabel-207' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-1'><a href='#magicparlabel-214' class='tocentry'>3 Normative References</a> <a href='#magicparlabel-214' class='tocarrow'>&gt;</a></div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-218' class='tocentry'>A First Appendix</a> <a href='#magicparlabel-218' class='tocarrow'>&gt;</a>
+<div class='lyxtoc-1'><a href='#magicparlabel-230' class='tocentry'>A First Appendix</a> <a href='#magicparlabel-230' class='tocarrow'>&gt;</a>
 
-<div class='lyxtoc-2'><a href='#magicparlabel-220' class='tocentry'>A.1 Sub-Appendix</a> <a href='#magicparlabel-220' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-2'><a href='#magicparlabel-232' class='tocentry'>A.1 Sub-Appendix</a> <a href='#magicparlabel-232' class='tocarrow'>&gt;</a></div>
 </div>
 
-<div class='lyxtoc-1'><a href='#magicparlabel-222' class='tocentry'>B Last Appendix</a> <a href='#magicparlabel-222' class='tocarrow'>&gt;</a></div>
+<div class='lyxtoc-1'><a href='#magicparlabel-234' class='tocentry'>B Last Appendix</a> <a href='#magicparlabel-234' class='tocarrow'>&gt;</a></div>
 </div>
 
 <h2 class="section"><span class="section_label">1</span> <a id='magicparlabel-101' />
@@ -502,99 +511,113 @@ Now a description list:</div>
  description of item 2</dd>
 </dl>
 <h3 class="subsection"><span class="subsection_label">1.1</span> <a id='magicparlabel-138' />
-Conventions used in this document</h3>
+Example References</h3>
 <div class="standard"><a id='magicparlabel-139' />
-The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <div class="flex_entityxref"><div class="plain_layout"><a id='magicparlabel-143' />
+Here's a reference to an Internet-Draft (by now published as an RFC): <div class="flex_entityxref"><div class="plain_layout"><a id='magicparlabel-143' />
+I-D.ietf-oauth-v2</div>
+</div>. Note that we have a reference to RFC1113 that we're not referencing outside the references section (so there will be a warning about an unused reference when exporting to RFC); this reference is defined in XML embedded within an EmbeddedBibXML inset.</div>
+
+<div class="standard"><a id='magicparlabel-144' />
+Note that the content in EntityXRef custom insets (used to refer to citations within the document) must be the anchors of those references.</div>
+<h3 class="subsection"><span class="subsection_label">1.2</span> <a id='magicparlabel-145' />
+Conventions used in this document</h3>
+<div class="standard"><a id='magicparlabel-146' />
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <div class="flex_entityxref"><div class="plain_layout"><a id='magicparlabel-150' />
 RFC2119</div>
 </div>.</div>
-<h2 class="section"><span class="section_label">2</span> <a id='magicparlabel-144' />
+<h2 class="section"><span class="section_label">2</span> <a id='magicparlabel-151' />
 Details</h2>
-<div class="standard"><a id='magicparlabel-145' />
+<div class="standard"><a id='magicparlabel-152' />
 Some text. Here's a protected&nbsp;space, and here's a bunch of them: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;, see?</div>
-<h3 class="subsection"><span class="subsection_label">2.1</span> <a id='magicparlabel-146' />
+<h3 class="subsection"><span class="subsection_label">2.1</span> <a id='magicparlabel-153' />
 <a id="sub_A_sub_section" />
 A sub-section</h3>
-<div class="standard"><a id='magicparlabel-147' />
+<div class="standard"><a id='magicparlabel-154' />
 and</div>
-<h4 class="subsubsection"><span class="subsubsection_label">2.1.1</span> <a id='magicparlabel-148' />
+<h4 class="subsubsection"><span class="subsubsection_label">2.1.1</span> <a id='magicparlabel-155' />
 A sub-sub-section</h4>
-<div class="standard"><a id='magicparlabel-149' />
+<div class="standard"><a id='magicparlabel-156' />
 cool.</div>
 
-<div class="standard"><a id='magicparlabel-150' />
+<div class="standard"><a id='magicparlabel-157' />
 Now back to standard paragraphs... And now a table</div>
 
-<div class="standard"><a id='magicparlabel-151' />
+<div class="standard"><a id='magicparlabel-158' />
 
 
 
-<table><tbody><tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-181' />
+<table><tbody><tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-188' />
 a</div>
 </td>
 
-<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-184' />
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-191' />
 b</div>
 </td>
 
-<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-187' />
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-194' />
 c</div>
 </td>
 </tr>
-<tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-190' />
+<tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-197' />
 0</div>
 </td>
 
-<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-193' />
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-200' />
 stuff</div>
 </td>
 
-<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-196' />
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-203' />
 what</div>
 </td>
 </tr>
-<tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-199' />
+<tr><td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-206' />
 1</div>
 </td>
 
-<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-202' />
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-209' />
 foo</div>
 </td>
 
-<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-205' />
+<td align='center' valign='top'><div class="plain_layout"><a id='magicparlabel-212' />
 bar</div>
 </td>
 </tr></tbody>
 </table>
 </div>
 
-<div class="standard"><a id='magicparlabel-206' />
+<div class="standard"><a id='magicparlabel-213' />
 And some text after it. See also section <a href="#sub_A_sub_section">2.1</a>.</div>
-<h2 class="section"><span class="section_label">3</span> <a id='magicparlabel-207' />
+<h2 class="section"><span class="section_label">3</span> <a id='magicparlabel-214' />
 <a id="sec_References" />
 Normative References</h2>
-<div class="standard"><a id='magicparlabel-208' />
-<div class="flex_embeddedbibxml"><div class="plain_layout"><a id='magicparlabel-212' />
-&lt;reference anchor='RFC2119'&gt; &lt;front&gt; &lt;title abbrev='RFC Key Words'&gt;Key words for use in RFCs to Indicate Requirement Levels&lt;/title&gt; &lt;author initials='S.' surname='Bradner' fullname='Scott Bradner'&gt; &lt;organization&gt;Harvard University&lt;/organization&gt; &lt;address&gt; &lt;postal&gt; &lt;street&gt;1350 Mass. Ave.&lt;/street&gt; &lt;street&gt;Cambridge&lt;/street&gt; &lt;street&gt;MA 02138&lt;/street&gt;&lt;/postal&gt; &lt;phone&gt;- +1 617 495 3864&lt;/phone&gt; &lt;email&gt;sob@harvard.edu&lt;/email&gt;&lt;/address&gt;&lt;/author&gt; &lt;date year='1997' month='March' /&gt; &lt;area&gt;General&lt;/area&gt; &lt;keyword&gt;keyword&lt;/keyword&gt; &lt;abstract&gt; &lt;t&gt; In many standards track documents several words are used to signify the requirements in the specification. These words are often capitalized. This document defines these words as they should be interpreted in IETF documents. Authors who follow these guidelines should incorporate this phrase near the beginning of their document: &lt;list&gt; &lt;t&gt; The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119. &lt;/t&gt;&lt;/list&gt;&lt;/t&gt; &lt;t&gt; Note that the force of these words is modified by the requirement level of the document in which they are used. &lt;/t&gt;&lt;/abstract&gt;&lt;/front&gt; &lt;seriesInfo name='BCP' value='14' /&gt; &lt;seriesInfo name='RFC' value='2119' /&gt; &lt;format type='TXT' octets='4723' target='http://www.rfc-editor.org/rfc/rfc2119.txt' /&gt; &lt;format type='HTML' octets='17970' target='http://xml.resource.org/public/rfc/html/rfc2119.html' /&gt; &lt;format type='XML' octets='5777' target='http://xml.resource.org/public/rfc/xml/rfc2119.xml' /&gt; &lt;/reference&gt; </div>
+<div class="standard"><a id='magicparlabel-215' />
+<div class="flex_bibxml"><div class="plain_layout"><a id='magicparlabel-219' />
+<a href="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">RFC2119</a></div>
 </div></div>
 
-<div class="standard"><a id='magicparlabel-213' />
-<div class="flex_embeddedbibxml"><div class="plain_layout"><a id='magicparlabel-217' />
+<div class="standard"><a id='magicparlabel-220' />
+<div class="flex_bibxml"><div class="plain_layout"><a id='magicparlabel-224' />
+<a href="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-v2.xml">I-D.ietf-oauth-v2</a></div>
+</div></div>
+
+<div class="standard"><a id='magicparlabel-225' />
+<div class="flex_embeddedbibxml"><div class="plain_layout"><a id='magicparlabel-229' />
 &lt;reference anchor='RFC1113'&gt; &lt;front&gt; &lt;title abbrev='Mail Privacy: Procedures'&gt;Privacy enhancement for Internet electronic mail: Part I - message encipherment and authentication procedures&lt;/title&gt; &lt;author initials='J.' surname='Linn' fullname='John Linn'&gt; &lt;organization&gt;Digital Equipment Corporation (DEC), Secure Systems&lt;/organization&gt; &lt;address&gt; &lt;postal&gt; &lt;street&gt;85 Swanson Road&lt;/street&gt; &lt;street&gt;BXB1-2/D04&lt;/street&gt; &lt;city&gt;Boxborough&lt;/city&gt; &lt;region&gt;MA&lt;/region&gt; &lt;code&gt;01719-1326&lt;/code&gt; &lt;country&gt;US&lt;/country&gt;&lt;/postal&gt; &lt;phone&gt;+1 508 264 5491&lt;/phone&gt; &lt;email&gt;Linn@ultra.enet.dec.com&lt;/email&gt;&lt;/address&gt;&lt;/author&gt; &lt;date year='1989' day='1' month='August' /&gt;&lt;/front&gt; &lt;seriesInfo name='RFC' value='1113' /&gt; &lt;format type='TXT' octets='89293' target='http://www.rfc-editor.org/rfc/rfc1113.txt' /&gt; &lt;/reference&gt; </div>
 </div></div>
-<h2 class="section"><span class="section_label">A</span> <a id='magicparlabel-218' />
+<h2 class="section"><span class="section_label">A</span> <a id='magicparlabel-230' />
 First Appendix</h2>
-<div class="standard"><a id='magicparlabel-219' />
+<div class="standard"><a id='magicparlabel-231' />
 Appendici.</div>
-<h3 class="subsection"><span class="subsection_label">A.1</span> <a id='magicparlabel-220' />
+<h3 class="subsection"><span class="subsection_label">A.1</span> <a id='magicparlabel-232' />
 Sub-Appendix</h3>
-<div class="standard"><a id='magicparlabel-221' />
+<div class="standard"><a id='magicparlabel-233' />
 Whatever.</div>
-<h2 class="section"><span class="section_label">B</span> <a id='magicparlabel-222' />
+<h2 class="section"><span class="section_label">B</span> <a id='magicparlabel-234' />
 Last Appendix</h2>
-<div class="standard"><a id='magicparlabel-223' />
+<div class="standard"><a id='magicparlabel-235' />
 Last word.</div>
 
-<div class="lyx__separator__"><a id='magicparlabel-224' />
+<div class="lyx__separator__"><a id='magicparlabel-236' />
 </div>
 </body>
 </html>

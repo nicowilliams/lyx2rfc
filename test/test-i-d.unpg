@@ -4,8 +4,8 @@
 Network Working Group                                             J. Doe
 Internet-Draft                                                       Doe
 Updates: RFC2119 (if approved)                                J. Sixpack
-Intended status: Informational                           January 4, 2013
-Expires: July 8, 2013
+Intended status: Informational                             July 11, 2013
+Expires: January 12, 2014
 
 
                 A Skeleton Internet-Draft Written in LyX
@@ -33,7 +33,7 @@ Status of this Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on July 8, 2013.
+   This Internet-Draft will expire on January 12, 2014.
 
 Copyright Notice
 
@@ -54,7 +54,8 @@ Copyright Notice
 Table of Contents
 
    1.          Introduction
-   1.1.        Conventions used in this document
+   1.1.        Example References
+   1.2.        Conventions used in this document
    2.          Details
    2.1.        A sub-section
    2.1.1.      A sub-sub-section
@@ -114,7 +115,19 @@ Table of Contents
 
    item2  description of item 2
 
-1.1.  Conventions used in this document
+1.1.  Example References
+
+   Here's a reference to an Internet-Draft (by now published as an RFC):
+   [I-D.ietf-oauth-v2].  Note that we have a reference to RFC1113 that
+   we're not referencing outside the references section (so there will
+   be a warning about an unused reference when exporting to RFC); this
+   reference is defined in XML embedded within an EmbeddedBibXML inset.
+
+   Note that the content in EntityXRef custom insets (used to refer to
+   citations within the document) must be the anchors of those
+   references.
+
+1.2.  Conventions used in this document
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
@@ -151,6 +164,10 @@ Table of Contents
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [I-D.ietf-oauth-v2]
+              Hardt, D., "The OAuth 2.0 Authorization Framework",
+              draft-ietf-oauth-v2-31 (work in progress), August 2012.
 
    [RFC1113]  Linn, J., "Privacy enhancement for Internet electronic
               mail: Part I - message encipherment and authentication

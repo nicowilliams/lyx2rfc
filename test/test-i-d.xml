@@ -7,7 +7,10 @@
 <?rfc tocindent="no"?>
 <?rfc comments="yes"?>
 <?rfc inline="yes"?>
-<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY I-D.ietf-oauth-v2 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-oauth-v2.xml">
+]>
 <rfc docName="draft-doe-something-or-other-00" ipr="trust200902" category="info" updates="RFC2119">
   <front>
     <title abbrev="Skeleton I-D">A Skeleton Internet-Draft Written in LyX</title>
@@ -25,7 +28,7 @@
       </address>
     </author>
     <author initials="J." surname="Sixpack" fullname="Joe Sixpack"/>
-    <date month="January" year="2013"/>
+    <date month="July" year="2013"/>
     <area>
 Security Area
 </area>
@@ -38,7 +41,7 @@ Two paragraph abstract, eh?</t>
     </abstract>
   </front>
   <middle>
-    <section title="Introduction" anchor="d1e245">
+    <section title="Introduction" anchor="d1e252">
       <t>
 A paragraph. Text after a vspace (currently doesn't work due to a bug in LyX's XHTML exporter).</t>
       <t>
@@ -111,18 +114,24 @@ Now a description list:</t>
  description of item 2</t>
         </list>
       </t>
-      <section title="Conventions used in this document" anchor="d1e345">
+      <section title="Example References" anchor="d1e352">
+        <t>
+Here's a reference to an Internet-Draft (by now published as an RFC): <xref target="I-D.ietf-oauth-v2"/>. Note that we have a reference to RFC1113 that we're not referencing outside the references section (so there will be a warning about an unused reference when exporting to RFC); this reference is defined in XML embedded within an EmbeddedBibXML inset.</t>
+        <t>
+Note that the content in EntityXRef custom insets (used to refer to citations within the document) must be the anchors of those references.</t>
+      </section>
+      <section title="Conventions used in this document" anchor="d1e370">
         <t>
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <xref target="RFC2119"/>.</t>
       </section>
     </section>
-    <section title="Details" anchor="d1e360">
+    <section title="Details" anchor="d1e385">
       <t>
 Some text. Here's a protected space, and here's a bunch of them:      , see?</t>
       <section title="A sub-section" anchor="sub_A_sub_section">
         <t>
 and</t>
-        <section title="A sub-sub-section" anchor="d1e380">
+        <section title="A sub-sub-section" anchor="d1e405">
           <t>
 cool.</t>
           <t>
@@ -154,70 +163,19 @@ And some text after it. See also section  <xref target="sub_A_sub_section"/>.</t
     </section>
   </middle>
   <back>
-    <references title="Normative References" anchor="sec_References">
-      <reference anchor="RFC2119">
-        <front>
-          <title abbrev="RFC Key Words">Key words for use in RFCs to Indicate Requirement Levels</title>
-          <author initials="S." surname="Bradner" fullname="Scott Bradner">
-            <organization>Harvard University</organization>
-            <address>
-              <postal>
-                <street>1350 Mass. Ave.</street>
-                <street>Cambridge</street>
-                <street>MA 02138</street>
-              </postal>
-              <phone>- +1 617 495 3864</phone>
-              <email>sob@harvard.edu</email>
-            </address>
-          </author>
-          <date year="1997" month="March"/>
-          <area>General</area>
-          <keyword>keyword</keyword>
-          <abstract>
-            <t> In many standards track documents several words are used to signify the requirements in the specification. These words are often capitalized. This document defines these words as they should be interpreted in IETF documents. Authors who follow these guidelines should incorporate this phrase near the beginning of their document: <list><t> The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in RFC 2119. </t></list>
-</t>
-            <t> Note that the force of these words is modified by the requirement level of the document in which they are used. </t>
-          </abstract>
-        </front>
-        <seriesInfo name="BCP" value="14"/>
-        <seriesInfo name="RFC" value="2119"/>
-        <format type="TXT" octets="4723" target="http://www.rfc-editor.org/rfc/rfc2119.txt"/>
-        <format type="HTML" octets="17970" target="http://xml.resource.org/public/rfc/html/rfc2119.html"/>
-        <format type="XML" octets="5777" target="http://xml.resource.org/public/rfc/xml/rfc2119.xml"/>
-      </reference>
-      <reference anchor="RFC1113">
-        <front>
-          <title abbrev="Mail Privacy: Procedures">Privacy enhancement for Internet electronic mail: Part I - message encipherment and authentication procedures</title>
-          <author initials="J." surname="Linn" fullname="John Linn">
-            <organization>Digital Equipment Corporation (DEC), Secure Systems</organization>
-            <address>
-              <postal>
-                <street>85 Swanson Road</street>
-                <street>BXB1-2/D04</street>
-                <city>Boxborough</city>
-                <region>MA</region>
-                <code>01719-1326</code>
-                <country>US</country>
-              </postal>
-              <phone>+1 508 264 5491</phone>
-              <email>Linn@ultra.enet.dec.com</email>
-            </address>
-          </author>
-          <date year="1989" day="1" month="August"/>
-        </front>
-        <seriesInfo name="RFC" value="1113"/>
-        <format type="TXT" octets="89293" target="http://www.rfc-editor.org/rfc/rfc1113.txt"/>
-      </reference>
-    </references>
-    <section title="First Appendix" anchor="d1e477">
+    <references title="Normative References">&RFC2119;
+&I-D.ietf-oauth-v2;
+
+<reference anchor="RFC1113"><front><title abbrev="Mail Privacy: Procedures">Privacy enhancement for Internet electronic mail: Part I - message encipherment and authentication procedures</title><author initials="J." surname="Linn" fullname="John Linn"><organization>Digital Equipment Corporation (DEC), Secure Systems</organization><address><postal><street>85 Swanson Road</street><street>BXB1-2/D04</street><city>Boxborough</city><region>MA</region><code>01719-1326</code><country>US</country></postal><phone>+1 508 264 5491</phone><email>Linn@ultra.enet.dec.com</email></address></author><date year="1989" day="1" month="August"/></front><seriesInfo name="RFC" value="1113"/><format type="TXT" octets="89293" target="http://www.rfc-editor.org/rfc/rfc1113.txt"/></reference> </references>
+    <section title="First Appendix" anchor="d1e514">
       <t>
 Appendici.</t>
-      <section title="Sub-Appendix" anchor="d1e486">
+      <section title="Sub-Appendix" anchor="d1e523">
         <t>
 Whatever.</t>
       </section>
     </section>
-    <section title="Last Appendix" anchor="d1e495">
+    <section title="Last Appendix" anchor="d1e533">
       <t>
 Last word.</t>
     </section>
