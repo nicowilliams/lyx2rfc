@@ -630,6 +630,10 @@
 </xsl:template>
 
 <!-- Author metadata templates (for the <author> elements) -->
+<xsl:template match="div[@class='flex_authorrole']">
+    <xsl:attribute name='role' select='normalize-space(.)'/>
+</xsl:template>
+
 <xsl:template match="div[@class='flex_authororg']">
     <xsl:element name='organization'>
         <xsl:choose>
@@ -735,6 +739,9 @@
         <xsl:attribute name="fullname">
             <xsl:value-of select="normalize-space(string-join(text(), ''))"/>
         </xsl:attribute>
+
+        <!-- role attribute -->
+        <xsl:apply-templates select=".//div[@class='flex_authorrole']"/>
 
         <!-- Organization element -->
         <xsl:apply-templates select=".//div[@class='flex_authororg']"/>
