@@ -263,6 +263,12 @@
 <xsl:template match="div[@class='toc']"/>
 <xsl:template match="a[starts-with(@id, 'magicparlabel-')]"/>
 
+<xsl:template match="br">
+    <xsl:element name="vspace">
+        <xsl:attribute name="blankLines">1</xsl:attribute>
+    </xsl:element>
+</xsl:template>
+
 <!-- Plain paragraphs -->
 <xsl:template match="div[@class='standard']">
     <xsl:choose>
